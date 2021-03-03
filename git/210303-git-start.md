@@ -29,7 +29,7 @@
 - Esc : normal 모드로 돌아오기
 
 #### vim command (노말모드에서)
-- 한 줄 복사 : shift y
+- 한 줄 복사 : shift + y
 - 붙여넣기 : p
 - 한 줄 지우기 : dd
 
@@ -51,10 +51,44 @@
 분산형 형상관리 도구
 
 ### Why is need it?
+- 빠른속도, 단순한 구조
+- 분산형 저장소 지원
+- 비선형적 개발(수천개의 브랜치) 가능
 
 ### How to use git?
-### Start project with git init
-### Start project with git clone
+1. working directory -> staging area : git add
+2. staging area -> localrepo : git commit
+3. localrepo -> remote repo : git push
 
+### Start project with git init
+1. git 환경설정
+ ```shell
+ $ git config --global user.name "깃헙유저네임"
+ $ git config --global user.email "깃헙가입이메일"
+ $ git config --global core.editor "vim"
+ $ git config --global core.paper "cat"
+ ```
+2. 실행
+ ```shell
+ $ mkdir my-first-repo	<!--새 디렉토리 생성-->
+ $ cd my-first-repo	<!--새 디렉토리로 이동-->
+ $ git init
+ $ git remote add origin https://github.com/{username}/{reponame}.git	<!-- origin : 별명 -->
+ $ touch README.md	<!--깃에 올릴 파일 생성-->
+ $ git add README.md	<!--working directory 에서 staging area로 올라감-->
+ $ git commit		<!--staging area에서 local repo로 올라감-->
+ $ git push origin main	<!--local repo에서 remote repo로 올라감-->
+ ```
+
+### Start project with git clone
+1. github에서 repository 주소 복사
+2. 실행
+ ```shell
+ $ git clone {repo address}
+ $ touch README.md	<!--깃에 올릴 파일 생성-->
+ $ git add README.md
+ $ git commit
+ $ git push origin main
+ ```
 
 ## TODO
