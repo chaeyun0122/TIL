@@ -62,7 +62,7 @@
 3. localrepo -> remote repo 		: **git push**
 
 #### Start project with git init
-1. git 환경설정
+1. Git 환경설정
  ```shell
  $ git config --global user.name "깃헙유저네임"
  $ git config --global user.email "깃헙가입이메일"
@@ -94,21 +94,21 @@
 
 ### 7. Create my Github page
 1. Static site Generator to use : **Hexo**
-2. install Hexo
+2. Install Hexo
  ```shell
  $ npm install -g hexo-cli
  ```
-3. init Hexo
+3. Init Hexo
  ```shell
  $ hexo init hexo-blog	<!--새로운 디렉토리 생성됨-->
  $ npm install
  ```
-4. create new post
+4. Create new post
  ```shell
  $ hexo new post "My first post"	<!--포스트 명-->
  $ vi source/_posts/My-first-post.md	<!--vim에서 포스트 작성-->
  ```
-5. clean & generate static files
+5. Clean & Generate static files
  ```shell
  $ hexo clean && hexo generate
  ```
@@ -116,7 +116,7 @@
  ```shell
  $ hexo server
  ```
-7. deploy
+7. Deploy settings
  ```shell
  $ npm install hexo-deployer-git --save
  $ vi _config.yml
@@ -129,7 +129,7 @@
  ```
  ![image](https://user-images.githubusercontent.com/79209568/109818462-593bab80-7c76-11eb-8f6c-7f162b47d503.png)
 
-8. clean & deploy
+8. Clean & Deploy
  ```shell
  $ hexo clean && hexo deploy
  ```
