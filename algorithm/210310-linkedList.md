@@ -176,3 +176,171 @@ linkedlist.desc()
 **8**  
 **9**  
 
+
+## 복잡한 링크드 리스트 2 : 특정 노드를 삭제
+* 1번째 케이스 : head 삭제
+* 2번째 케이스 : 마지막 노드 삭제
+* 3번째 케이스 : 중간 노드 삭제  
+  
+* 다음 코드는 위의 코드에서 delete 메서드만 추가한 것이므로 해당 메서드만 확인하면 됨
+```python
+class Node:
+    def __init__(self, data, next=None):
+        self.data = data
+        self.next = next
+    
+class NodeMgmt:
+    def __init__(self, data):
+        self.head = Node(data)
+        
+    def add(self, data):
+        if self.head == '':
+            self.head = Node(data)
+        else:
+            node = self.head
+            while node.next:
+                node = node.next
+            node.next = Node(data)
+        
+    def desc(self):
+        node = self.head
+        while node:
+            print (node.data)
+            node = node.next
+    
+    def delete(self, data):  # 노드 삭제 함수
+      if self.head == '':  # 링크드리스트에 값이 없음
+        print("No list")
+        return
+      
+      if self.head.data == data:  # 맨 앞의 노드를 삭제
+        temp = self.head
+        self.head = self.head.next
+        del temp
+      else:  # 중간이나 맨 끝의 노드를 삭제
+        node = self.head
+        while node.next:
+          if node.next.data == data:
+            temp = node.next
+            noed.next = node.next.next
+            del temp
+            return
+          else:
+            node = node.next
+```
+
+- 테스트 해보기
+```python
+# 노드 하나 만들기
+linkedlist1 = NodeMgmt(0)
+
+# 노드 추가
+for data in range(1,10):
+  linkedlist1.add(data)
+  
+# 노드 중 하나 삭제 (케이스 3: 중간값 삭제)
+linkedlist1.delete(4)   # 0, 1, 2, 3, 5, 6, 7, 8, 9
+
+
+
+## 다양한 링크드 리스트 구조
+* 더블 링크드 리스트(Double Linked List) 기본 구조
+  - 이중 연결 리스트라고도 함
+  - 장점 : 양방향으로 연결되어 있어서 노드 탐색이 양쪽으로 모두 가능 (맨 앞에서부터 탐색해야하는 기존 링크드 리스트의 단점 보완) 
+  
+  <img src="https://www.fun-coding.org/00_Images/doublelinkedlist.png" />
+  
+  
+```python
+class Node:
+  def __init__(self, data, prev=None, next=None):  # 기존의 링크드 리스트에서 prev 변수가 생김
+    self.data = data
+    self.prev = prev
+    self.next = next
+    
+ class NodeMgmt:
+   def __init__(self, data):
+     self.head = Node(data)
+     self.tail = self.head  # 처음에 노드가 하나 생성되면 head나 tail이나 같다
+     
+   def insert(self, data):
+     if self.head == None:
+       self.head = None(data)
+       self.tail = self.head
+     else:
+       node = self.head
+       while node.next:  # 맨 끝 노드를 찾아가서
+         node = nede.next
+       new = Node(data)  # 일단 새로운 노드를 만들고
+       node.next = new   # 맨 끝 노드의 포인터를 new로
+       new.prev = node   # new의 prev 포인터를 원래의 맨 끝 노드로
+       self.tail = new   # 맨 끝 노드가 new가 됐으므로 tail을 new로
+  
+  def desc(self):  # 모든 노드 출력 함수
+    node = self.head
+    while node:
+      print(node.data)
+      node = node.next
+      
+  def search_from_head(self, data):  # 앞에서부터 찾는 함수
+        if self.head == None:
+            return False
+    
+        node = self.head
+        while node:
+            if node.data == data:
+                return node
+            else:
+                node = node.next
+        return False
+    
+    def search_from_tail(self, data):  # 끝에서부터 찾는 함수
+        if self.head == None:
+            return False
+    
+        node = self.tail
+        while node:
+            if node.data == data:
+                return node
+            else:
+                node = node.prev
+        return False
+    
+    def insert_before(self, data, before_data):  # 특정 숫자인 노드 앞에 데이터를 추가하는 함수
+        if self.head == None:
+            self.head = Node(data)
+            return True
+        else:
+            node = self.tail
+            while node.data != before_data:
+                node = node.prev
+                if node == None:
+                    return False
+            new = Node(data)  # 특정 노드를 찾아야지만 실행되는 코드들
+            before_new = node.prev
+            before_new.next = new
+            new.prev = before_new
+            new.next = node
+            node.prev = new
+            return True
+            
+    def insert_after(self, data, after_data):  # 특정 숫자인 노드 뒤에 데이터를 추가하는 함수
+        if self.head == None:
+            self.head = Node(data)
+            return True            
+        else:
+            node = self.head
+            while node.data != after_data:
+                node = node.next
+                if node == None:
+                    return False
+            new = Node(data)
+            after_new = node.next
+            new.next = after_new
+            new.prev = node
+            node.next = new
+            if new.next == None:
+                self.tail = new
+            return True
+```
+
