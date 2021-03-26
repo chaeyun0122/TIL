@@ -41,16 +41,16 @@
 ![image](https://user-images.githubusercontent.com/79209568/112644527-e0043280-8e88-11eb-9483-09c03f1626dc.png)
   
   
-### Data
+## Kaggle Data
 * 데이터셋들을 확인 가능
 ![image](https://user-images.githubusercontent.com/79209568/112644738-15a91b80-8e89-11eb-9527-7fb0cd6f72cb.png)
 
-#### Code
+### Code
 * 다른 사용자들이 데이터셋을 활용하여 작업하고 업로드해놓은 code를 확인 가능
 ![image](https://user-images.githubusercontent.com/79209568/112645079-77698580-8e89-11eb-8d36-5aead13436fa.png)
   
   
-### Courses
+## Courses
 * 캐글에서 제공하는 기본적인 코스들로 학습 가능
   * Python, Machine Learning, Data Visualization, Pandas, SQL, Computer Vision, Data Cleaning, Geopatial Analysis, Machine Learning Explainability, MicroChallenges, Natural Language Processing, Game AI and Reinforcement Learning, Feature Engineering
 ![image](https://user-images.githubusercontent.com/79209568/112645529-e941cf00-8e89-11eb-9dc8-7b4d0cb716a8.png)
