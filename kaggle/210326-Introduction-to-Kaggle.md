@@ -7,8 +7,7 @@
 * Cha글llenge : 여러사람들이 어려운 문제에 대해서 도전
 * Competition : 데이터로부터 머신러닝 모델을 만들어서 사람들과 성능을 가지고 승부를 겨룸
 
-## 캐글 사이트 접속
-> [click](https://www.kaggle.com/)
+## 캐글 사이트 접속 👉[click](https://www.kaggle.com/)
 
 ![image](https://user-images.githubusercontent.com/79209568/112640411-a92c1d80-8e84-11eb-8de9-9066a3fb56bd.png)
 
