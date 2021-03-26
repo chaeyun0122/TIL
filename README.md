@@ -17,4 +17,4 @@ Today I Learned..
 
 ## Kaggle
 * [Introduction of Kaggle](kaggle/210326-Introduction-to-Kaggle.md)
-* [Kaggle API](https://github.com/Clary0122/TIL/blob/64d4343453521b1256207be132685f5dd435ae8a/kaggle/210326-Kaggle-API.md)
+* [Kaggle API](kaggle/210326-Kaggle-API.md)
