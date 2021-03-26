@@ -26,7 +26,7 @@
 * Your Competitions : 현재 내가 진행 중인 대회
 * All Competitions
   * Active : 현재 진행 중인 대회
-  * 
+  * Completed : 종료된 대회
 
 ### Competition
 #### Overview
