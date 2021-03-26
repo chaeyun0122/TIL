@@ -16,5 +16,5 @@ Today I Learned..
 * [Hash Table](https://github.com/Clary0122/TIL/blob/a50905c72e64eb434d0a943377a2c00779f3bce5/data-structure/hashTable.md)
 
 ## Kaggle
-* [Introduction of Kaggle](https://github.com/Clary0122/TIL/blob/64d4343453521b1256207be132685f5dd435ae8a/kaggle/210326-Introduction-to-Kaggle.md)
+* [Introduction of Kaggle](kaggle/210326-Introduction-to-Kaggle.md)
 * [Kaggle API](https://github.com/Clary0122/TIL/blob/64d4343453521b1256207be132685f5dd435ae8a/kaggle/210326-Kaggle-API.md)
