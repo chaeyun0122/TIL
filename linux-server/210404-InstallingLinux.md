@@ -14,3 +14,9 @@
   * VMware Player VirtualBox : 무료
 > **1 컴퓨터 1 운영체제(가상머신 내에 N 운영체제)**
 
+# 리눅스 설치
+* [VMware workstation player Download](https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html)
+* [CentOS 7 Download](http://data.nicehosting.co.kr/os/CentOS/7/isos/x86_64/)
+  * Everthing iso 10GB짜리로 다운로드 받아준다.
+  ![image](https://user-images.githubusercontent.com/79209568/113512802-441da980-95a1-11eb-8392-c65b0277cc1d.png)
+  * CD/DVD에 연결해줄 파일이다.
