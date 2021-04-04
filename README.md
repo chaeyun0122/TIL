@@ -18,3 +18,6 @@ Today I Learned..
 ## Kaggle
 * [Introduction of Kaggle](kaggle/210326-Introduction-to-Kaggle.md)
 * [Kaggle API](kaggle/210326-Kaggle-API.md)
+
+## Linux Server
+* [Concepts of Linux](linux-server/210402-ConceptsOfLinux.md)
