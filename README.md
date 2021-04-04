@@ -21,3 +21,4 @@ Today I Learned..
 
 ## Linux Server
 * [Concepts of Linux](linux-server/210402-ConceptsOfLinux.md)
+* [Installing Linux](linux-server/210404-InstallingLinux.md)
