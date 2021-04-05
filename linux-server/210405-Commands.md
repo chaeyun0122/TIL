@@ -17,15 +17,15 @@
 # 기본 명령어1
 ## pwd
 > ### 현재 디렉터리의 경로 확인
-### format : pwd
+### format : `pwd`
 
 ## cd
 > ### 디렉터리를 변경하고자 할 때
-### format1 : cd directory
+### format1 : `cd directory`
 (file은 안됨)
-### format2 : cd (또는 cd ~)
+### format2 : `cd (또는 cd ~)`
 * 현재 로그인한 계정의 홈 디렉터리로 변경
-### format3 : cd ~사용자
+### format3 : `cd ~사용자`
 * 지정한 사용자의 홈 디렉터리로 변경
 * ex) cd /home/itbank = cd ~itbank
 
@@ -44,7 +44,7 @@
 
 ## ls
 > ### 디렉터리의 목록을 출력
-### format: ls [option] directory
+### format: `ls [option] directory`
 ### option
 * **-l** : 자세히  
    ![image](https://user-images.githubusercontent.com/79209568/113582548-78599e80-9663-11eb-851b-6da3d542126a.png)
@@ -69,7 +69,7 @@
 # 기본 명령어2
 ## cp
 > ### 파일이나 디렉터리를 복사
-### format: cp [option] 원본파일 사본파일
+### format: `cp [option] 원본파일 사본파일`
 ### option
 * **-p** : 원본 그대로 복사 (생성 시간까지 원본 그대로)
   * ex) cp -p /backup/test1 /new
@@ -84,11 +84,11 @@
 
 ## mv
 > ### 파일이나 디렉터리를 이동 (원본 자체가 이동하는 것)
-### format: mv [option] 원본파일 사본파일
+### format: `mv [option] 원본파일 사본파일`
 
 ## mkdir
 > ### 디렉터리를 생성
-### format: mkdir [option] 디렉터리
+### format: `mkdir [option] 디렉터리`
 ### option
 * **-p** : 필요하다면 상위 디렉터리까지 만들어주는 옵션
   * mkdir /a
@@ -98,20 +98,114 @@
 
 ## rmdir
 > ### 디렉터리를 삭제
-### format: rmdir [option] 디렉터리
+### format: `rmdir [option] 디렉터리`
 * **-p** : 필요하다면 **비어있는** 상위 디렉터리까지 삭제해주는 옵션
   * 비어있지 않으면 오류가 나기때문에 rmdir은 잘 사용하지 않는 명령어다.
 
 ## rm
 > ### 파일이나 디렉터리를 삭제
-### format: rm [option] 파일|디렉터리
+### format: `rm [option] 파일|디렉터리`
 ### option
 * **-f** : 물어보지 않고(강제)
 * **-r** : 디렉터리 삭제(써야지만 디렉터리 삭제 가능)
 
+# 기본 명령어3
+## ln
+> ### 하드링크나 심볼릭링크 파일을 생성
+### format
+![image](https://user-images.githubusercontent.com/79209568/113591375-c6c06a80-966e-11eb-816f-5046e48ad45e.png)
+### option
+* **-s** : 심볼릭링크파일 생성(이 옵션을 사용하지않으면 하드링크 생성)
+#### 하드링크, 소프트링크, 심볼릭링크 비교
+* **하드링크** : 원본이 두 개가 되는 것. 만약 test1이라는 파일의 하드링크 파일 test2를 생성했다고 치자. test1의 내용이 변경되면 test2의 내용도 변경된다.
+  * ln test1 test2
+* **소프트링크** : 사본이 생기는 것. test1의 소프트링크 파일 test2는 test1의 내용이 변경되어도 변경되지않는다.
+  * cp test1 test2
+* **심볼릭 링크** : 원본의 바로가기를 반드는 것. test1의 심볼릭링크 파일 test2는 test1이 삭제되면 사용하지 못한다.
+  * ln -s test1 test2
 
+## alias
+> ### 복잡한 명령어와 옵션을 짧은 문자열로 바꿔줌
+### format1: `alias` → 기본으로 등록된 alias들을 확인할 수 있음
+### format2: `alias 문자='명령어'`
+### format3: `alias 문자='명령어 [option]'`
+### format4: `unalias 문자` → alias 해제
 
+## touch
+> ### 파일을 생성
+> * 기존에 있던 파일을 touch로 다시 생성하면 나머지는 다 그대로고 생성 날짜만 현재로 바뀜
+### format: `touch [option] 파일`
 
+## head
+> ### 파일의 내용을 출력
+> * 기본 값으로 10줄
+> * 출력되는 방향이 **위에서 아래**
+### format: `head [option] 파일`
+### option
+* **-n줄수** : 지정한 줄 수 만큼 출력
+  * head의 경우 n을 생략해도 오류가 나지 않고 사용가능
+  * ex) head /backup/test1 → 10줄 출력
+  * ex) head -n5 /backup/test1 → 5줄 출력
+  * ex) head -5 /backup/test1 → 5줄 출력
+  * ex) head -n5 /backup/test1 /backup/test2 → 두 파일 각각 5줄 출력
 
+## tail
+> ### 파일의 내용을 출력
+> * 기본 값으로 10줄
+> * 출력되는 방향이 **아래에서 위**
+### format: `tail [option] 파일`
+### option
+* **-n줄수** : 지정한 줄 수 만큼 출력
+  * tail의 경우 n을 생략하면 오류남
+
+## man
+> ### 모르는 명령어를 적으면 어떤 것인지 확인 가능
+### format: `man [option] 명령어
+### option
+* **-a** : 찾고자 하는 명령어의 검색된 매뉴얼 페이지를 모두 출력함
+* **-h** : 사용법을 출력함
+* enter키 : 한 줄 씩넘기기
+* space키 : 한 페이지씩 넘기기
+
+## --help
+> ### 상세 도움말
+### format: `명령어 --help`
+
+## more
+> ### 파일을 화면단위로 출력
+> * 파일의 마지막까지 보면 알아서 종료되어 프롬프트로 나옴
+### format: `more [option] 파일`
+### option
+* **enter키** : 한 줄씩 아래로 이동
+* **space키** : 한 페이지씩 아래로 이동
+* **q** : 종료
+
+## less
+> ### 파일 내용을 페이지 단위로 출력
+> * 파일의 마지막까지 가도 알아서 종료되지 않고 q를 눌러서 종료해야 함
+### format: `less [option] 파일`
+### option
+* **enter키** : 한 줄씩 아래로 이동
+* **space키** : 한 페이지씩 아래로 이동
+* **k** : 위로 이동
+* **j** : 아래로 이동
+* **q** : 종료
+
+## nl
+> ### 파일의 각 줄에 번호를 부여
+### format: `nl [option] 파일`
+
+## cat
+> ### 파일의 내용을 출력
+### format: `cat [option] 파일`
+
+## find
+> ### 주어진 조건을 검색하여 파일이나 디렉터리를 찾음
+### format1: `find 경로 -name 찾을이름` → 경로 하위에 찾을 이름을 검색
+### format2: `find 경로 -name 찾을이름 -type f|d|l` → 경로 하위에 찾을 이름의 타입을 지정하여 검색
+    * f는 파일, d는 디렉터리, l은 심볼릭링크
+### format3: `find 경로 -newer 찾을이름` → 경로 하위에 찾을 이름 **이후에** 생성 또는 수정된 것들을 검색
+### format4: `find 경로 -name 찾을이름 -exec 명령어 {}\;` → 경로 하위에 찾을 이름을 검색하고 명령어 수행
+    * {}에 명령어를 대입시켜서 \엔터하고 ;끝냄
 
 
