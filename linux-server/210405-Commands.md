@@ -46,7 +46,7 @@
 > 디렉터리의 목록을 출력
 ### 사용형식: ls [option] directory
 ### option
-* **-l** : 자세히
+* **-l** : 자세히  
    ![image](https://user-images.githubusercontent.com/79209568/113582548-78599e80-9663-11eb-851b-6da3d542126a.png)
   * 맨앞'-' : 파일 (d:디렉터리)
   * 1 : 링크 수
