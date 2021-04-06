@@ -34,3 +34,6 @@
 * 개발자 모드여야한다.
 
 ![image](https://user-images.githubusercontent.com/79209568/113703399-bf07d100-9715-11eb-89d4-f1a7bd4fc634.png)  
+* 오라클 사이트에서 Support > Software Download > Database > Data 18c Express Edition  
+![image](https://user-images.githubusercontent.com/79209568/113705533-7e5d8700-9718-11eb-805b-b4d3579b30bf.png)  
+* 윈도우 버전으로 다운로드 후 설치
