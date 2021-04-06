@@ -50,4 +50,4 @@
 * 64bit windows 파일 다운로드
 ![image](https://user-images.githubusercontent.com/79209568/113707010-43f4e980-971a-11eb-973f-341fa9e17421.png)  
 * C드라이브에 옮긴 후 bin폴더의 startup.bat 파일 실행  
-
+* 프롬프트 창에서 알아서 실행되면 잘 된 것
