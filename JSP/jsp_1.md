@@ -24,10 +24,9 @@
 * 오른쪽 아래에 More Download에서 Eclipse 2020-06(4.16) 클릭    
 * 권장 버전은 6월 이전 버전이다  
 ![image](https://user-images.githubusercontent.com/79209568/113702499-8adfe080-9714-11eb-8e8a-d36dfaf14947.png)  
-* Enterprise버전의 window로 다운로드 받는다
-![image](https://user-images.githubusercontent.com/79209568/113702516-90d5c180-9714-11eb-95e9-3bf1951e6e96.png)  
-* select Another Mirror를 눌러서 한국 서버에서 다운을 받아야 빠르게 받을 수 있다
+* Enterprise버전의 window로 다운로드 받는다  
 ![image](https://user-images.githubusercontent.com/79209568/113702613-b2cf4400-9714-11eb-85c8-1a68bcac8fa9.png)  
+* select Another Mirror를 눌러서 한국 서버에서 다운을 받아야 빠르게 받을 수 있다  
 
 # oracle
 ## 사전 설정
