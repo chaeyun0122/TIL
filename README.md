@@ -28,4 +28,4 @@ Today I Learned..
 * [Vi](linux-server/210406-vi.md)
 
 ## JSP
-* [JSP 01](JSP/jsp_1.md)
+* [JSP 01_Initial Setup](JSP/jsp_1.md)
