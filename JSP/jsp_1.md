@@ -50,4 +50,6 @@
 * 64bit windows 파일 다운로드
 ![image](https://user-images.githubusercontent.com/79209568/113707010-43f4e980-971a-11eb-973f-341fa9e17421.png)  
 * C드라이브에 옮긴 후 bin폴더의 startup.bat 파일 실행  
-* 프롬프트 창에서 알아서 실행되면 잘 된 것
+* 프롬프트 창이 뜨면서 알아서 실행된다  
+![image](https://user-images.githubusercontent.com/79209568/113709801-e6629c00-971d-11eb-9ec8-ac43fcc37d0b.png)  
+* 웹 브라우저에 `localhost:8080` 입력 후 해당 화면이 나오면 서버가 잘 작동하는 것  
