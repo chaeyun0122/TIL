@@ -26,3 +26,6 @@ Today I Learned..
 * [Commands](linux-server/210405-Commands.md)
 * [Shut down and Reboot](linux-server/210406-ShutDownAndReboot.md)
 * [Vi](linux-server/210406-vi.md)
+
+## JSP
+* [JSP 01](JSP/jsp_1.md)
