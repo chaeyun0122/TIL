@@ -22,4 +22,11 @@
 ![image](https://user-images.githubusercontent.com/79209568/113702489-86b3c300-9714-11eb-8d6d-d3c508e6b962.png)  
 ![image](https://user-images.githubusercontent.com/79209568/113702499-8adfe080-9714-11eb-8e8a-d36dfaf14947.png)  
 ![image](https://user-images.githubusercontent.com/79209568/113702516-90d5c180-9714-11eb-95e9-3bf1951e6e96.png)  
-![image](https://user-images.githubusercontent.com/79209568/113702539-99c69300-9714-11eb-8602-c9d54ecb1090.png)  
+![image](https://user-images.githubusercontent.com/79209568/113702613-b2cf4400-9714-11eb-85c8-1a68bcac8fa9.png)  
+
+# oracle
+## 사전 설정
+* pc이름이 영어여야한다.
+* 개발자 모드여야한다.
+
+![image](https://user-images.githubusercontent.com/79209568/113703399-bf07d100-9715-11eb-89d4-f1a7bd4fc634.png)  
