@@ -37,3 +37,12 @@
 * 오라클 사이트에서 Support > Software Download > Database > Data 18c Express Edition  
 ![image](https://user-images.githubusercontent.com/79209568/113705533-7e5d8700-9718-11eb-805b-b4d3579b30bf.png)  
 * 윈도우 버전으로 다운로드 후 설치
+
+# Apache Tomcat
+![image](https://user-images.githubusercontent.com/79209568/113706364-91248b80-9719-11eb-8460-23b435cd34c8.png)  
+* [사이트](http://tomcat.apache.org/)로 이동 후 왼쪽에 있는 Download 중 tomcat 9 클릭  
+![image](https://user-images.githubusercontent.com/79209568/113706385-984b9980-9719-11eb-8eeb-fe20e9204dcf.png)  
+* 64bit windows 파일 다운로드
+![image](https://user-images.githubusercontent.com/79209568/113707010-43f4e980-971a-11eb-973f-341fa9e17421.png)  
+* C드라이브에 옮긴 후 bin폴더의 startup.bat 파일 실행  
+
