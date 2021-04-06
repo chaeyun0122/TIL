@@ -74,7 +74,7 @@
 ![image](https://user-images.githubusercontent.com/79209568/113710979-5887b080-971f-11eb-9217-5697ba17ba64.png)  
 * 프롬프트 창에 sqlplus 입력
 * 사용자명 : system
-* 비밀번호 : 설치할 때 설정했던 비밀번호 *내 경우 9525*
+* 비밀번호 : 설치할 때 설정했던 비밀번호 ~*내 경우 9525*~
   
   
 # Apache Tomcat
