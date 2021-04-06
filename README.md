@@ -25,3 +25,4 @@ Today I Learned..
 * [File System of Linux and Hierarchical Structure](linux-server/210405-FileSystemOfLinuxAndHierarchicalStructure.md)
 * [Commands](linux-server/210405-Commands.md)
 * [Shut down and Reboot](linux-server/210406-ShutDownAndReboot.md)
+* [Vi](linux-server/210406-vi.md)
