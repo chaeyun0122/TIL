@@ -1,4 +1,5 @@
 # JAVA 환경설정
+* eclipse 사이트에서 JDK 1.8 
 ![image](https://user-images.githubusercontent.com/79209568/113699549-ae089100-9710-11eb-9f57-fba8a0093fc8.png)  
 * 해당 디렉터리 복사  
 ![image](https://user-images.githubusercontent.com/79209568/113699638-d0021380-9710-11eb-8dda-f02a16d25c10.png)  
