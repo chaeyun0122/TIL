@@ -41,7 +41,12 @@
 * 윈도우 버전으로 다운로드 후 설치  
 ![image](https://user-images.githubusercontent.com/79209568/113707304-aea62500-971a-11eb-972b-7f6ff8e9a0fa.png)  
 * 설치 완료된 후 해당 화면의 내용을 따로 기록해두도록 한다  
-  
+
+## 확인하기
+![image](https://user-images.githubusercontent.com/79209568/113710979-5887b080-971f-11eb-9217-5697ba17ba64.png)  
+* 프롬프트 창에 sqlplus 입력
+* 사용자명 : system
+* 비밀번호 : 설치할 때 설정했던 비밀번호 *내 경우 9525*
   
 # Apache Tomcat
 ![image](https://user-images.githubusercontent.com/79209568/113706364-91248b80-9719-11eb-8460-23b435cd34c8.png)  
@@ -53,3 +58,37 @@
 * 프롬프트 창이 뜨면서 알아서 실행된다  
 ![image](https://user-images.githubusercontent.com/79209568/113709801-e6629c00-971d-11eb-9ec8-ac43fcc37d0b.png)  
 * 웹 브라우저에 `localhost:8080` 입력 후 해당 화면이 나오면 서버가 잘 작동하는 것  
+![image](https://user-images.githubusercontent.com/79209568/113710562-d5665a80-971e-11eb-8a4e-ef952ae43aeb.png)  
+* 서버 종료하기
+
+# Oracle 실행하기
+## 실행
+![image](https://user-images.githubusercontent.com/79209568/113713164-f5e3e400-9721-11eb-9386-d9323172588d.png)   
+* 작업 폴더를 생성한다. M4jspWork  
+* eclipse.exe를 실행한다. (편리하도록 바로가기를 생성)  
+* 해당 작업 폴더를 workspace에 지정한다.  
+
+## 서버 설정
+![image](https://user-images.githubusercontent.com/79209568/113713368-36dbf880-9722-11eb-9a4f-3b09217a1250.png)  
+* Server 탭을 클릭해서 `No servers are available. Click this link to create a new server...`를 클릭  
+![image](https://user-images.githubusercontent.com/79209568/113713527-6c80e180-9722-11eb-87c4-aafd1c78f4b4.png)  
+* Apache 폴더 내의 Tomcat 9버전을 클릭 후 Next  
+![image](https://user-images.githubusercontent.com/79209568/113713630-89b5b000-9722-11eb-8eab-0af96da0664e.png)  
+* 설치했던 Tomcat 위치를 설정 후 Finish  
+### 서버 실행
+![image](https://user-images.githubusercontent.com/79209568/113713769-ab169c00-9722-11eb-9942-cac4f674cc6b.png)  
+* Server 탭의 설정한 서버를 클릭 후 오른쪽 위의 실행 버튼을 클릭  
+* Console 탭에서 시작되었다는 메시지가 뜨면 서버가 잘 실행 된 것이다.  
+### 서버 종료
+![image](https://user-images.githubusercontent.com/79209568/113713937-da2d0d80-9722-11eb-8a73-90769b51288b.png)  
+* 오른쪽 위의 정지 버튼 클릭  
+
+## eclipse 인코딩 설정
+* `Window 탭 > Preferences`  
+![image](https://user-images.githubusercontent.com/79209568/113714292-33953c80-9723-11eb-8e5f-2533bda7f4bd.png)   
+* `General > Workspace` 에서 아래에 `Text file encoding`을 other에서 UTF-8f로 변경  
+![image](https://user-images.githubusercontent.com/79209568/113714425-56bfec00-9723-11eb-88d8-8a90c716eaed.png)
+* `Web` 탭에서 `CSS Files`, `HTML Files`, `JSP Files` 모두 Encoding을 UTF-8로 변경  
+![image](https://user-images.githubusercontent.com/79209568/113714615-8c64d500-9723-11eb-9eb6-f7b8fcdb82a8.png)  
+* `General > Content Types`의 `Java Class File`을 클릭 후 아래에 UTF-8을 입력
+
