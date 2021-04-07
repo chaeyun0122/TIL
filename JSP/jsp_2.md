@@ -10,7 +10,8 @@
   ![image](https://user-images.githubusercontent.com/79209568/113854624-0788c280-97da-11eb-8d87-d52d7ddf8630.png)  
 * 이름 지정 및 모듈을 3.1로 변경  
   ![image](https://user-images.githubusercontent.com/79209568/113854718-28e9ae80-97da-11eb-9f66-24e890029c22.png)  
-> 생성된 프로젝트 확인  
+> ### 생성된 프로젝트 확인  
+>   
 > ![image](https://user-images.githubusercontent.com/79209568/113855290-d5c42b80-97da-11eb-992c-93df19393706.png)  
   
 ## HTML 문서 만들기
@@ -31,7 +32,7 @@
     * 2 Internet Explorer : 인터넷 익스플로러 브라우저로 실행
     * 3 Chrome : 크롬 브라우저로 실행
   
-## HTML Start : 각각의 태그에 대해서
+### HTML Start : 각각의 태그에 대해서
 ```html
 <!-- Ex00_start.html -->
 <!-- 
@@ -57,3 +58,129 @@
 </html>  <!-- html 문서 종료 -->
 ```
  
+### HTML 태그 : h tag
+```html
+<!-- Ex01_h-tag.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>h 태그</title>
+</head>
+<body>
+	<!-- 
+		# 제목 태그 : h1 ~ h6
+		 - 제목을 표현 할 때 사용하는 태그
+		 - 1이 가장 크고, 숫자가 커질수록 글자가 작아진다
+	 -->
+	 <h1> h1, 제목1 </h1>
+	 <h2> h2, 제목2 </h2>
+	 <h3> h3, 제목3 </h3>
+	 <h4> h4, 제목4 </h4>
+	 <h5> h5, 제목5 </h5>
+	 <h6> h6, 제목6 </h6>
+	 
+	 <!-- 
+	   	# hr 태그
+	   		- 구분선, 수평라인을 표시한다.
+	   		- 속성
+	   		 > align : 수평선 정렬 지정
+	   		   size  : 수평선 두께 지정
+	   		   width : 수평선 넓이 지정
+	   
+	  -->
+	  <hr size="30" align="left" width="300px"> <!-- 기본 단위 픽셀 -->
+	  <hr size="30%" align="center" width="50%"> <!-- % : 화면 전체 크기에서 지정. 화면 크기를 변경하면 그에 맞는 퍼센트로 크기가 변경된다 -->
+	  <hr align="right" width="500px" noshade="noshade"> <!-- noshade : 그림자없이 한 줄만 -->
+</body>
+</html>
+```
+> #### 결과화면
+>   
+> ![image](https://user-images.githubusercontent.com/79209568/113863322-7bc86380-97e4-11eb-9381-890a4a7b0b8f.png)
+  
+  
+### HTML 태그 : p tag
+```html
+<!-- Ex02_p-tag.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> p 태그</title>
+<!-- 스타일을 밖으로 빼서 정의 가능 head의 title 아래에 적는다. 전체에 적용되지만 만약 태그 내부에서 설정한 값이 있으면 그것이 우선 적용된다. -->
+<style>
+p {
+	font-size:30px;
+}
+</style>
+</head>
+<body>
+	<!-- 
+		# p 태그
+		  - p 태그는 문단 하나를 만들 때 사용한다
+	 -->
+	 <h1> p 태그 </h1>
+	 <p style="font-size:10px;"> 문서의 단락을 표기하기 위해 사용되는 태그다. </p>
+	 <!-- 태그 안에다가 css를 적는 것을 권장하지 않음. -->
+	 <p> 이전 단락과 구분되는 새로운 단락으로 단락과 단락 사이에 공간이 형성된다. </p>
+	 
+	 <!-- 
+	   # br 태그
+	     - 줄 바꾸기
+	  -->
+	  <p> 단락 안에서 개행이 필요 할 경우 br 태그를 사용한다.<br>
+	  	  br 태그는 열린 태그만 제공한다.
+	  </p>
+</body>
+</html>
+```
+> #### 결과화면
+>   
+> ![image](https://user-images.githubusercontent.com/79209568/113863815-16c13d80-97e5-11eb-9c97-dcfa151d5a03.png)
+  
+  
+### HTML 폰트 스타일
+```html
+<!-- Ex03_font-style.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 폰트 스타일 </title>
+</head>
+<body>
+	<h1> font style </h1>
+	<br>
+	<p> b         태그는 글자를 <b>굵게 표시</b> 한다.</p>
+	<p> i 태그는 글자를 <i>기울여서 표시</i> 한다.</p>
+	<p> small 태그는 해당 글자를 주변 글자보다 <small>작게 표시</small> 한다.</p>
+	<p> u 태그는 글자에 <u>밑줄 표시</u>를 한다.</p>
+	<p> mark 태그는 글자에 <mark>하이라이트 표시</mark>를 한다.</p>
+	
+	<br>
+	<hr>
+	<br>
+	
+	<!-- 
+		# html 특수 기호 (entity code)
+		  - 웹브라우저 상에 특정 문자가 표시되지 않고 html 코드로 인식하는 경우에 사용한다.
+		  - & 로 시작해서 ; 으로 끝난다.
+	 -->
+	 <h1> html 특수 기호 </h1>
+	 <p> &amp;amp; → &amp; (앤드, 엠퍼센트) </p>
+	 <p> &amp;nbsp; → 공&nbsp;&nbsp;&nbsp;&nbsp;백 </p> <!-- 원래 html에서 띄어쓰기는 많이해도 한 번만 적용된다. -->
+	 <p> &amp;lt; → &lt; (꺽쇠 괄호 열기) </p>
+	 <p> &amp;gt; → &gt; (꺽쇠 괄호 닫기) </p>
+	 <p> &amp;quot; → &quot; (쌍따옴표) </p>
+	 <p> &amp;#124; → &#124; (파이프)</p>
+	 <p> &amp;#40; → &#40; (괄호 열기)</p>
+	 <p> &amp;#41; → &#41; (괄호 닫기)</p>
+	 
+</body>
+</html>
+```
+
+> #### 결과화면
+>   
+> ![image](https://user-images.githubusercontent.com/79209568/113863976-4cfebd00-97e5-11eb-98e1-922cdfb086ae.png)
