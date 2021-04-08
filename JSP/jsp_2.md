@@ -218,10 +218,10 @@ p {
 ### HTML 태그 : a tag
 #### a 태그
 - 텍스트나 이미지에 링크를 걸 때 사용한다.
-- <a href="url" target="">
+- `<a href="url" target="">`
   - href   : 이동하는 url을 지정한다.
   - target : 링크를 클릭했을 때 웹사이트가 열리는 곳을 지정한다.  
-    - _self : 현재 페이지에서 열림
+    - _self : 현재 페이지에서 열림  
     - _blank : 새로운 페이지에서 열림
   
   
