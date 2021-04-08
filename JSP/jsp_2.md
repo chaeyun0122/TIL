@@ -319,5 +319,20 @@ p {
 ```
 > #### 결과 화면
 >   
-> ![image](https://user-images.githubusercontent.com/79209568/113868587-cd73ec80-97ea-11eb-8609-ffcb35c9902e.png)
-
+> ![image](https://user-images.githubusercontent.com/79209568/113868587-cd73ec80-97ea-11eb-8609-ffcb35c9902e.png)  
+  
+  
+  
+```html
+	<!-- 이미지 링크 -->
+	 <a href="https://namu.wiki/w/세종(조선)" title="세종대왕 이미지" target="_blank">
+		<img src="images/세종대왕.jpg" alt="클릭하면 세종대왕 wiki로 이동합니다.">
+	 </a>
+```
+> #### 결과화면
+>   
+> ![image](https://user-images.githubusercontent.com/79209568/114011987-c7404780-98a0-11eb-8caf-5e3d8c9ac4ae.png)
+>   
+> * 클릭했을 때 페이지 넘어감  
+>   
+> ![image](https://user-images.githubusercontent.com/79209568/114012209-01114e00-98a1-11eb-97a3-92605cbe34ba.png)
