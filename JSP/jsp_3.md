@@ -45,9 +45,10 @@
 	</body>
 ```  
   
-  > #### 결과화면
+  > #### 결과화면  
   >   
-  > ![image](https://user-images.githubusercontent.com/79209568/114014898-176cd900-98a4-11eb-814e-add0cf7ea23f.png)
+  >  
+  > ![image](https://user-images.githubusercontent.com/79209568/114014898-176cd900-98a4-11eb-814e-add0cf7ea23f.png)  
 
 ### HTML 태그 : form 태그
 #### form 태그
@@ -95,9 +96,10 @@
  		</fieldset>
  	 </form>
  	```
- 	> #### 결과화면
+ 	> #### 결과화면  
  	>   
- 	> ![image](https://user-images.githubusercontent.com/79209568/114021303-8568ce80-98ab-11eb-8d54-69116391e8f0.png)
+	>  
+ 	> ![image](https://user-images.githubusercontent.com/79209568/114021303-8568ce80-98ab-11eb-8d54-69116391e8f0.png)  
  	> * submit 후 URL : `localhost:8080/P01_HTML/Ex07_input-text.html?userid=hi&username=cy&userpw=1234&memo=hello&secret=비밀%28보낼+값+작성%29#`
  
 ## 선택 관련
@@ -119,8 +121,9 @@
  		</fieldset>
  	</form>
  	```
- 	> #### 결과화면
+ 	> #### 결과화면  
  	>   
+	>  
  	> ![image](https://user-images.githubusercontent.com/79209568/114023947-6fa8d880-98ae-11eb-87fe-93e8b3f9fc71.png)
  
 ### input type="radio"
@@ -140,7 +143,8 @@
 		<input type="submit" value="보내기">
 	 </form>
 	```
-	> #### 결과화면
+	> #### 결과화면  
+	>   
 	>   
 	> ![image](https://user-images.githubusercontent.com/79209568/114029648-b13c8200-98b4-11eb-95c3-2b1dd3829392.png)
 
@@ -185,7 +189,8 @@
 		<input type="submit" value="전송">
 	</form>
 	```
-	> #### 결과화면
+	> #### 결과화면  
+	>   
 	>   
 	> ![image](https://user-images.githubusercontent.com/79209568/114026014-b697cd80-98b0-11eb-86c3-15f169348e95.png)
 
@@ -205,7 +210,8 @@
 		<input type="submit" value="보내기">
 	</form>
 	```
-	> #### 결과화면
+	> #### 결과화면  
+	>   
 	>   
 	> ![image](https://user-images.githubusercontent.com/79209568/114030240-4770a800-98b5-11eb-844e-aeece8993340.png)
 
@@ -229,12 +235,16 @@
 	<br>
 	<p> 사용자가  form에 입력한 내용을 전송받아서, 후속 처리를 수행하게 된다 </p>
 	```
-	> #### 결과화면
+	> #### 결과화면  
+	>   
 	> * 텍스트 입력 후 '입력완료'를 누르면,  
+	>   
 	>   
 	> ![image](https://user-images.githubusercontent.com/79209568/114031145-0dec6c80-98b6-11eb-8dc0-be4eb39a85d0.png)  
 	>   
+	>   
 	> * `Ex11_result.html` 페이지로 넘어간다. (url에 username="입력값"의 데이터가 함께 넘어간 것을 확인 가능)  
+	>   
 	>   
 	> ![image](https://user-images.githubusercontent.com/79209568/114031404-4f7d1780-98b6-11eb-9354-a702a8e564f7.png)  
 
