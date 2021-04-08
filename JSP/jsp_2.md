@@ -59,6 +59,18 @@
 ```
  
 ### HTML 태그 : h tag
+#### 제목 태그 : h1 ~ h6
+- 제목을 표현 할 때 사용하는 태그
+- 1이 가장 크고, 숫자가 커질수록 글자가 작아진다  
+  
+#### hr 태그
+- 구분선, 수평라인을 표시한다.
+- 속성
+  - align : 수평선 정렬 지정
+  - size  : 수평선 두께 지정
+  - width : 수평선 넓이 지정  
+  
+  
 ```html
 <!-- Ex01_h-tag.html -->
 <!DOCTYPE html>
@@ -101,6 +113,12 @@
   
   
 ### HTML 태그 : p tag
+#### p 태그
+- p 태그는 문단 하나를 만들 때 사용한다.
+#### br 태그
+ - 줄 바꾸기  
+  
+  
 ```html
 <!-- Ex02_p-tag.html -->
 <!DOCTYPE html>
@@ -141,6 +159,18 @@ p {
   
   
 ### HTML 폰트 스타일
+#### 폰트 스타일 태그
+- b 태그 : 글자 굵게 표시
+- i 태그 : 글자 기울여서 표시
+- small 태그 : 해당 글자를 주변 글씨보다 작게 표시
+- u 태그 : 글자에 밑줄 표시
+- mark 태그 : 글자에 하이라이트 표시  
+  
+##### html 특수 기호 (entity code)
+- 웹브라우저 상에 특정 문자가 표시되지 않고 html 코드로 인식하는 경우에 사용한다.
+- & 로 시작해서 ; 으로 끝난다.  
+  
+  
 ```html
 <!-- Ex03_font-style.html -->
 <!DOCTYPE html>
@@ -152,7 +182,7 @@ p {
 <body>
 	<h1> font style </h1>
 	<br>
-	<p> b         태그는 글자를 <b>굵게 표시</b> 한다.</p>
+	<p> b 태그는 글자를 <b>굵게 표시</b> 한다.</p>
 	<p> i 태그는 글자를 <i>기울여서 표시</i> 한다.</p>
 	<p> small 태그는 해당 글자를 주변 글자보다 <small>작게 표시</small> 한다.</p>
 	<p> u 태그는 글자에 <u>밑줄 표시</u>를 한다.</p>
@@ -186,6 +216,15 @@ p {
 > ![image](https://user-images.githubusercontent.com/79209568/113863976-4cfebd00-97e5-11eb-98e1-922cdfb086ae.png)
 
 ### HTML 태그 : a tag
+#### a 태그
+- 텍스트나 이미지에 링크를 걸 때 사용한다.
+- <a href="url" target="">
+  - href   : 이동하는 url을 지정한다.
+  - target : 링크를 클릭했을 때 웹사이트가 열리는 곳을 지정한다.  
+    - _self : 현재 페이지에서 열림
+    - _blank : 새로운 페이지에서 열림
+  
+  
 ```html
 <!-- Ex04_a-tag.html -->
 <!DOCTYPE html>
@@ -236,7 +275,15 @@ p {
 > ![image](https://user-images.githubusercontent.com/79209568/113867041-01e6a900-97e9-11eb-8d93-cf5d2cfcec17.png)
 
 
-### HTML 태그 : a tag
+### HTML 태그 : img tag
+#### img 태그
+- 웹페이지에 이미지를 넣어 줄 때 사용한다
+  - src : 이미지 파일이 저장된 경로 지정
+  - title : 이미지에 대한 설명
+  - alt : 웹 접근성을 위해 시각 장애인 등 화면낭독기를 사용하는 사람을 위한 대체 텍스트
+  - width/height : 이미지의 가로, 세로 사이즈 지정  
+  
+  
 ```html
 <!-- Ex05_img-tag.html -->
 <!DOCTYPE html>
