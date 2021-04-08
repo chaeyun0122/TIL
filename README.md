@@ -29,3 +29,5 @@ Today I Learned..
 
 ## JSP
 * [JSP 01_Initial Setup](JSP/jsp_1.md)
+* [JSP 02 Web project & HTML Tags 1](JSP/jsp_2.md)
+* [JSP 03 HTML tags 2](JSP/jsp_3.md)
