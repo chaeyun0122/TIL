@@ -1,14 +1,9 @@
-# HTML 태그 (이어서)
+# HTML 태그 2
 ### HTML 태그 : div 태그
 #### div 태그
 - 페이지 레이아웃이나 태그를 그룹화 할 때 사용한다.  
+##### \<style>
 ```html
-<!-- Ex06_div.html -->
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title> div 태그 </title>
 <style type="text/css">
 #area_one { 
 	width:200px;
@@ -29,31 +24,80 @@
 	border:1px solid green;
 }
 </style>
-</head>
+```
+##### \<body>
+```html
 <body>
-	<!-- 
-		# div 태그
-		  - 페이지 레이아웃이나 태그를 그룹화 할 때 사용한다.
-	 -->
-	 
-	 <h1> div </h1>
-	 <br>
-	 <div id="area_one">
-	 	<p> 왼쪽 그룹 </p>
-	 	<p> 안녕하세요 </p>
-	 </div>
-	 <div id="area_two">
-	 	<p> 가운데 그룹 </p>
-	 	<p> 안녕하세요 </p>
-	 </div>
-	 <div id="area_three">
-	 	<p> 오른쪽 그룹 </p>
-	 	<p> 안녕하세요 </p>
-	 </div>
+ <h1> div </h1>
+ <br>
+ <div id="area_one">
+	<p> 왼쪽 그룹 </p>
+	<p> 안녕하세요 </p>
+ </div>
+ <div id="area_two">
+	<p> 가운데 그룹 </p>
+	<p> 안녕하세요 </p>
+ </div>
+ <div id="area_three">
+	<p> 오른쪽 그룹 </p>
+	<p> 안녕하세요 </p>
+ </div>
 </body>
-</html>
 ```  
   
 > #### 결과화면
 >   
 > ![image](https://user-images.githubusercontent.com/79209568/114014898-176cd900-98a4-11eb-814e-add0cf7ea23f.png)
+
+### HTML 태그 : form 태그
+#### form 태그
+* 사용자가 입력한 데이터를 서버에 전송 시키기 위해 사용하는 태그
+  * action : form을 전송할 서버쪽 파일 지정
+  * name   : form을 식별하기 위한 이름
+  * target : form에 입력된 데이터가 서버를 거쳐 처리된 결과를 표시할 프레임
+  * method : form을 서버에 전송할 http 메서드 지정
+
+#### label 태그
+- input 태그의 text 이름을 지정
+
+#### input 태그
+- form 태그 안에 사용하는 요소 중에서 가장 중요한 요소로, 사용자로부터 데이터를 입력받기 위해 사용한다.
+  - type : 입력 태그의 형태 지정
+  - name : 서버로 전달되는 이름 지정
+  - value : 입력 변수(태그)의 초기값을 설정
+
+#### Input type
+##### text
+* 문자를 입력 받는 타입
+##### password
+* 비밀번호를 입력 받는 타입(입력 시 \*로 숨김 처리)
+##### hidden 
+* 사용자에게 보이지 않고 서버 쪽에 데이터를 보낼 때 사용하는 타입. summit 후 url에 보임(get 형식일 때)
+```html
+<form action="#" method="get">
+	<fieldset>  <!-- 테두리 생성 -->
+		<legend> 내용 입력 </legend>
+		<label> ID </label>
+		<input type="text" id="userid" name="userid" maxlength="20"><br>
+		<label> 이름 </label>
+		<input type="text" id="username" name="username" maxlength="20"><br>
+		<label> 비밀번호 </label>
+		<input type="password" id="userpw" name="userpw" maxlength="20"><br> <!-- 비밀번호 작성 input 타입 -->
+		<label> 자기소개 </label><br>
+		<textarea id="memo" name="memo" rows="5" cols="50"></textarea><br>
+		<!-- 사용자에겐 보이지 않지만 서버쪽에 데이터를 보낼 때 : hidden 타입-->
+		<label> 숨김항목 </label>
+		<input type="hidden" id="secret" name="secret" value="비밀(보낼 값 작성)"> <!-- 화면에 안보이지만 summit 후 url에 value값이 보임 -->
+
+		<br>
+		<input type="submit" value="보내기"> <!-- 전송하는 input 타입 -->
+	</fieldset>
+ </form>
+```
+> #### 결과화면
+>   
+> ![image](https://user-images.githubusercontent.com/79209568/114021303-8568ce80-98ab-11eb-8d54-69116391e8f0.png)
+> * submit 후 URL : `localhost:8080/P01_HTML/Ex07_input-text.html?userid=hi&username=cy&userpw=1234&memo=hello&secret=비밀%28보낼+값+작성%29#`
+
+### HTML 태그 : Input Check
+#### 
