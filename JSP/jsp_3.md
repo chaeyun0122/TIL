@@ -153,40 +153,88 @@
 - select 태그 안의 목록을 생성한다.
 ##### optgrouop 태그
 - option 태그를 그룹화한다.
-```html
-<h1> select 태그 </h1>
-<br>
-<form action="#">
-	<fieldset>
-		<legend> 통신사 </legend>
-		<label for="telecom"> 선택 </label>
-		<select id="telecom" name="telecom">
-			<option value="KT"> KT </option>
-			<option value="SKT"> SKT </option>
-			<option value="U+"> LG </option>
-		</select>
-	</fieldset>
-	<fieldset>
-		<legend> 자동차 </legend>
-		<select id="car_list" name="carList" size="8">
-			<optgroup label="domestic">
-				<option value="현대"> 현대 </option>
-				<option value="기아"> 기아 </option>
-				<option value="쌍용"> 쌍용 </option>
-			</optgroup>
-			<optgroup label="foreign">
-				<option value="benz"> BENZ </option>
-				<option value="audi"> AUDI </option>
-				<option value="bmw"> BMW </option>
-			</optgroup>
-		</select>
-	</fieldset>
+	```html
+	<h1> select 태그 </h1>
 	<br>
-	<input type="submit" value="전송">
-</form>
-```
-> #### 결과화면
->   
-> ![image](https://user-images.githubusercontent.com/79209568/114026014-b697cd80-98b0-11eb-86c3-15f169348e95.png)
+	<form action="#">
+		<fieldset>
+			<legend> 통신사 </legend>
+			<label for="telecom"> 선택 </label>
+			<select id="telecom" name="telecom">
+				<option value="KT"> KT </option>
+				<option value="SKT"> SKT </option>
+				<option value="U+"> LG </option>
+			</select>
+		</fieldset>
+		<fieldset>
+			<legend> 자동차 </legend>
+			<select id="car_list" name="carList" size="8">
+				<optgroup label="domestic">
+					<option value="현대"> 현대 </option>
+					<option value="기아"> 기아 </option>
+					<option value="쌍용"> 쌍용 </option>
+				</optgroup>
+				<optgroup label="foreign">
+					<option value="benz"> BENZ </option>
+					<option value="audi"> AUDI </option>
+					<option value="bmw"> BMW </option>
+				</optgroup>
+			</select>
+		</fieldset>
+		<br>
+		<input type="submit" value="전송">
+	</form>
+	```
+	> #### 결과화면
+	>   
+	> ![image](https://user-images.githubusercontent.com/79209568/114026014-b697cd80-98b0-11eb-86c3-15f169348e95.png)
 
+## 파일 관련
+### input type="file"
+* 파일을 첨부한다.
+	```html
+	<h1> Input File </h1>
+	<br>
+	<form action="#">
+		<fieldset>
+			<legend> 파일 첨부 </legend>
+			<label for="txt">선택</label>
+			<input type="file" id="txt" name="txt">
+		</fieldset>
+		<br>
+		<input type="submit" value="보내기">
+	</form>
+	```
+	> #### 결과화면
+	>   
+	> ![image](https://user-images.githubusercontent.com/79209568/114030240-4770a800-98b5-11eb-844e-aeece8993340.png)
+
+## 전송 관련
+### form action="\[url]"
+* submit을 통해 form 태그의 action에 있는 페이지로 데이터를 전송한다.
+* #### 보내는 페이지
+	```html
+	<h1> 보내기 </h1>
+	<br>
+	<form action="Ex11_result.html" name="formTest" method="get">
+		<label> 이름 : </label>
+		<input type="text" id="username" name="username">
+		<br><br>
+		<input type="submit" value="입력완료"> &nbsp; <input type="reset" value="다시작성">
+	</form>
+	```
+* #### 결과 페이지
+	```html
+	<h1> 입력 결과를 전송 받기 위한 페이지 </h1>
+	<br>
+	<p> 사용자가  form에 입력한 내용을 전송받아서, 후속 처리를 수행하게 된다 </p>
+	```
+	> #### 결과화면
+	> * 텍스트 입력 후 '입력완료'를 누르면,  
+	>   
+	> ![image](https://user-images.githubusercontent.com/79209568/114031145-0dec6c80-98b6-11eb-8dc0-be4eb39a85d0.png)  
+	>   
+	> * `Ex11_result.html` 페이지로 넘어간다. (url에 username="입력값"의 데이터가 함께 넘어간 것을 확인 가능)  
+	>   
+	> ![image](https://user-images.githubusercontent.com/79209568/114031404-4f7d1780-98b6-11eb-9354-a702a8e564f7.png)  
 
