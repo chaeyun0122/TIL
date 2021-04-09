@@ -153,4 +153,86 @@
   ```
   > ![image](https://user-images.githubusercontent.com/79209568/114172641-df7f9780-9970-11eb-93ad-8d7faaeb22bc.png)
 
+## 목록
+* 리스트를 나타낼 때 사용하는 태그
+* **ul, ol, dl**
+* li (list item)
+  * ul, ol 태그 내부에 사용되는 태그
+  * 목록의 내용을 작성하는 태그
 
+### ul (unordered list)
+- 순서 없는 목록을 만들 때 사용하는 태그
+  > 글머리 기호를 붙여서 목록을 만드는 태그다.
+- type 속성을 사용해서 기호를 설저할 수 있다.
+  - disc : 검은 동그리미
+  - circle : 투명한 동그라미
+  - square : 검은 사각형
+
+  ```html
+  <h1> ul 태그 </h1>
+  <br>
+  <h3> disc </h3>
+  <ul>
+    <li> 항목 1 </li>
+    <li> 항목 2 </li>
+    <li> 항목 3 </li>
+  </ul>
+  <br>
+  <h3> circle </h3>
+  <ul type="circle">
+    <li> 항목 1 </li>
+    <li> 항목 2 </li>
+    <li> 항목 3 </li>
+  </ul>
+  <br>
+  <h3> square </h3>
+  <ul type="square">
+    <li> 항목 1 </li>
+    <li> 항목 2 </li>
+    <!-- 항목 안에 또 ul 삽입 가능  -->
+      <ul>
+        <li> 항목 2-1 </li>
+        <li> 항목 2-2 </li>
+      </ul>
+    <li> 항목 3 </li>
+  </ul>
+  ```
+  > #### 결과화면
+  >   
+  > ![image](https://user-images.githubusercontent.com/79209568/114182149-460ab280-997d-11eb-9744-3b05a3ebcfb9.png)
+   
+### ol (ordered list)
+- 순서가 있는 목록을 만들 때 사용하는 태그
+- type 속성을 사용해서 사용하는 항목 형태를 지정할 수 있다.
+  - 1 : 숫자(1,2,3...)
+  - A : 알파벳 대문자
+  - a : 알파벳 소문자
+  - I : 로마 숫자 대문자
+  - i : 로마 숫자 소문자
+  ```html
+  <h1> ol 태그</h1>
+  <br>
+  <h3> 숫자 </h3>
+  <ol>
+    <li> 항목 </li>
+    <li> 항목 </li>
+    <li> 항목 </li>
+  </ol>
+  <br>
+  <h3> A </h3>
+  <ol type="A">
+    <li> 항목 </li>
+    <li> 항목 </li>
+    <li> 항목 </li>
+  </ol>
+  <br>
+  <h3> I </h3>
+  <ol type="I">
+    <li> 항목 </li>
+    <li> 항목 </li>
+    <li> 항목 </li>
+  </ol>
+  ```
+  > #### 결과화면
+  >   
+  > ![image](https://user-images.githubusercontent.com/79209568/114182553-b6193880-997d-11eb-951d-0066b6dcd6ce.png)
