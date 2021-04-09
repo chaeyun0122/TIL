@@ -30,4 +30,8 @@ Today I Learned..
 ## JSP
 * [JSP 01_Initial Setup](JSP/jsp_1.md)
 * [JSP 02_Web project & HTML Tags 1](JSP/jsp_2.md)
-* [JSP 03_HTML tags 2](JSP/jsp_3.md)
+* [JSP 03_HTML tags 2 & Using HTML1](JSP/jsp_3.md)
+* [JSP 04 Using HTML2](JSP/jsp_4.md)
+
+  > ### Quiz
+  > * [Quiz 1 - Make Form](JSP/quiz1_make-form.md)
