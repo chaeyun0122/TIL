@@ -106,10 +106,51 @@
       </tr>
       </table>
       ```
-      > * colspan 하기 전
+      > * colspan 하기 전  
       > ![image](https://user-images.githubusercontent.com/79209568/114170547-0b4d4e00-996e-11eb-9025-629d19d7392d.png)
-      > * colspan 한 후
+      > * colspan 한 후  
       > ![image](https://user-images.githubusercontent.com/79209568/114170793-60895f80-996e-11eb-8672-9e3d65e02d26.png)
 
+#### 테이블로 공지사항 보드 만들기
+  ```html
+    <h1> 공지 사항 </h1>
+    <table border="1" width="100%">
+      <thead>
+        <tr>
+          <th>번호</th> <th>제목</th> <th>작성자</th> <th>조회수</th> <th>작성일</th>
+        </tr>
+      </thead>
+      <tbody align="center">
+        <tr>
+          <td width="50">3</td>
+          <td width="400"><a href="#">글 제목</a></td>
+          <td>관리자</td>
+          <td>10</td>
+          <td>2021-04-09</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><a href="#">글 제목</a></td>
+          <td>관리자</td>
+          <td>10</td>
+          <td>2021-04-09</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td><a href="#">글 제목</a></td>
+          <td>관리자</td>
+          <td>10</td>
+          <td>2021-04-09</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5" align="center">
+            <a href="#">1</a> &nbsp; <a href="#">2</a> &nbsp; <a href="#">3</a> &nbsp;
+        </tr>
+      </tfoot>
+    </table>
+  ```
+  > ![image](https://user-images.githubusercontent.com/79209568/114172641-df7f9780-9970-11eb-93ad-8d7faaeb22bc.png)
 
-    
+
