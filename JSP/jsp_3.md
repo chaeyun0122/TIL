@@ -244,7 +244,42 @@
 	>   
 	>   
 	> * `Ex11_result.html` 페이지로 넘어간다. (url에 username="입력값"의 데이터가 함께 넘어간 것을 확인 가능)  
-	>   
-	>   
 	> ![image](https://user-images.githubusercontent.com/79209568/114031404-4f7d1780-98b6-11eb-9354-a702a8e564f7.png)  
+
+## 버튼
+### input type="button"
+* javascript를 통해 버튼의 액션을 부여한다.
+```html
+	<!-- Ex11_submit.html -->
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>전송</title>
+	<script type="text/javascript">
+		function testClick() {
+			var name = document.getElementById("username");
+			if (name.value == "") {
+				alert("이름을 입력하세요");
+			}
+		}
+	</script>
+	</head>
+	<body>
+		<h1> 보내기 </h1>
+		<br>
+		<form action="Ex11_result.html" name="formTest" method="get">
+			<label> 이름 : </label>
+			<input type="text" id="username" name="username">
+			<br><br>
+			<input type="submit" value="입력완료"> &nbsp; <input type="reset" value="다시작성">
+			<input type="button" value="입력버튼" onclick="testClick()">
+			<!-- 화면에 액션을 줄 때 사용하는 것이 자바 스크립트 -->
+		</form>
+	</body>
+	</html>
+```
+> #### 결과화면  
+>  
+> ![image](https://user-images.githubusercontent.com/79209568/114167403-db03b080-9969-11eb-8625-20b4c237d45a.png)  
 
