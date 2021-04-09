@@ -56,3 +56,60 @@
 * 테이블의 셀과 셀을 합칠 수 있다.
   * rowspan : 셀을 세로로 합칠 때 사용한다. 속성 값으로 병합하려는 행의 수를 지정한다.
   * colspan : 셀을 가로로 합칠 때 사용한다. 속성 값으로 병합하려는 열의 수를 지정한다.
+  * rowspan 예시 : 2행을 셀 병합 시키면 아래의 3행과 3행1열이 오른쪽으로 밀린다.
+    ```html
+    <h1> 셀 병합 </h1>
+     <br>
+     <table border="1" width="300">
+      <caption> 행 통합 테이블 </caption>
+      <tr>
+        <th> 1행 </th><th> 1행 1열 </th>
+      </tr>
+      <tr>
+        <th rowspan="2"> 2행 </th><th> 2행 1열 </th>
+      </tr>
+      <tr>
+        <th> 3행 </th><th> 3행 1열 </th>
+      </tr>
+     </table>
+    ```
+    > ![image](https://user-images.githubusercontent.com/79209568/114169874-1a7fcc00-996d-11eb-9b2b-82889a6127eb.png)  
+    
+   * 맞춰서 바꿔준다.
+     ```html
+     <h1> 셀 병합 </h1>
+     <br>
+     <table border="1" width="300">
+      <caption> 행 통합 테이블 </caption>
+      <tr>
+        <th> 1행 </th><th> 1행 1열 </th>
+      </tr>
+      <tr>
+        <th rowspan="2"> 2행 </th><th> 2행 1열 </th>
+      </tr>
+      <tr>
+        <th> 2행 1열 </th>
+      </tr>
+     </table>
+     ```
+     > ![image](https://user-images.githubusercontent.com/79209568/114170925-93cbee80-996e-11eb-9ce1-0341cc9853ca.png)
+
+   * colspan 예시
+      ```html
+      <table border="1" width="300">
+      <caption> 열 통합 테이블 </caption>
+      <tr>
+        <th> 1열 </th><th colspan="2"> 2열 </th>
+      </tr>
+      <tr>
+        <th> 2행 1열 </th><th> 2행 2열 </th><th> 2행 3열 </th>
+      </tr>
+      </table>
+      ```
+      > * colspan 하기 전
+      > ![image](https://user-images.githubusercontent.com/79209568/114170547-0b4d4e00-996e-11eb-9025-629d19d7392d.png)
+      > * colspan 한 후
+      > ![image](https://user-images.githubusercontent.com/79209568/114170793-60895f80-996e-11eb-8672-9e3d65e02d26.png)
+
+
+    
