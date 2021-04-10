@@ -23,11 +23,11 @@
 ## SQL
 > #### 사용자가 SP(서버프로세스)로 명령어를 전달하여 DB server에서 요청을 수행하도록 하는 언어
 ## SQL 종류
-* QUERY : SELECT 
-* DML   : INSERT, UPDATE, DELETE, MERGE 
-* TCL   : COMMIT, ROLLBACK, SAVEPOINT 
-* DDL   : CREATE, DROP, ALTER, TRUNCATE 
-* DCL   : GRANT, REVOKE 
+* **QUERY** : SELECT 
+* **DML**   : INSERT, UPDATE, DELETE, MERGE 
+* **TCL**   : COMMIT, ROLLBACK, SAVEPOINT 
+* **DDL**   : CREATE, DROP, ALTER, TRUNCATE 
+* **DCL**   : GRANT, REVOKE 
 ## 데이터베이스
 * Database : table들의 집합
 * table : 2차원 구조의 표. 관리하고자 하는 속성과 데이터들의 집합
@@ -64,7 +64,7 @@ SELECT EMPNO, ENAME, SAL, DEPTNO FROM EMP;
 ### 산술식
 * 산술 연산자를 사용해서 숫자 및 날짜 데이터로 표현식을 작성할 수 있다. **(문자일 때는 실행되지 않음)**
 * 숫자일 경우 모두 가능하고 날짜일 경우 안되는 것도 있다.
-  * \+ 는 가능하지만 \* 는 안됨.
+  * \+, \- 는 가능하지만 \*, \/ 는 안됨.
   ```SQL
   SELECT HIREDATE, HIREDATE + 1 FROM EMP; -- 가능
   SELECT HIREDATE, HIREDATE * 2 FROM EMP; -- 오류
