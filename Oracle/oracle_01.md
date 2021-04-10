@@ -66,8 +66,8 @@ SELECT EMPNO, ENAME, SAL, DEPTNO FROM EMP;
 * 숫자일 경우 모두 가능하고 날짜일 경우 안되는 것도 있다.
   * \+ 는 가능하지만 \* 는 안됨.
   ```SQL
-  SELECT HIREDATE, HIREDATE + 1 FROM EMP; /* 가능 */
-  SELECT HIREDATE, HIREDATE * 2 FROM EMP; /* 오류 */
+  SELECT HIREDATE, HIREDATE + 1 FROM EMP; -- 가능
+  SELECT HIREDATE, HIREDATE * 2 FROM EMP; -- 오류
   ```
 * 연산자 우선 순위 존재
 
@@ -106,7 +106,39 @@ SELECT ENAME, JOB, ENAME || JOB FROM EMP ;
 * 리터럴은 SELECT 문에 포함된 문자, 숫자 또는 날짜
 * 숫자는 그냥 써도 된다.
 * 날짜 및 문자 리터럴 값은 **작은 따옴표**로 묶어야한다.
+  * 작은 따옴표를 출력하려면 두 번 쓰면된다.
+  ```SQL
+  SELECT department_name || 'Department''s Manager Id: ' || manager_id As "Department and Manager" FROM departments;
+  ```
 ```SQL
 SELECT ENAME, JOB, ENAME || ' is a ' || JOB FROM EMP ;
 ```
 > ![image](https://user-images.githubusercontent.com/79209568/114256111-dc2cf000-99f2-11eb-820d-f671dd0e3a6b.png)
+
+## 대체 인용(q) 연산자
+* 자신의 따옴표 구분자를 지정
+* 구분자를 임의로 선택한다.
+* 가독성 및 사용성이 증가한다.
+```SQL
+SELECT department_name || q'[ Department's Manager Id: ]' || manager_id AS "Department and Manager" FROM departments;
+```
+
+## 중복 행
+* 기본적으로 query 결과에는 중복 행을 포함한 모든 행이 표시된다.
+* 중복 행을 제거하기 위해 ```DISTINCT``` 혹은 ```UNIQUE```를 사용한다.
+  ```sql
+  SELECT DISTINCT DEPTNO FROM EMP ;
+  SELECT DISTINCT DEPTNO, JOB FROM EMP ;
+  ```
+* DISTINCT는 행의 중복을 제거하는 것이기 때문에 열 별로 중복 제거를 지정할 수는 없다.
+  ```sql
+  SELECT DEPTNO, DISTINCT JOB FROM EMP ;  -- ERROR 
+  ```
+  
+## DESCRIBE 명령
+* 테이블의 구조를 표시하는 명령어
+* 약어 ```DESC```로도 가능하다.
+```SQL
+DESCRIBE EMP;
+DESC EMP;
+```
