@@ -35,3 +35,6 @@ Today I Learned..
 
   > ### Quiz
   > * [Quiz 1 - Make Form](JSP/quiz1_make-form.md)
+
+## Oracle
+* [Oracle 01](Oracle/oracle_01.md)
