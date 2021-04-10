@@ -6,7 +6,7 @@
 
 ### 새 접속
 * '새 접속' 클릭
-* 테스트 클릭후 상태:성공 나오면 접속 클릭  
+* 테스트 클릭후 `상태:성공` 나오면 접속 클릭  
   
   ![image](https://user-images.githubusercontent.com/79209568/114253661-01673180-99e6-11eb-98fc-365310d9695a.png)
   * 사용자 이름 : ORA01
@@ -125,7 +125,7 @@ SELECT department_name || q'[ Department's Manager Id: ]' || manager_id AS "Depa
 
 ## 중복 행
 * 기본적으로 query 결과에는 중복 행을 포함한 모든 행이 표시된다.
-* 중복 행을 제거하기 위해 ```DISTINCT``` 혹은 ```UNIQUE```를 사용한다.
+* 중복 행을 제거하기 위해 `DISTINCT` 혹은 `UNIQUE`를 사용한다.
   ```sql
   SELECT DISTINCT DEPTNO FROM EMP ;
   SELECT DISTINCT DEPTNO, JOB FROM EMP ;
@@ -137,7 +137,11 @@ SELECT department_name || q'[ Department's Manager Id: ]' || manager_id AS "Depa
   
 ## DESCRIBE 명령
 * 테이블의 구조를 표시하는 명령어
-* 약어 ```DESC```로도 가능하다.
+* 약어 `DESC`로도 가능하다.
+* SQL Developer의 경우 테이블을 더블클릭하는 것으로도 구조 확인이 가능하다.
+  
+  ![image](https://user-images.githubusercontent.com/79209568/114258533-06d27500-9a02-11eb-8922-4710601a6325.png)
+
 ```SQL
 DESCRIBE EMP;
 DESC EMP;
