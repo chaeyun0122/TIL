@@ -63,6 +63,12 @@ SELECT EMPNO, ENAME, SAL, DEPTNO FROM EMP;
 ## SELECT문의 산술식 및 NULL 값
 ### 산술식
 * 산술 연산자를 사용해서 숫자 및 날짜 데이터로 표현식을 작성할 수 있다. **(문자일 때는 실행되지 않음)**
+* 숫자일 경우 모두 가능하고 날짜일 경우 안되는 것도 있다.
+  * \+ 는 가능하지만 \* 는 안됨.
+  ```SQL
+  SELECT HIREDATE, HIREDATE + 1 FROM EMP; /* 가능 */
+  SELECT HIREDATE, HIREDATE * 2 FROM EMP; /* 오류 */
+  ```
 * 연산자 우선 순위 존재
 
 ### NULL 값 정의
@@ -88,7 +94,7 @@ SELECT EMPNO, ENAME, SAL, DEPTNO FROM EMP;
   
 ## 연결 연산자
 * 열이나 문자열을 다른 열에 연결
-* 두 개의 세로선(||)으로 나타냄
+* 두 개의 세로선( || )으로 나타냄
 * 결과 열은 문자식으로 생성됨
 ```SQL
 SELECT ENAME, JOB, ENAME || JOB FROM EMP ;
