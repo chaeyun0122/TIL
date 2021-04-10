@@ -78,10 +78,10 @@
 >   ```
 
 ```SQL
-SELECT SYSDATE, SYSDATE + 1
-              , SYSDATE + 1/24
-			        , SYSDATE + 1/1440
-			        , SYSDATE + 1/86400
+SELECT SYSDATE, SYSDATE + 1  - 1일
+              , SYSDATE + 1/24  - 1시간
+	      , SYSDATE + 1/1440  - 1분
+ 	      , SYSDATE + 1/86400  - 1초
 FROM DUAL ;
 ```
 
