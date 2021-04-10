@@ -159,3 +159,51 @@
      OR DEPTNO = 30 )
     AND SAL    > 2000 ; 
   ```
+
+## ORDER BY 절을 사용하여 행 정렬
+* ORDER BY 절을 사용하여 검색된 행을 정렬
+ – ASC: 오름차순, **기본값**
+ – DESC: 내림차순
+* ORDER BY 절은 SELECT 문의 맨 마지막에 온다
+* **정렬은 정말 필요할 때만 써야한다. (성능저하의 원인이 될 수 있음)**
+### 정렬
+* 내림차순 오름차순으로 정렬 가능
+  
+  ```SQL
+  -- 오름차순
+  SELECT * 
+  FROM EMP 
+  ORDER BY SAL ;
+
+  -- 내림차순
+  SELECT * 
+  FROM EMP 
+  ORDER BY SAL DESC  ;
+
+  ```
+* ALIAS를 기준으로 정렬 가능
+  
+  ```SQL
+  SELECT EMPNO AS EMPID, ENAME, SAL  
+  FROM EMP 
+  ORDER BY EMPID ;
+  ```
+* 열의 숫자 위치를 사용하여 정렬 가능
+  
+  ```SQL
+  -- 8번째 열을 기준으로 정렬
+  SELECT * 
+  FROM EMP 
+  ORDER BY 8 ;
+  ```
+* 여러 열을 기준으로 정렬
+  
+  ```SQL
+  -- 8번째 열을 기준으로 정렬한 후, 같은 값일 경우 SAL열을 내림차순으로 정렬
+  SELECT * 
+  FROM EMP 
+  ORDER BY 8, SAL DESC ;
+  ```
+## 치환 변수
+* 단일 앰퍼샌드(&) 및 이중 앰퍼샌드(&&) 치환을 사용하여 값을 임시로 저장합니다.
+![image](https://user-images.githubusercontent.com/79209568/114260384-7569ff80-9a0f-11eb-9908-0f5bda51430f.png)
