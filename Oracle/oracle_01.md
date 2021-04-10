@@ -74,7 +74,7 @@ SELECT EMPNO, ENAME, SAL, DEPTNO FROM EMP;
 ### NULL 값 정의
 * Null은 사용할 수 없거나, 할당되지 않았거나, 알 수 없거나, 적용할 수 없는 값
 * **Null은 0이나 공백과는 다르다**
-* SQL Developer에서는 널 값과 공백을 구분하기 위해 표시 형식을 지정할 수 있다.
+* SQL Developer에서는 널 값과 공백을 구분하기 위해 표시 형식을 지정할 수 있다. (`도구 > 환경설정 > 데이터베이스 > 고급`)
   
   ![image](https://user-images.githubusercontent.com/79209568/114255797-a38c1700-99f0-11eb-8026-3658460fd89f.png)
 * NULL 값을 포함하는 산술식은 NULL로 계산된다. 무조건 NULL을 출력
