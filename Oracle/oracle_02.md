@@ -44,22 +44,22 @@
   ```
 * `BETWEEN ... AND ...`는 꼭 앞의 값이 뒤의 값보다 작아야 결과가 나온다. (오류는 안나지만 값이 안나옴)
   
- ```SQL
+  ```SQL
   SELECT *
   FROM EMP
   WHERE SAL BETWEEN 2000 AND 3000; -- O
-  
+
   SELECT *
   FROM EMP
   WHERE SAL BETWEEN 3000 AND 2000; -- X
- ```
- ```SQL
- -- 같은 값이 출력됨
+  ```
+  ```SQL
+  -- 같은 값이 출력됨
   SELECT * 
   FROM EMP 
   WHERE SAL >= 2000
     AND SAL <= 3000 ; 
- ```
+  ```
 
 * `IN (set)`은 리스트 안의 값이 포함되면 참을 반환한다.
 
@@ -119,6 +119,16 @@
     FROM EMP 
     WHERE COMM = NULL ; -- 오류는 안나지만 값이 나오지 않음
     ```
+> ### WHERE 절 이해하기!
+> > 이 경우 어떤 출력이 나올까?
+> ```SQL
+> SELECT * 
+> FROM EMP 
+> WHERE 1 = 1 ;
+> ```
+> * **전체 행이 출력 된다.**
+>   * WHERE 절은 참과 거짓을 판별하는 절이므로 `1 = 1`이 참이기 때문에 모든 값이 참이 된다.
+>   * 마찬가지로 `WHERE 1 = 0`의 경우는 거짓이므로 모든 값이 거짓이 되어 하나도 출력 되지 않는다.
   
 ### 논리 연산자를 사용하여 조건 정의
 #### 논리 연산자
@@ -129,4 +139,23 @@
 |     NOT    | 조건이 **거짓**인 경우 TRUE를 반환합니다. (비교 연산자 앞 쪽에 써줌) |
 
 ## 표현식의 연산자 우선 순위 규칙
+![image](https://user-images.githubusercontent.com/79209568/114260108-caa51180-9a0d-11eb-88cf-4e917b065b86.png)
 * AND 와 OR의 우선순위를 잘 살펴봐야한다!
+  
+  ```SQL
+  SELECT * 
+  FROM EMP 
+  WHERE DEPTNO = 10 
+     OR DEPTNO = 30 
+    AND SAL    > 2000 ; 
+  ```
+  * 이 경우 AND가 먼저 실행 된 후 OR이 실행된다.
+  * 만약 OR을 먼저 실행하고 싶으면 괄호를 해준다.
+  
+  ```SQL
+  SELECT * 
+  FROM EMP 
+  WHERE (DEPTNO = 10 
+     OR DEPTNO = 30 )
+    AND SAL    > 2000 ; 
+  ```
