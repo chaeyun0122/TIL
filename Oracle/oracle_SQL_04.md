@@ -63,7 +63,23 @@ SELECT '2021/04/10', TO_DATE('2021/04/10','YYYY/MM/DD')
 FROM DUAL ;
 ```
 ![image](https://user-images.githubusercontent.com/79209568/114263366-05b04080-9a20-11eb-82ee-bf32105bc24a.png)
-  * 앞은 날짜처럼보이지만 문자다.
+    * 앞은 날짜처럼보이지만 문자다.
+
+## 함수 중첩
+* 단일 행 함수는 어떠한 레벨로도 중첩될 수 있다
+* 중첩 함수는 가장 깊은 레벨에서 덜 깊은 레벨로 평가된다
+![image](https://user-images.githubusercontent.com/79209568/114288799-2ffc0f80-9aad-11eb-8b1f-77d09453fff7.png)
+* ex) 
+  ```SQL
+  UPPER (CONCAT (SUBSTR (LAST_NAME, 1, 8), '_US'))
+  ```
+
+## 일반 함수
+* 임의의 데이터 유형을 사용하며 NULL 사용과 관련 있는 함수들
+   * NVL (expr1, expr2)
+   * NVL2 (expr1, expr2, expr3)
+   * NULLIF (expr1, expr2)
+   * COALESCE (expr1, expr2, ... , exprn)
 
 ```SQL
 ELECT EMPNO, ENAME, MGR, NVL(MGR, 'NO MANAGER')
