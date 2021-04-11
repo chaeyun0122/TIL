@@ -60,7 +60,7 @@ GROUP BY DEPTNO ;
   * GROUP BY 절이 남은 행들을 그룹화 함
   * **따라서, SELECT의 JOB은 GROUP BY절에 참여하지 않은 열이므로 에러가 난다.**
 
-## GROUP BY
+## GROUP BY절
 * GROUP BY 절을 사용하여 테이블의 행을 더 작은 그룹으로 나눌 수 있다.
 * 그룹 함수에 속하지 않는 SELECT list의 모든 열은 GROUP BY절에 있어야한다.
   ```SQL
@@ -103,43 +103,48 @@ GROUP BY DEPTNO ;
   ```
   ![image](https://user-images.githubusercontent.com/79209568/114290553-6771b880-9abb-11eb-95b9-43bf0c81aa11.png)
 
-### HAVING
-* 그룹을 제한할 때 사용한다.
-* WHERE 절은 그룹을 제한하는데 사용할 수 없다
+### HAVING절
+* 그룹을 제한할 조건을 줄 때 사용한다.
+* WHERE 절은 그룹을 제한하는데 사용할 수 없다.
   ```SQL
   SELECT DEPTNO, SUM(SAL)
   FROM EMP
-  WHERE DEPTNO IN (10,20)
-  GROUP BY DEPTNO
+  WHERE DEPTNO IN (10,20)  -- WHERE절로 DEPTNO가 30인 행들을 제외시킨 후,
+  GROUP BY DEPTNO          -- DEPTNO별로 그룹화 한다.
   HAVING SUM(SAL) > 10000;
 
   SELECT DEPTNO, SUM(SAL)
   FROM EMP
-  GROUP BY DEPTNO
-  HAVING SUM(SAL) > 10000
-    AND DEPTNO IN (10,20);
-
-  -- 결과는 동일하지만 성능 차이가 남
-  -- 위는 WHERE에서 DEPTNO가 30인 것을 제외하고나서 그룹화하기 때문에 10, 20만 그룹화함
-  -- 아래는 10, 20, 30 그룹화를 진행한 후 30을 버림. 성능이 별로 안 좋음
+  GROUP BY DEPTNO          -- DEPTNO별로 그룹화한 후,
+  HAVING SUM(SAL) > 10000  
+    AND DEPTNO IN (10,20); -- DEPTNO가 30인 행들을 제외시킨다.
   ```
-```  
-SELECT DEPTNO, SUM(SAL)
-FROM EMP 
-GROUP BY DEPTNO 
-HAVING SUM(SAL) > 10000 
-  AND DEPTNO IN (10,20)
-  AND JOB > 'A' ; --에러
--- JOB이 GROUP BY에 참여하지 않았기 때문에
-
--- 그룹함수끼리의 중첩은 한 번만 가능하다.
--- 지원을 하지 않음
-SELECT MIN(MAX(AVG(SAL))) -- 세 번째부터는 에러
-FROM EMP 
-GROUP BY DEPTNO ; 
-
--- 이 경우는 가능하다
-SELECT TRUNC(MAX(AVG(SAL)))
-FROM EMP 
-GROUP BY DEPTNO ; 
-```
+  - 결과는 동일하지만 성능 차이가 남
+  - 위는 WHERE에서 DEPTNO가 30인 것을 제외하고나서 그룹화하기 때문에 10, 20만 그룹화함
+  - 아래는 10, 20, 30 그룹화를 진행한 후 30을 버림. 성능이 별로 안 좋음
+  
+* HAVING에 조건을 쓸 때는 GROUP BY절에서 참여한 컬럼들의 조건을 써야한다.
+  ```SQL 
+  SELECT DEPTNO, SUM(SAL)
+  FROM EMP 
+  GROUP BY DEPTNO 
+  HAVING SUM(SAL) > 10000 
+    AND DEPTNO IN (10,20)
+    AND JOB > 'A' ; --에러
+  -- JOB이 GROUP BY에 참여하지 않았기 때문에
+  ```
+  
+## 그룹 함수의 중첩
+* 그룹함수끼리의 중첩은 한 번만 가능하다.
+* 두 번째 까지 진행 하면 행이 행이 하나만 존재하게 됨. 세 번째 부터는 의미가 없기 때문에 아예 지원을 하지 않는다. (에러남)
+  ```SQL
+  SELECT MIN(MAX(AVG(SAL))) -- 세 번째부터는 에러
+  FROM EMP 
+  GROUP BY DEPTNO ; 
+  ```
+* 단일 행 함수는 여러 번 중첩이 가능하다.
+  ```SQL
+  SELECT TRUNC(MAX(AVG(SAL)))
+  FROM EMP 
+  GROUP BY DEPTNO ; 
+  ```
