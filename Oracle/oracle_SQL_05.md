@@ -63,62 +63,73 @@ GROUP BY DEPTNO ;
 ## GROUP BY
 * GROUP BY 절을 사용하여 테이블의 행을 더 작은 그룹으로 나눌 수 있다.
 * 그룹 함수에 속하지 않는 SELECT list의 모든 열은 GROUP BY절에 있어야한다.
- ```SQL
- SELECT TO_CHAR(HIREDATE, 'YYYY'), SUM(SAL)
- FROM EMP
- GROUP BY TO_CHAR(HIREDATE, 'YYYY');
+  ```SQL
+  SELECT TO_CHAR(HIREDATE, 'YYYY'), SUM(SAL)
+  FROM EMP
+  GROUP BY TO_CHAR(HIREDATE, 'YYYY');
 
- SELECT HIREDATE, SUM(SAL)
- FROM EMP
- GROUP BY TO_CHAR(HIREDATE, 'YYYY');
- -- 에러
- -- HIREDATE의 년도가 같은 것을 가져오기 때문에 SELECT의 HIREDATE는 14행을 가지고 있다.
- ```
+  SELECT HIREDATE, SUM(SAL)
+  FROM EMP
+  GROUP BY TO_CHAR(HIREDATE, 'YYYY');
+  -- 에러
+  -- HIREDATE의 년도가 같은 것을 가져오기 때문에 SELECT의 HIREDATE는 14행을 가지고 있다.
+  ```
 * GROUP BY열은 SELECT list에 없어도 된다.
- ```SQL
- SELECT TO_CHAR(HIREDATE, 'YYYY'), SUM(SAL)
- FROM EMP
- GROUP BY HIREDATE;
- -- 이건 가능
- -- HIREDATE가 같은 행끼리 그룹화하고 년도만 보이게 하기때문에
+  ```SQL
+  SELECT TO_CHAR(HIREDATE, 'YYYY'), SUM(SAL)
+  FROM EMP
+  GROUP BY HIREDATE;
+  -- 이건 가능
+  -- HIREDATE가 같은 행끼리 그룹화하고 년도만 보이게 하기때문에
 
- --에러는 안나지만 GROUP BY에 썼던 식을 SELECT에 그대로 쓰는 것이 좋음
- ```
+  --에러는 안나지만 GROUP BY에 썼던 식을 SELECT에 그대로 쓰는 것이 좋음
+  ```
 * GROUP BY에 SELECT절의 별칭을 쓰는 것은 불가능하다. (SELECT 보다 GROUP BY가 먼저 실행되기 때문에)
 * 따라서 SELECT의 별칭은 ORDER BY 에서만 사용 가능하다.
- ```SQL
- SELECT TO_CHAR(HIREDATE, 'YYYY') AS HIRE_YYYY, SUM(SAL)
- FROM EMP
- GROUP BY HIRE_YYYY; --ERROR
+  ```SQL
+  SELECT TO_CHAR(HIREDATE, 'YYYY') AS HIRE_YYYY, SUM(SAL)
+  FROM EMP
+  GROUP BY HIRE_YYYY; --ERROR
 
- -- 별칭을 불러와서 쓰는 것은 ORDER BY절에만 가능
- SELECT SAL*12 AS ANNSAL, ANNSAL/4 -- ERROR
- FROM EMP ;
- ```
+  -- 별칭을 불러와서 쓰는 것은 ORDER BY절에만 가능
+  SELECT SAL*12 AS ANNSAL, ANNSAL/4 -- ERROR
+  FROM EMP ;
+  ```
+* 그룹화는 두 개 이상의 열로도 가능하다.
+  ```SQL
+  SELECT DEPTNO, JOB, MAX(SAL)
+  FROM EMP
+  GROUP BY DEPTNO, JOB; 
+  ```
+  ![image](https://user-images.githubusercontent.com/79209568/114290553-6771b880-9abb-11eb-95b9-43bf0c81aa11.png)
 
-```SQL
+### HAVING
+* 그룹을 제한할 때 사용한다.
+* WHERE 절은 그룹을 제한하는데 사용할 수 없다
+  ```SQL
+  SELECT DEPTNO, SUM(SAL)
+  FROM EMP
+  WHERE DEPTNO IN (10,20)
+  GROUP BY DEPTNO
+  HAVING SUM(SAL) > 10000;
+
+  SELECT DEPTNO, SUM(SAL)
+  FROM EMP
+  GROUP BY DEPTNO
+  HAVING SUM(SAL) > 10000
+    AND DEPTNO IN (10,20);
+
+  -- 결과는 동일하지만 성능 차이가 남
+  -- 위는 WHERE에서 DEPTNO가 30인 것을 제외하고나서 그룹화하기 때문에 10, 20만 그룹화함
+  -- 아래는 10, 20, 30 그룹화를 진행한 후 30을 버림. 성능이 별로 안 좋음
+  ```
+```  
 SELECT DEPTNO, SUM(SAL)
-FROM EMP
-WHERE DEPTNO IN (10,20)
-GROUP BY DEPTNO
-HAVING SUM(SAL) > 10000;
-
-SELECT DEPTNO, SUM(SAL)
-FROM EMP
-GROUP BY DEPTNO
-HAVING SUM(SAL) > 10000
- AND DEPTNO IN (10,20);
- 
- -- 결과는 동일하지만 성능 차이가 남
- -- 위는 WHERE에서 DEPTNO가 30인 것을 제외하고나서 그룹화하기 때문에 10, 20만 그룹화함
- -- 아래는 10, 20, 30 그룹화를 진행한 후 30을 버림. 성능이 별로 안 좋음
-
-SELECT DEPTNO, SUM(SAL)
-  FROM EMP 
- GROUP BY DEPTNO 
- HAVING SUM(SAL) > 10000 
-    AND DEPTNO IN (10,20)
-	AND JOB > 'A' ; --에러
+FROM EMP 
+GROUP BY DEPTNO 
+HAVING SUM(SAL) > 10000 
+  AND DEPTNO IN (10,20)
+  AND JOB > 'A' ; --에러
 -- JOB이 GROUP BY에 참여하지 않았기 때문에
 
 -- 그룹함수끼리의 중첩은 한 번만 가능하다.
