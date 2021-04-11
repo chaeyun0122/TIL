@@ -65,3 +65,41 @@ FROM DUAL ;
 ![image](https://user-images.githubusercontent.com/79209568/114263366-05b04080-9a20-11eb-82ee-bf32105bc24a.png)
   * 앞은 날짜처럼보이지만 문자다.
 
+```SQL
+ELECT EMPNO, ENAME, MGR, NVL(MGR, 'NO MANAGER')
+FROM EMP; -- 오류 남(숫자 열인데 문자를 넣으려고하기 때문에)
+
+SELECT EMPNO, ENAME, MGR, NVL(TO_CHAR(MGR), 'NO MANAGER')
+FROM EMP; -- TO_CHAR로 MGR열을 문자로 만들어주면 오류가 안남
+```
+![image](https://user-images.githubusercontent.com/79209568/114288336-d7774300-9aa9-11eb-9389-e7dbff6dcaa4.png)
+
+
+## 조건부 표현식
+* SQL 문에서 IF-THEN-ELSE 논리를 사용할 수 있다. `CASE식`, `DECODE함수` 두 가지 있다.
+### CASE식
+* CASE, WHEN, THEN, ELSE, END 형식으로 쓴다
+```SQL
+SELECT EMPNO, ENAME, SAL, DEPTNO, 
+       CASE DEPTNO WHEN 10 THEN SAL * 1.1
+                   WHEN 20 THEN SAL * 1.2
+                   ELSE SAL * 1.3 END
+FROM EMP;
+```
+```SQL
+-- 아예 조건식 자체를 지정할 수도 있음. 좀 더 다양한 조건식을 적용할 수 있음
+SELECT EMPNO, ENAME, SAL, DEPTNO, 
+       CASE WHEN DEPTNO = 10 THEN SAL * 1.1
+            WHEN DEPTNO = 20 THEN SAL * 1.2
+            ELSE SAL * 1.3 END
+FROM EMP;
+```
+### DECODE 함수
+* 콤마(,)로 구분
+```SQL
+SELECT EMPNO, ENAME, SAL, DEPTNO,
+       DECODE (DEPTNO,10,SAL*1.1
+                     ,20,SAL*1.2
+                        ,SAL*1.3)
+FROM EMP;
+```
