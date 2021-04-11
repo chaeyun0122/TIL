@@ -16,7 +16,16 @@
     FROM EMP E JOIN DEPT D 
       ON E.DEPTNO = D.DEPTNO ; 
   ```
-  
+## Natural Join
+* NATURAL JOIN 절은 이름이 같은 두 테이블의 모든 열을 기반으로 한다.
+* 이 절은 두 테이블에서 대응되는 모든 열의 값이 동일한 행을 선택한다.
+* 동일한 이름을 가진 열이 서로 다른 데이터 유형을 가지면 오류가 반환된다.
+* 경우에 따라서는 필요없는 컬럼까지 이름이 같기만하면 같이 조인된다.
+```sql
+SELECT *
+FROM EMPLOYEES E NATURAL JOIN DEPARTMENTS D ;
+```
+
 ## Self Join
 ## Nonequijoin
 ```SQL
