@@ -38,7 +38,7 @@
 SELECT *
 FROM EMPLOYEES E NATURAL JOIN DEPARTMENTS D ;
 ```
-## Using 사용해서 조인
+### Using 사용해서 조인
 * ANSI만 가능
 * 여러 열의 이름이 동일하지만 데이터 유형은 다를 경우 USING 절을 사용하여 열을 Equijoin으로 지정한다.
 * USING 절을 사용하면 두 개 이상의 열이 일치하는 경우 하나의 열만 일치하도록 할 수 있다.
@@ -48,22 +48,54 @@ SELECT *
 FROM EMPLOYEES E JOIN DEPARTMENTS D 
 USING (DEPARTMENT_ID); 
 ```
-### USING 주의사항
+#### USING 주의사항
 * 같은 이름의 컬럼이 있는 경우 어떤 것을 보여줄지 지정해줘야 한다.
   ```SQL
-  -- MANAGER_ID가 두 테이블 모두 있음. 어떤 테이블의 MANAGER_ID를 출력할지 정해주지 않았기 때문에 에러가 남
   SELECT LAST_NAME, DEPARTMENT_NAME, MANAGER_ID   -- ERROR 
   FROM EMPLOYEES   E  JOIN DEPARTMENTS D 
   USING (DEPARTMENT_ID) ;
   ```
+  * MANAGER_ID가 두 테이블 모두 있음. 어떤 테이블의 MANAGER_ID를 출력할지 정해주지 않았기 때문에 에러가 남
 * USING절에 사용된 컬럼을 SELECT절에 별칭을 넣으면 에러가 난다.
   ```SQL
-  -- USING절에서 DEPARTMENT_ID를 사용했는데 SELECT절에서 테이블 별칭을 넣어서 사용했기때문에 에러가 남
   SELECT LAST_NAME, DEPARTMENT_NAME, E.MANAGER_ID, D.DEPARTMENT_ID -- ERROR 
   FROM EMPLOYEES   E  JOIN DEPARTMENTS D 
   USING (DEPARTMENT_ID) ; 
   ```
-> ### 이렇듯 복잡하고 신경써야할 것이 많기 때문에 Natural Join과 Using은 되도록이면 쓰지 말자!
+  * USING절에서 DEPARTMENT_ID를 사용했는데 SELECT절에서 테이블 별칭을 넣어서 사용했기때문에 에러가 남
+> #### 이렇듯 복잡하고 신경써야할 것이 많기 때문에 `Natural Join`과 `Using`은 되도록이면 쓰지 말자!
+
+### ON절을 사용해서 조인
+* Natural join의 조인 조건은 기본적으로 이름이 같은 모든 열의 Equijoin이다.
+* ON 절을 사용하여 임의 조건을 지정하거나 조인할 열을 지정한다.
+* 조인 조건은 다른 검색 조건과는 별개다.
+* ON 절을 사용하면 코드를 이해하기 쉽다.
+```SQL
+SELECT *
+FROM EMPLOYEES   E 
+JOIN DEPARTMENTS D 
+  ON (E.DEPARTMENT_ID = D.DEPARTMENT_ID) ;
+```
+#### ON절을 사용해서 3-Way 조인 생성 (세 개이상 조인)
+* 조인마다 ON절로 조건을 써준다. (JOIN - ON 이 하나의 형식)
+```SQL
+SELECT *  
+FROM EMPLOYEES   E 
+JOIN DEPARTMENTS D 
+  ON E.DEPARTMENT_ID = D.DEPARTMENT_ID 
+JOIN LOCATIONS L 
+  ON D.LOCATION_ID = L.LOCATION_ID  ;
+```
+* 3개 이상 조인을 할 때는 Oracle join방식이 좀 더 간단하다.
+  ```sql
+  SELECT *
+  FROM EMPLOYEES   E 
+      ,DEPARTMENTS D 
+	     ,LOCATIONS   L 
+  WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID 
+    AND D.LOCATION_ID   = L.LOCATION_ID  ;
+  ```
+
 ## Self Join
 ## Nonequijoin
 ```SQL
