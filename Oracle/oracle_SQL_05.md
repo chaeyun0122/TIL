@@ -134,7 +134,7 @@ HAVING SUM(SAL) > 10000
 
 -- 그룹함수끼리의 중첩은 한 번만 가능하다.
 -- 지원을 하지 않음
-SELECT MIN(MAX(AVG(SAL))) -- 세 번째부터는 
+SELECT MIN(MAX(AVG(SAL))) -- 세 번째부터는 에러
 FROM EMP 
 GROUP BY DEPTNO ; 
 
