@@ -236,3 +236,26 @@
   > #### 결과화면
   >   
   > ![image](https://user-images.githubusercontent.com/79209568/114182553-b6193880-997d-11eb-951d-0066b6dcd6ce.png)
+### dl
+- 정의 목록을 만들 때 사용하는 태그
+  - dt : 용어의 제목을 나타낸다
+  - dd : 용어에 대한 설명을 나타낸다
+  ```html
+  <dl>
+      <dt> 정의 목록 태그 </dt>
+      <dd> dd : 설명을 위한 태그 </dd>
+      <dd> dd는 자동 들여쓰기가 된다. </dd>
+     </dl>
+     <br>
+     <h3> 컴퓨터 부품 </h3>
+     <dl>
+      <dt> &lt; 마우스 &gt; </dt>
+      <dd> 컴퓨터 입력 장치 중 하나다. </dd>
+      <dt> &lt; 모니터 &gt; </dt>
+      <dd> 데이터를 출력하는 기본 출력 장치다. </dd>
+     </dl>
+  ```
+  > #### 결과화면
+  > 
+  > ![image](https://user-images.githubusercontent.com/79209568/114378588-d1c15080-9bc2-11eb-94c9-8f0fcc13a290.png)
+
