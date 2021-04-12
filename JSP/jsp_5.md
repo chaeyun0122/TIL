@@ -37,4 +37,22 @@
 ![image](https://user-images.githubusercontent.com/79209568/114390092-c543f480-9bd0-11eb-952e-0b221fe15ea5.png)
 
 ### 기본 세팅
-> #### `도구 > 환경설정`
+> #### Sql Developer 한글 글꼴 설정
+> - 한글이 잘 안되는 경우가 종종 있으므로 한글 글꼴을 설정해주는 것이 좋다.
+> - sql developer **실행 전**에 [이 글꼴 파일](JSP/util/D2Coding-Ver1.3.2-20180524-all.ttc)을 `모든 사용자용으로 설치`를 한다.
+  
+#### 세팅 위치 `도구 > 환경설정`
+- `환경 > 인코딩` : UTF-8로 설정
+- `코드 편집기 > 글꼴 > 글꼴 이름` : D2Coding으로 설정
+- `코드 편집기 > 행 여백` : 행 번호 표시 체크 설정
+  
+#### system 암호 설정
+- sqlplus 실행
+- 사용자 입력 : **sys as sysdba**
+- 비밀번호 : 입력 없이 **Enter**
+- `alter user system identified by 변경 비밀번호;`
+- `alter user system identified by oracle;`
+
+#### port 확인
+- `select dbms_xdb.getHttpPort() from dual;`를 입력하고 확인한다.
+- 결과가 9090이 아니면 `exec dbms_xdb.setHttpPort(9090);`로 포트 번호를 9090으로 변경 해준다.
