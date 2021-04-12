@@ -56,3 +56,31 @@
 #### port 확인
 - `select dbms_xdb.getHttpPort() from dual;`를 입력하고 확인한다.
 - 결과가 9090이 아니면 `exec dbms_xdb.setHttpPort(9090);`로 포트 번호를 9090으로 변경 해준다.
+
+## 실습
+### 사용자 계정 생성
+- 11g 버전 : `create user 생성계정명 identified by 패스워드;`
+- 18c 버전 : `create user c##생성계정명 identified by 패스워드;`
+```sql
+create user c##dbtest identified by a1234;
+```
+![image](https://user-images.githubusercontent.com/79209568/114396233-4bb00480-9bd8-11eb-87fc-82c7e5aeccf3.png)
+
+### 계정 확인
+```sql
+select * from all_users;
+```
+* 위에서 생성한 c##dbtest를 확인한다.
+  ![image](https://user-images.githubusercontent.com/79209568/114396322-697d6980-9bd8-11eb-8f46-0f7a123505c5.png)
+
+### 계정 삭제
+- `drop user 계정명`
+- 데이터가 있는 계정 삭제의 경우 `drop user 계정명 cascade;`
+```sql
+drop user c##dbtest;
+select * from all_users;
+```
+![image](https://user-images.githubusercontent.com/79209568/114396510-a0537f80-9bd8-11eb-9d3f-a102532227d0.png)  
+![image](https://user-images.githubusercontent.com/79209568/114396725-d4c73b80-9bd8-11eb-88c6-ceede564f042.png)
+
+
