@@ -18,6 +18,7 @@
 
 ## 실행
 - JDK 경로를 입력한다.  
+   
   ![image](https://user-images.githubusercontent.com/79209568/114386901-ca06a980-9bcc-11eb-9abb-dd96a755fdcc.png)
 
-- JDK 폴더의 jre > bin 폴더 안에 `msvcr100.dll`파일을 복사한다.
+- JDK 폴더의 jre > bin 폴더 안에 `msvcr100.dll`파일을 넣는다. ([파일 다운로드](JSP/util/msvcr100.dll))
