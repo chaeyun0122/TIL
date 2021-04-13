@@ -57,7 +57,7 @@
 - `select dbms_xdb.getHttpPort() from dual;`를 입력하고 확인한다.
 - 결과가 9090이 아니면 `exec dbms_xdb.setHttpPort(9090);`로 포트 번호를 9090으로 변경 해준다.
 
-## 실습
+## 사용자 계정
 ### 사용자 계정 생성
 - 11g 버전 : `create user 생성계정명 identified by 패스워드;`
 - 18c 버전 : `create user c##생성계정명 identified by 패스워드;`
