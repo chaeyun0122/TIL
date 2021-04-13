@@ -149,7 +149,7 @@ flashback table dbtest to before drop;
 ```
 > ![image](https://user-images.githubusercontent.com/79209568/114546474-25519e00-9c98-11eb-9ea2-a44bd31610ab.png)
 
-## 레코드
+## 추가
 ### 레코드 추가
 - 테이블에 데이터 추가하기
 - 전체 필드 혹은 일부 필드에 값을 추가  
@@ -239,3 +239,50 @@ select * from dbtest where height is null;
 select * from dbtest where height is not null;
 ```
 > ![image](https://user-images.githubusercontent.com/79209568/114551811-dc511800-9c9e-11eb-89e2-bd6d03119e83.png)
+
+## 수정
+### 레코드 수정
+- `update 테이블명 set 수정내용 where 조건;`
+- 현재 값을 확인 먼저 하고 내용을 수정하는 것이 좋다. `select * from 테이블명`
+
+```sql
+update dbtest set age=age+1 where name like '%k%';
+```
+> ![image](https://user-images.githubusercontent.com/79209568/114553530-af056980-9ca0-11eb-897a-2f710675a2ab.png)
+>  
+> 원래 값 → 수정 값  
+>   
+> ![image](https://user-images.githubusercontent.com/79209568/114553303-76fe2680-9ca0-11eb-9365-ed1550f78b1f.png)
+> ![image](https://user-images.githubusercontent.com/79209568/114554733-01935580-9ca2-11eb-91d0-3008af158117.png)
+
+
+#### null 값 수정
+- null 관련 수정은 일반 연산자가 아닌 `is` 혹은 `is not`을 통해 검색한다.
+```sql
+update dbtest set height=170.0 where height is null;
+```
+> ![image](https://user-images.githubusercontent.com/79209568/114553809-00155d80-9ca1-11eb-9142-b0661962d991.png)
+
+## 삭제
+### 레코드 삭제
+- `delete 테이블명;` : 테이블의 전체 레코드 삭제
+- `delete 테미블명 where 조건;` : 특정 조건에 맞는 레코드만 삭제
+
+```sql
+delete dbtest where age=33;
+```
+> ![image](https://user-images.githubusercontent.com/79209568/114554396-a5303600-9ca1-11eb-91f9-f15551e7c7d6.png)
+
+
+# 트랜잭션
+- 데이터를 처리하는 하나의 단위
+- **commit** : 갱신
+- **rollback** : 취소 (commit한 이후의 시점으로 돌아간다.)
+- 데이터 **추가, 삭제**의 결과를 저장하려면 commit을 꼭 해줘야한다.
+
+```sql
+commit;
+```
+> ![image](https://user-images.githubusercontent.com/79209568/114552691-d3ad1180-9c9f-11eb-9390-2499ed32c4e5.png)
+
+
