@@ -32,9 +32,18 @@ Today I Learned..
 * [JSP 02_Web project & HTML Tags 1](JSP/jsp_2.md)
 * [JSP 03_HTML tags 2 & Using HTML1 (text, selection, file, transport, button)](JSP/jsp_3.md)
 * [JSP 04 Using HTML2 (table, list)](JSP/jsp_4.md)
+* [JSP 05 Database & Execute SQL Developer (User account 1)](JSP/jsp_5.md)
+* [JSP 06 User account 2 & SQL & Table & CRUD data & Transaction](JSP/jsp_6.md)
 
   > ### Quiz
   > * [Quiz 1 - Make Form](JSP/quiz1_make-form.md)
+  > * [Quiz 2 - ul & dt](JSP/quiz2_ul_dt.md)
 
 ## Oracle
-* [Oracle 01](Oracle/oracle_01.md)
+* [Oracle 01](Oracle/oracle_SQL_01.md)
+* [Oracle 02](Oracle/oracle_SQL_02.md)
+* [Oracle 03](Oracle/oracle_SQL_03.md)
+* [Oracle 04](Oracle/oracle_SQL_04.md)
+* [Oracle 05](Oracle/oracle_SQL_05.md)
+* [Oracle 06](Oracle/oracle_SQL_06.md)
+* [Oracle 07](Oracle/oracle_SQL_07.md)
