@@ -160,6 +160,7 @@ public class Insert {
 > ### 콘솔 창
   ![image](https://user-images.githubusercontent.com/79209568/114714091-bc882580-9d6c-11eb-8586-a7104567f5db.png)
 > ### DB 확인
-> * 레코드가 잘 추가 되었다.
+> * 레코드가 잘 추가 되었다.  
+
   ![image](https://user-images.githubusercontent.com/79209568/114714284-ee00f100-9d6c-11eb-8b91-a2e75b49586a.png)
 
