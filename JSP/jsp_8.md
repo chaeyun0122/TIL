@@ -100,7 +100,7 @@ class InsertTest {
 		}
 	}
 	
-  // 연결이 잘 되었는지 확인 먼저 해본다.
+  	// 연결이 잘 되었는지 확인 먼저 해본다. (잘 되면 insertArticle을 실행)
 	public Connection getConnection() {
 		// 드리이브 연결
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
