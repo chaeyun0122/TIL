@@ -50,8 +50,8 @@ try {
 > ![image](https://user-images.githubusercontent.com/79209568/114710121-526d8180-9d68-11eb-8bfb-a11378a6b2b3.png)
 
 ## 드라이브 연결
-### Connection : java.sql.Connection
-- 연결 관리를 할 수 있는 객체를 생생한다.
+### Connection 객체 생성 : java.sql.Connection
+- 연결 관리를 할 수 있는 객체를 생성한다.
 - java.sql.DriverManager 클래스 안에 getConnection 메서드를 사용해서 생성
   - url		: DB의 위치와 정보를 담고 있는 데이터
     - jdbc : `DBMS명 : 데이터베이스 식별자 (host, port, sid ...)`
@@ -77,7 +77,26 @@ try {
 ```
 > ![image](https://user-images.githubusercontent.com/79209568/114713567-3966cf80-9d6c-11eb-8c8b-b8b5e1c4a09a.png)
 
-# 전체 코드
+## 쿼리 실행
+### PreparedStatement 객체 생성 : java.sql.PreparedStatement
+- 쿼리 실행을 위한 객체를 생성한다.
+
+### 쿼리 실행 메서드
+- int executeUpdate()
+  - insert, delete, update 문에서 실행 결과를 받을 때 사용하는 메서드
+- ResultSet executeQuery()
+  - select 문에서 실행
+
+# JDBC 전체 프로그램 실행 단계
+1. JDBC 드라이버 인스턴스 생성
+2. Connection 객체 생성 - 연결 관리 JDBC 드라이버 인스턴스를 통해서 DBMS에 연결
+3. Statement 생성 - 쿼리문 실행을 위한 객체
+4. 쿼리 실행
+5. ResultSet 종료
+6. Statement 종료
+7. Connection 종료
+
+# Insert (전체코드)
 ```java
 package ch02_insert;
 
@@ -100,7 +119,6 @@ class InsertTest {
 		}
 	}
 	
-  	// 연결이 잘 되었는지 확인 먼저 해본다. (잘 되면 insertArticle을 실행)
 	public Connection getConnection() {
 		// 드리이브 연결
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -134,7 +152,7 @@ class InsertTest {
 		int su = 0; // 반환 값 : 추가 성공한 레코드 수
 		
 		try {
-			String sql = "insert into dbtest values(?, ?, ?, sysdate)";
+			String sql = "insert into dbtest values(?, ?, ?, sysdate)"; // 미완성 쿼리문; 물음표 자리 1부터 시작(0아님)
 			pstmt = con.prepareStatement(sql); // 연결객체를 사용해서 쿼리문 전송할 객체에 쿼리문을 넣음
 			pstmt.setString(1, name);
 			pstmt.setInt(2, age);
@@ -143,6 +161,14 @@ class InsertTest {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally { // 모든 실행되었던 자원들을 닫아준다.
+			try {
+				if (pstmt != null) pstmt.close();
+				if (con != null) con.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		System.out.println(su + "개의 행이 추가되었습니다.");
 	}
@@ -164,3 +190,79 @@ public class Insert {
 
   ![image](https://user-images.githubusercontent.com/79209568/114714284-ee00f100-9d6c-11eb-8b91-a2e75b49586a.png)
 
+# Select
+```sql
+public void selectArticle() {
+	Connection con = getConnection();
+	PreparedStatement pstmt = null;
+	ResultSet res = null;
+
+	try {
+		String sql = "select * from dbtest";
+		pstmt = con.prepareStatement(sql);
+		res = pstmt.executeQuery();
+
+		while (res.next()) {
+			String name = res.getString("name");
+			int age = res.getInt("age");
+			double height = res.getDouble("height");
+			String logtime = res.getString("logtime");
+
+			//출력
+			System.out.println(name + "\t" + age + "\t" + height + "\t" + logtime);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally { // 모든 실행되었던 자원들을 닫아준다.
+		try {
+			if (res != null) res.close();
+			if (pstmt != null) pstmt.close();
+			if (con != null) con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+}
+```
+
+## 결과
+> ### 콘솔 창
+  ![image](https://user-images.githubusercontent.com/79209568/114857258-06334780-9e23-11eb-883e-989038a243e0.png)
+
+# Update
+```sql
+public void updateArticle() {
+	Scanner scanner = new Scanner(System.in);
+	System.out.print("수정 이름 입력 > ");
+	String name = scanner.next();
+
+	Connection con = getConnection();
+	PreparedStatement pstmt = null;
+	int su = 0;
+
+	try {
+		String sql = "update dbtest set age=age+1 where name like ?";
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, "%"+name+"%"); //해당 이름이 있는 레코드는 다 수정
+		su = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally { // 모든 실행되었던 자원들을 닫아준다.
+		try {
+			if (pstmt != null) pstmt.close();
+			if (con != null) con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+}
+```
+## 결과
+> ### 콘솔 창
+  ![image](https://user-images.githubusercontent.com/79209568/114857568-60340d00-9e23-11eb-980a-eb4521ccddce.png)
+> ### DB 확인
+> * 이름에 test가 들어가는 두 레코드의 나이가 +1 되었다.
+  
+  ![image](https://user-images.githubusercontent.com/79209568/114857690-85c11680-9e23-11eb-81fe-279b60e2aff0.png)
