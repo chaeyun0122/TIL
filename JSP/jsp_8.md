@@ -259,6 +259,8 @@ public void updateArticle() {
 	}
 }
 ```
+  
+  
 ## 결과
 > ### 콘솔 창
   ![image](https://user-images.githubusercontent.com/79209568/114857568-60340d00-9e23-11eb-980a-eb4521ccddce.png)
@@ -266,3 +268,45 @@ public void updateArticle() {
 > * 이름에 test가 들어가는 두 레코드의 나이가 +1 되었다.
   
   ![image](https://user-images.githubusercontent.com/79209568/114857690-85c11680-9e23-11eb-81fe-279b60e2aff0.png)
+  
+# Delete
+```sql
+public void deleteArticle() {
+	Scanner scanner = new Scanner(System.in);
+	System.out.print("삭제 이름 입력 > ");
+	String name = scanner.next();
+
+	Connection con = getConnection();
+	PreparedStatement pstmt = null;
+	int su = 0;
+
+	try {
+		String sql = "delete dbtest where name=?";
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, name);
+		su = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally { // 모든 실행되었던 자원들을 닫아준다.
+		try {
+			if (pstmt != null) pstmt.close();
+			if (con != null) con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	System.out.println(su + "개의 행이 삭제되었습니다.");
+}
+```
+  
+  
+## 결과
+> ### 콘솔 창
+  ![image](https://user-images.githubusercontent.com/79209568/114861093-c6bb2a00-9e27-11eb-9058-6e630d634395.png)
+  
+> ### DB 확인
+> * 이름이 kim인 레코드가 삭제되었다.
+  
+  ![image](https://user-images.githubusercontent.com/79209568/114861171-ddfa1780-9e27-11eb-86dd-ab643bde182e.png)
+
