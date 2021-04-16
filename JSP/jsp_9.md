@@ -15,7 +15,7 @@
 6. 매개변수가 없는 기본생성자가 있어야 한다.
 
 ## DTO
-```sql
+```java
 /*
 package : DBtestDTO
 name : DBtestDTO
@@ -60,7 +60,7 @@ public class DBtestDTO {
   
   
 ## DAO
-```sql
+```java
 /*
 package : DBtestDAO
 name : DBtestDAO
@@ -225,7 +225,7 @@ public class DBtestDAO {
 ## DBtestManger
 - 작성한 DTO, DAO를 이용해서 DB 관리 페이지를 만들어본다.  
   
-```sql
+```java
 /*
 package : 없음
 name : DBtestManger
@@ -256,7 +256,7 @@ public class DBtestManager {
 			case 2: //수정
 				update(); break;
 			case 3: //삭제
-				//delete(); break;
+				delete(); break;
 			case 4: //목록
 				list(); break;
 			case 0: //종료
@@ -266,7 +266,7 @@ public class DBtestManager {
 			}
 			System.out.println();
 		}
-	}// menu() end
+	} // menu() end
 	
 	public void insert() {
 		System.out.println("--- DB 추가 ---");
@@ -306,6 +306,21 @@ public class DBtestManager {
 		}
 	}
 	
+	public void delete() {
+		System.out.println("--- DB 삭제 ---");
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("이름 입력 > ");
+		String name = scanner.next();
+		
+		DBtestDAO dao = new DBtestDAO();
+		int res = dao.delete(name);
+		if(res > 0) {
+			System.out.println(name + "이(가) 삭제 되었습니다.");
+		} else {
+			System.out.println("삭제 실패");
+		}
+	}  // delete() end
+	
 	public void list() {
 		System.out.println("--- DB 목록 ---");
 		
@@ -313,13 +328,15 @@ public class DBtestManager {
 		dao.select();
 	} // list() end
 	
+	
 
 }
+
 ```
 
 ## DBMain
 - 관리 페이지를 실행
-```sql
+```java
 /*
 package : 없음
 name : DBMain
