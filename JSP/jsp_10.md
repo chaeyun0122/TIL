@@ -399,7 +399,7 @@ public class StudentManager {
 ```
 
 ## StudentMain
-```jqva
+```java
 public class StudentMain {
 	public static void main(String[] args) {
 		StudentManager stm = new StudentManager();
