@@ -126,3 +126,11 @@ WHERE DEPTNO IN (10,30);
 * 첫번째 query의 열 이름이 결과에 나타난다.
 * UNION ALL의 경우를 제외하고 출력은 기본적으로 오름차순으로 정렬된다.
 
+> ### 추가 : ROLL UP
+> * ROLLUP구문은 GROUP BY 절과 같이 사용 되며, GROUP BY절에 의해서 그룹 지어진 집합 결과에 대해서 좀 더 상세한 정보를 반환하는 기능을 수행 한다.
+> ```SQL
+> SELECT DEPTNO, JOB, SUM(SAL)
+> FROM EMP
+> GROUP BY ROLLUP(DEPTNO, JOB); --제일 아래에 전체 SUM확인
+> ```
+> ![image](https://user-images.githubusercontent.com/79209568/115096827-d76fbb00-9f61-11eb-87dc-ce488e38ef91.png)
