@@ -117,6 +117,30 @@
   
   ![image](https://user-images.githubusercontent.com/79209568/115102560-92aa4b00-9f86-11eb-8cca-84b38d2cf794.png)
 
+## 설정
+* [해당 파일](Oracle/util/adsql.zip) 압축 풀기. **반드시 C 드라이브** 바로 밑에 압축풀기
+  
+  ![image](https://user-images.githubusercontent.com/79209568/115102657-3693f680-9f87-11eb-8c93-243899f90364.png)
+* `SQL Plus` 파일 바탕화면으로 드래그 앤 드롭
+  
+  ![image](https://user-images.githubusercontent.com/79209568/115102771-27617880-9f88-11eb-864a-3a570e8d30eb.png)
+* `오른쪽 클릭 > 속성 > 바로가기`의 시작 위치를 `c:\adsql`로 입력 후 확인
+  
+  ![image](https://user-images.githubusercontent.com/79209568/115102792-46600a80-9f88-11eb-98cf-eb18ffefd380.png)
+* SQL Plus 실행 후 `/ as sysdba` 입력 후 엔터
+  
+  ![image](https://user-images.githubusercontent.com/79209568/115102804-67286000-9f88-11eb-9225-eed741f55d6a.png)
+* `  ` 입력 후 엔터를 누르면 임포트가 자동 실행되며 완료되면 화면 사라짐
+* 사용자명 입력에 `test/test`를 입력해서 test 사용자로 로그인
+  
+  ![image](https://user-images.githubusercontent.com/79209568/115102900-e1f17b00-9f88-11eb-8a95-092adb13828d.png)
+* `alter user system identifyed by oracle_4U;` 명령 입력
+  
+  ![image](https://user-images.githubusercontent.com/79209568/115102938-15cca080-9f89-11eb-8b42-00ea496b41fc.png)
 
-
+## SQL Developer
+* 새 접속 클릭
+* 해당 내용들을 입력 후 `테스트`를 눌러 `상태: 성공`이 뜨면 `접속` 클릭
+  
+  ![image](https://user-images.githubusercontent.com/79209568/115102981-5b896900-9f89-11eb-9d5c-14b5f219433f.png)
 
