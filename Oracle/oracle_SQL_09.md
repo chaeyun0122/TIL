@@ -98,6 +98,7 @@
   ##### A의 값이 UPDATE전으로 돌아가고 대기 중이던 B의 UPDATE가 진행된다. (이제는 Lock을 B가 정의 중)
   
 ### SELECT문의 FOR UPDATE 확인해보기
+  ##### SELECT문에 FOR UPDATE를 붙여놓으면 테이블의 해당 컬럼들에 LOCK이 걸린다.
 * A
   ```SQL
   SELECT ENAME, SAL FROM EMP WHERE DEPTNO=20 FOR UPDATE;
@@ -112,7 +113,7 @@
   SET SAL = 5000 
   WHERE EMPNO = 7788 ; -- LOCK 걸림
   ```
-  ##### SELECT문에 FOR UPDATE를 붙여놓으면 테이블의 해당 컬럼들에 LOCK이 걸린다.
+  
   ##### JOIN을 실행할 때 FOR UPDATE를 붙이면 두 테이블 모두에 LOCK이 걸린다. 특정 테이블에만 LOCK을 걸고 싶으면 `FOR UPDATE OF column_name`으로 작성한다.
     ```sql
     SELECT *
