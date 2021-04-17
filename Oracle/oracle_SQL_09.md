@@ -107,20 +107,20 @@
   ```SQL
   UPDATE EMP 
   SET SAL = 5000 
-  WHERE EMPNO = 7839 ; -- 상관없음
+  WHERE EMPNO = 7839 ; -- 실행됨
 
   UPDATE EMP 
   SET SAL = 5000 
   WHERE EMPNO = 7788 ; -- LOCK 걸림
   ```
   
-  ##### JOIN을 실행할 때 FOR UPDATE를 붙이면 두 테이블 모두에 LOCK이 걸린다. 특정 테이블에만 LOCK을 걸고 싶으면 `FOR UPDATE OF column_name`으로 작성한다.
-    ```sql
-    SELECT *
-    FROM EMP E, DEPT D 
-    WHERE E.DEPTNO = D.DEPTNO 
-    FOR UPDATE OF E.EMPNO ;
-    ```
+##### JOIN을 실행할 때 FOR UPDATE를 붙이면 두 테이블 모두에 LOCK이 걸린다. 특정 테이블에만 LOCK을 걸고 싶으면 `FOR UPDATE OF column_name`으로 작성한다.
+  ```sql
+  SELECT *
+  FROM EMP E, DEPT D 
+  WHERE E.DEPTNO = D.DEPTNO 
+  FOR UPDATE OF E.EMPNO ;
+  ```
 ## 정리
 ### COMMIT 또는 ROLLBACK 이전의 데이터 상태
 * 이전의 데이터 상태를 복구할 수 있다.
