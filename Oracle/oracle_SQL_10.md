@@ -112,6 +112,10 @@
 * `완료` 클릭
   
   ![image](https://user-images.githubusercontent.com/79209568/115102223-6d1c4200-9f84-11eb-9afa-929b16497145.png)
+### 완료
+* `닫기` 클릭
+  
+  ![image](https://user-images.githubusercontent.com/79209568/115102560-92aa4b00-9f86-11eb-8cca-84b38d2cf794.png)
 
 
 
