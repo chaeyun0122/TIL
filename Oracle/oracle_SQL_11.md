@@ -94,22 +94,47 @@ FROM DUAL ;
     ```
 
 ### PRIMARY KEY
+* 중복 값과 널 값을 허용하지 않도록 보장
 ```SQL
 ALTER TABLE DEPT2 
 ADD CONSTRAINT DEPT2_PK PRIMARY KEY(DEPTNO) ;
 ```
 
 ### NOT NULL
+* 열에 NULL값이 허용되지 않도록 보장
 ```SQL
 ALTER TABLE EMP2 
 MODIFY ENAME NOT NULL ; 
 ```
 
 ### UNIQUE
-
+* 중복 값을 허용하지 않도록 보장. 하지만 널 값은 가능
+```SQL
+ALTER TABLE EMP2 
+ADD CONSTRAINT EMP2_UK UNIQUE (EMAIL);
+```
 ### CHECK
+* 각 행이 충족해야하는 조건을 정의
+```SQL
+ALTER TABLE EMP2 
+ADD CHECK (SAL > 0) ; 
+```
 
 ### FOREIGN KEY
+* 테이블 제약 조건 레벨에서 하위 테이블의 열을 정의한다.
+* `ON DELETE CASCASE` : 상위 테이블의 행이 삭제될 때 하위 테이블의 종속 행을 삭제
+* `ON DELETE SET NULL` : 종속 FOREIGN KEY 값을 NULL로 변환
+```SQL
+ALTER TABLE EMP2 
+ADD FOREIGN KEY(DEPTNO) REFERENCES DEPT2(DEPTNO) ; 
+
+-- 이후 삭제 쿼리 실행하면 오류가 난다.
+DELETE DEPT2
+WHERE DEPTNO = 30;
+/* 만약 FOREIGN 제약조건에 ON DELETE CASCADE를 추가했으면 부서번호 30을 쓰는 사원들이 다 함께 삭제됨
+                          ON DELETE SET NULL을 추가했으면 부서번호가 30인 사원들의 DEPTNO가 NULL값이 됨 */
+
+```
 
 ## 서브쿼리를 사용하여 테이블 생성
 * **CREATE TABLE 문**과 **AS subquery 옵션**을 결합하여 테이블을 생성하고 행을 삽입
@@ -119,4 +144,39 @@ MODIFY ENAME NOT NULL ;
   AS SELECT * FROM EMP ; 
   ```
 ## ALTER TABLE
+* 새 열 추가
+* 기존 열 정의 수정
+* 새 열에 기본값 정의
+* 열 삭제
+* 열 이름 바꾸기
+* 읽기 전용 상태로 테이블 변경
+  - 테이블을 읽기 전용 모드로 설정하여 테이블 유지 관리 중에 DDL 또는 DML이 변경되는 것을 방지
+  - 테이블을 읽기/쓰기 모드로 다시 되돌린다.
+  ```SQL
+  ALTER TABLE EMP READ ONLY;
+  ALTER TABLE EMP READ WRITE;
+  ```
 ## DROP TABLE
+* 테이블 삭제이며 Recycle bin(휴지통)으로 이동
+  ```sql
+  DROP TABLE T1;
+  ```
+### DROP한 테이블 다시 살리기
+* Recycle bin을 확인
+  ```SQL
+  SHOW RECYCLEBIN;
+  ```
+  ![image](https://user-images.githubusercontent.com/79209568/115106937-c09d8880-9fa2-11eb-8666-9ebce7b27d34.png)
+* 해당 이름을 SELECT문으로 확인해도 가능함 (DROP은 이름을 바꾼다고도 볼 수 있음)
+  ```SQL
+  SELECT * FROM "BIN$6yks0Jt0QIKMsNMMNOBnLQ==$0";
+  ```
+* 테이블 되 살리기
+  ```SQL
+  FLASHBACK TABLE T2 TO BEFORE DROP;
+  ```
+### 완전히 삭제하는 방법
+* `PURGE` 명령어 사용
+  ```SQL
+  DROP TABLE T1 PURGE;
+  ```
