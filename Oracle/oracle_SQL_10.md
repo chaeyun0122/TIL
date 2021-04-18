@@ -118,7 +118,7 @@
   ![image](https://user-images.githubusercontent.com/79209568/115102560-92aa4b00-9f86-11eb-8cca-84b38d2cf794.png)
 
 ## 설정
-* [해당 파일](Oracle/util/adsql.zip) 압축 풀기. **반드시 C 드라이브** 바로 밑에 압축풀기
+* [해당 파일](Oracle/util/adsql.zip)(데이터 펌프) 압축 풀기. **반드시 C 드라이브** 바로 밑에 압축풀기
   
   ![image](https://user-images.githubusercontent.com/79209568/115102657-3693f680-9f87-11eb-8c93-243899f90364.png)
 * `SQL Plus` 파일 바탕화면으로 드래그 앤 드롭
