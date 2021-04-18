@@ -106,17 +106,20 @@ FROM SH.SALES;
 
 ### DBWn : 데이터베이스 기록자 프로세스
 데이퍼베이스 버퍼 캐시의 수정된(DIRTY) 버퍼를 디스크에 기록한다.
-* DIRTY
-* CLEAN
-* FREE
+* DIRTY buffer
+* CLEAN buffer
+* FREE buffer
 ### LGWR : 로그 기록자 프로세스
 1. 사용자 쿼리(SELECT제외)보냄
 
 ### CKPT : 체크 포인트 프로세스
+- full checkpoint
+- incremental checkpoint
+  - checkpoint queue의 순서대로 dirty buffer을 dbwr가 내려쓴다.
+  - 이 내려쓰는 시점을 관리 : checkpoint information에서
+- parsing checkpoint
 
 ## 데이터베이스 저장 영역 구조
-* table space
-테이블스페이스 : 하나 이상의 데이터 묶음
 * block
 i/o의 최소 작업 단위 : block
 ```sql
@@ -128,5 +131,27 @@ dba : data block address
 - 최소 연속적인 블록 둘 이상을 붙여서 extent라는 작업단위로 공간을 할당.
 - 적정사이즈가 좋고 무리하게 큰 것은 의미없다.
 - extent와 extent사이는 인접하지 않을 수 있다.
-* 세그먼
-- 저장공간을 가지는 객체 (테이블, 인덱스 등). 뷰, 시퀀스는 아니다(딕셔너리 정보만 저장됨)+
+* 세그먼트
+- 저장공간을 가지는 객체 (테이블, 인덱스 등). 뷰, 시퀀스는 아니다(딕셔너리 정보만 저장됨)
+
+* table space
+테이블스페이스 : 하나 이상의 데이터 묶음
+
+* ASM 
+
+> 리스너 : 리모트에서 연결을 요구하는 세션들
+> 
+
+
+### 문장 처리 과정 
+1. Parse : 구문 분석 단계 (실행 계획 확보)
+  - 문법 확인
+  - 의미 분석 (객체, 권한 유/무)
+    - 명령어를 실행하기 위한 select 명령어의 실행 계획도 필요
+    - 대부분 이 딕셔너리 파일을 dictionary cache(shared pool에 존재)에서 가져옴
+  - if 동일 문장 확인 (과거에 동일한 문장이 실행되었는지) library cache의 SQL area(shared pool에 존재)
+    - true : 실행 계획 재 사용
+    - false : 실행 계획 생성 / 저장
+2. Bind 
+3. Execute 
+4. Fetch 
