@@ -17,6 +17,7 @@
 ### 개요  
 ![image](https://user-images.githubusercontent.com/79209568/115130955-ebcdb980-a02e-11eb-8ed3-235c1d90168c.png)
 
+## 
 ## Instance 구성  
 ![image](https://user-images.githubusercontent.com/79209568/115131653-af9d5780-a034-11eb-8b71-3ecf2b076246.png)
 
@@ -89,8 +90,43 @@ SELECT *
 FROM SH.SALES;
 ```
 ![image](https://user-images.githubusercontent.com/79209568/115132489-baa7b600-a03b-11eb-83f5-1ff6c79a59bb.png)
-* 더 많은 행이 있지만 인출되는 것은 50개가 우선(내리면 50개씩 늘어남)
+* 더 많은 행이 있지만 인출되는 것은 50개가 우선 (내리면 50개씩 늘어남)
 * 서버프로세스가 데이터를 보내는것은 적절한 크기가 중요하다.
 * 행을 모았다가 보내줘야하는데 그 모으는 공간이 PGA의 CURSOR다. (50개를 채워서 보냄)
 * STACK SPACE는 
-* UGA : 유저를 위한 서버딴의 예약 공간
+* UGA : 유저를 위한 서버 딴의 예약 공간
+
+## In-Memory Column Stroe
+
+## 프로세스
+## 프로세스 아키텍처
+* User process
+* Database process
+* Daemom/응용 프로개름 프로세스
+
+### DBWn : 데이터베이스 기록자 프로세스
+데이퍼베이스 버퍼 캐시의 수정된(DIRTY) 버퍼를 디스크에 기록한다.
+* DIRTY
+* CLEAN
+* FREE
+### LGWR : 로그 기록자 프로세스
+1. 사용자 쿼리(SELECT제외)보냄
+
+### CKPT : 체크 포인트 프로세스
+
+## 데이터베이스 저장 영역 구조
+* table space
+테이블스페이스 : 하나 이상의 데이터 묶음
+* block
+i/o의 최소 작업 단위 : block
+```sql
+show parameter db_block_size
+```
+이것은 수정불가능한 파라미터
+dba : data block address
+* extent
+- 최소 연속적인 블록 둘 이상을 붙여서 extent라는 작업단위로 공간을 할당.
+- 적정사이즈가 좋고 무리하게 큰 것은 의미없다.
+- extent와 extent사이는 인접하지 않을 수 있다.
+* 세그먼
+- 저장공간을 가지는 객체 (테이블, 인덱스 등). 뷰, 시퀀스는 아니다(딕셔너리 정보만 저장됨)+
