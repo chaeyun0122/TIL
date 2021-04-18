@@ -140,7 +140,7 @@ dba : data block address
 * ASM 
 
 > 리스너 : 리모트에서 연결을 요구하는 세션들
-> 
+
 
 
 ### 문장 처리 과정 
