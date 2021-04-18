@@ -130,7 +130,7 @@
 * SQL Plus 실행 후 `/ as sysdba` 입력 후 엔터
   
   ![image](https://user-images.githubusercontent.com/79209568/115102804-67286000-9f88-11eb-9225-eed741f55d6a.png)
-* `  ` 입력 후 엔터를 누르면 임포트가 자동 실행되며 완료되면 화면 사라짐
+* `@setup_win` 입력 후 엔터를 누르면 임포트가 자동 실행되며 완료되면 화면 사라짐
 * 사용자명 입력에 `test/test`를 입력해서 test 사용자로 로그인
   
   ![image](https://user-images.githubusercontent.com/79209568/115102900-e1f17b00-9f88-11eb-8a95-092adb13828d.png)
