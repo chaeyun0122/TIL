@@ -78,16 +78,151 @@ public class LifeCycle extends HttpServlet {
 * 런타임 시 요청이 들어오면 컨테이너는 <serlet-mapping> 항목을 검색한다.
 
 #### \<servlet-name> 태그
-#### \<url-pattern>
+#### \<url-pattern> 태그
 * 웹 브라우저에서 요청하는 매핑 이름
+```xml
+<servlet>
+	<servlet-name>ex01</servlet-name>
+	<servlet-class>ex01.LifeCycle</servlet-class>
+</servlet>
 
+<servlet-mapping>
+  	<servlet-name>ex01</servlet-name>
+  	<url-pattern>/life</url-pattern>
+</servlet-mapping>
+```
 
 ## Servlet 실행
 1. 서버 실행
 2. 브라우저에 url 추가 후 확인
     - `http://주소:port/프로젝트명/서블릿url`
     - ex) `http://localhost:8080/P06_Servlet/life`
+  ![image](https://user-images.githubusercontent.com/79209568/115235495-3a757380-a155-11eb-960d-683167a77d41.png)
 
 
+# 실습
+## Parameter
+### WebContent에 html 파일 생성
+![image](https://user-images.githubusercontent.com/79209568/115236465-5d545780-a156-11eb-95f5-fa83a0e55bca.png)
+### 
 
-클라이언트에서 http request를 통해 요청이 들어옴 tomcap서버안에 web container가 있음 url주소 안에 클래스명을 못씀 url에서 사용할 이름을 작성해줘야하는데 맵핑을 통해 해당 url로 이동할 수 있도록 이름을 
+## Member
+### WebContent에 html 파일 생성
+```html
+<!-- member.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<br>
+	<form>
+		<table border="1">
+			<tr>
+				<td> 이 름 </td>
+				<td><input type="text" name="name" size="20"></td>
+			</tr>
+			<tr>
+				<td> 성 별 </td>
+				<td>
+					<input type="radio" name="gender" value="남성" checked> 남
+					<input type="radio" name="gender" value="여성"> 여
+				</td>
+			</tr>
+			<tr>
+				<td> 취 미 </td>
+				<td>
+					<input type="checkbox" name="hobby" value="독서"> 독서
+					<input type="checkbox" name="hobby" value="영화"> 영화
+					<input type="checkbox" name="hobby" value="음악"> 음악
+					<input type="checkbox" name="hobby" value="게임"> 게임
+					<input type="checkbox" name="hobby" value="쇼핑"> 쇼핑
+				</td>
+			</tr>
+			<tr>
+				<td> 과 목 </td>
+				<td>
+					<select name="subject" size="5" multiple>
+						<option value="JAVA"> JAVA </option>
+						<option value="JSP"> JSP </option>
+						<option value="Spring"> Spring </option>
+						<option value="JQuery"> JQuery </option>
+						<option value="Servlet"> Servlet </option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td> 배경색 </td>
+				<td>
+					<select name="color">
+						<option value="red"> 빨 강 </option>
+						<option value="green"> 초 록 </option>
+						<option value="blue"> 파 랑 </option>
+						<option value="magenta"> 보 라 </option>
+						<option value="cyan"> 하 늘 </option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" value="보내기"> &nbsp; <input type="reset" value="취소">
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
+```
+
+### src에 새 서블릿 생성
+![image](https://user-images.githubusercontent.com/79209568/115237563-a9ec6280-a157-11eb-90a3-165045b6920c.png)  
+  
+#### 1. 데이터
+```java
+String name = request.getParameter("name");
+String gender = request.getParameter("gender");
+String[] aHobby = request.getParameterValues("hobby");  // 여러 개의 값이 넘어오므로 배열로 처리, getParameterValues로 받음
+String[] aSubject = request.getParameterValues("subject");
+String coloer = request.getParameter("color");
+
+// 배열의 원소들을 하나의 문자열로 이어 붙이기
+String hobby = "";
+if (aHobby != null) {
+	for (int i=0; i<aHobby.length; i++) {
+		if (aHobby[i] != null) {
+			hobby += aHobby[i] + " ";
+		}
+	}
+}
+
+String subject = "";
+if (aSubject != null) {
+	for (int i=0; i<aSubject.length; i++) {
+		if (aSubject[i] != null) {
+			subject += aSubject[i] + " ";
+		}
+	}
+}
+```
+
+#### 2. 응답
+```java
+
+```
+
+PrintWriter out = response.getWriter();
+out.println("<html>");
+out.println("<head>");
+out.println("<title>PramServlet</title>");
+out.println("</head>");
+out.println("<body>");
+out.println("<br><br>");
+out.println(name + "님의 나이 : " + age + "세 <br><br>");
+if (age > 19)
+	out.println("성인");
+else
+	out.println("미성년자");
+out.println("</body>");
+out.println("</html>");
