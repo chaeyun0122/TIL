@@ -31,6 +31,10 @@
 ### 작업 수행 : doGet(), doPost()
   - 서블릿 요칭 시 매번 호출된다.
   - 실제로 클라이언트가 요청하는 작업을 수행한다.
+#### 서블릿 요청과 응답 수행 API
+  - 요청 : HttpServletRequest request
+    - 웹 브라우저에서 전송한 정보를 tomcat 컨테이너가 HttpServletRequest 객체를 생성한 후 doGet() 으로 넘겨 준다.
+  - 응답 : HttpServletResponse response
 
 ### 종료 : destroy()
   - java 코드가 수정이 되었을 때 서블릿의 마무리 작업을 수행한다.
@@ -104,7 +108,123 @@ public class LifeCycle extends HttpServlet {
 ## Parameter
 ### WebContent에 html 파일 생성
 ![image](https://user-images.githubusercontent.com/79209568/115236465-5d545780-a156-11eb-95f5-fa83a0e55bca.png)
-### 
+```html
+<!-- parameter.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>parameter</title>
+</head>
+<body>
+	<!-- 
+		보내기 버튼 클릭 시 <form> 태그의 action 속성에 지정한 servlet 이나 jsp로 name=value를 전송한다.
+		입력된 데이터를 서블릿 매핑 이름 paramServlet인 서블릿으로 전송
+	 -->
+	<form action="http://localhost:8080/P06_Servlet/ParamServlet" method="get">
+		<table border="1">
+			<tr>
+				<td width="700px" align="center"> 이 름 </td>
+				<td><input type="text" id="name" name="username"></td><br>
+			</tr>
+			<tr>
+				<td width="700px" align="center"> 나 이 </td>
+				<td><input type="text" id="age" name="userage"></td><br>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" value="보내기"> &nbsp; <input type="reset" value="취소">
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
+```
+
+### src에 새 서블릿 생성
+![image](https://user-images.githubusercontent.com/79209568/115239313-87f3df80-a159-11eb-9bcd-171105d48ffb.png)
+#### doGet메서드에 작성
+#### 1. 인코딩 설정
+```java
+request.setCharacterEncoding("utf-8");
+response.setContentType("text/html; charset=utf-8");
+```
+#### 2. 데이터
+```java
+String name = request.getParameter("username"); // getPrameter() 메서드를 사용해서 <input> 태그의 name 속성값으로 전송된 value를 가져온다.
+String strAge = request.getParameter("userage");
+int age = Integer.parseInt(strAge);
+// int age = Integer.parseInt(request.getParameter("userage")); // 한번에도 가능
+```
+#### 3. 응답
+```java
+PrintWriter out = response.getWriter();
+out.println("<html>");
+out.println("<head>");
+out.println("<title>PramServlet</title>");
+out.println("</head>");
+out.println("<body>");
+out.println("<br><br>");
+out.println(name + "님의 나이 : " + age + "세 <br><br>");
+if (age > 19)
+	out.println("성인");
+else
+	out.println("미성년자");
+out.println("</body>");
+out.println("</html>");
+```
+#### 전체 코드
+```java
+package ex03;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class ParamServlet extends HttpServlet {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		// 인코딩 설정
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		
+		// 1. 데이터
+		String name = request.getParameter("username");
+		String strAge = request.getParameter("userage");
+		int age = Integer.parseInt(strAge);
+		// int age = Integer.parseInt(request.getParameter("userage"));
+		
+		// 2. 응답
+		PrintWriter out = response.getWriter();
+		out.println("<html>");
+		out.println("<head>");
+		out.println("<title>PramServlet</title>");
+		out.println("</head>");
+		out.println("<body>");
+		out.println("<br><br>");
+		out.println(name + "님의 나이 : " + age + "세 <br><br>");
+		if (age > 19)
+			out.println("성인");
+		else
+			out.println("미성년자");
+		out.println("</body>");
+		out.println("</html>");
+	}
+}
+```
+### 실행
+* 이름과 나이를 적고 보내기 클릭  
+  
+  ![image](https://user-images.githubusercontent.com/79209568/115240325-98588a00-a15a-11eb-8e95-fe9e041f83fa.png)
+* 해당 페이지로 이동하여 화면에 출력됨
+  
+  ![image](https://user-images.githubusercontent.com/79209568/115240475-bc1bd000-a15a-11eb-93d6-671b7575418d.png)
 
 ## Member
 ### WebContent에 html 파일 생성
@@ -211,18 +331,3 @@ if (aSubject != null) {
 ```java
 
 ```
-
-PrintWriter out = response.getWriter();
-out.println("<html>");
-out.println("<head>");
-out.println("<title>PramServlet</title>");
-out.println("</head>");
-out.println("<body>");
-out.println("<br><br>");
-out.println(name + "님의 나이 : " + age + "세 <br><br>");
-if (age > 19)
-	out.println("성인");
-else
-	out.println("미성년자");
-out.println("</body>");
-out.println("</html>");
