@@ -299,6 +299,11 @@ public class ParamServlet extends HttpServlet {
 ### src에 새 서블릿 생성
 ![image](https://user-images.githubusercontent.com/79209568/115237563-a9ec6280-a157-11eb-90a3-165045b6920c.png)  
   
+#### 매핑
+* html에서 form의 action에 작성한 url 명(memberServlet)을 클래스 위에 `@WebServlet`으로 작성해주면 따로 매핑 작업을 하지 않아도 된다.
+```java
+@WebServlet("/memberServlet") // 매핑 과정을 거치지 않아도 실행 가능
+```
 #### 1. 데이터
 ```java
 String name = request.getParameter("name");
@@ -329,5 +334,108 @@ if (aSubject != null) {
 
 #### 2. 응답
 ```java
+response.setContentType("text/html; charset=utf-8");
+PrintWriter out = response.getWriter();
+out.println("<html>");
+out.println("<head>");
+out.println("<title> Member </title>");
+out.println("<style>");
+out.println("body { background-color: " + color + "};");
+out.println("li { font-size : 20px }");
+out.println("</style>");
+out.println("</head>");
+out.println("<body>");
+out.println("<ul>");
+out.println("<li> 이 름 : " + name + "</li>");
+out.println("<li> 성 별 : " + gender + "</li>");
+out.println("<li> 취 미 : " + hobby + "</li>");
+out.println("<li> 과 목 : " + subject + "</li>");
+out.println("<li> 색 상 : " + color + "</li>");
+out.println("</ul>");
+out.println("<a href='javascript:history.back();'> 뒤로 </a>");
+
+out.println("<br><br>");
+out.println("</body>");
+out.println("</html>");
+```
+#### 전체 코드
+```java
+package ex04;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/memberServlet") // 매핑 과정을 거치지 않아도 실행 가능
+public class Member extends HttpServlet {
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 1. 데이터
+		String name = request.getParameter("name");
+		String gender = request.getParameter("gender");
+		String[] aHobby = request.getParameterValues("hobby");  // 여러 개의 값이 넘어오므로 배열로 처리, getParameterValues로 받음
+		String[] aSubject = request.getParameterValues("subject");
+		String color = request.getParameter("color");
+		
+		// 배열의 원소들을 하나의 문자열로 이어 붙이기
+		String hobby = "";
+		if (aHobby != null) {
+			for (int i=0; i<aHobby.length; i++) {
+				if (aHobby[i] != null) {
+					hobby += aHobby[i] + " ";
+				}
+			}
+		}
+		
+		String subject = "";
+		if (aSubject != null) {
+			for (int i=0; i<aSubject.length; i++) {
+				if (aSubject[i] != null) {
+					subject += aSubject[i] + " ";
+				}
+			}
+		}
+		
+		// 2. 응답
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<html>");
+		out.println("<head>");
+		out.println("<title> Member </title>");
+		out.println("<style>");
+		out.println("body { background-color: " + color + "};");
+		out.println("li { font-size : 20px }");
+		out.println("</style>");
+		out.println("</head>");
+		out.println("<body>");
+		out.println("<ul>");
+		out.println("<li> 이 름 : " + name + "</li>");
+		out.println("<li> 성 별 : " + gender + "</li>");
+		out.println("<li> 취 미 : " + hobby + "</li>");
+		out.println("<li> 과 목 : " + subject + "</li>");
+		out.println("<li> 색 상 : " + color + "</li>");
+		out.println("</ul>");
+		out.println("<a href='javascript:history.back();'> 뒤로 </a>");
+		
+		out.println("<br><br>");
+		out.println("</body>");
+		out.println("</html>");
+		
+	}
+
+}
 
 ```
+### 실행
+* 정보를 입력 후 보내기 클릭  
+  
+  ![image](https://user-images.githubusercontent.com/79209568/115382509-c350e580-a20f-11eb-8464-899b7b52b62b.png)
+* 해당 페이지로 이동하여 화면에 출력됨
+  
+  ![image](https://user-images.githubusercontent.com/79209568/115382539-cb108a00-a20f-11eb-8a7c-2fb569f31d34.png)
+
