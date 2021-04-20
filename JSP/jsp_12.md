@@ -352,8 +352,8 @@ p { font-size:30px }
 </html>
 ```
 
-> * 숫자 입력과 select 옵션 선택 후 계산 클릭  
+> * 숫자 입력과 select 옵션 선택 후 계산 클릭    
 > ![image](https://user-images.githubusercontent.com/79209568/115398260-f308e900-a221-11eb-898d-119e87ec54df.png)
 >   
-> * 결과 출력
+> * 결과 출력  
 > ![image](https://user-images.githubusercontent.com/79209568/115398347-061bb900-a222-11eb-8aa0-c4498504b157.png)
