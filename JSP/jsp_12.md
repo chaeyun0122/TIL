@@ -20,11 +20,11 @@
 * **taglib 지시자** : JSP 페이지 내에서 사용되는 별도의 표현 언어를 사용하기 위해 쓰이는 지시자
 
 ## 스크립트릿 (Scriplets)
-* `<%!   %>` 선언부
+* **<%!   %>** : 선언부
   - 전역변수 및 메서드 선언
-* `<% %>` 스크립트릿
+* **<% %>** : 스크립트릿
   - 일반적인 코드를 작성하는 영역
-* `<%= %>` 표현식
+* **<%= %>** : 표현식
   - 데이터를 표현하는 부분
 
 # 실습
@@ -161,11 +161,14 @@ td { font-size:20px }
 </html>
 ```
 #### ex04Pro.jsp
+* 데이터를 받을 때 get 방식은 한글이 깨지지 않지만, post 방식은 깨진다.
+* `request.setCharacterEncoding("utf-8");`를 써줘야 깨지지 않는다.
 ```jsp
 <%-- ex04Pro.jsp --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+request.setCharacterEncoding("utf-8");
 String name = request.getParameter("name");
 int age = Integer.parseInt(request.getParameter("age"));
 String adult = "";
@@ -194,12 +197,163 @@ p { font-size:20px }
 ```
 
 > * 값을 입력 후 입력완료 클릭  
->   ![image](https://user-images.githubusercontent.com/79209568/115392217-475c9a80-a21b-11eb-8164-d2354bd6bd10.png)
+>   ![image](https://user-images.githubusercontent.com/79209568/115394025-547a8900-a21d-11eb-9194-ba306f7a9106.png)
 >   
 > * 결과 출력  
->   ![image](https://user-images.githubusercontent.com/79209568/115392295-5e9b8800-a21b-11eb-94a9-20546a595765.png)
+>   ![image](https://user-images.githubusercontent.com/79209568/115394048-58a6a680-a21d-11eb-84a6-f3eb62c6c7e6.png)
 
+## 성적 출력하기
+* html \<body> 안에서도 스크립트릿 사용 가능하다.
+* jsp 스크립트릿에서는 out 함수가 내장 되어 있다.
+#### ex05.jsp
+```jsp
+<%-- ex05.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 성 적</title>
+</head>
+<body>
+	<h1> 이름, 성적 입력 </h1>
+	<br>
+	<form action="ex05Pro.jsp" method="post">
+		이름 : <input type="text" name="name"><br><br>
+		CPP : <input type="text" name="cpp"><br><br>
+		JAVA : <input type="text" name="java"><br><br>
+		PYTHON : <input type="text" name="python"><br><br>
+		<br><br>
+		<input type="submit" value="전송">
+	</form>
+</body>
+</html>
+```
+#### ex05Pro.jsp
+```jsp
+<%-- ex04Pro.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+request.setCharacterEncoding("utf-8");
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 성적 결과 </title>
+</head>
+<body>
+	<h1> 성 적 </h1>
+	<br>
+	<div>
+		A : 100 ~ 90 <br>
+		B : 89 ~ 80 <br>
+		C : 79 ~ 70 <br>
+		D : 69 ~ 60 <br>
+		F : 59 ~ 0
+	</div>
+	<hr>
+	<%
+	// body 안에 써도 상관 없다
+	String name = request.getParameter("name");
+	float cpp = Float.parseFloat(request.getParameter("cpp"));
+	float java = Float.parseFloat(request.getParameter("java"));
+	float python = Float.parseFloat(request.getParameter("python"));
+	float total = cpp + java + python;
+	float avg = total / 3;
+	String grade = "F";
+	if (avg >= 90) grade = "A";
+	else if (avg >= 80) grade = "B";
+	else if (avg >= 70) grade = "C";
+	else if (avg >= 60) grade = "D";
+	// out 객체가 내장되어 있다.
+	out.println(name + "님의 성적 : " + grade);
+	%>
+</body>
+</html>
+```
+> * 값을 입력 후 전송 클릭  
+> ![image](https://user-images.githubusercontent.com/79209568/115397095-a8d33800-a220-11eb-9989-d7dd23ab95ce.png)
+>  
+> * 결과 출력  
+> ![image](https://user-images.githubusercontent.com/79209568/115397125-b5579080-a220-11eb-82d0-cd68b40eee6b.png)
 
+## 계산기
+#### ex06.jsp
+```jsp
+<%-- ex06.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>계산기</title>
+<style type="text/css">
+#calc { font-size:20px; text-align:center }
+</style>
+</head>
+<body>
+	<h1> 계산기 </h1>
+	<br>
+	<form action="ex06Pro.jsp" method="post">
+		<input type="text" id="calc" name="data1">
+		<select name="opt" id="calc">
+			<option value="+"> + </option>
+			<option value="-"> - </option>
+			<option value="*"> * </option>
+			<option value="/"> / </option>
+			<option value="%"> % </option>
+		</select>
+		<input type="text" id="calc" name="data2">
+		<input type="submit" id="calc" value="계산">
+	</form>
+</body>
+</html>
+```
+#### ex06Pro.jsp
+```jsp
+<%-- ex06Pro.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 계산 결과 </title>
+<style type="text/css">
+p { font-size:30px }
+</style>
+</head>
+<body>
+	<%
+	double data1 = Double.parseDouble(request.getParameter("data1"));
+	double data2 = Double.parseDouble(request.getParameter("data2"));
+	String opt = request.getParameter("opt");
+	double result = 0;
+	
+	switch(opt) {
+	case "+":
+		result = data1 + data2; break;
+	case "-":
+		result = data1 - data2; break;
+	case "*":
+		result = data1 * data2; break;
+	case "/":
+		result = data1 / data2; break;
+	case "%":
+		result = data1 % data2; break;
+	}
+	%>
+	<p><%=data1 %> <%=opt %> <%=data2 %> = <%=result %></p>
+</body>
+</html>
+```
 
-
-
+> * 숫자 입력과 select 옵션 선택 후 계산 클릭  
+> ![image](https://user-images.githubusercontent.com/79209568/115398260-f308e900-a221-11eb-898d-119e87ec54df.png)
+>   
+> * 결과 출력
+> ![image](https://user-images.githubusercontent.com/79209568/115398347-061bb900-a222-11eb-8aa0-c4498504b157.png)
