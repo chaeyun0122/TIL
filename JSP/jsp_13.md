@@ -201,7 +201,84 @@ String apple = (String)request.getAttribute("apple");
 > * 값이 함께 전달되지 않은 것을 확인할 수 있다.
 >   ![image](https://user-images.githubusercontent.com/79209568/115554324-4c881b00-a2e9-11eb-8eae-1060344f69d4.png)
 
-## 3. Out
+## 3. Session
+* 하나의 웹 브라우저 내에서 정보를 유지하기 위한 세션 정보를 저장하고 있는 객체
+* `session.setMaxInactiveInterval(time)` :  세션을 유지할 시간을 설정 (초 단위)
+* `session.isNew()` : 새로운 클라이언트인지 확인. 새로운 세션이면 true, 아니면 false 반환
+* `session.getCreationTime()` : 세션의 생성된 시각을 1/1000초단위로 반환 (1970년 1월 1일 0시 0분 0초 GMT 기준)
+* `session.getLastAccessedTime()` : 웹 브라우저의 요청이 마지막으로 시도된 시간을 1/1000초 단위로 반환
+* `session.getId()` : 해당 세션의 ID 를 반환
+#### ex03_session.jsp
+```jsp
+<%-- ex03_session.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+// session유지시간
+session.setMaxInactiveInterval(10); //10초
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> session </title>
+</head>
+<body>
+	<h1> session </h1>
+	<br>
+	<p> isNew() : <%=session.isNew() %></p>
+	<p> 생성 시간 : <%=session.getCreationTime() %></p>
+	<p> 최종 접속 시간 : <%=session.getLastAccessedTime() %></p>
+	<p> 세션 ID : <%=session.getId() %></p>
+</body>
+</html>
+```
+> #### 결과
+> * 웹페이지 요청이 시작되면서 세션이 생성되었다. 세션 유지시간인 10초 뒤에 새로고침을 눌러본다.  
+>   
+> ![image](https://user-images.githubusercontent.com/79209568/115549558-bd2c3900-a2e3-11eb-827e-d6d345fecf24.png)
+> * 새로운 세션이 시작되는 것을 확인할 수 있다.  
+>   
+> ![image](https://user-images.githubusercontent.com/79209568/115549593-c74e3780-a2e3-11eb-8fb1-e57ddba85aa7.png)
+
+## 4. Application
+* 웹 어플리케이션 Context의 정보를 저장하고 있는 객체
+* `application.getMajorVersion()` : 현재 지원하는 서블릿 스펙의 major 버전을 리턴
+* `application.getServerInfo()` : 현재 동작하고 있는 서버 정보를 리턴
+* `application.getRealPath("/")` : webapp폴더까지의 경로
+#### ex04_application.jsp
+```jsp
+<%-- ex04_application.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> application </title>
+</head>
+<body>
+	<table border="1">
+		<tr>
+			<td> JSP 버전 </td>
+			<td><%=application.getMajorVersion() %>, <%=application.getMinorVersion() %></td>
+		</tr>
+		<tr>
+			<td> 컨테이너 정보 </td>
+			<td><%=application.getServerInfo() %></td>
+		</tr>
+		<tr>
+			<td> 웹 어플리케이션의 파일시스템 정보</td>
+			<td><%=application.getRealPath("/") %></td>
+		</tr>
+	</table>
+</body>
+</html>
+```
+> #### 결과
+> ![image](https://user-images.githubusercontent.com/79209568/115557825-0df45f80-a2ed-11eb-99d1-ecc22568f48d.png)
+
+## 5. Out
 * JSP 페이지의 출력 할 내용을 가지고 있는 출력 스트림 객체
 #### out.jsp
 ```jsp
@@ -270,88 +347,94 @@ String age = request.getParameter("age");
 >   
 >   ![image](https://user-images.githubusercontent.com/79209568/115555461-7e4db180-a2ea-11eb-9da9-71bee9ee411d.png)
 
-## 4. Session
-* 하나의 웹 브라우저 내에서 정보를 유지하기 위한 세션 정보를 저장하고 있는 객체
-* `session.setMaxInactiveInterval(time)` :  세션을 유지할 시간을 설정 (초 단위)
-* `session.isNew()` : 새로운 클라이언트인지 확인. 새로운 세션이면 true, 아니면 false 반환
-* `session.getCreationTime()` : 세션의 생성된 시각을 1/1000초단위로 반환 (1970년 1월 1일 0시 0분 0초 GMT 기준)
-* `session.getLastAccessedTime()` : 웹 브라우저의 요청이 마지막으로 시도된 시간을 1/1000초 단위로 반환
-* `session.getId()` : 해당 세션의 ID 를 반환
-#### ex03_session.jsp
+
+## 6. PageContext
+* JSP 페이지에 대한 정보를 저장하고 있는 객체
+* `pageContext.forward("page_path");` : 지정한 상대경로 페이지로 이동
+* `pageContext.include("page_path");` : 지정한 상대경로 페이지를 현재 JSP 페이지에 포함
+
+#### pageContext1.jsp
+* forward를 통해 pageContext2.jsp로 이동한다.
 ```jsp
-<%-- ex03_session.jsp --%>
+<%-- pageContext1.jsp --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%
-// session유지시간
-session.setMaxInactiveInterval(10); //10초
+pageContext.forward("pageContext2.jsp");
 %>
+```
+#### pageContext2.jsp
+* include를 통해 pageContext3.jsp의 내용을 현재 페이지에 포함 시키고 현재 페이지의 h2태그 내용을 출력한다. 
+```jsp
+<%-- pageContext2.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title> session </title>
+<title> pageContext2 </title>
 </head>
 <body>
-	<h1> session </h1>
-	<br>
-	<p> isNew() : <%=session.isNew() %></p>
-	<p> 생성 시간 : <%=session.getCreationTime() %></p>
-	<p> 최종 접속 시간 : <%=session.getLastAccessedTime() %></p>
-	<p> 세션 ID : <%=session.getId() %></p>
+	<%
+	pageContext.include("pageContext3.jsp");
+	%>
+	<h2> pageContext1의 forward 메서드로 포워딩 된 페이지 입니다.</h2>
 </body>
 </html>
 ```
-> #### 결과
-> * 웹페이지 요청이 시작되면서 세션이 생성되었다. 세션 유지시간인 10초 뒤에 새로고침을 눌러본다.  
->   
-> ![image](https://user-images.githubusercontent.com/79209568/115549558-bd2c3900-a2e3-11eb-827e-d6d345fecf24.png)
-> * 새로운 세션이 시작되는 것을 확인할 수 있다.  
->   
-> ![image](https://user-images.githubusercontent.com/79209568/115549593-c74e3780-a2e3-11eb-8fb1-e57ddba85aa7.png)
-
-## 5. Application
-* 웹 어플리케이션 Context의 정보를 저장하고 있는 객체
-* `application.getMajorVersion()` : 현재 지원하는 서블릿 스펙의 major 버전을 리턴
-* `application.getServerInfo()` : 현재 동작하고 있는 서버 정보를 리턴
-* `application.getRealPath("/")` : webapp폴더까지의 경로
-#### ex04_application.jsp
+#### pageContext3.jsp
 ```jsp
-<%-- ex04_application.jsp --%>
+<%-- pageContext3.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<h2> include 되는 pageContext3.jsp 페이지 입니다.</h2>
+<hr>
+```
+> #### 결과
+> * pageContext1.jsp에서 실행되므로 url은 `pageContext1`이고, forward로 pageContext2.jsp로 이동했기 때문에 title과 페이지 내용은 `pageContext2`의 것이다.
+>   ![image](https://user-images.githubusercontent.com/79209568/115557492-b7872100-a2ec-11eb-9161-d0b54376c694.png)
+
+## 7. Cofig
+* JSP 페이지에 대한 설정정보를 저장하고 있는 객체
+```jsp
+<%-- ex07_config.jsp --%>
+<%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title> application </title>
+<title>config</title>
 </head>
 <body>
+	<h1> config </h1>
+	<br>
 	<table border="1">
+		<tr><td> 초기 파라미터 이름 </td><td> 초기 파라미터 값 </td></tr>
+	<%
+	Enumeration e = config.getInitParameterNames();
+	while (e.hasMoreElements()) {
+		String init_paramName = (String)e.nextElement();
+	%>	
 		<tr>
-			<td> JSP 버전 </td>
-			<td><%=application.getMajorVersion() %>, <%=application.getMinorVersion() %></td>
+			<td><%=init_paramName %></td>
+			<td><%=config.getInitParameter(init_paramName) %></td>
 		</tr>
-		<tr>
-			<td> 컨테이너 정보 </td>
-			<td><%=application.getServerInfo() %></td>
-		</tr>
-		<tr>
-			<td> 웹 어플리케이션의 파일시스템 정보</td>
-			<td><%=application.getRealPath("/") %></td>
-		</tr>
+	<%} %>
 	</table>
 </body>
 </html>
 ```
-## 6. PageContext
-* JSP 페이지에 대한 정보를 저장하고 있는 객체
+> #### 결과
+> ![image](https://user-images.githubusercontent.com/79209568/115555811-ebf9dd80-a2ea-11eb-85f9-8ec2f75d2e84.png)
 
-## 7. Page
+
+## 8. Page
 * JSP 페이지를 구현한 자바 클래스 객체
-
-## 8. Cofig
-* JSP 페이지에 대한 설정정보를 저장하고 있는 객체
 
 ## 9. Exception
 * JSP 페이지에서 예외가 발생한 경우에 사용되는 객체
