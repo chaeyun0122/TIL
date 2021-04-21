@@ -205,7 +205,7 @@ p { font-size:20px }
 ## 성적 출력하기
 * html \<body> 안에서도 스크립트릿 사용 가능하다.
 * jsp 스크립트릿에서는 out 함수가 내장 되어 있다.  
-(JSP 내장객체 종류와 설명은 이 글 참조 → [here](JSP/jsp_13.md))
+(JSP 내장객체 종류와 설명은 이 글 참조 → [here](https://github.com/Clary0122/TIL/blob/main/JSP/jsp_13.md))
 #### ex05.jsp
 ```jsp
 <%-- ex05.jsp --%>
