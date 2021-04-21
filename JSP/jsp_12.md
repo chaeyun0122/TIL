@@ -357,3 +357,34 @@ p { font-size:30px }
 >   
 > * 결과 출력  
 > ![image](https://user-images.githubusercontent.com/79209568/115398347-061bb900-a222-11eb-8aa0-c4498504b157.png)
+
+## 구구단
+* 자바코드와 html코드를 함께 사용할 수 있다.
+* 여는 태그와 닫는 태그를 항상 맞춰서 **먼저 작성해놓아야** 헷갈리지 않는다.
+#### ex07.jsp
+```jsp
+<%-- ex07.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 구구단 </title>
+</head>
+<body>
+	<table border="1">
+		<% for (int i=1; i<10; i++) { %>
+		<tr align="center">
+			<% for (int j=2; j<10; j++) { %>
+				<td> <%=j %> * <%=i %> = <%=j*i %> </td>
+			<%} %>
+		</tr>
+		<%} %>
+	</table>
+</body>
+</html>
+```
+> ![image](https://user-images.githubusercontent.com/79209568/115538204-9b788500-a2d6-11eb-829c-b7d902cd637d.png)
+
+
