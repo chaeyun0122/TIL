@@ -432,10 +432,100 @@ pageContext.forward("pageContext2.jsp");
 > #### 결과
 > ![image](https://user-images.githubusercontent.com/79209568/115555811-ebf9dd80-a2ea-11eb-85f9-8ec2f75d2e84.png)
 
+## 8. Exception
+* JSP 페이지에서 예외가 발생한 경우에 사용되는 객체
+#### add.jsp
+```jsp
+<%-- add.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> add </title>
+</head>
+<body>
+	<h1> 1 ~ n 까지의 합</h1>
+	<br>
+	<form action="addProc.jsp" method="get">
+		1 부터 <input type="text" name="last"> 까지의 합
+		<br><br>
+		<input type="submit" value="계산">
+	</form>
+	
+</body>
+</html>
+```
+#### addProc.jsp
+```jsp
+<%-- add.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> add </title>
+</head>
+<body>
+	<h1> 1 ~ n 까지의 합</h1>
+	<br>
+	<form action="addProc.jsp" method="get">
+		1 부터 <input type="text" name="last"> 까지의 합
+		<br><br>
+		<input type="submit" value="계산">
+	</form>
+	
+</body>
+</html>
+```
+> #### 결과
+> ![image](https://user-images.githubusercontent.com/79209568/115698509-a814e000-a39f-11eb-9f8c-20a8b700ad7a.png)  
+>   
+> ![image](https://user-images.githubusercontent.com/79209568/115698542-b3680b80-a39f-11eb-94cd-4d9f1f33c731.png)  
+>  
 
-## 8. Page
+### 하지만 숫자가 아닌 다른 값을 넣을 경우 에러가 발생한다
+* addProc.jsp의 page영역에 `errorPage="addException.jsp"`를 추가하여 에러가 나면 addException.jsp페이지로 넘어가도록 설정한다.
+* addException.jsp의 page영역에 `isErrorPage="true"`를 추가하여 현재 페이지가 예외 처리 페이지라는 것을 명시하고 exception 객체를 이용할 수 있게되어 예외에 대한 정보를 얻을 수 있다.
+#### addProc.jsp
+```jsp
+<%-- page부분에 errorPage="addException.jsp" 코드 추가 --%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    errorPage="addException.jsp"%>
+<%
+```
+#### addException.jsp 
+```jsp
+<%-- addException.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    isErrorPage="true"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> addException </title>
+</head>
+<body>
+	<h1> 에러 페이지 </h1>
+	<br>
+	<h1><%=exception.getMessage() %></h1>
+</body>
+</html>
+```
+
+> #### 결과
+> ![image](https://user-images.githubusercontent.com/79209568/115700530-b8c65580-a3a1-11eb-9f7d-6c072abbd7fd.png)  
+>   
+> ![image](https://user-images.githubusercontent.com/79209568/115700559-c085fa00-a3a1-11eb-85f5-d9fec7c2d4f8.png)
+
+
+## 9. Page
 * JSP 페이지를 구현한 자바 클래스 객체
 
-## 9. Exception
-* JSP 페이지에서 예외가 발생한 경우에 사용되는 객체
+
 
