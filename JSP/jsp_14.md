@@ -18,8 +18,8 @@
 
 ## 회원 가입 페이지 생성
 ### wirteForm JSP 페이지
+* 회원가입 폼의 틀을 만든다.
 * 프로젝트의 WebContent에 `member폴더 > writeFrom.jsp` 파일 생성
-* form의 틀을 만든다.
   
   ```html
   <form action="write.jsp" name="writeForm" method="post">
@@ -283,6 +283,7 @@ public class MemberDAO {
 ```
 
 ### write JSP 페이지
+* 회원 가입을 실행하는 페이지를 생성한다.
 * memberDTO와 memberDAO를 사용하기 위해 import 해준다.
   ```jsp
   <%@ page import="memberDTO.MemberDTO" %>
