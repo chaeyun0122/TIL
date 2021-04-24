@@ -78,24 +78,51 @@ password_lock_time		1 ;
 ![image](https://user-images.githubusercontent.com/79209568/115950895-e4b81700-a518-11eb-9029-4d8234357ad1.png)
 
 ```sql
+-- 현재 sys계정이다
 show parameter resource_limit
+```  
+![image](https://user-images.githubusercontent.com/79209568/115951046-96efde80-a519-11eb-9325-a991f6ea6a13.png)
 
+* 생성한 프로파일을 inventory 유저에게 정의 (각각의 유저마다 프로파일은 하나만 할당된다.)
+```sql
 ALTER USER inventory PROFILE hrprofile ; 
+```   
+![image](https://user-images.githubusercontent.com/79209568/115951172-3c0ab700-a51a-11eb-816b-12cfce831e49.png)
 
+* inventory 유저의 패스워드를 oracle로 변경 후 다시 한 번 같은 패스워드로 변경한다.
+* `password_reuse_max		2`로 설정했기 때문에 재사용 불가능하다.
+* 다른 비밀번호로는 잘 바뀜
+```sql
 ALTER USER inventory IDENTIFIED BY oracle ;
 ALTER USER inventory IDENTIFIED BY oracle ;
 
 ALTER USER inventory IDENTIFIED BY oracle_4U ;
+```  
+![image](https://user-images.githubusercontent.com/79209568/115951255-b3404b00-a51a-11eb-9d81-78e4331e5d1b.png)
 
+* inventory 계정으로 로그인 후 해당 select문 실행
+* `cpu_per_call			50`로 cpu 사용량을 제한 했기 때문에 호출 한계치가 초과했다는 오류가 난다.
+```sql
 CONN inventory/oracle_4U
 SELECT * 
-  FROM all_objects a, all_objects b, all_objects c 
+FROM all_objects a, all_objects b, all_objects c 
 ORDER BY 1,2,3,4,5,6,7 ; 
+```  
+![image](https://user-images.githubusercontent.com/79209568/115951317-16ca7880-a51b-11eb-9a0d-99d73f313f20.png)
 
+* 다시 sys계정으로 로그인 후 프로파일을 수정해준다.
+* inventory 계정의 프로파일을 defaul로 바꿔준다.
+```sql
 CONN / as sysdba
 ALTER SYSTEM SET resource_limit = FALSE ;
 ALTER USER inventory PROFILE DEFAULT ; 
+```  
+![image](https://user-images.githubusercontent.com/79209568/115951366-5c874100-a51b-11eb-97ea-fb0764a96aaf.png)
+
+* 프로파일 삭제와 inventory 유저를 삭제한다.
+```sql
 DROP PROFILE hrprofile ;
 DROP USER inventory CASCADE ; 
-```
-![image](https://user-images.githubusercontent.com/79209568/115950907-f5688d00-a518-11eb-914e-e5e70adf430a.png)
+```  
+![image](https://user-images.githubusercontent.com/79209568/115951384-76c11f00-a51b-11eb-8e21-ffb8fb2901e3.png)
+
