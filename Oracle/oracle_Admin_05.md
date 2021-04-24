@@ -1,13 +1,15 @@
 # 데이터베이스 저장 영역 구조 관리
 ```sql
+-- 테이블 스페이스 생성
 CREATE TABLESPACE tbs2
 DATAFILE 'D:\app\user\oradata\orcl\tbs2.dbf' SIZE 10M ;
 
+-- 테이블 생성
 CREATE TABLE t2
 ( id      NUMBER, 
-  name   CHAR(1000))
-SEGMENT CREATION IMMEDIATE 
-TABLESPACE tbs2 ; 
+  name   CHAR(1000)) --테이블은 객체
+SEGMENT CREATION IMMEDIATE --저장공간을 할당
+TABLESPACE tbs2 ; --테이블이 저장되는 테이블 스페이스 지정
 
 SELECT tablespace_name, status, contents, logging, segment_space_management, bigfile
 FROM dba_tablespaces ;
