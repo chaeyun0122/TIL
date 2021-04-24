@@ -40,7 +40,6 @@
 ### OPEN
 * 데이터 파일과 리두로그 파일을 오픈하는 작업 : 리두로그 파일과 데이터 파일이 있어야 됨
 
-
 ## 종료
 * 적어도 실행 된 인스턴스가 존재 한다는 뜻
 * 시작과 다르게 **단계별로 내릴 수 없음**
@@ -50,35 +49,42 @@
 * **N**(Nomal) : 모든 사용자가 알아서 다 자기 작업하고 session을 끊고 나가서 아무도 이 인스턴스에 연결되어있지 않을 때 shutdown 작업이 진행된다.
 * check point 프로세스가 모든 파일의 싱크를 동일하게 맞춰준 후 인스턴스가 내려가는 작업이다. (현장에서 많이 쓰이지 않음)
 * **T** (Transactional) : 하나의 트랜잭션 단위가 끝나면 또 다른 트랜잭션을 시작할 수 없도록 세션을 끊는 작업 (현장에서 많이 쓰이지 않음
+* **I** : 현재 연결되어있던 모든 세션들을 그 즉시 kill 시킴. 일단 더티버퍼들은 저장 시켜줌 변경된 작업들을 강제로 rollback을 시킴 (가장 많이 사용 됨)
+* **A** : 응급 상황일 때. 비정상 종료를 진행하는 작업. 인스턴스의 복구작업이 필요할 수 있는 작업
 
+## 시작 종료 실습
+* 현재 가동 중인 DB의 인스턴스 명을 확인
+  ```
+  SELECT instance_name, status
+  FROM v$instance ; 
+  ```
+  ![image](https://user-images.githubusercontent.com/79209568/115943591-c7208880-a4eb-11eb-9464-11da5285ba15.png)
 
+* 인스턴스가 가동 중인 상태에서 `STARTUP` 명령어 수행해보기  
+  ![image](https://user-images.githubusercontent.com/79209568/115943633-fe8f3500-a4eb-11eb-9ac2-1e63eb1faa8f.png)
 
+* `SHUTDOWN IMMEDIATE` 해보기  
+  ![image](https://user-images.githubusercontent.com/79209568/115943652-1a92d680-a4ec-11eb-880d-a2842f718dc6.png)
 
+* 가동 중인 인스턴스가 없는 상태에서 `STARTUP` 해보기  
+  ![image](https://user-images.githubusercontent.com/79209568/115943668-3c8c5900-a4ec-11eb-8fe8-e17f90fbd0a3.png)
 
+* `STARTUP FORCE`로 인스턴스 다시 시작하기  
+  ![image](https://user-images.githubusercontent.com/79209568/115943682-634a8f80-a4ec-11eb-89dd-995bcfb37a5d.png)
 
+## Alert Log 보기
+* db 운영 상황에 대한 모든 기록들이 순차적으로 남는 파일이다.
+* os딴에 만들어짐
+* 경로 : `D:\app\user\diag\rdbms\orcl\orcl\trace`의 **alert_orcl.log** 파일  
+  
+  ![image](https://user-images.githubusercontent.com/79209568/115943759-d7853300-a4ec-11eb-9259-cd9ba689a70d.png)
 
+# Dynamic Performance View
+* v$ 로 시작한다.
+* Instance 메모리 구조의 상태 변경과 관련된 정보에 액세스할 수 있다.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Data Dictionary View
+* DBA_, ALL_, USER_ 로 시작한다.
+  ![image](https://user-images.githubusercontent.com/79209568/115944708-3dc08480-a4f2-11eb-80c8-4d1f87662046.png)
+* DB에 영구히 저장되어야 하는 정보들에 액세스할 수 있다.
 
