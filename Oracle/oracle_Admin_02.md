@@ -88,3 +88,23 @@
   ![image](https://user-images.githubusercontent.com/79209568/115944708-3dc08480-a4f2-11eb-80c8-4d1f87662046.png)
 * DB에 영구히 저장되어야 하는 정보들에 액세스할 수 있다.
 
+
+```sql
+select * from v$session;
+select * from v$sgastat;
+select * from v$transaction; --아무것도 없다면 ,,
+-- dynamic performance 뷰
+
+
+select * from dba_tables; -- db에 존재하는 모든 테이블
+select * from dba_users; -- db에 존재하는 모든 유저
+-- 데이터 딕셔너리
+
+select * from obj$;
+select * from tab$;
+select * from col$;
+
+select *
+from dba_views
+where view_name='DBA_TABLES';
+```
