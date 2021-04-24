@@ -69,7 +69,7 @@
 * 확인  
   ![image](https://user-images.githubusercontent.com/79209568/115947915-c85eaf00-a505-11eb-808b-ab76e5417a11.png)
 
-> ## shared server
+> ### shared server
 > ```sql
 > alter system set shared_servers = 2 ; 
 > alter system set max_shared_servers = 5 ; 
@@ -80,7 +80,4 @@
 
 # DB 링크
 * db가 둘 이상 존재하고 한 db에 접속했다가 다른 db에 접속하고 싶을 때 전 db와의 연결을 끊는 게 아닌, db 간의 링크를 둬서 하나의 연결로 두 db를 사용한다.
-
-
-
-
+  ![image](https://user-images.githubusercontent.com/79209568/115948637-4329c900-a50a-11eb-9314-d04b9a4f396d.png)
