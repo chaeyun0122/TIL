@@ -92,5 +92,132 @@ p { font-size:20px }
 >   
 >   ![image](https://user-images.githubusercontent.com/79209568/116084129-6904c880-a6d8-11eb-839a-97c426bec8c1.png)
 
+## 로그인 : 세션 생성
+* 이 전에 실습했던 member 프로젝트의 로그인을 쿠키를 통해서 이루어지도록 변경해본다.
 
+#### login.jsp
+* `session.setAttribute()`로 세션의 속성을 설정한다.  
+  
+```jsp
+<%-- member/login.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="memberDAO.MemberDAO"%>
+<%
+String id = request.getParameter("id");
+String pwd = request.getParameter("pwd");
+
+MemberDAO memberDAO = new MemberDAO();
+String name = memberDAO.login(id, pwd);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 로그인 확인 </title>
+<style>
+p { font-size: 20px; }
+</style>
+</head>
+<body>
+	<%
+	// sesssion 속성 설정
+	if(name != null) {
+		session.setAttribute("memberName", name);
+		session.setAttribute("memberId", id);
+		
+		response.sendRedirect("loginOk.jsp");
+	}
+	else
+		response.sendRedirect("loginFail.jsp");
+	%>
+	
+</body>
+</html>
+```
+
+#### loginOk.jsp
+* session으로 받은 데이터로 로그인
+```jsp
+<%-- loginOk.jsp --%>
+<%@page import="java.net.URLDecoder"%>
+<%@page import="java.net.URLEncoder"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+// session으로 데이터 받기
+String name = (String)session.getAttribute("memberName");
+String id = (String)session.getAttribute("memberId");
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 로그인 성공 </title>
+<style>
+p { font-size: 20px; }
+</style>
+</head>
+<body> 
+	<img src="../image/home.jpg" width="300" height="200" 
+			onclick="location.href='../main/index.jsp'" style="cursor:pointer;">
+	<br><br>
+	<p><%=name %>님 안녕하세요~</p>
+	<input type="button" value="main" onclick="location.href='../main/index.jsp'">
+	<input type="button" value="로그아웃" onclick="location.href='logout.jsp'">
+</body>
+</html>
+```
+#### index.jsp
+* 메인 페이지에서 로그인이 되어있지 않으면 **회원가입, 로그인** 메뉴가 뜨도록하고, 로그인이 되어있으면 **로그아웃** 메뉴가 뜨도록한다.
+  
+```jsp
+<%-- main/index.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+// session으로 전달된 데이터 받기
+String id = null;
+id = (String)session.getAttribute("memberId");
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> main </title>
+<style>
+a { 
+	display: block;
+	font-size: 20px; 
+	padding: 2px;
+}
+</style>
+</head>
+<body>
+	<h1> Main </h1>
+	<br>
+	<%if (id == null) {%>
+		<a href="../member/writeForm.jsp"> 회원가입 </a>
+		<a href="../member/loginForm.jsp"> 로그인 </a>
+	<%} else { %>
+		<a href="../member/logout.jsp"> 로그아웃 </a>
+	<%} %>
+</body>
+</html>
+```
+> #### 결과
+> * 메인 화면에서 **로그인** 클릭  
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/116085673-03194080-a6da-11eb-9ca7-8a23be2ce869.png)
+> * 아이디 비밀번호 입력 후 로그인 버튼 클릭  
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/116085721-0f050280-a6da-11eb-9dbf-a28a4a157bfb.png)
+> * 로그인이 정상적으로 작동한다.  
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/116085835-3065ee80-a6da-11eb-8ad4-668be5d5ec0e.png)
+> * main으로 돌아오면 **로그아웃** 메뉴만 뜬다.  
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/116085919-4378be80-a6da-11eb-8ba1-00ecc364b67d.png)
+
+## 로그아웃 : 세션 삭제
 
