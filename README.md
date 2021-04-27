@@ -42,6 +42,8 @@ Today I Learned..
 * [JSP 12 JSP{Java Server Page](JSP/jsp_12.md)
 * [JSP 13 JSP Implicit Object](JSP/jsp_13.md)
 * [JSP 14 JSP Practice - Membership page](JSP/jsp_14.md)
+* [JSP 15 Cookie](JSP/jsp_15.md)
+* [JSP 16 Session](JSP/jsp_16.md)
 
   > ### Quiz
   > * [Quiz 1 - Make Form](JSP/quiz1_make-form.md)
