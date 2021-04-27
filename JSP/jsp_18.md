@@ -81,3 +81,83 @@
   </resource-ref>
 </web-app>
 ```
+
+### 4. DAO의 DB 연결 설정
+#### InitialContext 객체 생성 (JSDI 이용)
+```java
+Context context = new InitialContext();
+```
+#### Context 클래스의 lookup() 메서드는 "java:comp/env/jdbc/oracle"을 가지고 DataSource 객체를 구한다.
+* lookup() 메서드를 사용해서 naming 서비스에서 자원을 찾는다.
+* JNDI의 이름은 java:comp/env에 등록되어 있다.
+```java
+ds = (DataSource)context.lookup("java:comp/env/jdbc/oracle");
+```
+#### getConnection() 메서드를 사용해서 커넥션 풀로부터 커넥션 객체 가져오기
+```java
+con = ds.getConnection();
+```
+
+#### BoardDAO.java 전체 코드
+```java
+package boardDAO;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+
+
+import boardDTO.BoardDTO;
+
+public class BoardDAO {
+	
+	private DataSource ds;
+	private Connection con;
+	private PreparedStatement pstmt;
+	private ResultSet res;
+
+	public BoardDAO() {
+		try {
+			Context context = new InitialContext();
+			ds = (DataSource)context.lookup("java:comp/env/jdbc/oracle");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 글쓰기
+	public int boardWrite(BoardDTO boardDTO) {
+		String sql = "insert into board values (board_seq.nextval, ?, ?, ?, ?, 0, sysdate)";
+		int num = 0;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, boardDTO.getId());
+			pstmt.setString(2, boardDTO.getName());
+			pstmt.setString(3, boardDTO.getSubject());
+			pstmt.setString(4, boardDTO.getContent());
+			num = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) pstmt.close();
+				if (con != null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return num;
+		}
+	} // boardWrite() end
+}
+
+```
