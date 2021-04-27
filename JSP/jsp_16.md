@@ -220,4 +220,37 @@ a {
 >   ![image](https://user-images.githubusercontent.com/79209568/116085919-4378be80-a6da-11eb-8ba1-00ecc364b67d.png)
 
 ## 로그아웃 : 세션 삭제
+```jsp
+<%-- logout.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+// Session 삭제
+session.removeAttribute("memberName");
+session.removeAttribute("memberId");
+session.invalidate();
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 로그 아웃 </title>
+<script type="text/javascript">
+	// logout.jsp 가 호출되면서 바로 실행된다.
+	window.onload=function() {
+		alert("로그아웃");
+		location.href="../main/index.jsp"; // 확인 버튼을 누르면 이동하는 페이지
+	}
+</script>
+</head>
+<body>
 
+</body>
+</html>
+```
+> #### 결과
+> * 로그아웃 클릭 시 로그아웃 alert가 뜨며 로그아웃이 된다. main 페이지에 **회원가입, 로그인**이 뜬다.  
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/116226304-c6a71c80-a78d-11eb-838c-be83faca4666.png)
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/116226331-cc9cfd80-a78d-11eb-9c17-c32bec34af56.png)
