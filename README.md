@@ -39,7 +39,7 @@ Today I Learned..
 * [JSP 09 Java Bean](JSP/jsp_9.md)
 * [JSP 10 Java Bean Practice - school administration program](JSP/jsp_10.md)
 * [JSP 11 Servlet](JSP/jsp_11.md)
-* [JSP 12 JSP{Java Server Page](JSP/jsp_12.md)
+* [JSP 12 JSP Java Server Page](JSP/jsp_12.md)
 * [JSP 13 JSP Implicit Object](JSP/jsp_13.md)
 * [JSP 14 JSP Practice - Membership page](JSP/jsp_14.md)
 * [JSP 15 Cookie](JSP/jsp_15.md)
