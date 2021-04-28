@@ -183,6 +183,9 @@ if (endPage > totalPage) endPage = totalPage;
 </style>
 ```
 ```html
+<p> 글 수 : <%=totalArticle %> </p>
+<p> 페이지 수 : <%=totalPage %> </p>
+<p> start : <%=startPage %> - end : <%=endPage %></p>
 <!-- 페이지 번호 -->
 <body>
 	<div id="paging_block">
@@ -215,3 +218,145 @@ if (endPage > totalPage) endPage = totalPage;
 ![image](https://user-images.githubusercontent.com/79209568/116399836-50c1b480-a864-11eb-80dd-55c16fd56a9b.png)
 
 ## 글 내용 보기
+#### boardView.jsp
+* 글 내용을 확인하는 페이지
+```jsp
+<%-- boardView.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="boardDAO.BoardDAO" %>
+<%@ page import="boardDTO.BoardDTO" %>
+<%
+int seq = Integer.parseInt(request.getParameter("seq"));
+int pg = Integer.parseInt(request.getParameter("pg"));
+
+BoardDAO boardDAO = new BoardDAO();
+boardDAO.updateHit(seq);	// 조회수 증가
+BoardDTO boardDTO = boardDAO.boardView(seq);	//글에 대한 정보 가져오기
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table border="1" cellpadding="4">
+		<tr>
+			<td colspan="3"><%=boardDTO.getSubject() %> </td>
+		</tr>
+		<tr>
+			<td width="150" align="center"> 글번호 : <%=boardDTO.getSeq() %></td>
+			<td width="150" align="center"> 작성자 : <%=boardDTO.getName() %></td>
+			<td width="150" align="center"> 조회수 : <%=boardDTO.getHit() %></td>
+		</tr>
+		<tr>
+			<td colspan="3" height="200" valign="top"><pre><%=boardDTO.getContent() %></pre></td>
+		</tr>
+	</table>
+	<br>
+	<form action="#" name="boardView" method="get">
+		<input type="button" value="글 목록" onclick="location.href='boardList.jsp?pg=<%=pg %>'">
+	</form>
+</body>
+</html>
+```
+#### BoardDAO.jsp
+* 글을 클릭하면 조회수가 오르도록하는 `updateHit` 메서드를 추가
+```java
+public int updateHit(int seq) {
+	String sql = "update board set hit=hit+1 where seq=?";
+	int num = 0;
+
+	try {
+		con = ds.getConnection();
+		pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, seq);
+		num = pstmt.executeUpdate();
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if (res != null) res.close();
+			if (pstmt != null) pstmt.close();
+			if (con != null) con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	} return num;
+}
+```
+* 글을 클릭하면 글에 대한 내용을 boardDTO 객체에 담아서 리턴하는 `boardView` 메서드 추가
+```java
+// 글 내용 가져오기
+public BoardDTO boardView(int seq) {
+	String sql = "select * from board where seq=?";
+	BoardDTO boardDTO = new BoardDTO();
+
+	try {
+		con = ds.getConnection();
+		pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, seq);
+		res = pstmt.executeQuery();
+
+		// 리스트에 담아준다
+		if (res.next()) {
+			boardDTO = new BoardDTO();
+			boardDTO.setSeq(res.getInt("seq"));
+			boardDTO.setId(res.getString("id"));
+			boardDTO.setName(res.getString("name"));
+			boardDTO.setSubject(res.getString("subject"));
+			boardDTO.setContent(res.getString("content"));
+			boardDTO.setHit(res.getInt("hit"));
+			boardDTO.setLogtime(res.getString("logtime"));
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if (res != null) res.close();
+			if (pstmt != null) pstmt.close();
+			if (con != null) con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	} return boardDTO;
+}
+```
+#### boardList.jsp
+* 글 목록의 제목을 클릭하면 onclick을 통해 자바스크립트의 isLogin 메서드를 실행 하도록 한다.
+  ```html
+  <td align="center">
+  	<a href="#" id="subjectArticle" onclick="isLogin(<%=boardDTO.getSeq()%>)">
+  	<%=boardDTO.getSubject() %></a>
+  </td>
+  ```
+* 자바스크립트
+  ```js
+	<script type="text/javascript">
+	function isLogin(seq) {
+		<%if (session.getAttribute("memberId") == null) {%>
+			alert("로그인이 필요한 작업입니다.")
+		<%} else { %>
+			location.href="boardView.jsp?seq=" + seq + "&pg=" + <%=pg %>;
+		<%} %>
+	}
+	</script>
+  ```
+* 글을 클릭한다. (현재 조회수 0)
+  ![image](https://user-images.githubusercontent.com/79209568/116406164-57075f00-a86b-11eb-8cdd-9071dd65c59c.png)
+* 글의 내용이 나온다. (조회수 +1) 글 목록 버튼을 클릭하면 글 목록으로 돌아간다.
+  ![image](https://user-images.githubusercontent.com/79209568/116406311-7b633b80-a86b-11eb-979e-b336185f5210.png)
+
+## 글 수정 삭제
+#### boardView.jsp
+* 현재 로그인 중인 사람이 글을 쓴 사람이어야 수정과 삭제가 가능하도록 한다.
+  ```html
+<%if (session.getAttribute("memberId").equals(boardDTO.getId())) {%>
+		<input type="button" value="글 수정" onclick="location.href='boardModifyForm.jsp?pg=<%=pg %>&seq=<%=seq %>'">
+		<input type="button" value="글 삭제" onclick="location.href='boardDelet.jsp?seq=<%=seq %>'">
+<%} %>
+  ```
