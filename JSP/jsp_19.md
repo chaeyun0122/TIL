@@ -355,8 +355,8 @@ public BoardDTO boardView(int seq) {
 #### boardView.jsp
 * 현재 로그인 중인 사람이 글을 쓴 사람이어야 수정과 삭제가 가능하도록 한다.
   ```html
-<%if (session.getAttribute("memberId").equals(boardDTO.getId())) {%>
-		<input type="button" value="글 수정" onclick="location.href='boardModifyForm.jsp?pg=<%=pg %>&seq=<%=seq %>'">
-		<input type="button" value="글 삭제" onclick="location.href='boardDelet.jsp?seq=<%=seq %>'">
-<%} %>
+  <%if (session.getAttribute("memberId").equals(boardDTO.getId())) {%>
+  		<input type="button" value="글 수정" onclick="location.href='boardModifyForm.jsp?pg=<%=pg %>&seq=<%=seq %>'">
+  		<input type="button" value="글 삭제" onclick="location.href='boardDelet.jsp?seq=<%=seq %>'">
+  <%} %>
   ```
