@@ -522,7 +522,345 @@ public int boardModify(BoardDTO boardDTO) {
 >   ![image](https://user-images.githubusercontent.com/79209568/116541862-f2a9d580-a926-11eb-9bb7-8c755f5c0e69.png)  
 >   
 >   ![image](https://user-images.githubusercontent.com/79209568/116541890-fa697a00-a926-11eb-9580-8d909ef7aea1.png)
+  
+### 삭제
+#### board/boardDelete.jsp
+* 글을 삭제하는 페이지
+```jsp
+<%-- boardDelete.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="boardDAO.BoardDAO" %>
+<%
+int seq = Integer.parseInt(request.getParameter("seq"));
+
+BoardDAO boardDAO = new BoardDAO();
+boardDAO.boardDelete(seq);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 글 삭제 확인 </title>
+<script type="text/javascript">
+window.onload=function() {
+	alert("삭제를 완료했습니다.");
+	location.href="boardList.jsp?pg=1";
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>
+```
+
+#### src/BoardDAO.java
+* 글을 삭제하는` boardDelete` 메서드를 추가한다.
+```java
+public int boardDelete(int seq) {
+	String sql = "delete board where seq=?";
+	int num = 0;
+
+	try {
+		con = ds.getConnection();
+		pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, seq);
+		num = pstmt.executeUpdate();
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if (pstmt != null) pstmt.close();
+			if (con != null) con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	} return num;
+}
+```
+
+> #### 결과
+> * 글 작성자가 해당 글을 클릭한다.  
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/116552431-f859e800-a933-11eb-9fdc-7434e4d37435.png)
+> * 글 삭제 클릭  
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/116552479-0576d700-a934-11eb-982e-5edf3b957af9.png)  
+> * 글 삭제 완료  
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/116552494-0c054e80-a934-11eb-94da-2181a38e41dc.png)
 
 
 
+## 회원정보 수정
+#### main/index.jsp
+* 로그인 했을 때 회원 정보를 수정하는 페이지로 이동하는 a 태그를 추가
+```jsp
+<body>
+	<h1> Main </h1>
+	<br>
+	<%if (id == null) {%>
+		<a href="../member/writeForm.jsp"> 회원가입 </a>
+		<a href="../member/loginForm.jsp"> 로그인 </a>
+	<%} else { %>
+		<a href="../board/boardWriteForm.jsp"> 글쓰기 </a>
+		<a href="../member/modifyForm.jsp?id" <%=session.getAttribute("memberId") %>> 회원정보 수정 </a>
+		<a href="../member/logout.jsp"> 로그아웃 </a>
+	<%} %>
+	<a href="../board/boardList.jsp?pg=1"> 글 목록 </a>
+</body>
+```
 
+#### member/modifyForm.jsp
+* 회원 정보를 수정하는 폼이다.
+* 아이디는 변경할 수 없다.
+* 성별은 값을 불러와서 M일 경우와
+* 회원 수정 완료를 클릭 시 `checkModify()` 메서드를 실행 후 오류가 없으면 submit하여 `modify.jsp`로 이동한다.
+```jsp
+<%-- modifyForm.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="memberDTO.MemberDTO" %>
+<%@ page import="memberDAO.MemberDAO" %>
+<%
+request.setCharacterEncoding("utf-8");
+String id = request.getParameter("id");
+MemberDAO memberDAO = new MemberDAO();
+MemberDTO memberDTO = memberDAO.getMember(id);
+
+String tel = memberDTO.getTel();
+String tel1 = tel.substring(0, 3);
+String tel2 = tel.substring(4, 8);
+String tel3 = tel.substring(9);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 회원 정보 수정 </title>
+<script type="text/javascript">
+function checkModify(){
+	if(document.modifyForm.name.value==""){
+		alert("이름을 입력하세요!");
+		document.modifyForm.name.focus();
+	}
+	else if(document.modifyForm.pwd.value==""){
+		alert("비밀번호를 입력하세요!");
+		document.modifyForm.pwd.focus();
+	}
+	else if(document.modifyForm.pwd.value!=document.modifyForm.repwd.value){
+		alert("비밀번호가 틀립니다!");
+		document.modifyForm.repwd.focus();
+	}
+	else
+		document.modifyForm.submit();
+}
+</script>
+</head>
+<body>
+	<form action="modify.jsp" name="modifyForm" method="post">
+		<table border="1" cellpadding="4">
+			<tr>
+				<td width="120" align="center"> 이 름 </td>
+				<td width="300"><input type="text" name="name" value="<%=memberDTO.getName()%>"></td>
+			</tr>
+			<tr>
+				<td align="center"> 아이디 </td>
+				<td>
+					<input type="text" name="id" value="<%=memberDTO.getId()%>" readonly>
+				</td>
+			</tr>
+			<tr>
+				<td align="center"> 비밀번호 </td>
+				<td><input type="password" name="pwd"></td>
+			</tr>
+			<tr>
+				<td align="center"> 비밀번호 확인 </td>
+				<td><input type="password" name="repwd"></td>
+			</tr>
+			<tr>
+				<td align="center"> 성 별 </td>
+				<td>
+				<%if (memberDTO.getGender().equals("M")) {%>
+					<input type="radio" name="gender" value="M" checked><label for="genderM"> 남 </label>
+					<input type="radio" name="gender" value="F"><label for="genderF"> 여 </label>
+				<%} else { %>
+					<input type="radio" name="gender" value="M"><label for="genderM"> 남 </label>
+					<input type="radio" name="gender" value="F" checked><label for="genderF"> 여 </label>
+				<%} %>
+				</td>
+			</tr>
+			<tr>
+				<td align="center"> E-mail </td>
+				<td>
+					<input type="text" name="email" value="<%=memberDTO.getEmail()%>" size="10"> @
+					<input type="text" name="domain" value="<%=memberDTO.getDomain()%>" size="10">
+				</td>
+			</tr>
+			<tr>
+				<td align="center"> 핸드폰 </td>
+				<td>
+					<input type="text" name="tel1" value=<%=tel1 %> size="3" maxlength="3"> - 
+					<input type="text" name="tel2" value=<%=tel2 %> size="3" maxlength="4"> - 
+					<input type="text" name="tel3" value=<%=tel3 %> size="3" maxlength="4">
+				</td>
+			</tr>
+			<tr>
+				<td align="center"> 주 소 </td>
+				<td><input type="text" name="addr" value="<%=memberDTO.getAddr()%>" size="50"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="button" value="회원 수정 완료" onclick="checkModify()"> &nbsp;
+					<input type="reset" value="다시작성">
+				</td>
+			</tr>
+		</table>
+	</form>
+	<br>
+	<input type="button" value="main" onclick="location.href='../main/index.jsp'">
+</body>
+</html>
+```
+
+#### member/modify.jsp
+* 수정한 회원 정보를 DB에 저장하는 페이지
+```jsp
+<%-- modify.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="memberDTO.MemberDTO" %>
+<%@ page import="memberDAO.MemberDAO" %>
+<%
+request.setCharacterEncoding("utf-8");
+String name = request.getParameter("name");
+String id = request.getParameter("id");
+String pwd = request.getParameter("pwd");
+String gender = request.getParameter("gender");
+String email = request.getParameter("email");
+String domain = request.getParameter("domain");
+String tel = (request.getParameter("tel1") + "-" + request.getParameter("tel2") + "-" + request.getParameter("tel3"));
+String addr = request.getParameter("addr");
+
+MemberDTO memberDTO = new MemberDTO();
+memberDTO.setName(name);
+memberDTO.setId(id);
+memberDTO.setPwd(pwd);
+memberDTO.setGender(gender);
+memberDTO.setEmail(email);
+memberDTO.setDomain(domain);
+memberDTO.setTel(tel);
+memberDTO.setAddr(addr);
+
+MemberDAO memberDAO = new MemberDAO();
+int res = memberDAO.modify(memberDTO);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 회원 정보 수정 확인 </title>
+</head>
+<body>
+	<br>
+	<%if (res > 0) {%>
+		<p> 회원 정보 수정을 성공했습니다.</p>
+	<%} else { %>
+		<p> 회원 정보 수정을 실패했습니다.</p>
+	<%} %>
+	<br>
+	<input type="button" value="main" onclick="location.href='../main/index.jsp'">
+</body>
+</html>
+```
+
+#### src/MemberDAO.java
+* 회원 정보를 가져오는 `getMember` 메서드를 추가한다.
+```java
+public MemberDTO getMember(String id) {
+	String sql = "select * from member where id=?";
+	MemberDTO memberDTO = null;
+
+	try {
+
+		con = getConnection();
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, id);
+		res = pstmt.executeQuery();
+		if (res.next()) {
+			memberDTO = new MemberDTO();
+			memberDTO.setName(res.getString("name"));
+			memberDTO.setId(res.getString("id"));
+			memberDTO.setPwd(res.getString("pwd"));
+			memberDTO.setGender(res.getString("gender"));
+			memberDTO.setTel(res.getString("tel"));
+			memberDTO.setEmail(res.getString("email"));
+			memberDTO.setDomain(res.getString("domain"));
+			memberDTO.setAddr(res.getString("addr"));
+		}
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if (res != null)
+				res.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	return memberDTO;
+}
+```
+* 회원 정보를 수정하는 `modify` 메서드를 추가한다.
+```java
+public int modify(MemberDTO memberDTO) {
+	String sql = "update member "
+			+ "set name=?, pwd=?, gender=?, email=?, domain=?, tel=?, addr=? "
+			+ "where id=?";
+	int num = 0;
+
+	try {
+		con = getConnection();
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, memberDTO.getName());
+		pstmt.setString(2, memberDTO.getPwd());
+		pstmt.setString(3, memberDTO.getGender());
+		pstmt.setString(4, memberDTO.getEmail());
+		pstmt.setString(5, memberDTO.getDomain());
+		pstmt.setString(6, memberDTO.getTel());
+		pstmt.setString(7, memberDTO.getAddr());
+		pstmt.setString(8, memberDTO.getId());
+		num = pstmt.executeUpdate();
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	return num;
+}
+```
+> #### 결과
+> * 회원 정보 수정을 클릭한다.  
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/116552124-a7e28a80-a933-11eb-9e01-1934b94788d0.png)
+> * 이름을 `테스터 > 테스터1`로 변경, 주소도 변경한다.  
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/116552193-baf55a80-a933-11eb-8785-5893c99cdba1.png)
+> * 수정 성공  
+>   
+> ![image](https://user-images.githubusercontent.com/79209568/116552233-c6488600-a933-11eb-9678-156ec14fb2ee.png)
