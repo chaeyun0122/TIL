@@ -2,7 +2,7 @@
 * 현재 글쓰기 기능을 구현했고 커낵션 풀로 DB 연결을 해놓은 상태다.
 
 ## 글 목록 페이지
-#### BoardDTO.java
+#### src/BoardDTO.java
 * 글 목록 리스트를 리턴하는 `boardList` 메서드 추가
   ```java
   public ArrayList<BoardDTO> boardList(int start, int end) {
@@ -57,7 +57,7 @@
   ```
   * **seq로 내림차순한 board 테이블의 사본 tt를 rownum을 이용해 번호를 붙인 후, rn이 startNum과 endNum사이의 값인 seq, id, name, subject, content, hit, to_char(logtime, 'YYYY.MM.DD') AS logtime 열의 값을 출력하라는 의미의 구문이다.**
   
-#### boardList.jsp
+#### board/boardList.jsp
 * 글 목록을 출력하는 페이지
 ```jsp
 <%
@@ -99,7 +99,7 @@ ArrayList<BoardDTO> list = boardDAO.boardList(startNum, endNum);
 </body>
 ```
 
-#### index.jsp
+#### main/index.jsp
 * 글 목록 페이지로 이동하는 a 태그 추가
   ```html
   <body>
@@ -120,7 +120,7 @@ ArrayList<BoardDTO> list = boardDAO.boardList(startNum, endNum);
 ![image](https://user-images.githubusercontent.com/79209568/116396051-d98a2180-a85f-11eb-8288-5e2206ad2121.png)
 
 ## 페이지 번호 출력
-#### BoardDAO.java
+#### src/BoardDAO.java
 * 전체 글 수를 리턴하는 `getTotalArticle` 메서드 추가
   ```java
   public int getTotalArticle() {
@@ -150,7 +150,7 @@ ArrayList<BoardDTO> list = boardDAO.boardList(startNum, endNum);
     } //getTotalArticle() end
     ```
 
-#### boardList.jsp
+#### board/boardList.jsp
 * 글 목록의 페이지 번호를 출력 하는 코드 추가
 ```jsp
 <%
@@ -218,7 +218,7 @@ if (endPage > totalPage) endPage = totalPage;
 ![image](https://user-images.githubusercontent.com/79209568/116399836-50c1b480-a864-11eb-80dd-55c16fd56a9b.png)
 
 ## 글 내용 보기
-#### boardView.jsp
+#### board/boardView.jsp
 * 글 내용을 확인하는 페이지
 ```jsp
 <%-- boardView.jsp --%>
@@ -261,7 +261,7 @@ BoardDTO boardDTO = boardDAO.boardView(seq);	//글에 대한 정보 가져오기
 </body>
 </html>
 ```
-#### BoardDAO.jsp
+#### src/BoardDAO.jsp
 * 글을 클릭하면 조회수가 오르도록하는 `updateHit` 메서드를 추가
 ```java
 public int updateHit(int seq) {
@@ -326,7 +326,7 @@ public BoardDTO boardView(int seq) {
 	} return boardDTO;
 }
 ```
-#### boardList.jsp
+#### board/boardList.jsp
 * 글 목록의 제목을 클릭하면 onclick을 통해 자바스크립트의 isLogin 메서드를 실행 하도록 한다.
   ```html
   <td align="center">
@@ -352,7 +352,8 @@ public BoardDTO boardView(int seq) {
   ![image](https://user-images.githubusercontent.com/79209568/116406311-7b633b80-a86b-11eb-979e-b336185f5210.png)
 
 ## 글 수정 삭제
-#### boardView.jsp
+### 수정
+#### board/boardView.jsp
 * 현재 로그인 중인 사람이 글을 쓴 사람이어야 수정과 삭제가 가능하도록 한다.
   ```html
   <%if (session.getAttribute("memberId").equals(boardDTO.getId())) {%>
@@ -360,3 +361,168 @@ public BoardDTO boardView(int seq) {
   		<input type="button" value="글 삭제" onclick="location.href='boardDelet.jsp?seq=<%=seq %>'">
   <%} %>
   ```
+#### board/boardModifyForm.jsp
+* 글을 수정하는 form
+* 제목과 내용을 DTO의 getter를 통해 가져와서 보여준다.
+* 수정완료 버튼을 누르면 `checkBoardModify()` 메서드를 통해 빈 내용 없는지 체크 후 submit한다.
+```jsp
+<%-- boardModifyForm.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="boardDAO.BoardDAO" %>
+<%@ page import="boardDTO.BoardDTO" %>
+<%
+int pg = Integer.parseInt(request.getParameter("pg"));
+int seq = Integer.parseInt(request.getParameter("seq"));
+
+BoardDAO boardDAO = new BoardDAO();
+BoardDTO boardDTO = boardDAO.boardView(seq);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 글 수정 </title>
+<script type="text/javascript">
+function checkBoardModify() {
+	if (document.boardModifyform.subject.value == "") {
+		alert("제목을 입력하세요.");
+		document.boardModifyform.subject.focus();	//해당 칸으로 포커스 이동
+	}
+	else if (document.boardModifyform.content.value == "") {
+		alert("내용을 입력하세요.");
+		document.boardModifyform.content.focus();	//해당 칸으로 포커스 이동
+	}
+	else {
+		document.boardModifyform.submit();	// 다 들어갔으면 전송
+	}
+	
+}
+</script>
+</head>
+<body>
+	<form action="boardModify.jsp" name="boardModifyform" method="post">
+		<input type="hidden" name="seq" value="<%=seq %>">
+		<input type="hidden" name="pg" value="<%=pg %>">
+		<table border="1" cellpadding="4">
+			<tr align="center">
+				<td width="50"> 제 목 </td>
+				<td>
+					<input type="text" id="subject" name="subject" value="<%=boardDTO.getSubject() %>" style="width:98%">
+				</td>
+			</tr>
+			<tr align="center">
+				<td> 내 용 </td>
+				<td>
+					<textarea rows="20" cols="60" id="content" name="content" style="resize:none;">
+						<%=boardDTO.getContent() %>
+					</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="button" value="수정 완료" onclick="checkBoardModify()"> &nbsp;
+					<input type="reset" value="다시 작성">
+				</td>
+			</tr>
+		</table>
+	</form>
+	<br>
+	<input type="button" value="main" onclick="location.href='../main/index.jsp'">
+</body>
+</html>
+```
+
+#### board/boardModify.jsp
+* 수정된 내용을 DB에 업데이트 시키는 페이지
+* DAO의 `boardModify` 함수를 통해 업데이트 된다.
+```jsp
+<%-- boardModify.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="boardDAO.BoardDAO" %>
+<%@ page import="boardDTO.BoardDTO" %>
+<%
+request.setCharacterEncoding("utf-8");
+int pg = Integer.parseInt(request.getParameter("pg"));
+int seq = Integer.parseInt(request.getParameter("seq"));
+String subject = request.getParameter("subject");
+String content = request.getParameter("content");
+
+BoardDTO boardDTO = new BoardDTO();
+boardDTO.setSeq(seq);
+boardDTO.setSubject(subject);
+boardDTO.setContent(content);
+
+BoardDAO boardDAO = new BoardDAO();
+int num = boardDAO.boardModify(boardDTO);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 글 수정 결과 </title>
+<script type="text/javascript">
+window.onload=function() {
+	<%if (num > 0) {%>
+		alert("수정 되었습니다.");
+		location.href="boardList.jsp?pg=<%=pg %>";
+	<%} else {%>
+		alert("수정을 실패했습니다.")
+		history.back(-1);
+	<%} %>
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>
+```
+
+#### src/BoardDAO.java
+* 글을 수정하는 `boardModify` 메서드를 추가한다.
+```java
+public int boardModify(BoardDTO boardDTO) {
+	String sql = "update board set subject=?, content=? where seq=?";
+	int num = 0;
+
+	try {
+		con = ds.getConnection();
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, boardDTO.getSubject());
+		pstmt.setString(2, boardDTO.getContent());
+		pstmt.setInt(3, boardDTO.getSeq());
+		num = pstmt.executeUpdate();
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if (res != null) res.close();
+			if (pstmt != null) pstmt.close();
+			if (con != null) con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	} return num;
+}
+```
+> #### 결과
+> * 자신이 쓴 글만 글 수정 메뉴가 뜬다.
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/116541672-b8d8cf00-a926-11eb-908f-6c3cc5857bb1.png)  
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/116541703-c4c49100-a926-11eb-83bc-b2b32a02fc9b.png)
+> * 글 수정을 누르면 수정하는 페이지로 넘어가서 제목과 내용을 수정할 수 있다.  
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/116541794-de65d880-a926-11eb-903d-6238e883172a.png)  
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/116541862-f2a9d580-a926-11eb-9bb7-8c755f5c0e69.png)  
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/116541890-fa697a00-a926-11eb-9580-8d909ef7aea1.png)
+
+
+
+
