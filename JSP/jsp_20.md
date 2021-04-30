@@ -153,3 +153,8 @@ if (file2 != null) fileSize2 = file2.length();
 >   
 >   ![image](https://user-images.githubusercontent.com/79209568/116691840-5fd86c00-a9f6-11eb-92f2-f6c55714f598.png)
 
+## 파일 다운로드 실습
+#### fileDownload.jsp
+```jsp
+
+```
