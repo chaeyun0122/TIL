@@ -2,7 +2,7 @@
 * 현재 글쓰기 기능을 구현했고 커낵션 풀로 DB 연결을 해놓은 상태다.
 
 ## 글 목록 페이지
-#### src/BoardDTO.java
+#### src/BoardDAO.java
 * 글 목록 리스트를 리턴하는 `boardList` 메서드 추가
   ```java
   public ArrayList<BoardDTO> boardList(int start, int end) {
@@ -791,7 +791,7 @@ public MemberDTO getMember(String id) {
 
 	try {
 
-		con = getConnection();
+		con = ds.getConnection();
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, id);
 		res = pstmt.executeQuery();
@@ -833,7 +833,7 @@ public int modify(MemberDTO memberDTO) {
 	int num = 0;
 
 	try {
-		con = getConnection();
+		con = ds.getConnection();
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, memberDTO.getName());
 		pstmt.setString(2, memberDTO.getPwd());
