@@ -73,8 +73,94 @@ save log replace
 ```
 ![image](https://user-images.githubusercontent.com/79209568/116772394-b642ba80-aa89-11eb-87ec-19d7e092f54c.png)
 
+* v$logfile : 멤버 파일의 형태를 꺼내 볼 수 있음
+* status : 결과 화면에 아무것도 보이지 않을 때 정상
+```sql
+select group#, member, status 
+from v$logfile
+order by group# ;
+save logfile replace
+```
+![image](https://user-images.githubusercontent.com/79209568/116773012-d2485b00-aa8d-11eb-8643-93d2dea4fc05.png)
 
+* 6개의 멤버 파일을 각각의 그룹당 2개씩 추가 작업을 진행한다.
+```sql
+alter database add logfile member 
+'D:\app\user\DISK1\redo01a.log' to group 1,
+'D:\app\user\DISK1\redo02a.log' to group 2,
+'D:\app\user\DISK1\redo03a.log' to group 3,
+'D:\app\user\DISK2\redo01b.log' to group 1,
+'D:\app\user\DISK2\redo02b.log' to group 2,
+'D:\app\user\DISK2\redo03b.log' to group 3 ;
 
+@log
+
+@logfile
+```
+![image](https://user-images.githubusercontent.com/79209568/116773041-fa37be80-aa8d-11eb-81e4-143bc39ebb7d.png)
+
+* status에 invalid라고 나와있는 멤버들은 아직 사용하지 못하므로 스위치 시켜줘야한다.
+```sql
+alter system switch logfile ;
+alter system switch logfile ;
+alter system switch logfile ;
+@log
+@logfile 
+```
+![image](https://user-images.githubusercontent.com/79209568/116773078-2b17f380-aa8e-11eb-96da-4b96b300093d.png)
+
+* 멤버가 아니라 그룹을 추가하고 싶은 경우와 삭제
+```sql
+--추가
+alter database add logfile group 4 
+'D:\app\user\DISK1\redo04a.log' size 5m ;
+
+--삭제
+alter database drop logfile group 4;
+```
+
+* 멤버를 삭제할 때 현재 쓰고 있는 것은(current 상태) 삭제에 오류가 난다.
+* 나머지를 지우고 current만 남긴 후 스위치 시키고나서 삭제하면 삭제 가능
+```sql
+alter database drop logfile member 'D:\app\user\oradata\orcl\redo01.log' ;
+alter database drop logfile member 'D:\app\user\oradata\orcl\redo02.log' ;
+alter database drop logfile member 'D:\app\user\oradata\orcl\redo03.log' ; -- current라서 오류
+
+alter system switch logfile ;
+alter database drop logfile member 'D:\app\user\oradata\orcl\redo03.log' ;
+
+@log
+@logfile
+```
+![image](https://user-images.githubusercontent.com/79209568/116773146-a083c400-aa8e-11eb-8329-62e49222e217.png)
+
+## Archivelog mode 
+```
+-- 전체 아카이브
+show parameter archive
+
+show parameter db_recovery
+-- 방금 만들었던 경로로 만들어줌
+alter system set db_recovery_file_dest = 'D:\app\user\FRA' ; 
+```
+![image](https://user-images.githubusercontent.com/79209568/116776031-7c7dae00-aaa1-11eb-9974-b9de0e676df3.png)
+
+```
+shutdown immediate
+startup mount
+alter database archivelog ; 
+alter database open ; 
+```
+
+```
+-- 아카이브 로그인지 아닌지를 확인할 수 있음
+archive log list
+
+alter system switch logfile ;
+
+select * 
+from v$archived_log ;
+```
 
 
 
