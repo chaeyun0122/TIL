@@ -126,7 +126,8 @@ SELECT * FROM V$STATNAME; -- 세션 아이디들의 이름들
 * 스냅샷 찍기
 
 * ASSAM 사용 전 후 인스턴스 뷰어 경합 비교  
-  * 전
+  * 전  
   ![image](https://user-images.githubusercontent.com/79209568/116800232-3b85a800-ab3a-11eb-8011-f0ed17780c7f.png)
-  * 후
+  * 후  
   ![image](https://user-images.githubusercontent.com/79209568/116800227-227cf700-ab3a-11eb-90ad-1dd2a745c4cd.png)
+
