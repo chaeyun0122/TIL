@@ -24,7 +24,7 @@ where 2 < (select count(*)
 ![image](https://user-images.githubusercontent.com/79209568/116805313-82869400-ab60-11eb-8efc-a6dc4dbce287.png)
 
 ## 실행 통계 확인
-* `/*+ gather_plan_statistics */` : 실행 통계 
+* `/*+ gather_plan_statistics */` : 실행 중에 실행 통계를 수집 (병목지점을 찾고 작업량을 확인할 수 있음)
 
 * 두 쿼리를 한번에 같이 실행
 ```sql
