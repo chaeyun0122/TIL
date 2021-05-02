@@ -270,13 +270,15 @@ Microsoft Windows [Version 10.0.19042.928]
 (c) Microsoft Corporation. All rights reserved.
 
 C:\WINDOWS\system32> d:
-D:\> cd D:\app\oracle\product\12.1.0\dbhome_1\deinstall
+D:\> cd D:\app\user\product\12.1.0\dbhome_1\deinstall
+
+D:\> cd D:\app\user\product\12.1.0\dbhome_1\deinstall> deinstall.bat
 ...
-구성을 해제할 단일 인스턴스 리스너를 모두 지정하십시오. 모두 선택 해제하려면 .(마침표)를 입력하십시오. [L1,LISTENER]:
+구성을 해제할 단일 인스턴스 리스너를 모두 지정하십시오. 모두 선택 해제하려면 .(마침표)를 입력하십시오. [L1,LISTENER]: 엔터
 ...
-이 Oracle 홈에 구성된 데이터베이스 이름 목록을 지정하십시오. [ORCL]:
+이 Oracle 홈에 구성된 데이터베이스 이름 목록을 지정하십시오. [ORCL]: 엔터
 ...
-ORCL 데이터베이스의 세부 정보가 자동으로 검색되었습니다. ORCL 데이터베이스의 세부 정보를 수정하겠습니까? [n]:
+ORCL 데이터베이스의 세부 정보가 자동으로 검색되었습니다. ORCL 데이터베이스의 세부 정보를 수정하겠습니까? [n]: 엔터
 ...
 계속하겠습니까(y - 예, n - 아니오)? [n]: y
 ```
