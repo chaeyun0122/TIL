@@ -156,5 +156,54 @@ if (file2 != null) fileSize2 = file2.length();
 ## 파일 다운로드 실습
 #### fileDownload.jsp
 ```jsp
+<%-- fileDownload.jsp --%>
+<%@page import="java.io.BufferedOutputStream"%>
+<%@page import="java.io.FileInputStream"%>
+<%@page import="java.io.BufferedInputStream"%>
+<%@page import="java.net.URLEncoder"%>
+<%@page import="java.io.File"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+request.setCharacterEncoding("utf-8");
+String fileName = request.getParameter("fileName");
 
+// 실제 폴더 위치
+String realFolder = request.getServletContext().getRealPath("/storage");
+
+// 다운 받으려는 파일
+File file = new File(realFolder, fileName);
+System.out.println("file : " + file);
+
+// 파일 다운로드 형태로 전송
+fileName = "attachment;fileName=" + new String(URLEncoder.encode(fileName, "utf-8")).replace("\\+", " ");
+response.setHeader("Content-Disposition", fileName);
+response.setHeader("Content-Length", String.valueOf(file.length()));
+
+out.clear();
+out = pageContext.pushBody();	// 기존 jsp 객체 out의 스트림을 지우고 출력해야 예외가 발생하지 않는다.
+
+BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
+
+byte[] b = new byte[(int)file.length()];
+bis.read(b, 0, b.length);
+bos.write(b);
+
+bis.close();
+bos.close();
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 파일 다운로드 </title>
+</head>
+<body>
+
+</body>
+</html>
 ```
+> #### 결과
+> * 파일 명을 누르면 파일이 다운로드 된다.
+>   ![image](https://user-images.githubusercontent.com/79209568/116864507-ea151000-ac42-11eb-9e7e-fdf4f7834f5d.png)
