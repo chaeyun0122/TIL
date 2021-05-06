@@ -40,7 +40,8 @@
 ![image](https://user-images.githubusercontent.com/79209568/117259164-bfb49400-ae88-11eb-8f7b-d03096de3921.png)
 
 ## 실행
-* setting에서 centos를 넣어준 후 실행
+* setting에서 USB Controller, Sound Card, Printer 삭제
+* setting에서 CD/DVD의 Use ISO image file에 centos를 넣어준 후 실행
 * 한국어 설정 후 다음
 * 소프트웨어 선택
   ![image](https://user-images.githubusercontent.com/79209568/117261502-2dfa5600-ae8b-11eb-92ca-114dfc480c22.png)
