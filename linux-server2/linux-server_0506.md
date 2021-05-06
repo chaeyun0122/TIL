@@ -109,4 +109,5 @@
 2. 설치 및 IP 설정 : 192.168.x.129
 3. selinux 해제 (SELINUX=disabled)
 4. putty 접속해보기
-5. 스냅샷 찍기
+    > 다시 설정하고 client로 저장해야한다.
+6. 스냅샷 찍기
