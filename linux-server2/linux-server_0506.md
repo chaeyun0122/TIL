@@ -93,3 +93,6 @@
   * 리스트에 있는 입력 값 더블클릭
   * 뜨는 경고 창 `취소` **절대** 누르지 않고 root로 로그인
   ![image](https://user-images.githubusercontent.com/79209568/117269149-ff807900-ae92-11eb-823f-6bf3c1c6070e.png)
+
+* virtual machine 종료 후 스냅샷 찍기
+  ![image](https://user-images.githubusercontent.com/79209568/117270183-e88e5680-ae93-11eb-91e4-1ed6bbd1251a.png)
