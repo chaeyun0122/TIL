@@ -104,6 +104,8 @@
 
 ## 두 번째 virtual machine 만들기
 1. 이름 : client
+  > root : a
+  > 사용자 : itbank/a12345
 2. 설치 및 IP 설정 : 192.168.x.129
 3. selinux 해제 (SELINUX=disabled)
 4. putty 접속해보기
