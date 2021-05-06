@@ -14,8 +14,8 @@
     * 500 : 사용자가 제대로 된 요청을 보냈지만 서버가 오류남
 
 # 초기환경 세팅
-## Visual Code 받기
-## 웹서버 환경설정
+## 1. Visual Code 받기
+## 2. 웹서버 환경설정
 * [해당 파일](DGANGO/util/Apache httpd(웹서버).7z) 압축풀기
 * 아래는 해당 ReadMe.txt에 적힌대로 한 것
   ![image](https://user-images.githubusercontent.com/79209568/117249864-3f3c6600-ae7d-11eb-913e-a1470761592f.png)
@@ -25,3 +25,9 @@
 * `Apache24` 폴더를 c드라이브 바로 아래에 붙여넣기
 * 명령 프롬프트에서 `cd \` 후 `cd Apache24\bin`으로 bin 폴더 이동 후 `httpd.exe` 프로그램 실행
   ![image](https://user-images.githubusercontent.com/79209568/117250162-c8539d00-ae7d-11eb-8866-82bf703ad789.png)
+* 이제 local은 서버이며 클라이언트가 된다.
+* 브라우저에서 `127.0.0.1` 혹은 `localhost`를 치면 자신의 서버에 접속할 수 있다.
+  ![image](https://user-images.githubusercontent.com/79209568/117250622-72332980-ae7e-11eb-80b4-c61d1251649f.png)
+* 다른 서버의 IP주소를 알고 있으면 해당 서버로 접속도 가능
+  ![image](https://user-images.githubusercontent.com/79209568/117250865-d0f8a300-ae7e-11eb-8e91-2705420af665.png)
+
