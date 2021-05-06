@@ -39,39 +39,39 @@
 
 ![image](https://user-images.githubusercontent.com/79209568/117259164-bfb49400-ae88-11eb-8f7b-d03096de3921.png)
 
-### 실행
-* centos를 넣어준 후 실행
+## 실행
+* setting에서 centos를 넣어준 후 실행
 * 한국어 설정 후 다음
-#### 소프트웨어 선택
+* 소프트웨어 선택
   ![image](https://user-images.githubusercontent.com/79209568/117261502-2dfa5600-ae8b-11eb-92ca-114dfc480c22.png)
-#### 설치대상
+* 설치대상
   ![image](https://user-images.githubusercontent.com/79209568/117261653-5b470400-ae8b-11eb-8132-837f9ae6c5db.png)
   * 'boot' 1024, 'swap' 2048, '/' 빈 칸 으로 설정 후 완료
   * mbr영역이 사용가능한 공간(992.5)으로 남음
-#### 네트워크 호스트 이름
-* 호스트 이름 : server → 적용 후 위의 토글 킴
+* 네트워크 호스트 이름
+  * 호스트 이름 : server → 적용 후 위의 토글 킴
   ![image](https://user-images.githubusercontent.com/79209568/117262647-7403e980-ae8c-11eb-89d1-2f2ff415d5bb.png)
-#### 설치 시작
-#### 사용자 설정
-* root : a
-* 사용자 : itbank/a1234
+* 설치 시작
+* 사용자 설정
+  * root : a
+  * 사용자 : itbank/a1234
 
-#### 완료 후 재부팅
-#### 라이센스 동의
-#### root로 로그인
+* 완료 후 재부팅
+* 라이센스 동의
+* root로 로그인
 
 ## ip 설정
-* `edit > virtual network editor`의 
+* `edit > virtual network editor`의 NAT의 Subnet Address를 확인한다. (192.168.218.0)
   ![image](https://user-images.githubusercontent.com/79209568/117264922-add5ef80-ae8e-11eb-9cdc-6f8cac00529c.png)
 
-* `프로그램 > 시스템도구 > 설정 > 네트워크 > 유선의 설정 > IPv4`
+* `프로그램 > 시스템도구 > 설정 > 네트워크 > 유선의 설정 > IPv4` 방식을 수동으로 설정 후 주소, 네트마스크, 게이트웨이, 네임서버를 해당 값으로 채운다.
   ![image](https://user-images.githubusercontent.com/79209568/117264931-b1697680-ae8e-11eb-87db-a576bf456bfd.png)
 * 스위치 껐다 켜기
 
-## 터미널
+### 터미널
 * `바탕화면 오른쪽 > 터미널 열기`
-* 만약 서버이름이 server가 아니면 `etc/hostname`의 server로 이름을 바꾸고 재부팅
-* `vi etc/selinux/` disabled로 바꾼 후 저장 및 재부팅
+* (만약 서버이름이 server가 아니면 `etc/hostname`의 server로 이름을 바꾸고 재부팅)
+* `vi etc/selinux/config` disabled로 바꾼 후 저장 및 재부팅
   ![image](https://user-images.githubusercontent.com/79209568/117265882-a95e0680-ae8f-11eb-932e-5e4d7088a74d.png)
 
-## putty 설정
+### putty 설정
