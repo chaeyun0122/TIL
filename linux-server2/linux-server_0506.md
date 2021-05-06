@@ -39,3 +39,20 @@
 
 ![image](https://user-images.githubusercontent.com/79209568/117259164-bfb49400-ae88-11eb-8f7b-d03096de3921.png)
 
+### 실행
+* centos를 넣어준 후 실행
+* 한국어 설정 후 다음
+#### 소프트웨어 선택
+  ![image](https://user-images.githubusercontent.com/79209568/117261502-2dfa5600-ae8b-11eb-92ca-114dfc480c22.png)
+#### 설치대상
+  ![image](https://user-images.githubusercontent.com/79209568/117261653-5b470400-ae8b-11eb-8132-837f9ae6c5db.png)
+  * 'boot' 1024, 'swap' 2048, '/' 빈 칸 으로 설정 후 완료
+  * mbr영역이 사용가능한 공간(992.5)으로 남음
+#### 네트워크 호스트 이름
+* 호스트 이름 : server → 적용 후 위의 토글 킴
+  ![image](https://user-images.githubusercontent.com/79209568/117262647-7403e980-ae8c-11eb-89d1-2f2ff415d5bb.png)
+#### 설치 시작
+#### 사용자 설정
+* root : 1
+* 사용자 : itbank/a1234
+
