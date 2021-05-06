@@ -46,7 +46,8 @@
   ![image](https://user-images.githubusercontent.com/79209568/117261502-2dfa5600-ae8b-11eb-92ca-114dfc480c22.png)
 * 설치대상
   ![image](https://user-images.githubusercontent.com/79209568/117261653-5b470400-ae8b-11eb-8132-837f9ae6c5db.png)
-  * 'boot' 1024, 'swap' 2048, '/' 빈 칸 으로 설정 후 완료
+  * 표준으로 선택
+  * \+를 눌러'boot' 1024, 'swap' 2048, '/' 빈 칸 으로 설정 후 완료
   * mbr영역이 사용가능한 공간(992.5)으로 남음
 * 네트워크 호스트 이름
   * 호스트 이름 : server → 적용 후 위의 토글 킴
@@ -61,7 +62,7 @@
 * root로 로그인
 
 ## ip 설정
-* `edit > virtual network editor`의 NAT의 Subnet Address를 확인한다. (192.168.218.0)
+* `edit > virtual network editor`의 NAT의 Subnet Address를 확인한다. (192.168.217.0)
   ![image](https://user-images.githubusercontent.com/79209568/117264922-add5ef80-ae8e-11eb-9cdc-6f8cac00529c.png)
 
 * `프로그램 > 시스템도구 > 설정 > 네트워크 > 유선의 설정 > IPv4` 방식을 수동으로 설정 후 주소, 네트마스크, 게이트웨이, 네임서버를 해당 값으로 채운다.
@@ -75,3 +76,20 @@
   ![image](https://user-images.githubusercontent.com/79209568/117265882-a95e0680-ae8f-11eb-932e-5e4d7088a74d.png)
 
 ### putty 설정
+* `창 > 모양`
+  * 글꼴 : 소문자 l과 대문자 i의 구분이 안가기 때문에 글꼴을 바꿔줘야 한다. 터미널 기본 글꼴과 유니코드 글꼴 둘 다 바꿔줌
+    ![image](https://user-images.githubusercontent.com/79209568/117268025-d3b0c380-ae91-11eb-9636-6a14c88ebe86.png)
+* `창 > 변환`
+  * 수신할 데이터 문자 셋 변환 : UTF-8로 변경
+    ![image](https://user-images.githubusercontent.com/79209568/117268372-2e4a1f80-ae92-11eb-83fc-fc79eb0ce2de.png)
+
+* `접속 > SSH > 키교환`
+  * 순서가 14, 교환, 1 로 되도록 만들어준다
+    ![image](https://user-images.githubusercontent.com/79209568/117268661-7ff2aa00-ae92-11eb-9f03-8a3baa806317.png)
+
+* `세션`
+  * Host Name 입력 후 저장된 세션에 해당 값을 입력한 후에 저장
+  ![image](https://user-images.githubusercontent.com/79209568/117268962-cea04400-ae92-11eb-87b9-087a51dcfbd6.png)
+  * 리스트에 있는 입력 값 더블클릭
+  * 뜨는 경고 창 `취소` **절대** 누르지 않고 root로 로그인
+  ![image](https://user-images.githubusercontent.com/79209568/117269149-ff807900-ae92-11eb-823f-6bf3c1c6070e.png)
