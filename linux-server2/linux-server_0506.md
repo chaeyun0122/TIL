@@ -47,9 +47,13 @@
   ![image](https://user-images.githubusercontent.com/79209568/117261502-2dfa5600-ae8b-11eb-92ca-114dfc480c22.png)
 * 설치대상
   ![image](https://user-images.githubusercontent.com/79209568/117261653-5b470400-ae8b-11eb-8132-837f9ae6c5db.png)
-  * 표준으로 선택
-  * \+를 눌러'boot' 1024, 'swap' 2048, '/' 빈 칸 으로 설정 후 완료
+  * 완료 선택
+  * LVM을 표준 파티션으로 선택
+  * \+를 눌러'/boot' 1024, 'swap' 2048, '/' 빈 칸 으로 설정 후 완료
+    ![image](https://user-images.githubusercontent.com/79209568/117271155-dfea5000-ae94-11eb-865b-8fbf4618a798.png)
+
   * mbr영역이 사용가능한 공간(992.5)으로 남음
+  * 변경 사항 저장
 * 네트워크 호스트 이름
   * 호스트 이름 : server → 적용 후 위의 토글 킴
   ![image](https://user-images.githubusercontent.com/79209568/117262647-7403e980-ae8c-11eb-89d1-2f2ff415d5bb.png)
@@ -97,3 +101,10 @@
 
 * virtual machine 종료 후 스냅샷 찍기
   ![image](https://user-images.githubusercontent.com/79209568/117270183-e88e5680-ae93-11eb-91e4-1ed6bbd1251a.png)
+
+## 두 번째 virtual machine 만들기
+1. 이름 : client
+2. 설치 및 IP 설정 : 192.168.x.129
+3. selinux 해제 (SELINUX=disabled)
+4. putty 접속해보기
+5. 스냅샷 찍기
