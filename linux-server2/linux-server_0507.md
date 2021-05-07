@@ -154,6 +154,19 @@ multicast : 1:n, 몇몇 장치를 그룹화 시켜서 Class D IP로 묶어준 �
 - 벤더 ID는 **IEEE**에서 관리
   - 네트워크 장비 생산 회사는 IEEE에 일정 금액을 지불하고 벤터 ID를 할당받아 사용
 
+# 네트워크 관련 명령어
+## ifconfig
+  - Interface CONFIGuraion : interface의 정보 확인 및 제어
+  - CentoS 6.X 버전까지는 시스템에 기본적으로 탑재되 명령어였으나 CentOS 7.0버전 부터 추가로 설치해야 사용가능  
+(현재는 ip addr 명령어가 기본 탑재, net-tools 패키지 설치 후 ifconfig 명령어 사용가능)
+### 사용방법
+* `ifconfig` : 모든 interface의 정보를 출력  
+  
+  ![image](https://user-images.githubusercontent.com/79209568/117428581-2d33f380-af61-11eb-8429-19e25183c1b0.png)
+
+* `ifconfig <Interface 이름>` : 해당 interface의 정보만 출력  
+  
+  ![image](https://user-images.githubusercontent.com/79209568/117428611-32913e00-af61-11eb-89b1-850ba1d9df59.png)
 
 
 
