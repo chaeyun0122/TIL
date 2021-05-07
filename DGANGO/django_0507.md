@@ -82,7 +82,7 @@
 > a 태그는 링크를 만들어주는 태그다.
 * 기본 display 속성이 inline이다.
 * 속성
-  * href : 링크 경로 (로컬 파일 경로와 URL가 가능하다, `#이름`으로 다른 a 태그의 `name=이름` 위치로 옮겨간다.)
+  * href : 링크 경로 (로컬 파일 경로와 URL가 가능하다, `#이름`으로 다른 a 태그의 `name="이름"` 위치로 이동한다.)
   * target : `"_blank"` 속성 값을 넣어주면 새 창에서 링크를 연다.
 #### ex04-a.html
 ```html
@@ -132,3 +132,73 @@
 </body>
 </html>
 ```
+
+## list 태그
+### ul
+> ul 태그는 순서가 없는 리스트를 작성하는 태그다.
+#### ex06-ls.html
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>목록</title>
+</head>
+<body>
+    <h2>프로그래밍 언어</h2>
+    <ul>
+        <li>C언어</li>
+        <li>네트워크 기초</li>
+        <li>JAVA</li>
+        <li>JSP</li>
+    </ul>
+</body>
+</html>
+```
+![image](https://user-images.githubusercontent.com/79209568/117401634-eaadef00-af3f-11eb-82db-97ecd1275181.png)
+
+### ol
+> ol 태그는 순서가 있는 리스트를 작성하는 태그다.
+#### ex07-ls.html
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>목록</title>
+</head>
+<body>
+    <h2>프로그래밍 언어</h2>
+    <ol>
+        <li>C언어</li>
+        <li>네트워크 기초</li>
+        <li>JAVA</li>
+        <li>JSP</li>
+    </ol>
+</body>
+</html>
+```
+![image](https://user-images.githubusercontent.com/79209568/117401702-0b764480-af40-11eb-8346-f03c2dbc31b1.png)
+
+### 실습 문제
+> 리스트 항목을 클릭하면 해당 사이트로 이동하도록 직성
+* ul태그와 a태그를 사용한다.
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>실습문제</title>
+</head>
+<body>
+    <h2>다음 리스트 항목을 클릭하면 해당 사이트로 이동하도록 작성하세요</h2> 
+    <hr>
+    <ul>
+        <li><a href="https://www.naver.com/" target="_blank">네이버</a></li>
+        <li><a href="https://www.daum.net/" target="_blank">다음</a></li>
+        <li><a href="https://www.google.com/" target="_blank">구글</a></li>
+    </ul>
+</body>
+</html>
+```
+![image](https://user-images.githubusercontent.com/79209568/117402615-b3404200-af41-11eb-8d5e-e3d27af15fe8.png)
