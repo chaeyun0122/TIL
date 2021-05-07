@@ -1,11 +1,14 @@
-> visual code extends
-> * **Emmet Live** :쓰고자 하는 태그를 여러 개 쓰고 싶을 때 사용 (`br*5` → `<br><br><br><br><br>`)
+> visual code extensions
+> * **Emmet Live** :쓰고자 하는 태그를 여러 개 쓰고 싶을 때 사용 
+>   * `br*5` → `<br><br><br><br><br>`
+>   * `! + 엔터`를 하면 html 기본 구조를 작성해준다.
+>   * `ul>li*4`
 > * **Auto Rename** :태그를 바꾸면 자동으로 닫는 태그를 바꿔준다.  
   
 # HTML
 > HTML이란 웹 브라우저들 사이에서 태그를 통일시키는 웹 표준 언어
-## ex01-html
-* HTML 기본 구조
+## HTML 기본 구조
+#### ex01-html
 ```html
 <!DOCTYPE html>  <!-- HTML5 문서 타입 선언 -->
 <html>
@@ -20,11 +23,14 @@
 </html>
 ```
 
-## ex02-h-tag.html
+## h 태그
+> h 태그는 글자 크기를 지정해주는 태그다.
 * Elements : 문서를 구성하는 요소 → 태그
 * h 태그는 display 속성을 block으로 가지기 때문에 자동 개행이 된다. 만약 inline으로 바꾸면 개행하지 않는다.  
-  ![image](https://user-images.githubusercontent.com/79209568/117397039-32c81400-af36-11eb-80af-b53bc9c1dab4.png)
+  
+  <img src="https://user-images.githubusercontent.com/79209568/117397039-32c81400-af36-11eb-80af-b53bc9c1dab4.png" width="400" height="400">
 * 따로 개행을 하려면 `<br>` 태그를 사용해야한다.
+#### ex02-h.html
 ```html
 <!DOCTYPE html>
 <html>
@@ -47,3 +53,82 @@
 </html>
 ```
 ![image](https://user-images.githubusercontent.com/79209568/117397382-f9dc6f00-af36-11eb-8113-48f3c5feff99.png)
+
+## p 태그
+> p 태그는 단락을 만들어주는 태그다.
+* 기본 display 속성이 block이다. (자동 개행)
+#### ex03-p.html
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    안녕하세요<br>
+    <hr> <!-- 줄 그어주는 태그 -->
+    <p></p>
+    <hr>
+    <p>
+        제 이름은 홍길동입니다.
+    </p>
+</body>
+</html>
+```
+![image](https://user-images.githubusercontent.com/79209568/117399233-0b277a80-af3b-11eb-9a68-3e2bcff3fb97.png)
+
+## a 태그
+> a 태그는 링크를 만들어주는 태그다.
+* 기본 display 속성이 inline이다.
+* 속성
+  * href : 링크 경로 (로컬 파일 경로와 URL가 가능하다, `#이름`으로 다른 a 태그의 `name=이름` 위치로 옮겨간다.)
+  * target : `"_blank"` 속성 값을 넣어주면 새 창에서 링크를 연다.
+#### ex04-a.html
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>앵커</title>
+</head>
+<body>
+    <!-- <a href="링크경로(로컬파일경로, URL)">보여질 링크</a> -->
+    <a href="https://www.naver.com/">네이버 링크</a><br>
+    <a href="./ex01-html.html">로컬 파일 링크</a><br>
+
+    <p>a태그에 target="_blank" 속성을 추가하면 새 탭에서 링크 결과 보여줌</p>
+    <a href="https://www.naver.com/" target="_blank">네이버 링크(target="_blank")</a><br>
+    <a href="./ex01-html.html" target="_blank">로컬 파일 링크(target="_blank")</a><br>
+</body>
+</html>
+```
+#### ex05-a.html
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>앵커</title>
+</head>
+<body>
+    <a href="#bottom" name="top">아래로</a><br><br>
+    처음 문장<br>
+    문장<br>
+    문장<br>
+    문장<br>
+    문장<br>
+  .
+  .
+  .
+    문장<br>
+    문장<br>
+    문장<br>
+    문장<br>
+    문장<br>
+    끝 문장<br><br>
+    <!-- <a name="bottom"></a> -->
+    <a href="#top" name="bottom">위로</a>
+</body>
+</html>
+```
