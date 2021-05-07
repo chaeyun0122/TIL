@@ -27,8 +27,86 @@
   - 통신에 관련된 모든 물리적인 규칙을 정의 (ex. 신호 변환 방식, cable 규격, connector 규격, 전압 등)
   - 전송하려는 데이터를 signal(신호)로 변환 *(= Line coding : 이진수 데이터를 물리적인 신호로 변환)*
 
-## Port
+### Port
 - Port 번호는 **0 ~ 65535** 범위 사용
   - 0 ~ 1023 : well-known port(잘 알려진 포트)라고 하여 자주 사용되는 서비스들이 고정적으로 사용하도록 예약
   - 그 외 : system이 임의로 사용 (+ 포트 포워딩에 사용)
     - http는 80번 포트를 쓰도록 전세계적으로 약속 되어있고, https는 443번 포트를 쓰도록 했다. 특정 사람들만 접속하는 사이트를 만드려면 임의의 포트를 입력해서 제공하도록 한다. 이것이 포트 포워딩이다.
+
+### Logical address Layer
+- Logical address Layer은 3계층에서 사용하는 프로토콜에 따라 달라진다.
+  - IPv4 : IPv4 address(X.X.X.X)
+  - IPv6 : IPv6 address(X:X:X:X:X:X:X:X)
+
+#### IP address
+- 인터넷 표준 프로토콜 TCP/IP 에서 사용되는 logical address(논리적 주소)
+  - TCP/IP 표준 프로토콜을 사용하는 모든 장비들은 반드시 IP address가 할당되어 있어야 통신이 가능
+- 운영체제(OS)가 인식한 interface마다 할당 *(interface : 네트워크 통신에 사용되는 선을 연결할 수 있는 소켓. 랜선 하나하나가 인터페이스라고 생각하면 됨)*
+  - 사람이 직접 입력
+  - DHCP 서버를 이용하여 자동 할당
+- IP 주소는 InterNIC에서 관리하는게 기본. InterNIC에서 각 국가별로 분배해주고 국가에서는 ISP(통신업계)에 IP를 분배
+  - 사용자는 ISP에 IP를 신청하여 할당
+- 초창기에는 IPv4를 사용하다가 IP의 개수가 부족해지면서 1996년에 IPv6 제정
+  - 기존의 장비들은 IPv6와 호환되지 않음. 기존에 만들어진 장비들과의 호환성을 위해 IPv4와 IPv6를 함께 사용(현재까지)
+- **IPv4** : 32bit, 2^32 = 약 42억 9천만 개  
+**IPv6** : 128bit, 2^128 개
+##### IPv4 구성
+- Network ID + Host ID
+  - Network ID를 InterNIC/ISP 에서 할당, Host ID는 사용자가 network 범위 안에서 자유롭게 사용
+- `192.168.10.128` → 여기서 Network ID와 Host ID를 구별 가능? **불가능**
+  - netmask(subnetmask)를 이용하여 Network ID와 Host ID를 구별
+  - Network ID의 bit 수 만큼 1을 나열, Host ID의 bit 수 만큼 0을 나열
+    - ex)
+      ```
+      IP address : 192.168.10.128, netmask : 255.255.255.0
+      IP address : 11000000.10101000.00001010.1000000
+      netmask    : 11111111.11111111.11111111.0000000
+                   |<----------------------->|<----->|
+                            network ID        host ID
+      ```
+  - 동일한 Network ID를 사용하는 장치들은 논리적으로 같은 네트워크에 속해 있다.
+
+- IPv4 address는 기본적으로 두 가지 방식으로 사용(Classful, Clasless)
+  - **Classful**
+    - IP주소의 첫 번째 8bit(loctet)의 범위에 따라 A ~ E class를 구분하고 class에 따라 Network ID 범위를 파악  
+(IPv4에서 8bit = loctet, 4개 octet이 존재하고 loctet은 0 ~ 255를 2진수로 표현)
+    - **Class A** (0 ~ 127) (00000000 ~ 011111111)
+      - 첫 번째 bit가 0으로 고정된 범위
+      - 앞의 8bit를 Network ID로, 뒤의 24bit를 Host ID로 사용
+      - 하나의 network가 2^24 = **16,777,216**개의 IP를 포함 
+    - **Class B** (128 ~ 191) (10000000 ~ 10111111)
+      - 첫 번째 ~ 두 번째 bit가 10으로 고정된 범위
+      - 앞 쪽의 16bit를 Network ID로, 뒤의 16bit를 Host ID로 사용
+      - 하나의 network가 2^16 = **65,536**개의 IP를 포함
+    - **Class C** (192 ~ 223) (11000000 ~ 11011111)
+      - 첫 번째 ~ 세 번째 bit가 110으로 고정된 범위
+      - 앞의 24bit를 Network ID로, 뒤의 8bit를 Host ID로 사용
+      - 하나의 network가 2^8 = **256**개의 IP를 포함
+    - **Class D, Class E**는 장치에 할당하여 사용하는 주소가 아니고 **특수 목적**으로 사용
+    - 하지만 Classful 방식은 낭비가 심하다
+  - **Classless**
+
+### Physical address Layer
+- Physical address Layer은 2계층에서 사용하는 프로토콜에 따라 달라진다.
+  - LAN protocol(Ethernet) : MAC address (XX-XX-XX-XX-XX-XX)
+
+#### MAC address
+- LAN 구간 Protocol에서 사용되는 Layer 2 주소 (Physical address, 물리적 주소라고도 표현)
+- Ethernet 방식의 Interface에 부여
+  - 기본적으로 전 세계에 하나밖에 없는 고유한 MAC address 할당
+- 장비 생산 과정에서 부여되는 주소
+  - 총 48bit(2진수 48자리 = 16진수 12자리)의 이진수로 구성되어 있다
+    - 전반부 24bit는 **벤더 ID** (회사 고유 ID)
+    - 후반부 24bit는 **Host ID** (장치 고유 ID)
+- 벤더 ID는 **IEEE**에서 관리
+  - 네트워크 장비 생산 회사는 IEEE에 일정 금액을 지불하고 벤터 ID를 할당받아 사용
+
+
+
+
+
+
+
+
+
+
