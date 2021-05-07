@@ -83,8 +83,61 @@
       - 앞의 24bit를 Network ID로, 뒤의 8bit를 Host ID로 사용
       - 하나의 network가 2^8 = **256**개의 IP를 포함
     - **Class D, Class E**는 장치에 할당하여 사용하는 주소가 아니고 **특수 목적**으로 사용
-    - 하지만 Classful 방식은 낭비가 심하다
+    - 하지만 Classful 방식은 낭비가 심하기 때문에 현재 사용하지 않음
   - **Classless**
+    - 필요에 따라 Class 네트워크를 분할하여 사용하는 방식
+    - Classful 네트워크를 분할하는 작업을 subnetting이라고 한다.
+      - 분할 된 네트워크를 subnetwork(subnet)이라고 부르고 netmask는 subnetmask로 바꿔서 부른다.
+    - Classless 방식에서는 subnetmask의 표현이 정확해야 한다.
+      - IP 주소의 첫 번째 8bit에 따라 Network ID를 결정하지 않는다.  
+subnetmask 정보를 보고 Subnet ID *(= Network ID)* 의 bit의 개수를 파악
+    - Subnetmak 계산하여 사용하는 대신에 Subnet ID의 bit 수를 그대로 적어주는 Prefix Length 표현 방식이 존재
+      - ex)
+        ```
+        192.168.100.0 네트워크의 Subnet ID가 24bit인 경우
+        
+        255.255.255.0   -> 192.168.100.0/255.255.255.0
+        /24             -> 192.168.100.0/24
+        ```
+    - Classful 방식과 Classless 방식 전부 각 네트워크의 Host ID 중 2개의 Host는 장치에 할당하지 않는다.
+      - 첫 번째 IP는 해당 네트워크의 이름(= 대표주소, Network ID)으로 사용
+      - 마지막 IP는 해당 네트워크의 방송 주소(= broadcast)로 사용 
+        - broadcast : 1:n, 방송 주소, 특정 네트워크 내부에 전체 IP에다 동일한 내용을 전달  
+unicast : 1:1, 장치와 장치간의 통신  
+multicast : 1:n, 몇몇 장치를 그룹화 시켜서 Class D IP로 묶어준 후 그 IP에 데이터를 전달(그룹 통신이라고 부름)
+        - VMware의 경우 첫 번째 IP와 마지막 IP를 동일하게 사용하지 못하고, 다른 IP를 추가로 사용하지 못한다.
+          - ex)
+            ```
+            192.168.10.0/24 네트워크 일 때
+            0     : Subnet ID (= Network ID)          >> Hostonly, NAT, bridge
+            1     : (Host PC) virtual network adapter >> Hostonly, NAT
+            2     : gateway (외부로 나가는 문)         >> NAT
+            255   : broadcast                         >> Hostonly, NAT, bridge
+            ```
+          - 1번 확인 : `window 실행창 > ncpa.cpl` 네트워크 연결 콘솔  
+          
+            ![image](https://user-images.githubusercontent.com/79209568/117425533-d11ba000-af5d-11eb-84da-e9dbc2f309ee.png)
+          - 2번 확인 : VMware `Edit > Virtual Network Editor > NAT 클릭 > NAT Setting`  
+          
+            ![image](https://user-images.githubusercontent.com/79209568/117426159-8baba280-af5e-11eb-89e8-b00379429f7c.png)
+
+
+### NAT
+- NAT : Network Address Translation : 네트워크 주소 변환(네트워크 주소 = IP 주소)
+- IPv4 의 문제점 중 하나인 주소 부족현상을 해결하기 위해 90년대 후반에 만들어짐
+- 내부 네트워크와 외부 네트워크를 분리해서 사용 (보안성이 높음)
+  - 외부 네트워크 : 공인 네트워크(public network), 공인 IP 주소 사용
+  - 내부 네트워크 : 사설 네트워크(private network), 사설 IP 주소 사용
+- 공인 IP 주소/ 사설 IP 주소 구분
+  - 공인 IP 주소 : 유료, ISP에서 제공, 외부 네트워크와 직접적인 통신 가능
+  - 사설 IP 주소 ; 무료, 내 마음대로 사용, 외부 네트워크와 직접적인 통신 불가능
+    - 사설 IP 범위
+      - Class A : 10.0.0.0/8 (10.0.0.0 ~ 10.255.255.255) 10으로 시작하는 모든 IP
+      - Class B : 172.16.0.0/12 (172.16.0.0 ~ 172.31.255.255)
+      - Class C : 192.168.0.0/16 (192.168.0.0 ~ 192.168.255.255)
+- NAT는 보안 목적으로 사용하는 Basic NAT와 IP주소 절약 목적으로 사용하는 NAPT로 분류
+ - 공유기기에서NAPT가 동작, NAPT를 일반적으로 NAT라고 부른다.
+   - NAPT : Network Address Port Translation
 
 ### Physical address Layer
 - Physical address Layer은 2계층에서 사용하는 프로토콜에 따라 달라진다.
