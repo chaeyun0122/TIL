@@ -183,6 +183,7 @@
 ### 실습 문제
 > 리스트 항목을 클릭하면 해당 사이트로 이동하도록 직성
 * ul태그와 a태그를 사용한다.
+#### ex08-ls.html
 ```html
 <!DOCTYPE html>
 <html lang="ko">
@@ -202,3 +203,78 @@
 </html>
 ```
 ![image](https://user-images.githubusercontent.com/79209568/117402615-b3404200-af41-11eb-8d5e-e3d27af15fe8.png)
+
+## table 태그
+> table 태그는 표를 만드는 태그다.
+* **\<th>** : Table Header
+* **\<tr>** : Table Row
+* **\<td>** : Table data  
+  ![image](https://user-images.githubusercontent.com/79209568/117404167-6742cc80-af44-11eb-9497-b18a07492479.png)
+
+#### ex09-table.html
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title> 테이블 </title>
+</head>
+<body>
+    <!-- table>tr*2>td*3 -->
+    <table border="1">
+        <tr><td>1</td><td>2</td><td>3</td></tr>
+        <tr><td>4</td><td>5</td><td>6</td></tr>
+    </table>
+    <hr>
+    <h5>rowspan</h5>
+    <table border="1">
+        <tr><td rowspan="2">1</td><td>2</td><td>3</td></tr>
+        <tr><td>4</td><td>5</td><td>6</td></tr>
+    </table>
+    <br>
+    <table border="1">
+        <tr><td rowspan="2">1 4</td><td>2</td><td>3</td></tr>
+        <tr><td>5</td><td>6</td></tr>
+    </table>
+    <hr>
+    <h5>colspan</h5>
+    <table border="1">
+        <tr><td colspan="2">1</td><td>2</td><td>3</td></tr>
+        <tr><td>4</td><td>5</td><td>6</td></tr>
+    </table>
+    <br>
+    <table border="1">
+        <tr><td>1</td><td colspan="2">2</td><td>3</td></tr>
+        <tr><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+    </table>
+    <br>
+    <table border="1">
+        <tr><td colspan="3">1</td></tr>
+        <tr><td>4</td><td>5</td><td>6</td></tr>
+    </table>
+    <br>
+    <table border="1">
+        <tr><th>th1</th><th colspan="2">th2</th></tr>
+        <tr><td>1</td><td colspan="2">2</td></tr>
+        <tr><td>4</td><td colspan="2">5</td></tr>
+    </table>
+</body>
+</html>
+```
+![image](https://user-images.githubusercontent.com/79209568/117405554-c9043600-af46-11eb-8382-8e5dd5902f7a.png)
+
+## img 태그
+> img 태그는 이미지를 보여주는 태그다.
+* 브라우저가 코드를 해석할 때 태그들을 읽다가 img태그를 만나면 이미지 소스에 해당하는 경로로 브라우저가 다시 이동해서 찾는다.
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>이미지</title>
+</head>
+<body>
+    <img src="./kitty1.jpg">
+</body>
+</html>
+```
