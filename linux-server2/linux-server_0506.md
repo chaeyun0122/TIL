@@ -81,15 +81,15 @@
   ![image](https://user-images.githubusercontent.com/79209568/117265882-a95e0680-ae8f-11eb-932e-5e4d7088a74d.png)
 
 ### putty 설정
-* `창 > 모양`
-  * 글꼴 : 소문자 l과 대문자 i의 구분이 안가기 때문에 글꼴을 바꿔줘야 한다. 터미널 기본 글꼴과 유니코드 글꼴 둘 다 바꿔줌
+* `창 > 모양`  
+  * 글꼴 : 소문자 l과 대문자 i의 구분이 안가기 때문에 글꼴을 바꿔줘야 한다. 터미널 기본 글꼴과 유니코드 글꼴 둘 다 바꿔줌  
     ![image](https://user-images.githubusercontent.com/79209568/117268025-d3b0c380-ae91-11eb-9636-6a14c88ebe86.png)
-* `창 > 변환`
-  * 수신할 데이터 문자 셋 변환 : UTF-8로 변경
+* `창 > 변환`  
+  * 수신할 데이터 문자 셋 변환 : UTF-8로 변경  
     ![image](https://user-images.githubusercontent.com/79209568/117268372-2e4a1f80-ae92-11eb-83fc-fc79eb0ce2de.png)
 
-* `접속 > SSH > 키교환`
-  * 순서가 14, 교환, 1 로 되도록 만들어준다
+* `접속 > SSH > 키교환`  
+  * 순서가 14, 교환, 1 로 되도록 만들어준다  
     ![image](https://user-images.githubusercontent.com/79209568/117268661-7ff2aa00-ae92-11eb-9f03-8a3baa806317.png)
 
 * `세션`
