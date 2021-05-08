@@ -27,6 +27,10 @@ Today I Learned..
 * [Shut down and Reboot](linux-server/210406-ShutDownAndReboot.md)
 * [Vi](linux-server/210406-vi.md)
 
+## Linux Server2
+* [Virtual Machine Setting](linux-server2/linux-server_0506.md)
+* [OSI 7 Layer Model & TCP/IP Model](linux-server2/linux-server_0507.md)
+
 ## JSP
 * [JSP 01_Initial Setup](JSP/jsp_1.md)
 * [JSP 02_Web project & HTML Tags 1](JSP/jsp_2.md)
@@ -49,6 +53,10 @@ Today I Learned..
   > * [Quiz 1 - Make Form](JSP/quiz1_make-form.md)
   > * [Quiz 2 - ul & dt](JSP/quiz2_ul_dt.md)
   > * [Quiz 3 - Database (Create account ~ SQL (create, insert, select, delete))](JSP/quiz3_database.md)
+
+## Django
+* [Network Overview & setting](DGANGO/django_0506.md)
+* [HTML, Useful Extentions of VSCode](DGANGO/django_0507.md)
 
 ## Oracle
 * [Oracle SQL 01](Oracle/oracle_SQL_01.md)
