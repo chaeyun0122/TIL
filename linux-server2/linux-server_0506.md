@@ -93,7 +93,7 @@
     ![image](https://user-images.githubusercontent.com/79209568/117268661-7ff2aa00-ae92-11eb-9f03-8a3baa806317.png)
 
 * `세션`
-  * Host Name 입력 후 저장된 세션에 해당 값을 입력한 후에 저장
+  * Host Name 입력 후 저장된 세션에 해당 값을 입력한 후에 저장  
   ![image](https://user-images.githubusercontent.com/79209568/117268962-cea04400-ae92-11eb-87b9-087a51dcfbd6.png)
   * 리스트에 있는 입력 값 더블클릭
   * 뜨는 경고 창 `취소` **절대** 누르지 않고 root로 로그인
