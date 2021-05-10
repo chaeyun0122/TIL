@@ -41,9 +41,17 @@ netstat [옵션] | grep { port번호 | service }`
 > * `-n` : port번호 출력
 > * `-p` : 프로그램 이름 + PID
 > * `-l` : listen 상태 (연결 대기 중인 상태)만 출력
+  
+![image](https://user-images.githubusercontent.com/79209568/117621170-45e41980-b1ac-11eb-8455-885a9863057f.png)
 
-
-
+## ping
+* 내 장치와 목적지 장치간의 네트워크 통신 상태 확인
+* 기본적으로 횟수 제한이 없음 (무한정 지속) 윈도우에선 4번으로 제한되어있음
+### 사용법
+```
+ping <IP 주소>
+```
+* 종료 하고 싶을 때 `Ctrl + c`
 
 
 > ### 데몬 프로세스
