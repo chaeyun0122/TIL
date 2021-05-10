@@ -266,6 +266,11 @@
 ## img 태그
 > img 태그는 이미지를 보여주는 태그다.
 * 브라우저가 코드를 해석할 때 태그들을 읽다가 img태그를 만나면 이미지 소스에 해당하는 경로로 브라우저가 다시 이동해서 찾는다.
+* 이미지나 동영상 또는 다른 HTML문서들은 경로 개념이 존재한다.
+* 속성
+  * `src` : 그림 경로
+  * `alt` : 그림 설명(불러오기 실패했을 때 그림에 대한 설명을 설정할 수 있다.)
+  * `width`, `height` : 이미지의 크기 설정
 ```html
 <!DOCTYPE html>
 <html lang="ko">
@@ -274,7 +279,31 @@
     <title>이미지</title>
 </head>
 <body>
-    <img src="./kitty1.jpg">
-</body>
-</html>
+    <img width="300px" height="400px" src="./kitty1.jpg" alt="불러오기 실패">
+    <img width="300px" height="400px" src="./dog.jpg" alt="불러오기 실패">
+    <img width="300px" height="400px" src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/802.png"> <!-- 네이버 접속 시 개발자 도구에 있는 png의 주소 복사-->
+    <img width="300px" height="400px" src="https://blog.hmgjournal.com/images_n/contents/170719_cat01.png"> <!-- 구글에 이미지 검색 후 '이미지 주소 복사'-->
 ```
+![image](https://user-images.githubusercontent.com/79209568/117604468-6e5e1a80-b190-11eb-900f-16550621167a.png)
+
+> ### 경로
+> #### 상대경로
+> * 현재 해석 중인 HTML파일 기준으로 경로를 표현 (해석 주체 : 웹 브라우저)
+>   * `./kitty1.jpg`
+>   * `.`은 현재 위치를 의미함
+>   * `..`은 상위 위치를 의미함
+> #### 절대 경로
+> * 최상위 개념부터 경로를 표현
+> * 현재 파일 시스템에서 표현하려는 경우 → 드라이브의 시작부터 표현
+>   * `D:/html/kitty1.jpg`
+> * 서버에 요청하는 경우 → 서버의 서비스 폴더부터 표현
+>   * 서버에서 서비스하는 폴더가 최상위 폴더
+>   * 브라우저에서 요청 시 도메인명(IP주소)까지가 최상위 요청 (Context Path)
+>   * ex)
+>     ```
+>     서버(컴퓨터A)에서 C:\service\test.html 파일이 있고 (서비스 폴더 C:\service\)
+>     브라우저(컴퓨터B)가 test.html 파일을 요청하려는 경우?
+>     
+>       요청 URL -> http://example.com/ 여기가 최상위 폴더를 요청하는 것
+>       test.html파알을 요청한다면 http://example.com/test.html 와 같이 요청
+>     ```
