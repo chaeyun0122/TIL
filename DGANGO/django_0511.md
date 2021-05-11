@@ -151,7 +151,41 @@
 >   * 수정 시 하나하나 다 바꿔야하기 때문이다.
 
 
-
+# 실습
+## form 생성
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>실습</title>
+</head>
+<body>
+    <form>
+        <label for="username">이름: </label><input type="text" name="username" id="username" value="홍길동"><br>
+        <h3>좋아하는 장르를 선택하세요</h3>
+        <ol>
+            <li>
+                <label for="action">액션</label>
+                <input type="checkbox" name="ganre" id="action">
+            </li>
+            <li>
+                <label for="sf">공상과학</label>
+                <input type="checkbox" name="ganre" id="sf" checked>
+            </li>
+            <li>
+                <label for="thriller">스릴러</label>
+                <input type="checkbox" name="ganre" id="thriller" checked>
+            </li>
+        </ol>
+        <br>
+        <input type="submit">
+        <input type="reset">
+    </form>
+</body>
+</html>
+```
+![image](https://user-images.githubusercontent.com/79209568/117762990-0594a200-b265-11eb-8770-9c3fdc959231.png)
 
 
 
