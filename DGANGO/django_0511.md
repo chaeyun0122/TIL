@@ -139,9 +139,14 @@
 </body>
 </html>
 ```
-* 모든 요소는 tag 선택자를 통해 red로 설정되었지만 class 선택자의 우선순위가 높기 때문에 yellowgreen과 darkgreen으로 나온다.
-* '요소3'은 'grp1'클래스여서 yellowgreen으로 설정되었지만 id 선택자의 우선순위가 우선이기 때문에 violet으로 나온다.  
-![image](https://user-images.githubusercontent.com/79209568/117762317-dd587380-b263-11eb-81ae-a50403f4ffbf.png)
+#### 결과
+![image](https://user-images.githubusercontent.com/79209568/117762317-dd587380-b263-11eb-81ae-a50403f4ffbf.png)  
+  
+* 모든 요소는 tag 선택자를 통해 red로 설정되었지만 **class 선택자의 우선순위가 높기 때문에** yellowgreen과 darkgreen으로 나온다.
+* '요소3'은 'grp1'클래스여서 yellowgreen으로 설정되었지만 **id 선택자의 우선순위가 우선**이기 때문에 violet으로 나온다.  
+  * 개발자 도구를 통해 적용된 우선순위를 확인할 수도 있다.
+    <image width=600 src="https://user-images.githubusercontent.com/79209568/117763293-894e8e80-b265-11eb-96de-b23c07870f7c.png">
+
 
 
 
