@@ -13,14 +13,14 @@
 
 * 데몬 : sshd  
   
-  > * 데몬 확인 `systemctl status sshd`
+  > * 데몬 확인 `systemctl status sshd`  
   >   ![image](https://user-images.githubusercontent.com/79209568/117772622-53fc6d80-b272-11eb-8329-e5c630f80254.png)
 
 * 방화벽 : port=22/tcp, service=ssh
 * 설정파일 : /etc/ssh/sshd_config
 
 ## ssh 설정 파일
-* 설정 파일 열기 : `vi /etc/ssh/sshd_config`  
+* 설정 파일 열기 : `vi /etc/ssh/sshd_config`    
   ![image](https://user-images.githubusercontent.com/79209568/117775090-1ea54f00-b275-11eb-9be1-2c939e3d3631.png)
   * 설정 값들의 기본 값 확인 : `man sshd_config`
 ### 설정 값
@@ -65,7 +65,7 @@
 * `Subsystem       sftp    /usr/libexec/openssh/sftp-server` : sftp에 대한 설정 내용
 
 ### 설정하기
-* `PermitRootLogin no`로 변경해보기
+* `PermitRootLogin no`로 변경해보기  
   ![image](https://user-images.githubusercontent.com/79209568/117780027-316e5280-b27a-11eb-82a9-84b7ec869ab6.png)
   
   * 하지만 다시 root로 접속해도 접속이 된다. 바뀐 정보를 적용해야한다.
@@ -81,17 +81,17 @@
 👉 [접속 명령 정리](#접속-명령-정리)
 ## ssh 접속하기
 * `ssh <접속할 IP>` : 명령어를 입력한 사용자명으로 접속
-  * 루트 접속을 막아놨기 때문에 로그인 거절이 된다. (ctrl c로 원래 프롬프토로)
+  * 루트 접속을 막아놨기 때문에 로그인 거절이 된다. (ctrl c로 원래 프롬프토로)  
     ![image](https://user-images.githubusercontent.com/79209568/117781531-b6a63700-b27b-11eb-9fb9-260e70d991c5.png)
 * `ssh -l <계정명> <접속할 IP>` : 계정명을 입력하여 접속
-  * `ssh <계정명>@<접속할 IP>` 이런 형식도 가능
+  * `ssh <계정명>@<접속할 IP>` 이런 형식도 가능  
   ![image](https://user-images.githubusercontent.com/79209568/117782183-595eb580-b27c-11eb-808f-ce6fa11e061d.png)
 
 ## sftp 접속하기
 * etc로 이동
 * `sftp <접속할 IP>` : 명령어를 입력한 사용자명으로 접속
 * `sftp <계정명>@<접속할 IP>` : 계정명을 입력하여 접속
-* `put` 명령어로 업로드 가능  
+* `put` 명령어로 업로드 가능   
   ![image](https://user-images.githubusercontent.com/79209568/117783047-2668f180-b27d-11eb-8fd3-4d816f37fda0.png)
 
 > ### 접속 명령 정리
