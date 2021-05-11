@@ -98,6 +98,37 @@
 ```
 ![image](https://user-images.githubusercontent.com/79209568/117759267-77b5b880-b25e-11eb-8a94-b1e091d41b07.png)
 
+## input 태그 추가 속성 타입
+* `email`
+  ```html
+  <input type="email" name="user_email" placeholder="이메일" required>
+  ```
+  * email 태그는 이메일 형식이 아니면 submit 되지 않는다.
+    ![image](https://user-images.githubusercontent.com/79209568/117765365-ca946d80-b268-11eb-8886-2d9bdd2086ec.png)
+  * 빈 값은 넘어가기 때문에 이를 방지하기 위해 required를 설정해주면 된다. **(required는 모든 input 태그에 추가 가능하다.)**
+* `number`
+  ```html
+  <input type="number" name="usernum" value="100" step="10" min="0" max="100">
+  ```
+* `range`
+  ```html
+  input type="range" name="scope" min="0" max="100">
+  ```
+* `color`
+  ```html
+  <input type="color" name="color">
+  ```
+* `date`
+  ```html
+  <input type="date" name="birth" value="2021-12-25">
+  ```
+## textarea
+```html
+<textarea name="intro" cols="40" rows="8"></textarea>
+```
+#### 결과화면
+![image](https://user-images.githubusercontent.com/79209568/117765644-47274c00-b269-11eb-8ade-ee9ba1a9170f.png)
+
 ## 선택자
 > * 특정 요소들을 선택해서 디자인을 적용시키는 역할을 한다.
 > * HTML 문서의 \<head> 태그 내에 \<style> 태그로 입력한다.
@@ -148,8 +179,6 @@
     <image width=600 src="https://user-images.githubusercontent.com/79209568/117763293-894e8e80-b265-11eb-96de-b23c07870f7c.png">
 
 
-
-
 > * HTML : 구조와 요소를 정의
 > * CSS : HTML을 통해 정의된 구조의 디자인을 정의
 >   * HTML 태그 내에 style 속성으로 디자인을 설정할 수 있지만 따로 정의해놓은 디자인 속성들을 적용시키는 것을 선호한다.
@@ -192,8 +221,133 @@
 ```
 ![image](https://user-images.githubusercontent.com/79209568/117762990-0594a200-b265-11eb-8770-9c3fdc959231.png)
 
+## select 태그
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <select name="grade">
+            <option value="A">A학점</option>
+            <option value="B">B학점</option>
+            <option value="C">C학점</option>
+            <option value="D">D학점</option>
+            <option value="F">F학점</option>
+        </select>
+        <input type="submit" value="전송">
+    </form>
+    <hr>
+    <!-- multiple -->
+    <form>
+        <select name="grade" multiple size="5"> 
+            <!--
+                multiple: ctrl키 누른 상태로 여러 개 선택 가능
+                size: 한 번에 보여질 항목 개수 지정
+            -->
+            <option value="A">A학점</option>
+            <option value="B">B학점</option>
+            <option value="C">C학점</option>
+            <option value="D">D학점</option>
+            <option value="F">F학점</option>
+        </select>
+        <input type="submit" value="전송">
+    </form>
+    <hr>
+    <!-- 옵션 그룹화 -->
+    <form>
+        <select name="grade">
+            <optgroup label="Pass">
+                <option value="A">A학점</option>
+                <option value="B">B학점</option>
+                <option value="C">C학점</option>
+                <option value="D">D학점</option>
+            </optgroup>
+            <option value="F">F학점</option>
+        </select>
+        <input type="submit" value="전송">
+    </form>
+</body>
+</html>
+```
+![image](https://user-images.githubusercontent.com/79209568/117766177-227fa400-b26a-11eb-8f7b-38a03094ae10.png)
 
 
-
-
+## 실습
+### 회원가입 폼 만들기
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입 실습</title>
+    <style>
+        h2 { color: green; }
+    </style>
+</head>
+<body>
+    <h2> Join Us </h2>
+    <form>
+        <table border="1">
+            <tr>
+                <th><label for="id">아이디</label></th>
+                <td>
+                    <input type="text" id="id" name="id" placeholder="사용할 ID 입력" required>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="pwd">비밀번호</label></th>
+                <td>
+                    <input type="password" id="pwd" name="pwd" placeholder="사용할 PW 입력" required>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="pwd_ch">비밀번호 재확인</label></th>
+                <td>
+                    <input type="password" id="pwd_ch" name="pwd_ch" placeholder="사용할 PW 입력" required>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="name">사용자 이름</label></th>
+                <td>
+                    <input type="text" id="name" name="name" placeholder="사용할 이름 입력" required>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="birth">생년월일</label></th>
+                <td>
+                    <input type="text" id="birth" name="birth" placeholder="생년월일 6자리" required>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="num">휴대폰 번호</label></th>
+                <td><input type="text" id="num" name="num" placeholder="-없이 입력" required></td>
+            </tr>
+            <tr>
+                <th><label>성별</label></th>
+                <td>
+                    <label for="man">남성</label><input type="radio" id="man" name="gender">
+                    <label for="woman">여성</label><input type="radio" id="woman" name="gender">
+                </td>
+            </tr>
+            <tr>
+                <th><label for="join">가입 포부</label></th>
+                <td>
+                    <textarea name="join" id="join" cols="20" rows="5" required></textarea>
+                </td>
+            </tr>
+            <tr align="center">
+                <td colspan="2">
+                    <input type="submit" value="등록">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+```
+![image](https://user-images.githubusercontent.com/79209568/117767776-62478b00-b26c-11eb-9261-50652416ef53.png)
 
