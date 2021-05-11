@@ -69,12 +69,31 @@
 * 이렇게 루트 접속을 불가능하게 한 후 루트 접속을 하려면 저번처럼 일반 사용자 접속 후 `su -`로 접속해야한다.  
   ![image](https://user-images.githubusercontent.com/79209568/117780972-19e39980-b27b-11eb-9fc5-cc3ee120bcae.png)
 
-
+[접속 명령 정리](#접속-명령-정리)
 ## ssh 접속하기
-* `ssh <접속할 IP>`
+* `ssh <접속할 IP>` : 명령어를 입력한 사용자명으로 접속
   * 루트 접속을 막아놨기 때문에 로그인 거절이 된다. (ctrl c로 원래 프롬프토로)
     ![image](https://user-images.githubusercontent.com/79209568/117781531-b6a63700-b27b-11eb-9fb9-260e70d991c5.png)
+* `ssh -l <계정명> <접속할 IP>` : 계정명을 입력하여 접속
+  * `ssh <계정명>@<접속할 IP>` 이런 형식도 가능
+  ![image](https://user-images.githubusercontent.com/79209568/117782183-595eb580-b27c-11eb-808f-ce6fa11e061d.png)
 
-> * 접속 명령
+## sftp 접속하기
+* etc로 이동
+* `sftp <접속할 IP>` : 명령어를 입력한 사용자명으로 접속
+* `sftp <계정명>@<접속할 IP>` : 계정명을 입력하여 접속
+* `put` 명령어로 업로드 가능  
+  ![image](https://user-images.githubusercontent.com/79209568/117783047-2668f180-b27d-11eb-8fd3-4d816f37fda0.png)
+
+> ### 접속 명령 정리
 > 1. ssh
->   * ssh <접속할 IP> : 명령어를 입력한 사용자명으로 접속
+>   * `ssh <접속할 IP`> : 명령어를 입력한 사용자명으로 접속
+>   * `ssh -l <계정명> <접속할 IP>` : 계정명을 입력하여 접속
+>   * `ssh <계정명>@<접속할 IP>` : 계정명을 입력하여 접속
+> 2. sftp(secure shell + ftp)
+>   * `sftp <접속할 IP>` : 명령어를 입력한 사용자명으로 접속
+>   * `sftp <계정명>@<접속할 IP>` : 계정명을 입력하여 접속
+> 3. scp(secure shell + rcp) 
+>   * rcp : 원래 cp 명령어가 하나의 장치 안에서 복사를 지원했다면 scp는 장치 간의 파일 복사를 지원해주는 명령어  
+>     * `rcp 원본 <장치 IP>:<복사할 위치>` : 내 파일을 다른 장치에 복사
+>     * `rcp <장치 IP>:<원본> <복사할 위치>` : 다른 장치에 있는 파일을 나한테 복사
