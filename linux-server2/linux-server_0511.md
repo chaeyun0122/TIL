@@ -35,28 +35,37 @@
 
  ListenAddress 192.168.10.130 -> 다른 IP로는 접속하지 못하고 130 IP만 허용한다.
  ```
-* HostKey /etc/ssh/ssh_host_rsa_key
-   #HostKey /etc/ssh/ssh_host_dsa_key
+* 호스트 키
+  ```
+  HostKey /etc/ssh/ssh_host_rsa_key
+  #HostKey /etc/ssh/ssh_host_dsa_key
+  ```
   * ecdsa, ed25519 : 추가 확장 key
 
 * logging
+  ```
+  #SyslogFacility AUTH
+  SyslogFacility AUTHPRIV
+  ```
   * version1에선 auth 사용, version 2에선 authpriv 사용이 기본 값
 
 * authentication
-  * LoginGraceTime : 로그인 대기 시간 (일정 시간 이후 연결 끊음)
-  * PermitRootLogin : 루트로의 직접적인 로그인을 허용할 것 인지
-  * StrictModes : 비밀번호 없는 접속을 허용할 것 인지(ssh는 불가능)
-  * MaxAuthTries : 암호를 틀릴 수 있는 최대 횟수(그 이후는 연결 시도를 안함)
-  * maxSessions : 최대 연결 회선 개수
-
-* PubkeyAuthentication : 공개 키로 인증하는 것을 허용할 것 인지
-* PasswordAuthentication yes : 암호없이 로그인할 때 필요한 설정
-   #PermitEmptyPasswords no
-* Banner : 로그인할 때 나오는 메시지 설정
-* Subsystem       sftp    /usr/libexec/openssh/sftp-server : sftp에 대한 설정 내용
+  * `LoginGraceTime` : 로그인 대기 시간 (일정 시간 이후 연결 끊음)
+  * `PermitRootLogin` : 루트로의 직접적인 로그인을 허용할 것 인지
+  * `StrictModes` : 비밀번호 없는 접속을 허용할 것 인지(ssh는 불가능)
+  * `MaxAuthTries` : 암호를 틀릴 수 있는 최대 횟수(그 이후는 연결 시도를 안함)
+  * `MaxSessions` : 최대 연결 회선 개수
+* `PubkeyAuthentication` : 공개 키로 인증하는 것을 허용할 것 인지
+* 암호없이 로그인할 때 필요한 설정
+  ```
+  PasswordAuthentication yes
+  #PermitEmptyPasswords no
+  ```
+* `Banner` : 로그인할 때 나오는 메시지 설정
+* `Subsystem       sftp    /usr/libexec/openssh/sftp-server` : sftp에 대한 설정 내용
 
 ### 설정하기
-* `PermitRootLogin no`로 변경
+* `PermitRootLogin no`로 변경해보기
   ![image](https://user-images.githubusercontent.com/79209568/117780027-316e5280-b27a-11eb-82a9-84b7ec869ab6.png)
   
   * 하지만 다시 root로 접속해도 접속이 된다. 바뀐 정보를 적용해야한다.
@@ -69,7 +78,7 @@
 * 이렇게 루트 접속을 불가능하게 한 후 루트 접속을 하려면 저번처럼 일반 사용자 접속 후 `su -`로 접속해야한다.  
   ![image](https://user-images.githubusercontent.com/79209568/117780972-19e39980-b27b-11eb-9fc5-cc3ee120bcae.png)
 
-[접속 명령 정리](#접속-명령-정리)
+👉 [접속 명령 정리](#접속-명령-정리)
 ## ssh 접속하기
 * `ssh <접속할 IP>` : 명령어를 입력한 사용자명으로 접속
   * 루트 접속을 막아놨기 때문에 로그인 거절이 된다. (ctrl c로 원래 프롬프토로)
