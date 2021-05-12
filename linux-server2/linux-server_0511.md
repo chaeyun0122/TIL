@@ -117,9 +117,21 @@ client : 192.168.217.129, /test 디렉터리 생성
 scp 예문 두 개 다 실행해보기
 (단, 하나 완료 후 반드시 /test/A 삭제 할 것)
 
-scp 192.168.217.128:/tmp/A /test
-scp /tmp/A 192.168.217.129:/test
+scp 192.168.217.128:/tmp/A /test  >> client
+scp /tmp/A 192.168.217.129:/test  >> server
 
 * 참고 *
 ssh 계정명@192.168.217.128
+```
+## 1. client의 PermitRootLogin을 no로 바꾸기
+```
+c : /test 디렉토리 생성
+s : /tmp/A 파일 생성
+
+c : scp itbank@192.168.217.128:/tmp/A /test  >>잘됨
+
+c : chmod 757 /test
+
+c : rm -rf /test/*  >>기존 파일 지우기 
+s : scp /tmp/A itbank@192.168.217.129:/test
 ```
