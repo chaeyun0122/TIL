@@ -64,11 +64,32 @@
 
 ## 서버 실행
 * `cd project01`로 해당 프로젝트 파일로 이동한다.
-* `python manage.py runserver` python을 통해 manage파일로 서버를 실행시킨다.  
+* `python manage.py runserver` : python을 통해 manage파일로 서버를 실행시킨다.  
   
   ![image](https://user-images.githubusercontent.com/79209568/117923295-bfa41080-b32e-11eb-8f3e-9aba21a242aa.png)
 
 * 서버 실행 후 출력되는 URL을 웹브라우저에서 열어서 연결되면 성공  
   
   ![image](https://user-images.githubusercontent.com/79209568/117923308-c3d02e00-b32e-11eb-93c6-d61505392b76.png)
+
+### admin으로 이동
+* 해당 URL뒤에 `/admin`을 추가하면 admin 로그인 화면이 나온다.  
+  
+  ![image](https://user-images.githubusercontent.com/79209568/117927238-e107fb00-b334-11eb-8f4e-b430ea3a819b.png)
+* `python manage.py createsuperuser` : super user을 생성
+  
+  > * username : admin
+  > * email : 아무거나(admin@admin.com)
+  > * password : 1234
+
+  * admin 페이지에서 방금 생성한 user로 로그인 가능
+    
+    ![image](https://user-images.githubusercontent.com/79209568/117927641-70ada980-b335-11eb-8b88-178e56047b29.png)
+
+## 앱 추가
+* 설문조사 앱을 만드는 실습을 진행하기 위해 새로운 앱을 추가한다.
+* `python manage.py startapp polls` : polls 앱을 생성한다.
+* `python manage.py makemigrations` : 현재 프로젝트에 db.sqlite에 저장할 새로운 변경사항이 있는지 확인
+* `python manage.py migrations` : db에 필요한 필수 정보들 저장됨
+
 
