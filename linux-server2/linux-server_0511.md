@@ -123,8 +123,10 @@ scp /tmp/A 192.168.217.129:/test  >> server
 * 참고 *
 ssh 계정명@192.168.217.128
 ```
-## 1. client의 PermitRootLogin을 no로 바꾸기
+## 장딥
 ```
+c : client의 PermitRootLogin을 no로 바꾸기
+
 c : /test 디렉토리 생성
 s : /tmp/A 파일 생성
 
