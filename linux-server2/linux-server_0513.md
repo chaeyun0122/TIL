@@ -116,6 +116,8 @@ server에 있는 파일을 내 컴퓨터로 전송 **(download)**
 * 7버전 부터는 모든 서비스가 system d에 종속되므로 기본값이 `NO`다 
 * IPv4는 보안성이 떨어지고 IPv6는 별도로 관리하도록 `YES`가 기본값이다. 
 
+<hr>
+
 > #### FTP 모드
 > * ftp는 active mode와 passive mode로 분류
 > * active mode : client가 server의 command port로 접속, data 전송은 server가 client의 data port 연결 (client의 방화벽 설정이 필요)
