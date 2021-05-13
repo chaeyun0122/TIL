@@ -40,7 +40,7 @@ server에 있는 파일을 내 컴퓨터로 전송 **(download)**
 
 ## FTP 설정파일
 > ### `vi /etc/vsftpd/vsftpd.conf`
-> [사진으로 한번에 보기](#vsftpd.conf)
+> [사진으로 한번에 보기](#설정파일-정리)
 ### `anonymous_enable` : 익명 접속 가능 여부 설정 
 * 현재 `YES`가 기본 값인데 `NO`로 바꿔본다.
 * 그 후 데몬 재 실행 `systemctl restart vsftpd`
@@ -76,5 +76,5 @@ server에 있는 파일을 내 컴퓨터로 전송 **(download)**
 * 다른 형식으로 하려면 `NO`로 바꾸면 된다.
 * 다른 형식으로 할 때의 주의점은 `xferlog_file`의 경로와 이름을 다른 것으로 바꿔줘야한다는 점이다.
 
-> #### vsftpd.conf
+> #### 설정파일 정리
 > ![image](https://user-images.githubusercontent.com/79209568/118100189-213cab80-b411-11eb-96c5-1f64e769cbad.png)
