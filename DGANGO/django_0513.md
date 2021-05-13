@@ -94,6 +94,7 @@ class Choice(models.Model):
 * polls 앱에 `appurls.py` 파일을 추가 (설문조사 앱에서 요청할 url들은 따로 동작하기 때문에 mysite의 url 정보와 구분해야한다.)
   * 최상위 요청이 들어오면 views.py의 index를 사용한다.
   ```python
+  # polls/appurls.py
   from django.urls import path
   from . import views
 
@@ -105,6 +106,7 @@ class Choice(models.Model):
 * `views.py`에 index를 정의한다. Question테이블의 값들을 'pub_date'에 대한 정렬 후 5개만 요청
 * 그 요청 값의 템플릿은 index.html을 따른다.
   ```python
+  # polls/views.py
   from django.shortcuts import render
   from polls.models import Question
   
@@ -118,7 +120,8 @@ class Choice(models.Model):
 * polls 앱에 새 폴더 추가를 누르고 `templates/polls` 입력. 하위 파일까지 한번에 생성한다.
   * templates/polls 폴더에 `index.html` 파일 생성
   * 변경되는 값들을 표현해야하기 때문에 템플릿 형식으로 작성해준다.
-    ```
+    ```html
+    <!-- polls/templates/polls/index.html -->
     {% if q_list %}
         <ul>
             {% for question in q_list %}
@@ -130,8 +133,9 @@ class Choice(models.Model):
     {% endif %}    
     ```
 * 브라우저에서 요청되는 모든 경로는 메인 앱(mysite)의 `urls.py`에서 처리되어야한다. 따라서 urls.py에서 polls의 `appurls.py`를 불러오도록 설정한다.
-  * `from django.urls`에 include를 import 시켜준다.
-  ```
+  * `from django.urls`에 `include`를 import 시켜준다.
+  ```python
+  # mysite/urls.py
   from django.contrib import admin
   from django.urls import path, include
   
