@@ -40,7 +40,7 @@ server에 있는 파일을 내 컴퓨터로 전송 **(download)**
 
 ## FTP 설정파일
 > ### `vi /etc/vsftpd/vsftpd.conf`
-> [사진으로 한번에 보기](vsftpd.conf-정리)
+> [사진으로 한번에 보기](#vsftpd.conf-정리)
 ### `anonymous_enable` : 익명 접속 가능 여부 설정 
 * 현재 `YES`가 기본 값인데 `NO`로 바꿔본다.
 * 그 후 데몬 재 실행 `systemctl restart vsftpd`
