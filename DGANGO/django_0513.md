@@ -82,6 +82,6 @@ class Choice(models.Model):
 
 
 > ### DB Browser for SQLite
-> * sqlite 파일을 확인할 수 있는 프로그램 →[다운로드](DGANGO/util/DB.Browser.for.SQLite-3.12.0-rc1-win64.zip)
+> * sqlite 파일을 확인할 수 있는 프로그램 →[다운로드](https://github.com/Clary0122/TIL/blob/main/DGANGO/util/DB.Browser.for.SQLite-3.12.0-rc1-win64.zip)
 > * 실행 위치 `C:\Program Files\DB Browser for SQLite`의 DB Browser for SQLite.exe
 > * `데이터베이스 열기` 클릭 후 .sqlite3 확장자 파일을 연다.
