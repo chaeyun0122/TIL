@@ -24,6 +24,8 @@ server에 있는 파일을 내 컴퓨터로 전송 **(download)**
   firewall-cmd --permanent --add-service=ftp
   ```
   ![image](https://user-images.githubusercontent.com/79209568/118095096-a07ab100-b40a-11eb-8281-99d2fa2f8e68.png)
+  
+
 
 ## FTP 접속
 * windows cmd에서 진행
@@ -76,5 +78,65 @@ server에 있는 파일을 내 컴퓨터로 전송 **(download)**
 * 다른 형식으로 하려면 `NO`로 바꾸면 된다.
 * 다른 형식으로 할 때의 주의점은 `xferlog_file`의 경로와 이름을 다른 것으로 바꿔줘야한다는 점이다.
 
+### `connect_from_port_20` : [20번 포트 연결](#FTP-모드) 허용 여부
+
+### `chown_uploads`, `chown_username` : anonymous의 업로드 허용 시 소유권이 ftp로 올라가는데 그걸 특정 사용자의 소유로 만들어주고 싶을 때 하는 설정
+
+### `idle_session_timeout` : ftp 접속 후 아무것도 안할 때 연결 끊길 때까지 걸리는 시간
+* 데이터를 주고 받기 전에 아무것도 안함
+
+### `data_connection_timeout` : ftp 접속 후 데이터를 주고 받은 후에 아무것도 안할 때 연결 끊길 때까지 걸리는 시간
+* 데이터를 주고 받은 후 아무것도 안함
+
+### `ftpd_banner` : 베너 설정
+
+### `deny_email_enable` : 특정 이메일 주소를 막을 것인지 설정
+
+### `banned_email_file` : 막을 이메일 주소 목록
+
+### `chroot_*` : 로컬 [사용자의 격리](#사용자-격리)에 대한 설정
+* 로컬 사용자의 격리를 위해 주석을 풀어준다.  
+  ![image](https://user-images.githubusercontent.com/79209568/118107549-d8d5bb80-b419-11eb-95a7-14dacfd37112.png)
+* 하지만 아직 예외 목록 파일이 없기 때문에 접속 오류가 난다.  
+  ![image](https://user-images.githubusercontent.com/79209568/118107630-f571f380-b419-11eb-98c4-a27559ef5bef.png)
+* `touch /etc/vsftpd/chroot_list` 해당 파일을 만들어 준다.(비어있어도 됨)  
+* 6 버전까지는 여기까지하면 접속완료, 하지만 7버전부터 새로운 설정을 하나 추가해줘야한다.
+  * 7버전 이상이라 접속 오류가 난다.  
+  ![image](https://user-images.githubusercontent.com/79209568/118107863-41bd3380-b41a-11eb-9a4b-1da810b7ea1d.png)
+* 설정 파일에 `allow_writeable_chroot=YES` 설정을 추가해준다. (데몬 재실행)  
+  ![image](https://user-images.githubusercontent.com/79209568/118107928-5699c700-b41a-11eb-9ca0-262213a67264.png)
+* 사용자 격리 완료  
+  ![image](https://user-images.githubusercontent.com/79209568/118108008-6dd8b480-b41a-11eb-97bd-90e7bfd7a605.png)
+
+### `ls_recurse_enable` : 대문자 R 옵션 사용 가능 여부
+![image](https://user-images.githubusercontent.com/79209568/118108190-a8dae800-b41a-11eb-978a-47c7c1373652.png)
+
+### `listen`, `listen_ipv6` : listen설정. 각각 IPv4와 IPv6에 대한 설정
+* 데몬을 독립모드(stand alone)로 사용할 것인지 설정하는 것이다. 
+* 7버전 부터는 모든 서비스가 system d에 종속되므로 기본값이 `NO`다 
+* IPv4는 보안성이 떨어지고 IPv6는 별도로 관리하도록 `YES`가 기본값이다. 
+
+> #### FTP 모드
+> * ftp는 active mode와 passive mode로 분류
+> * active mode : client가 server의 command port로 접속, data 전송은 server가 client의 data port 연결 (client의 방화벽 설정이 필요)
+> * passive mode : client가 server의 command port로 접속, data 전송은 server가 client에게 임의의 port를 알려주고 client가 server의 임의의 port로 연결 (client에서 방화벽 설정 X) **20번 포트 사용을 안함**
+>   ![image](https://user-images.githubusercontent.com/79209568/118102271-8c877d00-b413-11eb-9473-4e34d87bc5ee.png)
+
+> #### 사용자 격리
+> * FTP server는 보안 목적으로 접속하는 사용자를 격리할 수 있다.
+> * 사용자 격리는 사용자의 최초 접속 위치 밖으로는 이동할 수 없도록 만드는 설정
+> * 익명 사용자는 격리가 적용, 로컬 사용자는 설정을 통해 사용자 격리가 가능
+> * 최초 접속 위치를 `/`로 바꿔서 인식시켜주는 것이 사용자 격리다.
+>   ![image](https://user-images.githubusercontent.com/79209568/118107255-7e3c5f80-b419-11eb-9d0b-b1d7fed40d37.png)
+>     * 익명 사용자의 pwd는 `/` . 루트가 아님. `var/ftp/`에 있는 디렉토리다.
+>     * 따라서 anonymous는 위로 아무리 올라가도 `var/ftp` 현재 위치에서 상위로 벗어날 수 없음
+
+
 > #### 설정파일 정리
-> ![image](https://user-images.githubusercontent.com/79209568/118100189-213cab80-b411-11eb-96c5-1f64e769cbad.png)
+> ![image](https://user-images.githubusercontent.com/79209568/118100189-213cab80-b411-11eb-96c5-1f64e769cbad.png)  
+> ![image](https://user-images.githubusercontent.com/79209568/118106735-e3438580-b418-11eb-9d7b-d03f2fe8c8f1.png)  
+> ![image](https://user-images.githubusercontent.com/79209568/118108079-85b03880-b41a-11eb-9ab5-662ce0d1e54d.png)  
+> ![image](https://user-images.githubusercontent.com/79209568/118108731-50581a80-b41b-11eb-813d-6288d0dad236.png)  
+
+
+
