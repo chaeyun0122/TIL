@@ -16,7 +16,8 @@
 
   TIME_ZONE = 'Asia/Seoul'
   ```
-  
+<hr>
+
 ## 모델 생성
 * 모델은 데이터의 설계를 해준다. Question 테이블과, Choice 테이블을 작성한다.
 * PK는 자동으로 만들어지지만 FK는 직접 만들어야한다.
@@ -61,6 +62,7 @@ class Choice(models.Model):
   * 이렇게 코드만 가지고 sql을 조작할 수 있는 것을 ORM이라고 한다.  
   
   ![image](https://user-images.githubusercontent.com/79209568/118082322-eed28480-b3f7-11eb-824d-318f2f530a3b.png)
+<hr>
 
 ## Admin 페이지 테이블 관리 설정
 * `polls > admin.py`에 테이블들을 등록해준다.  
@@ -79,20 +81,24 @@ class Choice(models.Model):
   ![image](https://user-images.githubusercontent.com/79209568/118082719-a2d40f80-b3f8-11eb-941b-c9a617e02767.png)
 
 ## Admin 페이지에서 테이블에 데이터 추가
-* 추가를 눌러서 Question과 Choice 데이터 추가
+* 추가를 눌러서 Question과 Choice 데이터 추가  
+  
   ![image](https://user-images.githubusercontent.com/79209568/118084066-fe9f9800-b3fa-11eb-893c-b6da6f0f6d4f.png)
 
 
+<hr>
 
 > ### DB Browser for SQLite
 > * sqlite 파일을 확인할 수 있는 프로그램 →[다운로드](https://github.com/Clary0122/TIL/blob/main/DGANGO/util/DB.Browser.for.SQLite-3.12.0-rc1-win64.zip)
 > * 실행 위치 `C:\Program Files\DB Browser for SQLite`의 DB Browser for SQLite.exe
 > * `데이터베이스 열기` 클릭 후 .sqlite3 확장자 파일을 연다.
+<hr>
 
-## 동작과 화면 정의
+## 화면 정의
 ### URL 설정
 * polls 앱에 `appurls.py` 파일을 추가 (설문조사 앱에서 요청할 url들은 따로 동작하기 때문에 mysite의 url 정보와 구분해야한다.)
-  * 최상위 요청이 들어오면 views.py의 index를 사용한다.
+  * 최상위 요청이 들어오면 views.py의 index를 사용한다.  
+  
   ```python
   # polls/appurls.py
   from django.urls import path
@@ -103,8 +109,9 @@ class Choice(models.Model):
       path('', views.index), 
   ]
   ```
-* `views.py`에 index를 정의한다. Question테이블의 값들을 'pub_date'에 대한 정렬 후 5개만 요청
-* 그 요청 값의 템플릿은 index.html을 따른다.
+* `views.py`에 index를 정의한다. Question테이블의 값들을 'pub_date'에 대한 정렬 후 5개만 요청해서 딕셔너리에 넣음
+* 이 딕셔너리 값을 처리하기 위한 템플릿은 index.html을 따른다.
+  
   ```python
   # polls/views.py
   from django.shortcuts import render
@@ -119,7 +126,8 @@ class Choice(models.Model):
   ```
 * polls 앱에 새 폴더 추가를 누르고 `templates/polls` 입력. 하위 파일까지 한번에 생성한다.
   * templates/polls 폴더에 `index.html` 파일 생성
-  * 변경되는 값들을 표현해야하기 때문에 템플릿 형식으로 작성해준다.
+  * 변경되는 값들을 표현해야하기 때문에 템플릿 형식으로 작성해준다. %가 있는 곳은 템플릿 문법이다. 여기는 서버가 처리한다.
+    
     ```html
     <!-- polls/templates/polls/index.html -->
     {% if q_list %}
@@ -134,6 +142,7 @@ class Choice(models.Model):
     ```
 * 브라우저에서 요청되는 모든 경로는 메인 앱(mysite)의 `urls.py`에서 처리되어야한다. 따라서 urls.py에서 polls의 `appurls.py`를 불러오도록 설정한다.
   * `from django.urls`에 `include`를 import 시켜준다.
+  
   ```python
   # mysite/urls.py
   from django.contrib import admin
@@ -151,3 +160,152 @@ class Choice(models.Model):
 * url에 polls를 입력하면 위에서 설정했던 대로 Question 테이블의 값들이 출력된다.  
   
   ![image](https://user-images.githubusercontent.com/79209568/118086892-a323d900-b3ff-11eb-9b8f-43f1bd7e9a0d.png)
+<hr>
+
+## 동작
+### Question 클릭 시 동작 처리
+* `index.html`의 a 태그 요청 주소를 `/polls/{{question.id}}/`로 지정해준다.
+  
+  ```html
+  <!-- polls/templates/polls/index.html -->
+  {% if q_list %}
+      <ul>
+          {% for question in q_list %}
+              <li><a href="/polls/{{question.id}}/">{{question.question_text}}</a></li>
+          {% endfor %}
+      </ul>
+  {% else %}
+      <p>설문 항목이 존재하지 않음</p>
+  {% endif %}
+  ```
+  
+  ![image](https://user-images.githubusercontent.com/79209568/118219375-52ba8300-b4b4-11eb-906a-a4d31d88e589.png)
+* 이제 해당 URL로 요청을 받을 수 있게 `appurl.py` 파일에 path를 추가해준다. question_id라는 변수에 들어오는 정수 값을 넣어주고 처리하는 것은 `views.py`의 detail이 처리한다.
+  
+  ```python
+  from django.urls import path
+  from . import views
+
+  urlpatterns = [
+      # 사용자가 요청할 URL 경로를 등록한다.
+      path('', views.index), # 빈 경로(최상위 요청)가 들어오면 views.index를 사용
+      path('<int:question_id>/', views.detail), # question_id라는 변수에 들어오는 정수 값을 넣어준다.
+  ]
+  ```
+* `views.py`에 `detail` 함수를 정의해준다. `detail.html` 템플릿으로 동작한다.
+  
+  ```python
+  from django.shortcuts import render
+  from polls.models import Question
+
+  # Create your views here.
+  def index(request):
+      q_list = Question.objects.all().order_by('pub_date')[:5]
+      context = { 'q_list':q_list }
+
+      return render(request, 'polls/index.html', context)
+
+  def detail(request, question_id):
+      question = Question.objects.get(id=question_id)
+
+      return render(request, 'polls/detail.html', {'question':question})
+  ```
+* `detail.html` 템플릿을 정의해준다. 
+  * submit 후 `/polls/{{question_id}}/vote/` 페이지로 이동하도록 한다.
+  * 참조하는 대상을 하나 알면 그 것을 참조하는 모든 것의 내용을 가지고 있기때문에 question을 통해 choice의 내용들도 가져올 수 있다.
+  
+  ```html
+  <h1>{{ question.question_text }}</h1>
+
+  <form action="/polls/{{question.id}}/vote/" method="POST">
+      {% csrf_token %} <!-- CSRF (권한 도용 공격)를 막기 위한 일시적인 토큰을 만듦-->
+      {% for choice in question.choice_set.all %}
+          <input type="radio" name="choice" value="{{ choice.id }}" id="choice{{forloop.counter}}">
+          <label for="choice{{forloop.counter}}">{{ choice.choice_text }}</label><br>
+      {% endfor %}
+      <br>
+      <input type="submit" value="votes">
+  </form>
+  ```
+  
+  ![image](https://user-images.githubusercontent.com/79209568/118223255-ef345380-b4bb-11eb-87bd-8136efbe0169.png)
+
+> #### CSRF Token
+> * CSRF는 권한을 도용하는 해킹 기법이다.
+> * 장고에서는 csrf 토큰이 있어야만 폼을 통해 페이지가 넘어갈 수 있다.
+> * 한 웹 브라우저에 하나의 일시적인 토큰을 부여한다. 만약 같은 토큰 값이어도 다른 브라우저에서 요청하면 검증이 실패된다.
+> * csrf_token을 부여하지 않았을 경우  
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/118224938-0f194680-b4bf-11eb-93fc-0019b2c053e0.png)
+> * csrf_token을 부여한 form  
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/118225803-bcd92500-b4c0-11eb-9d84-cdd5d325cc10.png)
+
+
+### vote 클릭 후 동작 처리
+* `appurl.py`에 항목 선택 후 넘어갈 url `path('<int:question_id>/vote/', views.vote)`를 추가해준다. 처리는  `views.py`의 vote가 처리한다.
+  
+  ```python
+  from django.urls import path
+  from . import views
+
+  urlpatterns = [
+      # 사용자가 요청할 URL 경로를 등록한다.
+      path('', views.index), # 빈 경로(최상위 요청)가 들어오면 views.index를 사용
+      path('<int:question_id>/', views.detail), # question_id라는 변수에 들어오는 정수 값을 넣어준다.
+      path('<int:question_id>/vote/', views.vote),
+  ]
+  ```
+* `views.py`에 vote 함수를 정의해준다.
+  * question_id를 가져오고 그 question에서 선택한 값의 votes값을 1 올려주고 저장한다.
+  * 그 후 값을 가지고 `/result/` 페이지로 이동한다.
+
+  ```python
+  def vote(request, question_id):
+      q = Question.objects.get(id=question_id)
+      selected_choice = q.choice_set.get(id=request.POST['choice'])
+      selected_choice.votes += 1
+      selected_choice.save()
+
+      return HttpResponseRedirect('%s%d%s' % ('/polls/', q.id, '/result/'))
+  ```
+### 결과 페이지 
+* `appurl.py`에 결과를 보여줄 페이지로 넘어갈 url `path('<int:question_id>/result/', views.result)`를 추가해준다. 처리는 `views.py`의 result가 처리한다.  
+  
+  ```python
+  from django.urls import path
+  from . import views
+
+  urlpatterns = [
+      # 사용자가 요청할 URL 경로를 등록한다.
+      path('', views.index), # 빈 경로(최상위 요청)가 들어오면 views.index를 사용
+      path('<int:question_id>/', views.detail), # question_id라는 변수에 들어오는 정수 값을 넣어준다.
+      path('<int:question_id>/vote/', views.vote),
+      path('<int:question_id>/result/', views.result),
+  ]
+  ```
+* `vies.py`에 result 함수를 정의해준다.
+  
+  ```python
+  def result(request, question_id):
+      question = Question.objects.get(id=question_id)
+
+      return render(request, 'polls/result.html', {'question':question})
+  ```
+* `result.html` 템플릿을 정의해준다. 
+  
+  ```html
+  <h1>{{question.question_text}}</h1>
+  <ul>
+      {% for choice in question.choice_set.all %}
+          <li>{{ choice.choice_text }} ----> {{ choice.votes }}</li>
+      {% endfor %}
+  </ul>
+
+  <a href="/polls/{{question.id}}/">다시 선택?</a><br>
+  <a href="/polls/">처음으로</a>
+  ```
+![image](https://user-images.githubusercontent.com/79209568/118226301-ada6a700-b4c1-11eb-8806-f97b050ef98c.png)
+  
+![image](https://user-images.githubusercontent.com/79209568/118226315-b5664b80-b4c1-11eb-9e62-018cee2f9425.png)
+
