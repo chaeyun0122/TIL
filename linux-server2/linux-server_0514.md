@@ -1,4 +1,4 @@
-# Auto moun
+# Auto mount
 * 기본적으로 마운트 된 모든 장치는 시스템 종료 시 전부 마운트 해제
   * 시스템 부팅 시 자동으로 마운트가 되도록 설정이 되어 있는 장치들만 마운트 된 상태로 부팅
 
@@ -30,3 +30,18 @@
   * 1: root partition(/ 에 마운트 할 파티션)
   * 2: 나머지 자료를 저장할 파티션)
 * 단, CentOS 7.0 부터는 0으로 고정(systemd가 알아서 사용)
+
+## 실습
+```
+<오토마운트 해보기>
+
+HDD : 1GB (SCSI) 추가
+
+partition    mount point
+
+100MB  : linux
+200MB  : Clang
+200MB  : Ms
+300MB  : Net
+200MB  : Anon
+```
