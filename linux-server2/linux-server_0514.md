@@ -1,23 +1,32 @@
-# FTP2
-## 실습
-### ftp서버에 익명 사용자로 접속해서 파일 업로드 해보기
-* 접속 후 권한 변경은 안됨
+# Auto moun
+* 기본적으로 마운트 된 모든 장치는 시스템 종료 시 전부 마운트 해제
+  * 시스템 부팅 시 자동으로 마운트가 되도록 설정이 되어 있는 장치들만 마운트 된 상태로 부팅
 
-```
-1. 설정 파일에서 anon 업로드, 쓰기 권한 주기
-  vi /etc/vsftpd/vsftpd.conf
+## 오토 마운트 설정 파일 : `/etc/fstab`
+* OS를 설치하면 자동으로 생성되고 설정 되어있는 파일
+* 장치와 마운트포인트를 준비하고 fstab 파일에 설정만 정확하게 작성하면 오토마운트 끝  
   
-    anon_upload_enable=YES
-    anon_mkdir_write_enable=YES
-
-2. 데몬 재실행
-  systemctl restart vsfpd
-
-3. pub 폴더 권한 주기 (안 주면 553 Could not create file.오류뜸)
-  - pub 폴더에 권한 주는 이유 : ftp 폴더에 주면 500 OOPS: vsftpd: refusing to run with writable root inside chroot() 오류뜸
-  chmod 757 /var/ftp/pub
-
-4. pub 폴더로 이동하고 업로드해주기
-  cd pub
-  put a.txt
-```
+![image](https://user-images.githubusercontent.com/79209568/118242581-768fc000-b4d8-11eb-8ac9-f3c5fcbb006a.png)
+  
+### 장치명
+* 오토 마운트 할 장치의 이름을 절대경로로 작성
+* 현재는 기본 설정된 장치들의 장치명이 아닌 UUID 값으로 작성(IDE 장치 관련 버그 때문에)
+  * UUID : 장치의 고유 값, blkid로 확인 가능
+### 마운트포인트
+* 장치를 오토마운트 할 디렉토리의 이름을 절대경로로 작성
+### 장치의 fstype 
+* 오토 마운트 할 장치의 파일 시스템 형식을 작성
+### 마운트 옵션
+* 오토마운트를 하면서 적용시킬 옵션 작성, 일반적으로 defualts 사용
+  * defaults 옵션은 기본적으로 사용하는 옵션들을 모아놓은 특수 옵션
+### dump 운용
+* 장치의 dump를 사용할 것인지 확인
+  * 0: 사용안함 
+  * 1: 사용
+* 단, CentOS 7.0 부터는 0으로 고정(systemd가 알아서 사용)
+### 부팅 시 fsck (file system check) 동작
+* 부팅 시 file system(= partition)이 정상인지 상태 확안 
+  * 0: 사용안함
+  * 1: root partition(/ 에 마운트 할 파티션)
+  * 2: 나머지 자료를 저장할 파티션)
+* 단, CentOS 7.0 부터는 0으로 고정(systemd가 알아서 사용)
