@@ -73,7 +73,7 @@ partition    mount point
   mount /dev/sdb3 /Ms
   mount /dev/sdb5 /Net
   mount /dev/sdb6 /Anon
- ```
+  ```
 * `/etc/fstab`에 오토마운트 설정하기
   ```
   /dev/sdb1  /Linux  xfs  defaults  0  0
@@ -85,4 +85,8 @@ partition    mount point
 * 재부팅
   ```
   init 6
+  ```
+* 확인
+  ```
+  df -h
   ```
