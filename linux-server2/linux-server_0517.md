@@ -26,5 +26,6 @@
   * `192.168.217.128` : 클라이언트 IP (제공해줄 디렉터리를 누구에게 줄 것인지)
   * `(rw,no_root_squash,sync)` : NFS 옵션 (어떤 옵션을 기반으로 용량을 제공해 줄 것인지)
     * `rw / ro` : read write / read only
-    * `no_root_squash / root_squash(기본값) / all_squash` : 클라이언트가 root로 연결할 때 내 입장에서도 root로 받아주는 것 / 클라이언트가 root로 연결할 때 내 입장에서는 root로 받아주지 않고 일반 사용자로 받아주는 것 / 클라이언트가 일반 사용자로 접근했을 때 내 입장에서 others로 받는 것
+    * `no_root_squash / root_squash(기본값)` : 클라이언트가 root로 연결할 때 내 입장에서도 root로 받아주는 것 / 클라이언트가 root로 연결할 때 내 입장에서는 root로 받아주지 않고 일반 사용자로 받아주는 것
+    * `all_squash(기본값)` :  클라이언트가 일반 사용자로 접근했을 때 내 입장에서 others로 받는 것
     * `sync` : 양 쪽 동기화 시켜주는 옵션
