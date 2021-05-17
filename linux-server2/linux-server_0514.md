@@ -39,9 +39,31 @@ HDD : 1GB (SCSI) 추가
 
 partition    mount point
 
-100MB  : linux
+100MB  : Linux
 200MB  : Clang
 200MB  : Ms
 300MB  : Net
 200MB  : Anon
 ```
+* 새 디스크 1GB 추가
+* `fdisk /dev/sdb`로 새로운 디스크 설정
+  * 첫 번째 파티션 : `n` → `<enter>` → `<enter>` → `+100M`
+  * 두 번째 파티션 : `n` → `<enter>` → `<enter>` → `+200M`
+  * 세 번째 파티션 : `n` → `<enter>` → `<enter>` → `+200M`
+  * 네 번째 전 로지컬 파티션 생성 : 그냥 `<enter>`
+  * 네 번째 파티션 : `n` → `<enter>` → `<enter>` → `+300M`
+  * 다섯 번째 파티션 : `n` → `<enter>` → `<enter>` → `+200M`
+  * 저장 : `w`
+* `fdisk -l`로 `/dev/sdb1`, `/dev/sdb2`, `/dev/sdb3`, `/dev/sdb4`, `/dev/sdb5`, `/dev/sdb6`이 생긴 것을 확인
+* `mkfs.xfs /dev/sdb1`~ `sdb6`까지 파티션 포맷하기 (`sdb4`는 extend이므로 하지 않는다)
+* 경로 생성
+  ```
+  mkdir /test
+  cd /test
+  mkdir /Linux
+  mkdir /Clang
+  mkdir /Ms
+  mkdir /Net
+  mkdir /Anon
+  ```
+* 
