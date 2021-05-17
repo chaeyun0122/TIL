@@ -66,4 +66,23 @@ partition    mount point
   mkdir /Net
   mkdir /Anon
   ```
-* 
+* 각각 마운트 하기
+  ```
+  mount /dev/sdb1 /Linux
+  mount /dev/sdb2 /Clang
+  mount /dev/sdb3 /Ms
+  mount /dev/sdb5 /Net
+  mount /dev/sdb6 /Anon
+ ```
+* `/etc/fstab`에 오토마운트 설정하기
+  ```
+  /dev/sdb1  /Linux  xfs  defaults  0  0
+  /dev/sdb2  /Clang  xfs  defaults  0  0
+  /dev/sdb3  /Ms     xfs  defaults  0  0
+  /dev/sdb5  /Net    xfs  defaults  0  0
+  /dev/sdb6  /Anon   xfs  defaults  0  0
+  ```
+* 재부팅
+  ```
+  init 6
+  ```
