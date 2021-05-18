@@ -133,3 +133,20 @@ systemctl enable autofs
 * 용량 제공은 자동으로 동작되도록 설정
 * 스냅샷 되돌린 후에는 putty를 하나만 켜고 한다.
 ```
+### 정답
+> 서울지사(서버) : s
+> 본사(클라이언트) : c → 로그인  `ssh 192.168.217.129`
+
+#### HDD 추가(20G)
+#### \[ s ]
+* `vi /etc/exports`
+  * `/nfs_server   192.168.217.129(rw,no_root_squash,sync)`
+* `mkdir /nfs_server` 폴더 생성
+* `systemctl restart nfs`
+* `fdisk /dev/sdb`로 +5G 인 파티션 생성
+* 초기화 `mkfs.xfs /dev/sdb1`
+* `mount /dev/sdb1 /nfs_server`
+* 오토마운트 설정 `vi /etc/fstab` → `/dev/sdb1  /nfs_server  xfs  defaults  0  0`
+* 재부팅 `init 6`
+* 방화벽 설정 `firewall-cmd --permanent -add-service=nfs`
+* 방화벽 재시작 'firewall-cmd -
