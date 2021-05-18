@@ -172,3 +172,8 @@ systemctl enable autofs
 	* 위의 내용 설정을 한줄로 처리하되 확인은 용량을 제공받는 client의 IP를 바꿔서 확인
 	* 1번은 nfs설정으로 가능하지만 2번은 추가 조작이 필요합니다
 ```
+```
+/nfs_server	192.168.217.0/255.255.255.255.0(rw,sync)
+/nfs_server	192.168.217.*(rw,sync)
+/nfs_server	192.168.217.0/24(rw.sync)
+```
