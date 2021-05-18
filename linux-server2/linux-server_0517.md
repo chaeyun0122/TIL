@@ -134,7 +134,7 @@ systemctl enable autofs
 * 스냅샷 되돌린 후에는 putty를 하나만 켜고 한다.
 ```
 ### 정답
-> 서울지사(서버) : s
+> 서울지사(서버) : s  
 > 본사(클라이언트) : c → 로그인  `ssh 192.168.217.129`
 
 #### HDD 추가(20G)
@@ -143,10 +143,32 @@ systemctl enable autofs
   * `/nfs_server   192.168.217.129(rw,no_root_squash,sync)`
 * `mkdir /nfs_server` 폴더 생성
 * `systemctl restart nfs`
+* `systemctl enable nfs`
 * `fdisk /dev/sdb`로 +5G 인 파티션 생성
 * 초기화 `mkfs.xfs /dev/sdb1`
 * `mount /dev/sdb1 /nfs_server`
 * 오토마운트 설정 `vi /etc/fstab` → `/dev/sdb1  /nfs_server  xfs  defaults  0  0`
 * 재부팅 `init 6`
 * 방화벽 설정 `firewall-cmd --permanent -add-service=nfs`
-* 방화벽 재시작 'firewall-cmd -
+* 방화벽 재시작 'firewall-cmd --reload`
+
+#### \[ c ]
+* `mkdir /nfs_client` 폴더 생성
+* `yum -y install autofs-*` 설치
+* `vi /etc/autofs.conf`
+  * `browse_mode = yes`
+* `vi /etc/auto.misc`
+  * `nfs_client_auto   -rw,hard,intr   192.168.217.128:/nfs_server` 추가
+* `systemctl restart autofs` 데몬 재실행
+* `ll /misc` `ll /misc/nfs_client_auto` 경로 잘 되는지 확인
+* `systemctl enable autofs`
+
+## 실습 2
+```
+	1. 현재 연결이 1:1 연결인데, 하나의 nfs서버가 같은 IP대역대의 여러대의 컴퓨터에
+	   용량을 제공할 수 있도록 설정
+	2. no_root_squash 옵션을 root_squash 옵션으로 변경해서 파일 남겨보기
+
+	* 위의 내용 설정을 한줄로 처리하되 확인은 용량을 제공받는 client의 IP를 바꿔서 확인
+	* 1번은 nfs설정으로 가능하지만 2번은 추가 조작이 필요합니다
+```
