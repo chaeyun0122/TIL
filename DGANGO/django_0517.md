@@ -25,7 +25,7 @@ def index(request):
  ```
  ![image](https://user-images.githubusercontent.com/79209568/118433914-0753df00-b717-11eb-82e3-5b25decabb3c.png)
 
-### 파라미터 보내기
+## Request 이해하기 (함수형 뷰)
 ### GET 요청 예제 1
 #### index.html
 ```html
