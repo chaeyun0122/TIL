@@ -67,3 +67,6 @@ subnet 192.168.217.0 netmask 255.255.255.0 {
 * 스위치 껐다 키고 잠시 후 확인하면 범위내의 아이피를 받아옴
   
   ![image](https://user-images.githubusercontent.com/79209568/118946218-21005b00-b991-11eb-8a7e-a782e95cac35.png)
+* IP 할당 확인 : `/var/lib/dhcpd/dhcpd.leases`
+  
+
