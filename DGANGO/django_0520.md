@@ -34,8 +34,8 @@
 > ```
 > ![image](https://user-images.githubusercontent.com/79209568/118917567-2303f300-b96c-11eb-8aa3-839e55a8a23e.png)
 
-## Template
-### 탬플릿 추가
+# Template
+## 탬플릿 추가
 #### ex01.html
 ```html
 n1 : {{ n1 }}<br>
@@ -75,7 +75,7 @@ def ex01(request):
   {{ tup.1 }}, {{ tub.2 }}<br>
   {{ dic.a }}, {{ dic.c }}<br>
   ```
-### Invalid
+## Invalid
 * 모르는 값이 들어오면 특정 값이 나오도록 설정할 수 있다.
 #### ex01.html
 * `un`이라는 값은 `views.py`의 ex01 함수에 정의하지 않았다.
@@ -89,7 +89,7 @@ unkown : [{{ un }}]<br>
 * 빈 값에 지정한 문자가 나옴  
   ![image](https://user-images.githubusercontent.com/79209568/118922168-7f6b1080-b974-11eb-9788-c83157c0ca53.png)
 
-### 필터
+## 필터
 #### views.py
 ```python
 def ex02(request):
@@ -110,7 +110,8 @@ val1|upper|linebreaks : {{ val1|upper|linebreaks }}<br>
 ```
 ![image](https://user-images.githubusercontent.com/79209568/118923184-213f2d00-b976-11eb-898e-af287a26dd90.png)
 
-### 필터2
+## 필터2
+### for
 #### views.py
 ```python
 def ex02(request):
@@ -139,3 +140,116 @@ bio|truncatewords:4 : {{ bio|truncatewords:4 }}<br>
 lst|pluralize : {{ lst|pluralize }}<br>
 ```
 ![image](https://user-images.githubusercontent.com/79209568/118923604-bfcb8e00-b976-11eb-9972-d294a716b37b.png)
+
+## 태그
+#### views.py
+```python
+# 클래스 : 객체를 정의해놓은 틀
+class Info:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __str__(self):
+        return "Info[%s, %d]" % (self.name, self.age)
+
+def ex03(request):
+    name_list = ['홍길동', '이순신', '강감찬']
+
+    info1 = Info('홍길동', 33) # Info 클래스의 __init__ 함수가 호출 됨 (객체생성)
+    info2 = Info('이순신', 34)
+    info3 = Info('강감찬', 53)
+    info4 = Info('임꺽정', 89)
+
+    print(info1)  # Info 클래스의 __str__함수가 호출된 결과 출력
+    print(info2)
+    print(info3)
+    print(info4)
+
+    info_list = [
+        info1,
+        info2,
+        info3,
+        info4,
+    ]
+    context = {
+        'name_list':name_list,
+        'info_list':info_list,
+    }
+    return render(request, 'extemp/ex03.html', context)
+```
+#### ex03.html
+```html
+<!-- 하나씩 출력 -->
+{{ name_list.0 }}<br>
+{{ name_list.1 }}<br>
+{{ name_list.2 }}<br>
+<hr>
+<!-- '{%' 이 부분은 파이썬 코드, 없는 것은 html 코트 -->
+<ul>
+{% for name in name_list %}
+    <li>이름 : {{ name }}</li>
+{% endfor %}
+</ul>
+```
+> * 출력화면  
+> ![image](https://user-images.githubusercontent.com/79209568/118926533-70d42780-b97b-11eb-8d8c-a0a5b7f4ffdf.png)
+### 클래스 객체 for문으로 출력
+```html
+<!-- __str__함수 출력처럼 나옴 -->
+<ul>
+    {% for info in info_list %}
+        <li>{{ info }}</li>
+    {% endfor %}
+</ul>
+<hr>
+<!-- 각각의 객체가 갖고있는 속성 값들을 꺼냄 -->
+<ul>
+    {% for info in info_list %}
+        <li>{{ info.name }} : {{ info.age }} </li>
+    {% endfor %}
+</ul>
+```
+> * 출력 화면  
+> ![image](https://user-images.githubusercontent.com/79209568/118929333-5734df00-b97f-11eb-9c2f-83ced790bee8.png)
+
+## forloof
+* for 문 안이면 모두 사용가능한 카운트 함수다
+```html
+<!-- 순서 카운팅 : forloop -->
+<ul>
+    {% for name in name_list %}
+        <li>
+            이름 : {{ name }}<br>
+            forloop.counter: {{ forloop.counter }}<br> <!-- 1부터 시작하는 카운팅 -->
+            forloop.counter0: {{ forloop.counter0 }}<br> <!-- 0부터 시작하는 카운팅 -->
+            forloop.revcounter: {{ forloop.revcounter }}<br> <!-- 거꾸로 카운팅 -->
+            forloop.revcounter0: {{ forloop.revcounter0 }}<br> <!-- 마지막이 0인 거꾸로 카운팅 -->
+            forloop.first: {{ forloop.first }}<br> <!-- 반복의 처음 시점이면 True -->
+            forloop.last: {{ forloop.last }}<br> <!-- 반복의 마지막 시점이면 False -->
+        </li>
+
+    {% endfor %}
+</ul>
+```
+> * 출력 결과  
+> ![image](https://user-images.githubusercontent.com/79209568/118927837-5733df80-b97d-11eb-964e-2eb148eee71f.png)
+
+## if
+#### ex04.html
+```html
+{% if name_list %} <!-- name_list가 있으면 True, 없으면 False -->
+    name_list|length : {{ name_list|length }}
+{% else %}
+    name_list is empty!
+{% endif %}
+<hr>
+{% if age_list %} <!-- age_list는 존재하지 않음 -->
+    age_list|length : {{ age_list|length }}
+{% else %}
+    age_list is empty!
+{% endif %}
+<hr>
+```
+> * 출력 화면  
+> ![image](https://user-images.githubusercontent.com/79209568/118929444-7f244280-b97f-11eb-8b62-04b3f536f216.png)
