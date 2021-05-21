@@ -40,16 +40,16 @@ ex) `www.google.com` 이라는 주소가 있다면 `www` 가 host name, `google.
 1. client 장치를 사용하는 사용자가 FQDN을 입력하면 client는 자신의 cache를 확인하여 FQDN에 대한 IP를 알고 있다면 해당 IP로 바로 연결
 2. FQDN에 대한 IP주소가 없다면 IP설정에 등록된 DNS server에게 FQDN에 대한 IP주소를 요청
 3. DNS server는 자신의 zone 영역을 확인하여 해당 FQDN에 대한 IP주소가 있다면 client에게 전송  
-없다면 cache 영역 확인하여 내가 해당 FQDN의 Name Server 역할으 하고 있는지 확인
+없다면 cache를 확인하여 기존에 해당 FQND에 대한 IP주소를 알아온 적이 있는지 확인
 4. cache에 있다면 해당 IP 주소를 확인하여 client에게 전송  
 cache에 없다면 root hint를 확인하여 root domain에 해당 FQDN의 IP를 확인
 5. root domain 은 FQDN의 top-level domain을 확인하여 해당 서버의 IP를 DNS server에게 전송  
 DNS server는 다시 top-level domain에 찾아가서 FQDN의 IP를 확인  
-top-level domain은 FQDN의 second-level domain을 확인하여 해당 서버의 IP를 DNS server에게 전송  
+6. top-level domain은 FQDN의 second-level domain을 확인하여 해당 서버의 IP를 DNS server에게 전송  
 DNS server는 second-level domain에 찾아가서 FQDN의 IP를 확인
-6. second-level domain에서는 FQDN의 host name이 자신에게 있는지 확인하고 해당 IP주소를 DNS server에게 전송
-7. DNS server는 IP주소를 알아온 과정을 cache에 저장 후 client에게 알아온 IP를 전송
-8. client는 자신의 cache 에 IP를 저장 후 해당 IP로 연결
+7. second-level domain에서는 FQDN의 host name이 자신에게 있는지 확인하고 해당 IP주소를 DNS server에게 전송
+8. DNS server는 IP주소를 알아온 과정을 cache에 저장 후 client에게 알아온 IP를 전송
+9. client는 자신의 cache 에 IP를 저장 후 해당 IP로 연결
 * 1 ~ 9 과정을 거쳐서 FQDN을 IP주소로 변환 (DNS server는 3 ~ 8 까지를 담당)
 #### Name Server 구성
 * DNS server를 설처히면 name server를 구성할 수 있는 (= zone 여역을 만들 수 있는) 파일이 같이 설치된다.
@@ -79,3 +79,47 @@ DNS server는 second-level domain에 찾아가서 FQDN의 IP를 확인
   * 네이버 연결 시 연결되지 않음 → 네이버 주소가 내 IP로 연결되도록 설정했기 때문에
     
     ![image](https://user-images.githubusercontent.com/79209568/119108039-c0d5eb80-ba5a-11eb-9cfe-fc9c41309626.png)
+* `/etc/resolv.conf` : 클라이언트 역할의 파일
+  * cache에 없는 주소가 들어오면 위에서 아래로 순서대로 DNS가 있는지 찾음
+  ![image](https://user-images.githubusercontent.com/79209568/119110422-1ad7b080-ba5d-11eb-90a9-b7fd7b0cd233.png)
+
+  * 필요하다면 직접 작성도 가능
+    ```
+    nameserver 168.126.63.1  // kt에서 운영중인 DNS 서버
+    nameserver 8.8.8.8       // 구글에서 운영중인 DNS 서버
+    ```
+  * 네트워크 데몬 재실행하면 추가한 DNS 서버들이 사라지고 원래대로 돌아옴
+    ```
+    systemctl restart network
+    ```
+    ![image](https://user-images.githubusercontent.com/79209568/119111118-ba953e80-ba5d-11eb-852f-f3f790b9c84c.png)
+
+## DNS server 관련 파일 설치
+```
+yum -y install bind-*
+```
+
+## DNS 설정 파일
+> ### `vi /etc/named.conf`
+
+* 주석이 `#`이 아닌 `//`로 들어가있음
+### options
+![image](https://user-images.githubusercontent.com/79209568/119113764-6475ca80-ba60-11eb-807b-af440a740734.png)
+
+* `listen-on port 53`를 `any`로 변경
+  ![image](https://user-images.githubusercontent.com/79209568/119112290-e533c700-ba5e-11eb-95ce-478f63423eb0.png)
+* `allow-query`를 `any`로 변경 (웬만하면 `listen-on port 53`와 맞춤)
+  ![image](https://user-images.githubusercontent.com/79209568/119112869-815dce00-ba5f-11eb-8660-f67b5b6d5e41.png)
+### logging
+![image](https://user-images.githubusercontent.com/79209568/119113744-5f188000-ba60-11eb-8aef-2229e6234faa.png)
+
+### zone
+![image](https://user-images.githubusercontent.com/79209568/119113720-5aec6280-ba60-11eb-8a39-fccc346cde91.png)
+
+* 루트 힌트 영역
+* 모든 DNS서버는 전세계의 IP 주소를 가지고 있는 파일이 있다. 
+
+### include
+![image](https://user-images.githubusercontent.com/79209568/119114406-1b724600-ba61-11eb-8cdd-765db6e71c46.png)
+
+* named 데몬이 실행될 때 named.conf 파일을 체크하는데 해당 include된 파일들도 함께 체크한다.
