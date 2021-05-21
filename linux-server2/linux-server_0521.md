@@ -62,3 +62,20 @@ DNS server는 second-level domain에 찾아가서 FQDN의 IP를 확인
 - 방화벽 : port=53/tcp, service=dns
 - 설정파일 : /etc/named.conf
 
+* `/etc/hosts` : DNS cache를 확인하기 이전에 먼저 확인하게 되는 파일
+  
+  ![image](https://user-images.githubusercontent.com/79209568/119106711-8ddf2800-ba59-11eb-93f6-8d0079fb8ccb.png)
+  * 뒤에 있는 문자주소가 컴퓨터에 입력되면 앞에 있는 IP주소로 연결을 한다는 뜻
+  * firefox 열기
+
+    ![image](https://user-images.githubusercontent.com/79209568/119107099-e9111a80-ba59-11eb-89bb-353bc977d773.png)
+  * www.naver.com 으로 들어가기
+  * `메뉴 > 환경설정 > 개인 정보 및 보안 > 쿠키와 사이트 데이터` 데이터 삭제
+
+    ![image](https://user-images.githubusercontent.com/79209568/119107476-38efe180-ba5a-11eb-8da3-f33e48aec5d6.png)
+  * 다시 그 파일로 가서 내 IP 주소와 네이버 주소 입력
+    
+    ![image](https://user-images.githubusercontent.com/79209568/119107772-84a28b00-ba5a-11eb-8898-d849cbd0bf01.png)
+  * 네이버 연결 시 연결되지 않음 → 네이버 주소가 내 IP로 연결되도록 설정했기 때문에
+    
+    ![image](https://user-images.githubusercontent.com/79209568/119108039-c0d5eb80-ba5a-11eb-9cfe-fc9c41309626.png)
