@@ -173,6 +173,8 @@ subnet 192.168.217.0 netmask 255.255.255.0 {
   }
   ```
 * `systemctl restart dhcpd` 데몬 재실행
+* (선택) `firewall-cmd --add-service=dhcp / firewall-cmd --reload`
+* `systemctl enable dhcpd` 자동 시작 등록
 * vmware client 로그인 후 네트워크 설정 : 자동으로 변경, 네임서버 지우고 적용
 * Ipv4주소 확인
   
