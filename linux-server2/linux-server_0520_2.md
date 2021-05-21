@@ -160,19 +160,29 @@ subnet 192.168.217.0 netmask 255.255.255.0 {
 ### 정답
 * `Virtual Network Editor` 설정
 * `yum -y install dhcp-*` dhcp 설치
-* `vi /etc/dhcp/dhcpd.conf` 설정파일 수정
-  ```
+* `vi /etc/dhcp/dhcpd.conf` 설정파일 수정  
   
+  ```
+  subnet 192.168.217.0 netmask 255.255.255.0 {
+        range dynamic-bootp 192.168.217.51 192.168.217.60;
+        option subnet-mask 255.255.255.0;
+        option routers 192.168.217.2;
+        option domain-name-servers 192.168.217.2;
+        default-lease-time 259200;
+        max-lease-time 518400;
+  }
   ```
 * `systemctl restart dhcpd` 데몬 재실행
 * vmware client 로그인 후 네트워크 설정 : 자동으로 변경, 네임서버 지우고 적용
 * Ipv4주소 확인
+  
   ![image](https://user-images.githubusercontent.com/79209568/119094769-6897ed00-ba4c-11eb-91e7-26b0a140b089.png)
 * `ssh 192.168.217.51` client로 로그인
 * `yum -y install samba-*` samba 설치
 * `adduser testuser` testuser 생성
 * `passwd testuser` 비밀번호 설정 a1234
 * `vi /etc/samba/smb.conf` 설정파일 수정
+  
   ```
   [global]에 추가
   map to guest = bad user
