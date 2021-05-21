@@ -37,16 +37,28 @@ ex) `www.google.com` 이라는 주소가 있다면 `www` 가 host name, `google.
 
 ### DNS server의 역할
 #### IP address의 FQDN을 상호 변환
-  1. client 장치를 사용하는 사용자가 FQDN을 입력하면 client는 자신의 cache를 확인하여 FQDN에 대한 IP를 알고 있다면 해당 IP로 바로 연결
-  2. FQDN에 대한 IP주소가 없다면 IP설정에 등록된 DNS server에게 FQDN에 대한 IP주소를 요청
-  3. DNS server는 자신의 zone 영역을 확인하여 해당 FQDN에 대한 IP주소가 있다면 client에게 전송  
+1. client 장치를 사용하는 사용자가 FQDN을 입력하면 client는 자신의 cache를 확인하여 FQDN에 대한 IP를 알고 있다면 해당 IP로 바로 연결
+2. FQDN에 대한 IP주소가 없다면 IP설정에 등록된 DNS server에게 FQDN에 대한 IP주소를 요청
+3. DNS server는 자신의 zone 영역을 확인하여 해당 FQDN에 대한 IP주소가 있다면 client에게 전송  
 없다면 cache 영역 확인하여 내가 해당 FQDN의 Name Server 역할으 하고 있는지 확인
-  4. cache에 있다면 해당 IP 주소를 확인하여 client에게 전송  
+4. cache에 있다면 해당 IP 주소를 확인하여 client에게 전송  
 cache에 없다면 root hint를 확인하여 root domain에 해당 FQDN의 IP를 확인
-  5. root domain 은 FQDN의 top-level domain을 확인하여 해당 서버의 IP를 DNS server에게 전송  
+5. root domain 은 FQDN의 top-level domain을 확인하여 해당 서버의 IP를 DNS server에게 전송  
 DNS server는 다시 top-level domain에 찾아가서 FQDN의 IP를 확인  
 top-level domain은 FQDN의 second-level domain을 확인하여 해당 서버의 IP를 DNS server에게 전송  
 DNS server는 second-level domain에 찾아가서 FQDN의 IP를 확인
-  6. second-level domain에서는 FQDN의 host name이 자신에게 있는지 확인하고 해당 IP주소를 DNS server에게 전송
-  7. DNS server는 IP주소를 알아온 과정을 cache에 저장 후 client에게 알아온 IP를 전송
-  8. client는 자신의 cache 에 IP를 저장 후 해당 IP로 연결
+6. second-level domain에서는 FQDN의 host name이 자신에게 있는지 확인하고 해당 IP주소를 DNS server에게 전송
+7. DNS server는 IP주소를 알아온 과정을 cache에 저장 후 client에게 알아온 IP를 전송
+8. client는 자신의 cache 에 IP를 저장 후 해당 IP로 연결
+* 1 ~ 9 과정을 거쳐서 FQDN을 IP주소로 변환 (DNS server는 3 ~ 8 까지를 담당)
+#### Name Server 구성
+* DNS server를 설처히면 name server를 구성할 수 있는 (= zone 여역을 만들 수 있는) 파일이 같이 설치된다.
+* root domain, top-level domain, second-level domain 전부 name server이다.  
+(실습에서는 second-level domain을 생성할 것)
+
+## DNS 관련 정보
+- 패키지 : bind-*
+- 데몬 : named
+- 방화벽 : port=53/tcp, service=dns
+- 설정파일 : /etc/named.conf
+
