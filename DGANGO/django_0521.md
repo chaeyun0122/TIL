@@ -75,7 +75,7 @@ def ex06(request):
   결과: {{ values|safe }}
 ```
 
-## 페이지 상속
+# 페이지 상속
 * 공통으로 사용할 페이지를 만들어두고 그 페이지를 상속시켜서 동일한 내용이 모든 페이지 내에 존재하도록 하는 것
 #### base.html
 ```html
@@ -96,7 +96,7 @@ def ex06(request):
 </html>
 ```
 #### index.html
-* `base.html`을 상속 시켜준다.
+* `{% extends './base.html' %}` 코드를 통해 `base.html`을 상속 시켜준다.
 * 쓰지 않은 block은 기본 값이 출력된다.
 ```html
 {% extends './base.html' %}
@@ -118,3 +118,5 @@ def ex06(request):
 {% endblock %}
 ```
 ![image](https://user-images.githubusercontent.com/79209568/119086313-48623100-ba40-11eb-8346-9755f063cc9d.png)
+
+## static
