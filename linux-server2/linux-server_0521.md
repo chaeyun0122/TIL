@@ -106,9 +106,9 @@ yum -y install bind-*
 ### options
 ![image](https://user-images.githubusercontent.com/79209568/119113764-6475ca80-ba60-11eb-807b-af440a740734.png)
 
-* `listen-on port 53`를 `any`로 변경
+* `listen-on port 53`를 `any`로 변경  
   ![image](https://user-images.githubusercontent.com/79209568/119112290-e533c700-ba5e-11eb-95ce-478f63423eb0.png)
-* `allow-query`를 `any`로 변경 (웬만하면 `listen-on port 53`와 맞춤)
+* `allow-query`를 `any`로 변경 (웬만하면 `listen-on port 53`와 맞춤)  
   ![image](https://user-images.githubusercontent.com/79209568/119112869-815dce00-ba5f-11eb-8660-f67b5b6d5e41.png)
 ### logging
 ![image](https://user-images.githubusercontent.com/79209568/119113744-5f188000-ba60-11eb-8aef-2229e6234faa.png)
