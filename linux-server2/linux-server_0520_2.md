@@ -157,5 +157,37 @@ subnet 192.168.217.0 netmask 255.255.255.0 {
 2. windows에서 client의 공유 폴더 접근하여 메모장 파일 만들어보기
   (단, 접손은 testuser로 진행)
 ```
-
-
+### 정답
+* `Virtual Network Editor` 설정
+* `yum -y install dhcp-*` dhcp 설치
+* `vi /etc/dhcp/dhcpd.conf` 설정파일 수정
+  ```
+  
+  ```
+* `systemctl restart dhcpd` 데몬 재실행
+* vmware client 로그인 후 네트워크 설정 : 자동으로 변경, 네임서버 지우고 적용
+* Ipv4주소 확인
+  ![image](https://user-images.githubusercontent.com/79209568/119094769-6897ed00-ba4c-11eb-91e7-26b0a140b089.png)
+* `ssh 192.168.217.51` client로 로그인
+* `yum -y install samba-*` samba 설치
+* `adduser testuser` testuser 생성
+* `passwd testuser` 비밀번호 설정 a1234
+* `vi /etc/samba/smb.conf` 설정파일 수정
+  ```
+  [global]에 추가
+  map to guest = bad user
+  ```
+  ```
+  [testuser]
+        comment = testusers's share
+        path = /samba/testuser
+        writable = Yes
+        read only = No
+        valid users = @testuser
+  ```
+* `mkdir -p /samba/testuser` samba 경로 생성
+* `chown testuser /samba/testuser` 경로 소유자 testuser로 설정
+* `systemctl restart smb` 데몬 재실행
+* `firewall-cmd --permanent --add-service=samba / firewall-cmd --reload` 방화벽 열기
+* 실행창에 `\\192.168.217.51`로 들어가서 `testuser/a1234` 자격 증명
+* 새 텍스트파일 
