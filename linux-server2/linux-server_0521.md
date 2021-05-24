@@ -254,3 +254,58 @@ www.itbank.com 세팅하기
 * 스냅샷 되돌린 후 진행한다.
 * 최대한 기억에 의존해서 하기 (보고 따라치기만 하는건 도움안됨)
 ```
+### 정답
+* `yum -y install bind-*` 설치
+* `vi /etc/named.conf`에서
+  * `listen-on port 53`를 any로 변경
+  * `allow-query`를 any로 변경
+* `vi /etc/rfc1912.zones`에 두 개의 zone추가
+  
+  ```
+  zone "itbank.com" IN {
+          type master;
+          file "itbank.com.zone";
+          allow-update { any; };
+          allow-transfer { any; };
+  };
+  ```
+  ```
+  zone "217.168.192.in-addr.arpa" IN {
+          type master;
+          file "192.168.217.zone";
+          allow-update { any; };
+          allow-transfer { any; };
+  };
+  ```
+* `/var/named`에 `itbank.com.zone`과 `192.168.192.zone` 파일 생성
+  
+  ```
+  $TTL 1D
+  @       IN SOA  itbank.com.             root(
+                                          0       ; serial
+                                          1D      ; refresh
+                                          1H      ; retry
+                                          1W      ; expire
+                                          3H )    ; minimum
+          IN      NS      itbank.com.
+          IN      A       192.168.217.128
+
+  128     IN      PTR     www.itbank.com.
+  ```
+  ```
+  $TTL 1D
+  @       IN SOA  itbank.com.             root(
+                                          0       ; serial
+                                          1D      ; refresh
+                                          1H      ; retry
+                                          1W      ; expire
+                                          3H )    ; minimum
+          IN      NS      itbank.com.
+          IN      A       192.168.217.128
+
+  www     IN      A       192.168.217.128
+  ```
+* `systemctl restart named` 데몬 재실행
+* `nslookup` 확인
+  
+  ![image](https://user-images.githubusercontent.com/79209568/119325558-f0cff980-bcbb-11eb-96bd-36d4103a2443.png)
