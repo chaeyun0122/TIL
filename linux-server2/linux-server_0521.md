@@ -127,7 +127,7 @@ yum -y install bind-*
 ## zone 영역 만들기
 > ### `vi /etc/named.rfc1912.zones`
 * 안쪽에 zone은 기본적으로 5개 있다.
-* 아래에 새로운 zone을 만들어준다. (위쪽 zone 수정 X)
+#### 아래에 새로운 zone을 만들어준다. (위쪽 zone 수정 X)
 ### forward zone (FQDN → IP address)
   ```
   zone "linux.edu" IN {
@@ -143,7 +143,7 @@ yum -y install bind-*
   * `file` : 영역에 대한 상세 설정이 들어있는 파일
   * `allow-update` : 보조 영역이 내 정보를 복사해갔을 때 정보가 바뀐것을 누구에게 알려줄 것인지 정하는 속성 (주 영역에 적어주는 속성)
   * `allow-transfer` : 내 영역을 누구에게 전송해줄지 정하는 속성 (주 영역에 적어주는 속성)
-* `/var/named`에 file에 적은 `linux.edu.zone` 파일을 만들고 내용을 작성한다.
+#### `/var/named`에 file에 적은 `linux.edu.zone` 파일을 만들고 내용을 작성한다.
   
   ```
   $TTL 86400
@@ -159,25 +159,25 @@ yum -y install bind-*
   www     IN      A       192.168.217.128
   ```
 
-  * `IN` : 인터넷에서 사용된다는 뜻
   * `TTL` : 기본 유효기간 정보가 살아있는 시간
-  * `SOA` : DNS 기본이름 식별. 오른쪽과 아래의 정보들을 받아서 이상이 없으면 실행시켜주는 것
+  * `IN` : 인터넷에서 사용된다는 뜻
   * 오른쪽 : 각종 일련번호와 시간값 정보들
   * 아래쪽 : 영역에 대한 실제 정보들
   * DNS 레코드 : DNS서버에서 사용하는 자원 역할을 한다.
+    * `SOA` : DNS 기본이름 식별. 오른쪽과 아래의 정보들을 받아서 이상이 없으면 실행시켜주는 것
     * `NS` : 도메인의 모든 네임 서버 식별
     * `A` : IPv4 주소를 기준으로 하는 호스트 이름이 정의된 주 영역(호스트 이름에 대한 IP주소를 정의)
     * `AAAA` : IPv6 주소를 기준으로 하는 호스트 이름 레코드
     * `PTR` :  A레코드에대한 PTR레코드를 만들어서 A레코드의 신뢰성을 높여주는 레코드
-  * 도메인 이름에 대한 레코드 (=Name server) 
+  * 도메인 이름에 대한 레코드 (=Name server)   
+    
     ![image](https://user-images.githubusercontent.com/79209568/119316591-1c4de680-bcb2-11eb-9428-b60f04bd4934.png)
-    * A 레코드 형식 : hostname IN A IPaddress
+    * A 레코드 형식 : `[hostname] IN A IPaddress`
     * 둘이 한 세트
   * 호스트 이름에 대한 레코드
     * `www     IN      A       192.168.217.128` : www.linux.edu가 192.168.217.128이라는 것을 알려줌
     * `128     IN      PTR     www.linux.edu.`: 128.217.168.192.in-addr.arpa 가 www.linux.edu.이라는 것을 알려줌
-  ![image](https://user-images.githubusercontent.com/79209568/119308784-6f22a080-bca8-11eb-98fc-90ff17b96d73.png)
-  * 시간 정보
+  * 시간 정보  
     ![image](https://user-images.githubusercontent.com/79209568/119318080-d5f98700-bcb3-11eb-8b1b-e73fc142efa1.png)
 
     * 해당 정보들이 누구의 권한으로 실행되는지
@@ -191,14 +191,16 @@ yum -y install bind-*
       ...
       7D 1W - exprie
       ```
+  ![image](https://user-images.githubusercontent.com/79209568/119308784-6f22a080-bca8-11eb-98fc-90ff17b96d73.png)
+  
 ### reverse zone (IP address → FQDN)
-* forward zone의 신뢰성을 높이기 위해 사용한다.
-  ```
-  A = B
-  A = B and B = A   -> 더 신뢰성 높음
-  ```
-* 메일서버를 구현하기 위해서 필요하다.
-* 다시 `/etc/named.rfc1912.zones`에 새로운 zone 입력. Network ID를 거꾸로 적음 (192.168.217.0 → 217.168.192)
+> * forward zone의 신뢰성을 높이기 위해 사용한다.
+>   ```
+>   A = B
+>   A = B and B = A   -> 더 신뢰성 높음
+>   ```
+> * 메일서버를 구현하기 위해서 필요하다.
+#### 다시 `/etc/named.rfc1912.zones`에 새로운 zone 입력. Network ID를 거꾸로 적음 (192.168.217.0 → 217.168.192)
  
   ```
   zone "217.168.192.in-addr.arpa" IN {
@@ -209,7 +211,7 @@ yum -y install bind-*
   };
   ```
   
-* `/var/named`에 file에 적은 `192.168.217.zone` 파일을 만들고 내용을 작성한다.
+#### `/var/named`에 file에 적은 `192.168.217.zone` 파일을 만들고 내용을 작성한다.
   
   ```
   $TTL 1D
@@ -225,7 +227,7 @@ yum -y install bind-*
   128     IN      PTR     www.linux.edu.
   ```
   * 1D(86400초) : 하루
-* 파일 권한과 소유자를 바꿔준다.
+#### 파일 권한과 소유자를 바꿔준다.
   
   ```
   chmod 660 *.zone
@@ -234,9 +236,9 @@ yum -y install bind-*
   * other는 접근 못하고 named로 들어오는 것은 읽고 쓰기 가능
   
   ![image](https://user-images.githubusercontent.com/79209568/119310693-16083c00-bcab-11eb-898b-69a03c5976e9.png)
-* `systemctl restart named` 데몬 재실행
+#### `systemctl restart named` 데몬 재실행
 
-## 
+## 실행 후 확인
 > ### `vi /etc/resolv.conf`
 * 순서대로 실행하기 때문에 1순위를 자신의 IP로 변경한다.
   
@@ -244,3 +246,11 @@ yum -y install bind-*
 * `nslookup` : 문자 주소를 IP주소로, IP주소를 문자주소로 바꿔서 출력해주는 명령어
   
   ![image](https://user-images.githubusercontent.com/79209568/119311854-89f71400-bcac-11eb-944c-0605b573a353.png)
+
+## 실습
+```
+www.itbank.com 세팅하기
+
+* 스냅샷 되돌린 후 진행한다.
+* 최대한 기억에 의존해서 하기 (보고 따라치기만 하는건 도움안됨)
+```
