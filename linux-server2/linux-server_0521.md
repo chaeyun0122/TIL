@@ -164,6 +164,7 @@ yum -y install bind-*
   };
   ```
 * `/var/named`에 file에 적은 `192.168.217.zone` 파일을 만들고 내용을 작성한다.
+  
   ```
   $TTL 1D
   @       IN SOA  linux.edu.              root(
@@ -177,3 +178,10 @@ yum -y install bind-*
 
   128     IN      PTR     www.linux.edu.
   ```
+* 파일 권한과 소유자를 바꿔준다.
+  
+  ```
+  chmod 660 *.zone
+  chown .named *.zone
+  ```
+  ![image](https://user-images.githubusercontent.com/79209568/119310693-16083c00-bcab-11eb-898b-69a03c5976e9.png)
