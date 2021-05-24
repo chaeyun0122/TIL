@@ -123,3 +123,57 @@ yum -y install bind-*
 ![image](https://user-images.githubusercontent.com/79209568/119114406-1b724600-ba61-11eb-8cdd-765db6e71c46.png)
 
 * named 데몬이 실행될 때 named.conf 파일을 체크하는데 해당 include된 파일들도 함께 체크한다.
+
+## zone 영역 만들기
+> ### `vi /etc/named.rfc1912.zones`
+* 안쪽에 zone은 기본적으로 5개 있다.
+* 아래에 새로운 zone을 만들어준다. (위쪽 zone 수정 X)
+  
+  ```
+  zone "linux.edu" IN {
+        type master;
+        file "linux.edu.zone";
+        allow-update { any; };
+        allow-transfer { any; };
+  };
+  ```
+* `/var/named`에 file에 적은 `linux.edu.zone` 파일을 만들고 내용을 작성한다.
+  
+  ```
+  $TTL 86400
+  @       IN SOA  linux.edu.              root(
+                                          0       ; serial
+                                          86400   ; refresh
+                                          3600    ; retry
+                                          604800  ; expire
+                                          10800 ) ; minimum
+          IN      NS      linux.edu.
+          IN      A       192.168.217.128
+
+  www     IN      A       192.168.217.128
+  ```
+  ![image](https://user-images.githubusercontent.com/79209568/119308784-6f22a080-bca8-11eb-98fc-90ff17b96d73.png)
+* 다시 `/etc/named.rfc1912.zones`에 새로운 zone 입력. Network ID를 거꾸로 적음 (192.168.217.0 → 217.168.192)
+  
+  ```
+  zone "217.168.192.in-addr.arpa" IN {
+          type master;
+          file "192.168.217.zone";
+          allow-update { any; };
+          allow-transfer { any; };
+  };
+  ```
+* `/var/named`에 file에 적은 `192.168.217.zone` 파일을 만들고 내용을 작성한다.
+  ```
+  $TTL 1D
+  @       IN SOA  linux.edu.              root(
+                                          0       ; serial
+                                          1D      ; refresh
+                                          1H      ; retry
+                                          1W      ; expire
+                                          3H )    ; minimum
+          IN      NS      linux.edu.
+          IN      A       192.168.217.128
+
+  128     IN      PTR     www.linux.edu.
+  ```
