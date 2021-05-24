@@ -185,3 +185,13 @@ yum -y install bind-*
   chown .named *.zone
   ```
   ![image](https://user-images.githubusercontent.com/79209568/119310693-16083c00-bcab-11eb-898b-69a03c5976e9.png)
+* `systemctl restart named` 데몬 재실행
+
+## 
+> ### `vi /etc/resolv.conf`
+* 순서대로 실행하기 때문에 1순위를 자신의 IP로 변경한다.
+  
+  ![image](https://user-images.githubusercontent.com/79209568/119311493-194ff780-bcac-11eb-9efa-8a01575733e5.png)
+* `nslookup` : 문자 주소를 IP주소로, IP주소를 문자주소로 바꿔서 출력해주는 명령어
+  
+  ![image](https://user-images.githubusercontent.com/79209568/119311854-89f71400-bcac-11eb-944c-0605b573a353.png)
