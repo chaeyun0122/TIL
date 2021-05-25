@@ -119,4 +119,38 @@ def ex06(request):
 ```
 ![image](https://user-images.githubusercontent.com/79209568/119086313-48623100-ba40-11eb-8346-9755f063cc9d.png)
 
-## static
+## Static files (CSS, Javascript, Image)
+* 정적 파일이란 직접 값에 변화를 주지 않는이상 변하지 안흔 파일이다.
+#### settings.py
+```
+# 정적 파일 요청 URL(브라우저에서 요청 시)
+STATIC_URL = '/static/'
+
+# 정적 파일 실제 경로
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+# project03 폴더에 static이라는 폴더 지정
+
+# 장고에 정적 파일 경로 등록
+STATICFILES_DIRS = [
+    STATIC_DIR,
+]
+```
+* 앱 레벨에 `static`폴더를 생성한다.  
+  ![image](https://user-images.githubusercontent.com/79209568/119435833-f5e18700-bd55-11eb-992d-6415eca0d1d3.png)
+* `static` 폴더에 css파일, js파일, 이미지 파일 등을 넣는다.
+  * style.css
+      ```css
+      h3{
+          color:violet;
+      }
+      ```
+### static 파일 적용
+#### 1. `{% load static %}`을 작성 후 static 태그를 통해 static 폴더에 있는 파일을 첨부한다.
+```html
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"/>
+```
+#### 2. static 폴더의 경로를 직접 쓴다.
+```html
+    <link rel="stylesheet" href="/static/style.css"/>
+```
