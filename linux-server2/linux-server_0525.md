@@ -100,7 +100,8 @@ mv index.html ~itbank
 * `vi /etc/httpd/conf/httpd.conf`에서 설정을 바꿔준다.
   * `DocumentRoot "/home/itbank"`
   * ![image](https://user-images.githubusercontent.com/79209568/119470161-06f4bd00-bd83-11eb-923d-5450bc153d9c.png)
-* `chmod 701 ~itbank` 홈 디렉터리의 권한을 바꿔준다.
+* `chmod 701 ~itbank` 홈 디렉터리의 권한을 바꿔준다. other(apache)가 실행 권한만 있으면 되기 때문에
 * `systemctl restart httpd` 데몬 재실행
 * index.html이 출력
+  
   ![image](https://user-images.githubusercontent.com/79209568/119470482-5804b100-bd83-11eb-8a1f-08d6d014055e.png)
