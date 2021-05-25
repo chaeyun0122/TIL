@@ -99,7 +99,9 @@ mv index.html ~itbank
 ### 정답
 * `vi /etc/httpd/conf/httpd.conf`에서 설정을 바꿔준다.
   * `DocumentRoot "/home/itbank"`
-  * ![image](https://user-images.githubusercontent.com/79209568/119470161-06f4bd00-bd83-11eb-923d-5450bc153d9c.png)
+  * Document root의 상위 디렉터리 설정과 Document root 디렉터리 설정을 변경해준다.
+    
+    ![image](https://user-images.githubusercontent.com/79209568/119470161-06f4bd00-bd83-11eb-923d-5450bc153d9c.png)
 * `chmod 701 ~itbank` 홈 디렉터리의 권한을 바꿔준다. other(apache)가 실행 권한만 있으면 되기 때문에
 * `systemctl restart httpd` 데몬 재실행
 * index.html이 출력
