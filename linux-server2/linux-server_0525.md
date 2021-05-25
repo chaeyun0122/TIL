@@ -74,7 +74,7 @@ yum -y install httpd-*
 * ![image](https://user-images.githubusercontent.com/79209568/119463567-d873e380-bd7c-11eb-8284-0d294794de7a.png)
   * Document root 속의 어떤 이름의 파일을 client에게 제공해 줄 것인지 정하는 설정
   * 암묵적으로 이름은 index로 한다. 그리고 뒤에는 작성한 언어를 적어준다. 따라서 해당 index.html은 **html로 작성한 기본문서**라는 뜻이된다.
-  * 다른 언어로 기본문서를 작성하고 싶으면 뒤에 적어주면 된다. 다만 앞에 있을수록 우선순위가 높다. 
+  * 다른 언어로 기본문서를 작성하고 싶으면 뒤에 적어주면 된다. 다만 앞에 있을수록 우선순위가 높다.  
     ![image](https://user-images.githubusercontent.com/79209568/119463966-3e606b00-bd7d-11eb-8619-ce29cedee77d.png)
 * ![image](https://user-images.githubusercontent.com/79209568/119464041-56d08580-bd7d-11eb-9872-63d965285018.png)
   * 로그 저장될 경로와 로그 파일 이름
@@ -86,3 +86,13 @@ yum -y install httpd-*
 
 * ![image](https://user-images.githubusercontent.com/79209568/119464617-dfe7bc80-bd7d-11eb-91e6-1ae00e61d83f.png)
   * include로 끌어오는 옵션들이 conf.d/ 위치에 \*.conf 확장자로 되어있다는 설정
+
+## 실습
+```
+현재 /var/www/html/에 index.html 파일이 있는데(위에서 만듦)
+그걸 itbank의 홈 디렉터리로 옮긴다.
+
+mv index.html ~itbank
+
+이 상태에서 apche 실행 시 index.html이 뜨도록 바꾼다.
+```
