@@ -278,6 +278,7 @@ www.itbank.com 세팅하기
   };
   ```
 * `/var/named`에 `itbank.com.zone`과 `192.168.192.zone` 파일 생성
+  * `cp named.localhost itbank.com.zone` 복사해서 쓰면 값 변경만 해주면 된다. 
   
   ```
   $TTL 1D
