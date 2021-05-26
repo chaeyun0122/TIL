@@ -41,7 +41,7 @@
   ```
   # models.py의 Student class
   def __str__(self):
-    return "Student(%s, %d)\n" % (self.name, self.age)
+    return "Student(%s, %d)" % (self.name, self.age)
   ```
 * django shell로 로그인
   ```
@@ -52,8 +52,7 @@
   >>> from exam_model.models import Student
   >>> q = Student(name='까까', age=5, intro='냥아치') 
   >>> q
-  <Student: Student(까까, 5)
-  >
+  <Student: Student(까까, 5)>
   >>> q.save()
   ```
 * admin 사이트에서 확인
