@@ -31,3 +31,20 @@ chmod 701 ~main
 systemctl restart httpd
 ```
 ![image](https://user-images.githubusercontent.com/79209568/119625965-b2fedc80-be45-11eb-858c-c07171f36b62.png)
+
+### 2, 3
+```
+<public_html 폴더 안에 test1폴더를 만들고 그 안에 index.html을 만든다.>
+
+cd ~main/public_html
+
+mkdir test1
+
+echo "test1" >> test1/index.html
+
+<test2 폴더를 test1 폴더 안에 만들고 그 안에 index.html을 만든다.>
+
+mkdir test1/test2
+
+echo "test2" >> test1/test2/index.html
+```
