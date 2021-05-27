@@ -43,44 +43,167 @@
   
   ![image](https://user-images.githubusercontent.com/79209568/119602078-5c81a600-be25-11eb-98b4-6d73f21719a6.png)
 
-## 객체 생성
-> * `Student( ~~ ).save()`
-> * `Student.objects.create( ~~ )`
+## CRUD
+* django shell에서 진행
+### Create (insert)
+#### 첫 번째 방법
+```python
+>>> from exam_model.models import Student
+>>> Student(name='홍길동', age=38, intro='산에 살아요').save()
+>>> Student.objects.all()
+<QuerySet [<Student: Student(까까, 5)>, <Student: Student(홍길동, 38)>]>
+```
+#### 두 번째 방법
+```python
+Student.objects.create(name='공유', age=50, intro='도깨비')
+<Student: Student(공유, 50)>
+>>> Student.objects.all()
+<QuerySet [<Student: Student(까까, 5)>, <Student: Student(홍길동, 38)>, <Student: Student(공유, 50)>]>
+```
 
-* django shell로 로그인
+### Read (select)
+#### get은 하나의 결과일 경우에만 사용한다.
+```python
+>>> Student.objects.get(id=1)
+<Student: Student(까까, 5)>
+
+>>> Student.objects.get(id=2)
+<Student: Student(홍길동, 38)>
+
+>>> Student.objects.get(id=3)
+<Student: Student(공유, 50)>
+
+>>> Student.objects.get(age=5)
+<Student: Student(까까, 5)>
+```
+#### 개수 가져오기
+```python
+>>> Student.objects.all().count()
+3
+```
+#### 목록 조회(여러개)
+##### 전체 조회
+```python
+>>> Student.objects.all() #순서를 보장하지 않음
+<QuerySet [<Student: Student(까까, 5)>, <Student: Student(홍길동, 38)>, <Student: Student(공유, 50)>]>
+```
+##### 조건으로 조회 (where개념) 
+* `filter([조건])`
+  
+  ```python
+  >>> Student.objects.filter(name='공유')
+  <QuerySet [<Student: Student(공유, 50)>]>
   ```
-  python manage.py shell
+* `filter([필드명]__contain='[조건]')` : 조건이 포함되는 필드의 객체들을 반환, 조건 여러개인 경우 and 연산
+  
+  ```python
+  >>> Student.objects.filter(name__contains='공')
+  <QuerySet [<Student: Student(공유, 50)>]>
+
+  >>> Student.objects.filter(name__contains='공', age=50) #and연산
+  <QuerySet [<Student: Student(공유, 50)>]>
   ```
-* Student 모델 import 후 객체 생성 및 저장
+* or연산 사용하려는 경우 django.db.models.Q 객체 사용
+  
+  ```python
+  >>> from django.db.models import Q
+  
+  >>> Student.objects.filter(name__contains='공', age=30)
+  <QuerySet []>
+
+  >>> Student.objects.filter(Q(name__contains='공') | Q(age=38))
+  <QuerySet [<Student: Student(홍길동, 38)>, <Student: Student(공유, 50)>]>
   ```
-  >>> from exam_model.models import Student
-  >>> q = Student(name='까까', age=5, intro='냥아치') 
+* `filter([필드명]__gt=[숫자])` : 값 초과의 큰 값을 가진 필드의 객체들을 반환
+* `filter([필드명]__gte=[숫자])` : 값 이상의 큰 값을 가진 필드의 객체들을 반환
+* `filter([필드명]__lt=[숫자])` : 값 미만의 작은 값을 가진 필드의 객체들을 반환
+* `filter([필드명]__lte=[숫자])` : 값 이하의 작은 값을 가진 필드의 객체들을 반환
+  
+  ```python
+  >>> Student.objects.filter(age__gt=38)
+  <QuerySet [<Student: Student(공유, 50)>]>
+  
+  >>> Student.objects.filter(age__gte=38)
+  <QuerySet [<Student: Student(홍길동, 38)>, <Student: Student(공유, 50)>]>
+  
+  >>> Student.objects.filter(age__lt=38)
+  <QuerySet [<Student: Student(까까, 5)>]>
+  
+  >>> Student.objects.filter(age__lte=38)
+  <QuerySet [<Student: Student(까까, 5)>, <Student: Student(홍길동, 38)>]>
+  ```
+* `filter([필드명]__startswith='[조건]')` : 해당 조건 글자로 시작하는 필드의 객체를 반환
+* `filter([필드명]__endswith='[조건]')` : 해당 조건 글자로 끝나는 필드의 객체를 반환
+  
+  ```python
+  >>> Student.objects.filter(name='공')
+  <QuerySet []>
+  
+  >>> Student.objects.filter(name__startswith='공')
+  <QuerySet [<Student: Student(공유, 50)>]>
+  
+  >>> Student.objects.filter(name__endswith='유')
+  <QuerySet [<Student: Student(공유, 50)>]>
+  ```
+##### 정렬하기
+```python
+# 객체 좀 더 추가
+>>> Student.objects.create(name='아이유', age=29, intro='가수')
+<Student: Student(아이유, 29)>
+>>> Student.objects.create(name='이', age=20, intro='강사')
+<Student: Student(이, 20)>
+>>> Student.objects.all()
+<QuerySet [<Student: Student(까까, 5)>, <Student: Student(홍길동, 38)>, <Student: Student(공유, 50)>, <Student: Student(아이유, 29)>, <Student: Student(이, 20)>]>
+```
+* 오름차순 정렬
+  ```python
+  >>> Student.objects.all().order_by('age')
+
+  <QuerySet [<Student: Student(까까, 5)>, <Student: Student(이규철, 20)>, <Student: Student(아이유, 29)>, <Student: Student(홍길동, 38)>, <Student: Student(공유, 50)>]>
+  ```
+* 내림차순 정렬 : 앞에 `-`를 붙인다.
+  ```python
+  >>> Student.objects.all().order_by('-age')
+  
+  <QuerySet [<Student: Student(공유, 50)>, <Student: Student(홍길동, 38)>, <Student: Student(아이유, 29)>, <Student: Student(이규철, 20)>, <Student: Student(까까, 5)>]>
+  >>>
+  ```
+* 조회 결과를 정렬
+  * filter를 이용한 결과인 QuerySet객체에다 order_by함수 사용
+  ```python
+  >>> Student.objects.filter(age__gte=30)
+  <QuerySet [<Student: Student(홍길동, 38)>, <Student: Student(공유, 50)>]>
+
+  >>> Student.objects.filter(age__gte=30).order_by('-age')
+  <QuerySet [<Student: Student(공유, 50)>, <Student: Student(홍길동, 38)>]>
+
+  >>> Student.objects.filter(age__gte=30).order_by('name')
+  <QuerySet [<Student: Student(공유, 50)>, <Student: Student(홍길동, 38)>]>
+
+  >>> Student.objects.filter(age__gte=30).order_by('-name')
+  <QuerySet [<Student: Student(홍길동, 38)>, <Student: Student(공유, 50)>]>
+  ```
+### Update
+#### 첫 번째 방법
+* 특정 객체 하나를 가져와서 수정 후 save
+  ```python
+  >>> q = Student.objects.get(id=1)
   >>> q
   <Student: Student(까까, 5)>
+  >>> q.name='kkakka'
+  >>> q
+  <Student: Student(kkakka, 5)>
+  >>> Student.objects.all()
+  <QuerySet [<Student: Student(까까, 5)>, <Student: Student(홍길동, 38)>, <Student: Student(공유, 50)>, <Student: Student(아이유, 29)>, <Student: Student(이규철, 20)>]>
   >>> q.save()
+  >>> Student.objects.all()
+  <QuerySet [<Student: Student(kkakka, 5)>, <Student: Student(홍길동, 38)>, <Student: Student(공유, 50)>, <Student: Student(아이유, 29)>, <Student: Student(이규철, 20)>]>
+  >>>
   ```
-* admin 사이트에서 확인
-  
-  ![image](https://user-images.githubusercontent.com/79209568/119602871-13325600-be27-11eb-8e86-70073faf4a1e.png)
+#### 두 번째 방법
+* QuerySet객체의 update함수 사용
 
-```
->>> Student.objects.create(name='공유', age=50, intro='도깨비')
-<Student: Student(공유, 50)>
-```
 
-## 조회
-* `Student.objects.get(id=1)` : 한 개의 결과 값을 출력하는 조건을 조회 (두 개 이상은 오류가 남)
-* `Student.objects.all()` : 전체 조회. 순서를 보장하지 않음
-* `Student.objects.filter(name='까까')` : 조건에 해당하는 결과를 조회
-  * `Student.objects.filter(name__contains='까')` : \_\_contains를 통해 해당 조건을 포함한 것을 조회
-  * `Student.objects.filter(name__contains='까', age=4)` : 조건을 여러 개를 포함할 수 있다. and 연산으로 묶인다.
-  * `Student.
-## 개수
-* `Student.objects.all().count()`
-
-## 정렬
-
-## 수정
 
 update함수 : filter를 통해 수정한 것이기 때문에 여러개가 수정될 수 있기때문에 조심해야한다.
 
