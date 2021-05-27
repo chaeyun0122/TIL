@@ -30,7 +30,7 @@ chmod 701 ~main
 
 systemctl restart httpd
 ```
-![image](https://user-images.githubusercontent.com/79209568/119625965-b2fedc80-be45-11eb-858c-c07171f36b62.png)
+> ![image](https://user-images.githubusercontent.com/79209568/119625965-b2fedc80-be45-11eb-858c-c07171f36b62.png)
 
 ### 2, 3
 ```
@@ -48,4 +48,35 @@ mkdir test1/test2
 
 echo "test2" >> test1/test2/index.html
 ```
-![image](https://user-images.githubusercontent.com/79209568/119633440-b5b10000-be4c-11eb-9fd9-3c3464ac987a.png)
+> ![image](https://user-images.githubusercontent.com/79209568/119633440-b5b10000-be4c-11eb-9fd9-3c3464ac987a.png)
+
+### 3, 4
+```
+useradd -mk /kg user1
+useradd -mk /kg user2
+
+chmod 701 /home/user*
+
+echo "user1's home" >> ~user1/public_html/index.html
+echo "user2's home" >> ~user2/public_html/index.html
+
+cd /etc/httpd/conf
+```
+
+### 3
+```
+vi userdir.conf
+```
+* 위의 주석을 걸고 아래에 주석을 풀어준다.
+  ![image](https://user-images.githubusercontent.com/79209568/119786913-a0e77180-bf0b-11eb-8c7a-200cc4a56045.png)
+  
+> ![image](https://user-images.githubusercontent.com/79209568/119787241-f91e7380-bf0b-11eb-9a2d-1059c015ab36.png)
+
+### 4
+```
+vi autoindex.conf
+```
+* Alias를 추가해준다.
+  ![image](https://user-images.githubusercontent.com/79209568/119787002-b6f53200-bf0b-11eb-95eb-f4c34db9bd4f.png)
+  
+> ![image](https://user-images.githubusercontent.com/79209568/119787190-ed32b180-bf0b-11eb-8e6f-8156ff1b8ed1.png)
