@@ -173,3 +173,16 @@ mysql -u root -p mysql
   
   ![image](https://user-images.githubusercontent.com/79209568/119946957-25042c80-bfd2-11eb-9430-d906faea9288.png)
 
+## 실습
+```
+itbank에 관련한 모든 내용 삭제 후 진행
+
+* root에서 진행
+D/B     : dbtest
+user    : usertest
+
+* usertest에서 진행
+table   : tbtest
+field   : num, name, addr, phone
+values  : 3개 이상
+```
