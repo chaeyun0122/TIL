@@ -186,3 +186,41 @@ table   : tbtest
 field   : num, name, addr, phone
 values  : 3개 이상
 ```
+
+### 정답
+#### itbank에 관련한 모든 내용 삭제
+```
+drop database dbitbank;
+
+drop table tbitbank;
+
+delete from db;
+
+delete from user where user='useritbank';
+```
+#### 실습 진행
+* DB 생성 
+  * `create database dbtest;` 
+  * 확인 `show databases;`
+* user 생성
+  * `insert into user(host, user, password) values('localhost', 'usertest', password('itbank'));`
+  * 확인 `select host, user, password from user;`
+* 권한 설정
+  * `insert into db values ('localhost', 'dbtest', 'usertest', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y');`
+  * 확인 `select host, db, user from db;`
+* 데몬 재실행
+  ```
+  exit
+  systemctl restart mariadb
+  ```
+* 접속
+  * `mysql -u usertest -p dbtest`
+  * 비밀번호 itbank
+* 테이블 생성
+  * `create table tbtest (num int(3), name char(20), addr char(50), phone char(20));`
+  * 확인 `desc tbtest;`
+* value 넣기
+  * `insert into tbtest values(1,'test1','Seoul','01011111111');`
+  * `insert into tbtest values(2,'test2','Seoul','01022222222');`
+  * `insert into tbtest values(3,'test3','Seoul','01033333333');`
+  * 확인 `select * from tbtest;`
