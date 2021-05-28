@@ -95,7 +95,7 @@ mysql -u root -p mysql
   > * primary key를 한번에 확인 가능
   > * 호스트에서 접속하는 사용자가 DB서버 전체에 대해서 어떤 권한을 쓸 수 있는지에 대한 내용
 
-* Database/table 삭제
+* **Database/table 삭제**
   ```
   drop { database | table } <이름>;
   ```
@@ -105,13 +105,71 @@ mysql -u root -p mysql
   > ![image](https://user-images.githubusercontent.com/79209568/119798263-f294f980-bf15-11eb-8297-02ea144f4291.png)
 
 ### Table Value
-* table 내부 value 확인
+* **table 내부 value 확인 : `select`**
   ```
   select <field 이름> from <table 이름>;
   ```
   > ![image](https://user-images.githubusercontent.com/79209568/119800914-2c66ff80-bf18-11eb-979a-25cc5293115e.png)
 
+* **table 내부 value 중 특정 data를 변경 : `update`**
+  ```
+  update <table 이름> set <field 이름>=<data> where <조건>
+  ```
+  > * `update user set password=password('itbank') where user='root';`
+  >   * root 계정에 itbank를 암호화 시켜서 password를 넣어준다.  
+  >   
+  >   ![image](https://user-images.githubusercontent.com/79209568/119942211-86c19800-bfcc-11eb-99ba-68b4ceec5638.png)
 
+* **table 내부 value 삭제 : `delete`**
+  ```
+  delete from <table 이름> where <조건>
+  ```
+  > * `delete from user where user=' ';`
+  >   * 익명 사용자를 삭제한다.  
+  >   
+  >   ![image](https://user-images.githubusercontent.com/79209568/119942883-4a426c00-bfcd-11eb-914e-9e1dee3ddfb7.png)
 
+* **table 내부에 value 입력 : `insert`**
+  ```
+  intesr into <table 이름>[(field 이름)] values (입력할 value)
+  ```
+  > * `insert into user values('localhost', 'useritbank', password('itbank'));`
+  >   * 오류난다. field수와 value수가 같아야한다.  
+  > * `insert into user(host, user, password) values ('localhost', 'useritbank', password('itbank'));`
+  >   
+  >   ![image](https://user-images.githubusercontent.com/79209568/119943971-a954b080-bfce-11eb-83c3-014092704cd9.png)
 
+## user, db table의 역할
+### user 
+* **DB server 사용자 계정 관리(+ 권한 설정)**
+  * user table의 value로 사용자 관리, 여기에서 설정하는 권한은 DB server 전체에 영향을 준다.
+### db
+* **DB 계정에게 특정 database에 대한 권한 할당**
+  * db table에서 사용자에게 권한을 주면 해당 database에만 영향을 준다.
+* db 테이블 확인
+  
+  ![image](https://user-images.githubusercontent.com/79209568/119945214-1d438880-bfd0-11eb-898b-76c45135b57b.png)
+  * host에서 접속하는 user가 db에 적힌 database에 대해서 아래의 권한을 적용받는다는 의미
+* 익명 사용자들을 지워줘야하므로 다 지워준다.
+  > * `delete form db;`  
+  >  
+  >   ![image](https://user-images.githubusercontent.com/79209568/119945087-fb4a0600-bfcf-11eb-96f7-323561600ec1.png)
+* host, db, user을 추가해준다.
+  > * `insert into db values ('localhost', 'dbitbank', 'useritbank', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y');`
+  >   
+  >   ![image](https://user-images.githubusercontent.com/79209568/119946097-36006e00-bfd1-11eb-9438-b0b1e3550e2c.png)
+* mariadb를 나와서 데몬 재실행
+  
+  ```
+  exit
+  systemctl restart mariadb
+  ```
+* useritbank로 dbitbank 데이터베이스에 접속해보기
+  
+  ```
+  mysql -u useritbank -p dbitbank
+  ```
+  * 패스워드 입력 : itbank
+  
+  ![image](https://user-images.githubusercontent.com/79209568/119946957-25042c80-bfd2-11eb-9430-d906faea9288.png)
 
