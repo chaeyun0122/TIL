@@ -139,6 +139,13 @@ mysql -u root -p mysql
   >   
   >   ![image](https://user-images.githubusercontent.com/79209568/119943971-a954b080-bfce-11eb-83c3-014092704cd9.png)
 
+### table 생성 시 자료형
+| 자료형 | 설명 |
+|:---:|---|
+| int | 정수(숫자) 데이터 |
+| char | 문자 데이터, 고정 용량 (정해진 byte 만큼의 용량을 항상 사용) |
+| varchar | 문자 데이터, 가변 용량 (입력된 데이터에 따라 용량 다름, 자료형에 적힌 byte는 최대 용량) |
+
 ## user, db table의 역할
 ### user 
 * **DB server 사용자 계정 관리(+ 권한 설정)**
