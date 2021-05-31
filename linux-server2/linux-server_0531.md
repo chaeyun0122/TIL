@@ -87,3 +87,15 @@ alter table <table 이름> modify <field 이름> <자료형> char set utf8;
 >   * 3번의 이름을 한글로 변경한다.
 >   
 >   ![image](https://user-images.githubusercontent.com/79209568/120156784-47de4d00-c22d-11eb-80ac-a4b932c7c406.png)
+
+## 실습
+```
+1. 스냅샷 되돌리기
+  useritbank 만들어서 dbitbank 연동
+  useritbank 접속해서 연동여부 확인(중요!!)
+  
+2. user            : main
+   자동생성디렉터리  :  public_html (DocumnetRoot로 사용)
+   도메인           :  www.hatems.com
+   화면내용         :  MAIN 
+```
