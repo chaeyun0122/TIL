@@ -180,12 +180,6 @@ mysql -u root -p mysql
   
   ![image](https://user-images.githubusercontent.com/79209568/119946957-25042c80-bfd2-11eb-9430-d906faea9288.png)
 
-## 한글 사용
-* `show variables like 'c%';` 
-  
-  ![image](https://user-images.githubusercontent.com/79209568/119961673-4a4c6700-bfe1-11eb-98e8-a5980414747d.png)
-  * `utf8`로 변경해줘야한다.
-
 ## 실습
 ```
 itbank에 관련한 모든 내용 삭제 후 진행
