@@ -56,3 +56,34 @@ alter table <table 이름> { add | drop | change | modify } ...
   
   ![image](https://user-images.githubusercontent.com/79209568/120154638-0b115680-c22b-11eb-85bc-036ad6187186.png)
 * 데몬 재실행 `systemctl restart mariadb`
+* **이 후 만들어지는 모든 DB는 한글을 지원한다.**
+* 확인해보면 라틴어 남은 것이 없다.
+  
+  ![image](https://user-images.githubusercontent.com/79209568/120155285-9d195f00-c22b-11eb-9ebd-880566efc82d.png)
+### 기존에 만들었던 DB도 한글 사용 가능하게 만들기
+```
+alter database <database 이름> default character set utf8;
+commit;
+```
+> * `use dbtest;` : 기존에 있던 DB를 사용하도록 이동
+> * `status;`
+>   * DB가 latin으로 되어있다.
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/120156048-80315b80-c22c-11eb-9481-92980ece16d8.png)
+> * `alter database dbtest default character set utf8; / commit;`
+>   * 모두 utf8로 변경되었다.
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/120156416-ecac5a80-c22c-11eb-9471-221c2d4749e7.png)
+
+
+### 기존에 만들었던 table도 한글 사용 가능하게 만들기
+```
+(database 사용 상태로 전환)
+alter table <table 이름> modify <field 이름> <자료형> char set utf8;
+```
+> * `alter table tbtest modify name char(20) char set utf8;`
+>   * 이름을 한글 사용이 가능하도록 변경한다.
+> * `update tbtest set name='테스트3' where num=3;`
+>   * 3번의 이름을 한글로 변경한다.
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/120156784-47de4d00-c22d-11eb-80ac-a4b932c7c406.png)
