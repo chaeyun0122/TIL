@@ -181,3 +181,13 @@ def signup(request):
 ```html
 <a href="{% url 'account:signup_form' %}"><button>회원가입</button></a>
 ```
+> * 메인에서 회원가입 버튼 클릭
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/120270072-ecbb6180-c2e3-11eb-8858-9393f081ce32.png)
+> * 사용자 이름과 비밀번호 입력. tester2/test@1234
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/120270131-0492e580-c2e4-11eb-9063-75ea57d50d6a.png)
+> * admin 사이트에서 tester2가 생성된 것을 확인
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/120270171-17a5b580-c2e4-11eb-9ede-729df1e0ee81.png)
+
