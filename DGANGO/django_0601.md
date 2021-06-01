@@ -101,7 +101,7 @@ def main(request):
         'username' : username
     }
 
-    return render(request, 'account/login_main.html', context)
+    return render(request, 'account/main.html', context)
 ```
 
 #### login_main.html
@@ -118,7 +118,7 @@ def main(request):
 </body>
 </html>
 ```
-
+#### 결과
 > ![image](https://user-images.githubusercontent.com/79209568/120268509-e8da1000-c2e0-11eb-918a-960a3981a726.png)
 
 ## 회원가입
@@ -176,11 +176,13 @@ def signup(request):
 </body>
 </html>
 ```
-#### login_main.html
+#### main.html
 * 회원가입 페이지로 넘어가는 버튼을 생성한다.
 ```html
 <a href="{% url 'account:signup_form' %}"><button>회원가입</button></a>
 ```
+
+#### 결과
 > * 메인에서 회원가입 버튼 클릭
 >   
 >   ![image](https://user-images.githubusercontent.com/79209568/120270072-ecbb6180-c2e3-11eb-8858-9393f081ce32.png)
@@ -191,3 +193,187 @@ def signup(request):
 >   
 >   ![image](https://user-images.githubusercontent.com/79209568/120270171-17a5b580-c2e4-11eb-9ede-729df1e0ee81.png)
 
+## 로그인
+#### views.py
+```python
+# 로그인 폼 만들기
+from django.contrib.auth.forms import AuthenticationForm
+
+def login_form(request):
+    context = {
+        'login_form' : AuthenticationForm(),
+    }
+
+    return render(request, 'account/login_form.html', context)
+
+# 로그인 동작
+## django에서 지원하는 모듈의 이름과 정의한 함수의 이름이 같을 때 모듈에 별칭을 지정해서 구분해줄 수 있다.
+from django.contrib.auth import login as auth_login
+
+def login(request):
+    login_form = AuthenticationForm(request, request.POST)
+    print(login_form)
+
+    if login_form.is_valid():
+        # 로그인 상태로 저장
+        auth_login(request, login_form.get_user())
+        print('login success!')
+        return redirect('account:main')
+    else:
+        print('login failed!')
+        context = {
+            'login_form' : login_form,
+        }
+        return render(request, 'account/login_form.html', context)
+```
+
+#### login_form.html
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+</head>
+<body>
+    <form action="{% url account:login %}" method="post">
+        {% csrf_token %}
+        {{ login_form.as_p }}
+        <input type="submit" value="로그인">
+    </form>
+</body>
+</html>
+```
+
+#### main.html
+* 로그인 페이지로 넘어가는 버튼을 생성한다.
+```html
+<a href="{% url 'account:login_form' %}"><button>로그인</button></a>
+```
+
+#### 결과
+> * 로그인 버튼 클릭. 현재 로그인 되어있는 계정이 없으므로 익명사용자로 로그인 되어있다.
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/120273780-e8924280-c2e9-11eb-96c7-97b0a7385175.png)
+> * tester2/test@1234 로그인
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/120273812-f47e0480-c2e9-11eb-9cf8-5db35fa62436.png)
+> * 메인페이지로 넘어가며 tester2로 로그인 된 것을 확인할 수 있다.
+>   
+>   ![image](https://user-images.githubusercontent.com/79209568/120273854-05c71100-c2ea-11eb-87fa-560ad71ff0ae.png)
+
+## 로그아웃
+#### views.py
+```python
+from django.contrib.auth import logout as auth_logout
+
+def logout(request):
+    auth_logout(request)
+    return redirect('account:main')
+```
+
+#### main.html
+* 로그아웃을 하는 넘어가는 버튼을 생성한다.
+```html
+<a href="{% url 'account:logout' %}"><button>로그아웃</button></a>
+```
+
+> * ![image](https://user-images.githubusercontent.com/79209568/120274441-d1078980-c2ea-11eb-9b82-11a3b39edb8c.png)
+> * ![image](https://user-images.githubusercontent.com/79209568/120274427-ccdb6c00-c2ea-11eb-9709-0d70912438ce.png)
+
+## 메인 화면에 로그인 상태에 따라 메뉴 설정
+* 로그인 된 상태에선 **로그아웃**을 뜨게한다.
+* 로그인 되지 않은 상태에선 **로그인**과 **회원가입**을 뜨게한다.
+
+#### views.py
+* `main` 함수에 익명 계정의 경우 username의 값을 빈 값으로 설정하는 코드를 추가한다.
+```python
+if username.is_anonymous: # 익명 계정일 경우
+        username = None
+```
+
+#### main.html
+* html body를 해당 내용으로 수정한다.
+* username이 존재할 경우(로그인 된 상태일 경우) username과 로그아웃 버튼을 띄운다.
+* username이 존재하지 않을 경우(로그인 되지 않은 상태일 경우) 회원가입과 로그인 버튼을 띄운다.
+```html
+<h2>메인 페이지 입니다.</h2>
+{% if username %}
+    {{ username }}으로 로그인 되었습니다.<br><br>
+    <a href="{% url 'account:logout' %}"><button>로그아웃</button></a>
+{% else %}
+    <a href="{% url 'account:signup_form' %}"><button>회원가입</button></a>
+    <a href="{% url 'account:login_form' %}"><button>로그인</button></a>
+{% endif %}
+```
+
+## 마이페이지
+* 로그인 된 상태에서 마이페이지가 보이도록한다.
+### is_authenticated 사용
+#### views.py
+```python
+# 마이페이지1
+def mypage1(request):
+    if request.user.is_authenticated:
+        context = {
+            'username' : request.user,
+        }
+        return render(request, 'account/mypage1.html', context)
+    
+    return redirect('account:main')
+```
+### 데코레이터 사용
+#### views.py
+```python
+# 마이페이지2
+## 하나하나 코드에 적었던 인증하는 개념을 데코레이터로 적을 수 있다.
+from django.contrib.auth.decorators import login_required
+
+@login_required(login_url='account:login_form') # 인증이 실패했을 때 지정된 페이지로 이동하게 만듦
+def mypage2(request):
+    context = {
+            'username' : request.user,
+        }
+    return render(request, 'account/mypage1.html', context)
+```
+
+#### main.html
+```html
+<h2>메인 페이지 입니다.</h2>
+{% if username %}
+    {{ username }}으로 로그인 되었습니다.<br><br>
+    <a href="{% url 'account:mypage1' %}"><button>마이페이지1</button></a>
+    <a href="{% url 'account:mypage2' %}"><button>마이페이지2</button></a>
+    <a href="{% url 'account:logout' %}"><button>로그아웃</button></a>
+{% else %}
+    <a href="{% url 'account:signup_form' %}"><button>회원가입</button></a>
+    <a href="{% url 'account:login_form' %}"><button>로그인</button></a>
+    <a href="{% url 'account:mypage1' %}"><button>마이페이지1(불가)</button></a>
+    <a href="{% url 'account:mypage2' %}"><button>마이페이지2(불가)</button></a>
+{% endif %}
+```
+
+#### mypage1.html
+* mypage2.html도 같음
+```html
+마이페이지1<br>
+{{ username }}의 정보<br>
+<a href="{% url 'account:logout' %}"><button>로그아웃</button></a>
+```
+
+#### 결과
+> #### 마이페이지1(is_authenticated 사용)
+> * 로그인 되지 않은 상태
+>   ![image](https://user-images.githubusercontent.com/79209568/120277010-6f491e80-c2ee-11eb-87b2-2639a8fe3972.png)
+>   * 다시 메인페이지로 돌아온다.
+> * 로그인 된 상태
+>   ![image](https://user-images.githubusercontent.com/79209568/120277182-b0d9c980-c2ee-11eb-81f9-6f9a233fdfa8.png)
+>   * 마이페이지 누르면 username과 로그아웃 버튼이 나옴
+>     ![image](https://user-images.githubusercontent.com/79209568/120277222-bdf6b880-c2ee-11eb-8c23-5f388cccfbfd.png)
+>  
+> #### 마이페이지2(데코레이터 사용)
+> * 로그인 되지 않은 상태
+>   ![image](https://user-images.githubusercontent.com/79209568/120277336-e383c200-c2ee-11eb-9128-ad702669201f.png)
+>   * login_form으로 돌아간다.
+> * 로그인 된 상태
+>   * 마이페이지1과 동일하다.
