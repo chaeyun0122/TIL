@@ -38,6 +38,7 @@
   - DB 선택
     
     ![image](https://user-images.githubusercontent.com/79209568/120297788-6c592880-c304-11eb-9d3e-834afa3bf840.png)
+    - `mysqli_innodb` 선택
     - innodb : mysql, mariadb를 위한 DB 엔진 (5.5버전 기준으로 innodb가 기본적으로 포함되어있다.)
   - DB 정보 입력
     
