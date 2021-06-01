@@ -20,3 +20,18 @@
   ![image](https://user-images.githubusercontent.com/79209568/120170623-1d47c080-c23c-11eb-985b-364b523f9886.png)
 
 - ftp로 업로드
+  ```
+  <PuTTY>
+  1. yum -y install vsftpd-*
+  2. systemctl restart vsftpd
+  3. firewall-cmd --permanent --add-service=ftp
+  4. firewall-cmd --reload
+
+  <명령 프롬프트>
+  1. 다운로드 받은 파일 C드라이브로 옮기기
+  2. C드라이브로 cd
+  3. ftp 192.168.217.128
+  4. itbank계정으로 로그인
+  5. cd /home/main/public_html
+  6. put phpMyAdmin-4.0.10.20-all-languages.zip
+  ```
