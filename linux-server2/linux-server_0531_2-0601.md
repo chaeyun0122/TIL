@@ -17,6 +17,8 @@
 - php 언어로 작성되어 있기 때문에 web server가 php 언어를 알고 있어야 한다.
   - php 버전과 DB server 버전을 확인하여 사용
 - 일반 사용자들에게 편의성을 제공하기 위해 사용
+<hr>
+
 - https://www.phpmyadmin.net/files/ 에서 4.0.10.20 버전 zip 다운로드
   ![image](https://user-images.githubusercontent.com/79209568/120170623-1d47c080-c23c-11eb-985b-364b523f9886.png)
 
