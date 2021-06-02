@@ -323,6 +323,9 @@ def mypage1(request):
     return redirect('account:main')
 ```
 ### 데코레이터 사용
+* `@login_required(login_url='account:login_form')` : 인증이 실패했을 때 지정된 페이지로 이동하게 만듦
+* `@login_required` : settings.py에 지정된 경로로 리다이렉트(디폴트)
+  * settings.py에 `LOGIN_URL = 'account:main'`을 추가하면된다.
 #### views.py
 ```python
 # 마이페이지2
@@ -363,16 +366,16 @@ def mypage2(request):
 
 #### 결과
 > #### 마이페이지1(is_authenticated 사용)
-> * 로그인 되지 않은 상태
->   ![image](https://user-images.githubusercontent.com/79209568/120277010-6f491e80-c2ee-11eb-87b2-2639a8fe3972.png)
->   * 다시 메인페이지로 돌아온다.
-> * 로그인 된 상태
+> * 로그인 되지 않은 상태  
+>   ![image](https://user-images.githubusercontent.com/79209568/120277010-6f491e80-c2ee-11eb-87b2-2639a8fe3972.png) 
+>   * 다시 메인페이지로 돌아온다. 
+> * 로그인 된 상태  
 >   ![image](https://user-images.githubusercontent.com/79209568/120277182-b0d9c980-c2ee-11eb-81f9-6f9a233fdfa8.png)
->   * 마이페이지 누르면 username과 로그아웃 버튼이 나옴
+>   * 마이페이지 누르면 username과 로그아웃 버튼이 나옴  
 >     ![image](https://user-images.githubusercontent.com/79209568/120277222-bdf6b880-c2ee-11eb-8c23-5f388cccfbfd.png)
 >  
 > #### 마이페이지2(데코레이터 사용)
-> * 로그인 되지 않은 상태
+> * 로그인 되지 않은 상태  
 >   ![image](https://user-images.githubusercontent.com/79209568/120277336-e383c200-c2ee-11eb-9128-ad702669201f.png)
 >   * login_form으로 돌아간다.
 > * 로그인 된 상태
