@@ -70,6 +70,9 @@ Client의 firefox에서 www.finaltest.com 입력해서 2번 머신의 XE화면 �
 * unzip xe.zip
 * vi /etc/httpd/conf/httpd.conf -> xe로 DocumentRoot 바꿈
 * 방화벽 열기 firewall-cmd --permanent --add-service=http
+* vi /etc/resolv.conf에서 192.168.217.129 추가
+* firefox에서 www.finaltest.com 들어가서 설치
+* ![image](https://user-images.githubusercontent.com/79209568/120621191-9e02f880-c498-11eb-9386-ff9dab9ff28a.png) 
 
 ## DB
 * yum -y install mariadb-*
