@@ -20,7 +20,7 @@ Client의 firefox에서 www.finaltest.com 입력해서 2번 머신의 XE화면 �
         allow-transfer { any; };
   };
 
-  zone "217.168.192.in-addr-arpa" IN {
+  zone "217.168.192.in-addr.arpa" IN {
           type master;
           file "192.168.217.zone";
           allow-update { any; };
@@ -29,13 +29,57 @@ Client의 firefox에서 www.finaltest.com 입력해서 2번 머신의 XE화면 �
   ```
 * cp named.localhost finaltest.com.zone
 * vi finaltest.com.zone
+  ```
+  $TTL 1D
+  @       IN SOA  finaltest.com.          root(
+                                          0       ; serial
+                                          1D      ; refresh
+                                          1H      ; retry
+                                          1W      ; expire
+                                          3H )    ; minimum
+          IN      NS      finaltest.com.
+          IN      A       192.168.217.128
+
+  www     IN      A       192.168.217.129
+
+  ```
 * cp finaltest.com.zone 192.168.217.zone
 * vi 192.168.217.zone
+  ```
+  $TTL 1D
+  @       IN SOA  finaltest.com.          root(
+                                          0       ; serial
+                                          1D      ; refresh
+                                          1H      ; retry
+                                          1W      ; expire
+                                          3H )    ; minimum
+          IN      NS      finaltest.com.
+          IN      A       192.168.217.128
+
+  129     IN      PTR     www.finaltest.com.
+  ```
 * chmod 660 \*.zone
 * chown .named \*.zone
 * systemctl restart named
 * vi /etc/resolv.conf
-* nslookup
+* nslookup 확인
 
-## DB : 130
+## web
+* yum -y install httpd-* php-* --skip-broken
+* systemctl restart vsftpd ~~ (xe업로드)
+* unzip xe.zip
+* vi /etc/httpd/conf/httpd.conf -> xe로 DocumentRoot 바꿈
+* 방화벽 열기 firewall-cmd --permanent --add-service=http
+
+## DB
 * yum -y install mariadb-*
+* systemctl restart mariadb
+* update user set passsword=password('itbank') where user='root';
+* delete from user where user=' ';
+* insert into user(host, user, password) values ('192.168.217.%','userfinal', password('itbank'));
+* insert into db values ('192.168.217.%', 'dbfinal', 'userfinal', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y');
+* systemctl restart mariadb
+* firewall-cmd --permanent --add-port=3306/tcp / --reload
+
+## client
+* vi /etc/resolv.conf 에 네임서버 192.168.217.128 추가
