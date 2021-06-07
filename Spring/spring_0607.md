@@ -23,7 +23,21 @@
 * 프로젝트 추가
  - 프로젝트 이름 : MySpring
  - 패키지 : org.myspring.context
- - 
+ - 클래스 : MySpringContext
+   ![image](https://user-images.githubusercontent.com/79209568/120967854-00167300-c7a3-11eb-8167-439481e51b5f.png)
+* 해당 프로젝트를 jar파일로 export해서 라이브러리 파일로 만든다.
+  ![image](https://user-images.githubusercontent.com/79209568/120967932-20dec880-c7a3-11eb-8eed-5ba4c6aadf9c.png)
+  ![image](https://user-images.githubusercontent.com/79209568/120967936-24724f80-c7a3-11eb-86ad-0981cdd2170e.png)
+* 해당 프로젝트는 라이브러리로 생성 했으니 삭제해도 된다. 그 후 라이브러리를 테스트 할 새로운 프로젝트 생성
+  - 프로젝트 이름 : myspringtest
+  - 패키지 : myspringtest
+  - 클래스 : TestMain
+* 프로젝트 오른쪽 클릭 `Build Path > Labraries`에 Add JAR로 jar파일 추가(myspring jar파일은 해당 프로젝트 내에 있어야한다.)
+   ![image](https://user-images.githubusercontent.com/79209568/120968513-ecb7d780-c7a3-11eb-874f-1f9ca0e0be66.png)
+
+* TestMain에 해당 코드 작성으로 import되는 것을 확인한다.
+  ![image](https://user-images.githubusercontent.com/79209568/120968557-fb05f380-c7a3-11eb-978c-9c625fc03e17.png)
+
   
 ## maven project
 * 직접 만들어 본다. maven은 빌드해주는 도구다.
@@ -55,3 +69,8 @@
  ![image](https://user-images.githubusercontent.com/79209568/120967438-677ff300-c7a2-11eb-9b16-d9dab7161178.png)
 * main에서 setFormat을 주석처리 후 실행해보면 bean에 설정한대로 출력된다.  
   ![image](https://user-images.githubusercontent.com/79209568/120967550-8c746600-c7a2-11eb-86bc-2039d9fae257.png)
+
+
+> ### 추가 공부할 개념
+> * 자바 Class 클래스
+> * 자바 Reflection 개념
