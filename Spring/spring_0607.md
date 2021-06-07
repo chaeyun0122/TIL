@@ -1,5 +1,6 @@
 # Spring Framework
 - 의존주입(DI) 지원 : 객체가 다른 객체를 참조하게 하는 것을 직접 지원해준다.
+- 제어의 역전 : 모든 제어를 스프링이 하도록 한다.
 # 초기 환경 설정
 ## Eclipse 설치
 * https://www.eclipse.org/downloads/packages/release/2020-06/r : 2020-06 버전을 설치  
@@ -49,3 +50,8 @@
     ![image](https://user-images.githubusercontent.com/79209568/120965337-ba0be000-c79f-11eb-9804-05703524c685.png)
 * 실행 결과 
   ![image](https://user-images.githubusercontent.com/79209568/120965384-c859fc00-c79f-11eb-8ecd-ca77455b70bf.png)
+
+* bean에 property를 추가해서 format을 설정해주면 객체를 생성하면서 행위를 한다.  
+ ![image](https://user-images.githubusercontent.com/79209568/120967438-677ff300-c7a2-11eb-9b16-d9dab7161178.png)
+* main에서 setFormat을 주석처리 후 실행해보면 bean에 설정한대로 출력된다.  
+  ![image](https://user-images.githubusercontent.com/79209568/120967550-8c746600-c7a2-11eb-86bc-2039d9fae257.png)
