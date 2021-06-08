@@ -1,6 +1,7 @@
 # Spring Framework
 - 의존주입(DI) 지원 : 객체가 다른 객체를 참조하게 하는 것을 직접 지원해준다.
-- 제어의 역전 : 모든 제어를 스프링이 하도록 한다.
+- 제어의 역전(IOC) : 모든 제어를 스프링이 하도록 한다.
+- AOP
 # 초기 환경 설정
 ## Eclipse 설치
 * https://www.eclipse.org/downloads/packages/release/2020-06/r : 2020-06 버전을 설치  
