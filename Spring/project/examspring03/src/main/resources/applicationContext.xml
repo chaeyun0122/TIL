@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/context
+  http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- annotation 읽어서 처리하는 설정  -->
+	<context:annotation-config/>
+	
+	<bean id="memberDao" class="spring.MemberDao"></bean>
+	
+	<bean id="memberRegSvc" class="spring.MemberRegisterService"></bean>
+	
+	<!-- 동일한 타입의 객체가 두 개 이상 존재한다면 -->
+	<bean id="printer1" class="spring.MemberPrinter">
+		<qualifier value="sysout1"/>
+	</bean>
+	<bean id="printer2" class="spring.MemberPrinter">
+		<qualifier value="sysout2"/>
+	</bean>
+	
+	<bean id="infoPrinter" class="spring.MemberInfoPrinter"></bean>
+</beans>
