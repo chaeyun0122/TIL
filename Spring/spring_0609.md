@@ -1,5 +1,5 @@
 # Spring의 의존객체 주입
-> - 프로젝트명 : examspring02 [👉project file] (https://github.com/Clary0122/TIL/tree/main/Spring/project/examspring02)
+> - 프로젝트명 : examspring02 ([👉project file](https://github.com/Clary0122/TIL/tree/main/Spring/project/examspring02))
 > - 패키지명 : spring
 > - 리소스 : applicationContext.xml 추가
 ## 명시적 의존 주입
