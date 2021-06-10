@@ -1,4 +1,4 @@
-> - 프로젝트명 : examspring03 ([👉project file]())
+> - 프로젝트명 : examspring03 ([👉project file](https://github.com/Clary0122/TIL/tree/main/Spring/project/examspring03))
 > - 패키지명 : spring
 > - 리소스 : applicationContext.xml 추가
 
