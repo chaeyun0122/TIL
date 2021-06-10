@@ -62,7 +62,7 @@
 - 회원 클래스
 - id, email, password, name, registerDate
 - changePassword : 비밀번호 변경 매서드
-  - `IdPasswordNotMatchingException()` exception 클래스 
+  - `IdPasswordNotMatchingException()` : 현재 비밀번호가 틀릴 경우 발생하는 exception
 ```java
 package spring;
 
@@ -177,7 +177,7 @@ public class RegisterRequest {
 #### MemberDao.java
 - 회원 DB 역할 클래스
 - `db` : Map에 회원 정보를 저장
-- insert, selectByEmail, update 매서드로 삽입, 조회, 수정
+- `insert`, `selectByEmail`, `update` 매서드로 삽입, 조회, 수정
 ```java
 package spring;
 
@@ -204,6 +204,116 @@ public class MemberDao {
 	// 수정(U)
 	public void update(Member member) {
 		db.put(member.getEmail(), member);
+	}
+}
+```
+
+#### MemberRegisterService.java
+- 회원 등록 동작 클래스
+- `private MemberDao memberDao;` : MemberDao 의존 객체 직접 생성
+- `regist` : 회원을 등록시키는 매서드
+  - `AlreadyExistingMemberException` : 이미 존재하는 회원의 이메일이면 발생하는 exception
+    ![image](https://user-images.githubusercontent.com/79209568/121512717-fbf98800-ca24-11eb-868d-4037ba3489e4.png)
+```java
+package spring;
+
+import java.util.Date;
+
+public class MemberRegisterService {
+	private MemberDao memberDao;
+	
+	public MemberRegisterService(MemberDao memberDao) {
+		this.memberDao = memberDao;
+	}
+	
+	public void regist(RegisterRequest req) {
+		Member member = memberDao.selectByEmail(req.getEmail());
+		if (member != null) {
+			throw new AlreadyExistingMemberException("dup email:" + req.getEmail());
+		}
+		Member newMember = new Member(
+				req.getEmail(),
+				req.getPassword(),
+				req.getName(),
+				new Date());
+		memberDao.insert(newMember);
+	}
+}
+```
+
+#### ChangePasswordService.java
+- 비밀번호 변경 클래스
+- `changePassword` : email, oldPwd, newPwd를 인자로 받아서 비밀번호를 변경하는 매서드
+  -  `MemberNotFoundException` : 입력받은 이메일이 존재하지 않다면 발생하는 exception
+```java
+package spring;
+
+public class ChangePasswordService {
+	private MemberDao memberDao;
+	
+	public ChangePasswordService(MemberDao memberDao) {
+		this.memberDao = memberDao;
+	}
+	
+	public void changePassword(String email, String oldPwd, String newPwd) {
+		Member member = memberDao.selectByEmail(email);
+		if (member == null) {
+			throw new MemberNotFoundException();
+		}
+		member.changePassword(oldPwd, newPwd);
+		memberDao.update(member);
+	}
+}
+```
+
+#### Assembler.java
+- 조립기 클래스
+- MemberDao, MemberRegisterService, ChangePasswordService 클래스들을 조립해준다.
+```java
+package spring;
+
+public class Assembler {
+	private MemberDao memberDao;
+	private MemberRegisterService regSvc;
+	private ChangePasswordService pwdSvc;
+	
+	public Assembler() {
+		memberDao = new MemberDao();
+		regSvc = new MemberRegisterService(memberDao);
+		pwdSvc = new ChangePasswordService(memberDao);
+	}
+	
+	public MemberDao getMemberDao() {
+		return memberDao;
+	}
+	
+	public MemberRegisterService getMemberRegisterService() {
+		return regSvc;
+	}
+
+	public ChangePasswordService getChangePasswordService() {
+		return pwdSvc;
+	}
+}
+```
+
+#### MainForAssembler.java
+- Main 클래스
+- 등록할 회원의 정보를 RegisterRequest의 req 객체에 담아서 regist를 진행한다.
+```java
+package spring;
+
+public class MainForAssembler {
+	public static void main(String[] args) {
+		Assembler assm = new Assembler();
+		
+		MemberRegisterService regSvc = assm.getMemberRegisterService();
+		RegisterRequest req = new RegisterRequest();
+		req.setEmail("aaa@aaa.com");
+		req.setName("홍길동");
+		req.setPassword("1234");
+		req.setConfirmPassword("1234");
+		regSvc.regist(req);
 	}
 }
 ```
