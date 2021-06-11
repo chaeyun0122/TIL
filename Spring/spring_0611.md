@@ -53,8 +53,9 @@
 ![image](https://user-images.githubusercontent.com/79209568/121634563-be960880-cabf-11eb-8ba4-dcee5e5bbe48.png)
 
 ## Close(), Shutdown() 메서드
-> - 패키지 : config
+> - 패키지 : conf
 > - 클래스 : JavaConfig2
+> - 실행 : spring/Main3
 
 - 따로 종료 메서드라는 설정을 하지 않아도 close, shutdown이라는 이름의 메서드는 종료 메서드로 인식한다.
 #### Client3.java, Client4.java
@@ -71,3 +72,38 @@
 ![image](https://user-images.githubusercontent.com/79209568/121635369-16813f00-cac1-11eb-9be2-27d08a4f98d5.png)
 
 - 자원을 해제하는 것이 중요하기 때문에 종료 메서드를 따로 지원한다.
+
+## 객체의 범위
+- 기본적으로 Spring 컨테이너는 Bean객체를 하나만 생성한다(싱글톤)
+- 필요에 따라 Prototype의 Bean을 생성해서 객체를 구할 때 마다 계속 생성하게 할 수 있다.
+
+### Java
+> - 패키지 : conf
+> - 클래스 : JavaConfigPrototype
+> - 실행 : spring/Main4
+
+#### JavaConfigPrototype
+![image](https://user-images.githubusercontent.com/79209568/121639747-f739e000-cac7-11eb-98b8-2cf4e3852ccb.png)
+![image](https://user-images.githubusercontent.com/79209568/121639781-06209280-cac8-11eb-9802-f0be42d04f81.png)
+![image](https://user-images.githubusercontent.com/79209568/121639787-0882ec80-cac8-11eb-95ec-466c33de103a.png)
+
+- scope지우기
+![image](https://user-images.githubusercontent.com/79209568/121639827-120c5480-cac8-11eb-9a49-c61071586735.png)
+![image](https://user-images.githubusercontent.com/79209568/121639834-146eae80-cac8-11eb-9b07-787da50abe43.png)
+
+- 소멸자 메서드
+  - 클라이언트로 바꾸기
+  ![image](https://user-images.githubusercontent.com/79209568/121639867-22bcca80-cac8-11eb-999f-9faea47881e1.png)
+![image](https://user-images.githubusercontent.com/79209568/121639888-281a1500-cac8-11eb-8a61-937c3b820c7e.png)
+  - 소멸자 호출 X
+![image](https://user-images.githubusercontent.com/79209568/121639903-2cdec900-cac8-11eb-9fd8-3a006aa70739.png)
+  - destroy 직접 호출해줘야함
+  ![image](https://user-images.githubusercontent.com/79209568/121639952-43852000-cac8-11eb-92cb-a23600586c59.png)
+![image](https://user-images.githubusercontent.com/79209568/121639958-46801080-cac8-11eb-8937-66a1cfefc2ed.png)
+
+## xml
+![image](https://user-images.githubusercontent.com/79209568/121639974-4da71e80-cac8-11eb-8213-321dde43c66c.png)
+- 위와 같음
+![image](https://user-images.githubusercontent.com/79209568/121639986-539cff80-cac8-11eb-9dee-02be3b755f7f.png)
+
+> proxy pattern
