@@ -1,9 +1,12 @@
+
+> - 프로젝트명 : examspring05 ([👉project file]())
+> - 패키지명 : spring
+>   - 클래스 : Client, Client2, Client3, Client4, Main, Main2, Main3
+> - 패키지명 : conf
+>   - 클래스 : JavaConfig, JavaConfig2
+> - 리소스 : appctx.xml
 # Spring Life Cycle
 - 객체가 생성되고 사라지는 과정을 본다.
-> - 프로젝트명 : examspring05 ([👉project file]())
-> - 패키지명 : spring 추가
-> - 클래스 : Client, Client2
-> - 리소스 : appctx.xml
 
 #### Client.java
 - `InitializingBean`과 `DisposableBean`을 implement
@@ -16,7 +19,7 @@
 ![image](https://user-images.githubusercontent.com/79209568/121630353-eed9a900-cab7-11eb-82f7-9ac674a0063c.png)
 
 #### 결과
-![image](https://user-images.githubusercontent.com/79209568/121631916-f8b0db80-caba-11eb-91c3-8e7a8ef2bc3f.png)
+![image](https://user-images.githubusercontent.com/79209568/121635631-868fc500-cac1-11eb-84bd-a58a1a94146b.png)
 
 ## 클래스에 직접 초기화, 종료 메서드 지정
 #### Client2.java
@@ -34,8 +37,8 @@
 ![image](https://user-images.githubusercontent.com/79209568/121634118-010b1580-cabf-11eb-8689-8d72e9b330b1.png)
 
 ## Java로 해보기
-- 패키지 : conf
-- 클래스명 : JavaConfig.java
+> - 패키지 : conf
+> - 클래스명 : JavaConfig.java
 
 
 #### JavaConfig.java
@@ -50,6 +53,9 @@
 ![image](https://user-images.githubusercontent.com/79209568/121634563-be960880-cabf-11eb-8ba4-dcee5e5bbe48.png)
 
 ## Close(), Shutdown() 메서드
+> - 패키지 : config
+> - 클래스 : JavaConfig2
+
 - 따로 종료 메서드라는 설정을 하지 않아도 close, shutdown이라는 이름의 메서드는 종료 메서드로 인식한다.
 #### Client3.java, Client4.java
 - Client3, Client4를 생성 후 종료 메서드의 이름을 각각 close(), shutdown()로 지정한다.
