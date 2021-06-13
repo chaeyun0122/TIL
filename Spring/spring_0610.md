@@ -2,8 +2,9 @@
 > - 패키지명 : spring
 > - 리소스 : applicationContext.xml 추가
 
-## 자동주입
+# 자동주입
 - 참조를 Spring이 알아서 찾게 해준다.
+## xml 코드로 설정 설정
 > ### @Autowired
 > - 필드나 메서드에 적용하면 의존 객체를 자동으로 주입한다.
 
