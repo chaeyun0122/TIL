@@ -1,5 +1,5 @@
 
-> - 프로젝트명 : examspring05 ([👉project file]())
+> - 프로젝트명 : examspring05 ([👉project file](https://github.com/Clary0122/TIL/tree/main/Spring/project/examspring05))
 > - 패키지명 : spring
 >   - 클래스 : Client, Client2, Client3, Client4, Main, Main2, Main3
 > - 패키지명 : conf
