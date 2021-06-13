@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="client" class="spring.Client">
+		<property name="host" value="호스트에게"/>
+	</bean>
+
+	<!-- 초기화메서드, 종료메서드를 지정한다. -->
+	<bean id="client2" class="spring.Client2" 
+			init-method="startMethod"
+			destroy-method="endMethod">
+		<property name="host" value="호스트2에게"/>
+	</bean>
+</beans>
