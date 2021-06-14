@@ -80,3 +80,4 @@ Today I Learned..
 * [Spring 04 - 스프링으로 의존 주입(자동 주입-Xml)](Spring/spring_0610.md)
 * [Spring 05 - 스프링으로 의존 주입(자동 주입-Java)](Spring/spring_0610_2.md)
 * [Spring 06 - 스프링 빈 생명주기, 초기화 소멸 메서드, 빈 객체의 범위](Spring/spring_0611.md)
+* [Spring 07 - AOP](Spring/spring_0612.md)
