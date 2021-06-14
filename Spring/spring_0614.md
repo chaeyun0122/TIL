@@ -1,5 +1,9 @@
 # AOP
 - aspect oriented programming (관점 지향 프로그래밍)
+- 여러 객체에 공통적인 기능과 핵심적인 기능을 구분한다.
+- 재사용성을 높인다.
+- 핵심 기능의 수정 없이 공통 기능을 적용할 수 있다.
+- 핵심 기능에 공통기능을 삽입하는 것
 
 > - 프로젝트명 : examspring06 ([👉project file](https://github.com/Clary0122/TIL/tree/main/Spring/project/examspring06))
 > - [aop00](#Java에서-확인하기) : 기본 calculator 동작 구현
@@ -29,7 +33,7 @@
 #### 결과
 ![image](https://user-images.githubusercontent.com/79209568/121836874-50478500-cd0f-11eb-890f-0fbd697f5a29.png)
 
-## 기능에 수행 시간을 구하는 기능을 추가한다면?
+### 기능에 수행 시간을 구하는 기능을 추가한다면?
 ### 직접 기능 수정
 - main에서 직접 넣어준다.
 - 하나하나 다 해야하는 번거로움이 있다.  
@@ -51,6 +55,9 @@
 #### Main & 결과
 ![image](https://user-images.githubusercontent.com/79209568/121839166-82a7b100-cd14-11eb-93e3-4b58ae3b470f.png)
 
+## 구조 확인
+![image](https://user-images.githubusercontent.com/79209568/121873910-d41a6500-cd41-11eb-9802-1c677ffaa646.png)
+
 
 ## Spring에서 AOP 기능 확인
 ### XML
@@ -66,6 +73,7 @@
 - POJO : Plain Old Java Object
   - 아무것도 의존하지 않고, 또 무엇도 의존 받지 않은 깔끔한 클래스 객체
 ![image](https://user-images.githubusercontent.com/79209568/121845497-7d506380-cd20-11eb-9f20-035cb3a6dbf6.png)
+- `ProceedingJoinPoint` : aop의 어드바이스 중 around의 경우 해당 객체의 proceed() 메서드를 호출해서 사용한다.
 
 #### appctx4.xml
 - aop 설정을 해준다 
@@ -76,6 +84,7 @@
 
 - `<aop:pointcut>` : 스프링에 알려주는 자르고 들어갈 지점.
 - `<aop:around>` : pointcut 지점 전 후에 유연하게 사용
+  - 다른 Advice
   
   ![image](https://user-images.githubusercontent.com/79209568/121844907-a3293880-cd1f-11eb-8975-f375769de76c.png)
   
@@ -98,9 +107,12 @@
 ### Annotation
 #### ExecTimeCalculator
 ![image](https://user-images.githubusercontent.com/79209568/121846236-ae7d6380-cd21-11eb-8424-8108b2cec6e3.png)
+- `@Aspect` : 해당 클래스가 공통 기능을 구현하는 클래스임을 알려주는 어노테이션
+- `@Around("pointcut")` : around 어드바이스 어노테이션. 속성 값으로 pointcut을 전달해준다.
 
 #### appctx5.xml
 ![image](https://user-images.githubusercontent.com/79209568/121847495-9d355680-cd23-11eb-9d77-7dabceccfc43.png)
+- `<aop:aspectj-autoproxy/>` : @Aspect 어노테이션을 읽어들이는 aop 태그
 
 #### Main & 결과
 ![image](https://user-images.githubusercontent.com/79209568/121846556-251a6100-cd22-11eb-9e49-36739f83b6cc.png)
@@ -108,6 +120,7 @@
 ### Java
 #### JavaConfig
 ![image](https://user-images.githubusercontent.com/79209568/121846796-8d694280-cd22-11eb-90ad-0170cdd98b4f.png)
+- `@EnableAspectJAutoProxy` : xml의 <aop:aspectj-autoproxy> 역할. @Aspect 어노테이션을 읽어들이는 역할을 하는 어노테이션
 
 #### ExecTimeCalculator
 ![image](https://user-images.githubusercontent.com/79209568/121846834-9a863180-cd22-11eb-9f90-f020a6bdadcf.png)
