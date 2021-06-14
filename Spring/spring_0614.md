@@ -67,7 +67,7 @@
   - 아무것도 의존하지 않고, 또 무엇도 의존 받지 않은 깔끔한 클래스 객체
 ![image](https://user-images.githubusercontent.com/79209568/121845497-7d506380-cd20-11eb-9f20-035cb3a6dbf6.png)
 
-#### appctx.xml
+#### appctx4.xml
 - aop 설정을 해준다 
   - 어떤 기능이 동작할 때 그 기능이 동작되기 전, 후 등에 동작할 메서드 지정
   - ex) factorial 동작하기 전에 시간 구하는 동작을 먼저 수행해라
@@ -98,6 +98,9 @@
 ### Annotation
 #### ExecTimeCalculator
 ![image](https://user-images.githubusercontent.com/79209568/121846236-ae7d6380-cd21-11eb-8424-8108b2cec6e3.png)
+
+#### appctx5.xml
+![image](https://user-images.githubusercontent.com/79209568/121847495-9d355680-cd23-11eb-9d77-7dabceccfc43.png)
 
 #### Main & 결과
 ![image](https://user-images.githubusercontent.com/79209568/121846556-251a6100-cd22-11eb-9e49-36739f83b6cc.png)
