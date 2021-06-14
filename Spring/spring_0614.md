@@ -1,6 +1,12 @@
 # AOP
 - aspect oriented programming (관점 지향 프로그래밍)
 
+> - 프로젝트명 : examspring06 ([👉project file](https://github.com/Clary0122/TIL/tree/main/Spring/project/examspring05))
+> - [aop00](#Java에서-확인하기) : 기본 calculator 동작 구현
+> - [aop01](#직접-기능-수정) : main에서 직접 기능 수정
+> - [aop02](#클래스에서-기능-수정) : 핵심 기능 클래스에 수정
+> - [aop03](#공통적인-기능을-하는-클래스-구현) : 공통 기능 클래스 추가(프록시 패턴)
+
 ## Java에서 확인하기
 #### Calculator
 - 인터페이스  
