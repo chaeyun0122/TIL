@@ -11,7 +11,7 @@
 > - [aop02](#클래스에서-기능-수정) : 핵심 기능 클래스에 수정
 > - [aop03](#공통적인-기능을-하는-클래스-구현) : 공통 기능 클래스 추가(프록시 패턴)
 > - [aop04](#XML) : Spring의 AOP - XML
-> - [aop05](#Annotation) : Spring의 AOP - Annotation
+> - [aop05](#Annotation) : Spring의 AOP - XML, Annotation
 > - [aop06](#Java) : Spring의 AOP - Java
 
 ## Java에서 확인하기
