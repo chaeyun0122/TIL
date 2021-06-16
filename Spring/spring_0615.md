@@ -2,7 +2,9 @@
 
 > - 프로젝트명 : examspring06 ([👉project file](https://github.com/Clary0122/TIL/tree/main/Spring/project/examspring06))
 > - [aop001](#전체) : 전체 작업
-> - [aop002](#Advice-Annotation) : Before - annotation
+> - aop002
+>     - [1 : Before - annotation](#Advice-Annotation)
+>     - [2 : JoinPoint](#JoinPoint)
 > - [aop003](#POJO클래스와-XML을-이용) : Before - POJO class & XML
 > - [aop004](#POJO클래스와-XML을-이용) : Before, After - POJO class & XML
 > - aop005 : Before, After - annotation
@@ -44,9 +46,19 @@
 #### MyAspect
 - @Aspect를 지정하는 MyAspect 클래스를 생성
 - @Before어노테이션이 있는 beforeMethod를 생성  
+  - `@Before("execution(public void aop002.Boy.runSomething()) || execution(public void aop002.Girl.runSomething())")`
+  - `@Before("execution(public void aop002.*.runSomething())")`
+  - `@Before("execution(public void aop002..runSomething())")`
+
+  ![image](https://user-images.githubusercontent.com/79209568/121994824-eeefe680-cde0-11eb-9a9a-e5609239cf8d.png)
   
-![image](https://user-images.githubusercontent.com/79209568/121994824-eeefe680-cde0-11eb-9a9a-e5609239cf8d.png)
-  
+> ### 포인트 컷 지시자(표현식)
+> ```
+> execution([접근 제한자] 반환자료형 [패키지명.][클래스명].메서드명(파라미터타입))
+> ```
+> * \* : 모든 값
+> * .. : 0 개 이상
+
 #### aop002.xml
 ![image](https://user-images.githubusercontent.com/79209568/121994460-45a8f080-cde0-11eb-8000-388cd375f525.png)
 
@@ -55,6 +67,35 @@
 
 #### 결과
 ![image](https://user-images.githubusercontent.com/79209568/121994712-bea84800-cde0-11eb-835c-dcc4cdb2bada.png)
+
+## JoinPoint
+- JoinPoint란 핵심 기능 함수가 실행하기 **전, 중간, 후** 등의 포인트다.
+- PointCut은 그 JoinPoint들 중 공통 기능 함수가 자르고 들어갈 곳이다.
+- Advice는 그 PoinCut을 기준으로 어느 시점에 실행 될 것인지 나타낸다. (여기서는 @Before이므로 이전)
+- JoinPoint를 인자로 받는 메서드는 그 당시의 JoinPoint 정보를 받는다.
+  - get으로 시작한다.
+    
+    ![image](https://user-images.githubusercontent.com/79209568/122204862-8f760180-ceda-11eb-8a6c-c0b797bf6f81.png)
+
+- 만약 main에서 PointCut에 충족하는 메서드(핵심 기능 메서드)가 실행될 때 받는 인자가 있을 경우, JoinPoint를 인자로 받으면 getArgs()를 통해 그 때의 인자를 곧통 기능 함수에서 받아올 수 있다.
+#### Person
+- 인터페이스에 정수와 실수를 인자로 받는 runSomething 함수를 정의해준다.  
+  
+![image](https://user-images.githubusercontent.com/79209568/122205336-1925cf00-cedb-11eb-8692-c60e42c404f1.png)
+
+#### Girl, Boy
+- Person의 runSomething()을 오버라이드하는 함수를 정의해준다.  
+  
+![image](https://user-images.githubusercontent.com/79209568/122205535-4ffbe500-cedb-11eb-9e78-bdcbbef50f3a.png)
+
+#### MyAspect
+- before 공통 기능 메서드가 JoinPoint를 인자로 받는다.
+- getArgs()로 받은 값을 하나하나 출력해주도록 해준다.  
+  
+![image](https://user-images.githubusercontent.com/79209568/122205929-c26cc500-cedb-11eb-89ea-572cc7996d55.png)
+
+#### Main & 결과
+![image](https://user-images.githubusercontent.com/79209568/122206151-03fd7000-cedc-11eb-9161-2cf5da569b03.png)
 
 ## POJO클래스와 XML을 이용
 ### Before
