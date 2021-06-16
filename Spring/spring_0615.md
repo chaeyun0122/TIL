@@ -2,7 +2,7 @@
 
 > - 프로젝트명 : examspring06 ([👉project file](https://github.com/Clary0122/TIL/tree/main/Spring/project/examspring06))
 > - [aop001](#전체) : 전체 작업
-> - [aop002](#Advice Annotation) : Before - annotation
+> - [aop002](#Advice-Annotation) : Before - annotation
 > - [aop003](#POJO클래스와-XML을-이용) : Before - POJO class & XML
 > - [aop004](#POJO클래스와-XML을-이용) : Before, After - POJO class & XML
 > - aop005 : Before, After - annotation
