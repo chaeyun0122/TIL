@@ -1,17 +1,13 @@
+# AOP 예제 2 _이어서
 > - 프로젝트명 : examspring06 ([👉project file](https://github.com/Clary0122/TIL/tree/main/Spring/project/examspring06))
-> - [aop001](#) : 전체 작업
-> - [aop002](#) : Before - annotation
-> - [aop003](#) : Before - POJO class & XML
-> - [aop004](#) : Before, After - POJO class & XML
-> - [aop005](#) : Before, After - annotation
-> - [aop006](#) : @Pointcut - annotation
-> - [aop007](#) : @Pointcut - POJO class & XML
-> - [aop008](#) : Around - POJO class & XML
-> - [aop009](#) : AfterReturning - POJO class & XML
-> - [aop010](#) : AfterThrowing - POJO class & XML
-> - [aop011](#) : Around - annotation
-> - [aop012](#) : AfterReturning - annotation
-> - [aop013](#) : AfterThrowing - annotation
+> - [aop008](#Around) : Around - POJO class & XML
+> - [aop009](#AfterReturning) : AfterReturning - POJO class & XML
+> - [aop010](#AfterThrowing) : AfterThrowing - POJO class & XML
+> - [aop011](#Annotation으로-변경) : Around - annotation
+> - [aop012](#Annotation으로-변경) : AfterReturning - annotation
+> - [aop013](#Annotation으로-변경) : AfterThrowing - annotation
+> - aop014 : Around로 통합
+> - [aop015](#Aspect-적용-순서) : Order - 다중 aspect의 순서
 
 ## Around
 #### MyAspect
@@ -62,6 +58,36 @@
 - after-throwing  
   ![image](https://user-images.githubusercontent.com/79209568/122163517-4b6e0700-ceb0-11eb-98e8-5e67f6142e56.png)
 
-## Aspect 적용 순서 - @Order(정수) (aop015)
-- 정수 값이 작을 수록 aspect의 우선순위가 높다.
-- 핵심 기능을 감싸는 개념으로 우선순위가 정해진다.
+## Aspect 적용 순서
+- 두 개 이상의 Aspect가 존재할 경우 어떤 Aspect가 우선 적용될 것인가?
+> #### '문'을 통과한 후 '중문'을 통과하고 '핵심기능' 수행한다고 설계해보자.
+
+#### MyAspect
+- `문`을 통과하는 Aspect  
+![image](https://user-images.githubusercontent.com/79209568/122209009-fc8b9600-cede-11eb-8e11-00b45311cbae.png)
+
+#### MyAspect2
+- `중문`을 통과하는 Aspect   
+![image](https://user-images.githubusercontent.com/79209568/122209093-15944700-cedf-11eb-9ebf-fad25c620d2b.png)
+
+#### aop015.xml
+- MyAspect, MyAspect2 빈 등록
+![image](https://user-images.githubusercontent.com/79209568/122209240-483e3f80-cedf-11eb-87f4-002a0650a71e.png)
+
+#### 결과
+- `중문`의 우선순위가 `문`의 우선순위보다 높다.
+- **xml에 등록한 Bean 순서로 우선순위가 결정되는 것을 확인할 수 있다.**
+![image](https://user-images.githubusercontent.com/79209568/122209857-f518bc80-cedf-11eb-8e7b-263011fe57a3.png)
+
+### 우선순위 직접 지정
+#### annotation
+- `@Order(정수)` 어노테이션을 설정한다. 정수의 숫자가 작을수록 우선순위가 높다.  
+  
+![image](https://user-images.githubusercontent.com/79209568/122210683-dc5cd680-cee0-11eb-9dca-bad1d4114d1f.png)
+
+#### XML
+- `<aop:aspect>`의 `order` 속성으로 우선순위를 설정한다.  
+  
+![image](https://user-images.githubusercontent.com/79209568/122212377-b89a9000-cee2-11eb-910c-424417142e4d.png)
+
+### 다중 Aspect 우선순위를 정할 때 어드바이스가 around인 경우 순서가 뒤죽박죽되는 경우가 많다. (특히 어노테이션의 경우) 그러므로 around를 가장 많이 사용하지만 항상 around가 좋은 것은 아니다.
