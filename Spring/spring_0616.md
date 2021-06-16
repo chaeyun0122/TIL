@@ -61,3 +61,7 @@
   ![image](https://user-images.githubusercontent.com/79209568/122163310-efa37e00-ceaf-11eb-8c84-b324a1d21e0c.png)
 - after-throwing  
   ![image](https://user-images.githubusercontent.com/79209568/122163517-4b6e0700-ceb0-11eb-98e8-5e67f6142e56.png)
+
+## Aspect 적용 순서 - @Order(정수) (aop015)
+- 정수 값이 작을 수록 aspect의 우선순위가 높다.
+- 핵심 기능을 감싸는 개념으로 우선순위가 정해진다.
