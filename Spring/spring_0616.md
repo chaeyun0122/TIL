@@ -1,5 +1,5 @@
 # AOP 예제 2 _이어서
-> - 프로젝트명 : examspring06 ([👉project file](https://github.com/Clary0122/TIL/tree/main/Spring/project/examspring06))
+> - 프로젝트명 : examspring06 ([👉project file](https://github.com/Clary0122/TIL/blob/main/Spring/project/examspring06.zip))
 > - [aop008](#Around) : Around - POJO class & XML
 > - [aop009](#AfterReturning) : AfterReturning - POJO class & XML
 > - [aop010](#AfterThrowing) : AfterThrowing - POJO class & XML
