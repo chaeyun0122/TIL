@@ -1,14 +1,14 @@
 # AOP 예제 2
 
 > - 프로젝트명 : examspring06 ([👉project file](https://github.com/Clary0122/TIL/tree/main/Spring/project/examspring06))
-> - [aop001](#) : 전체 작업
-> - [aop002](#) : Before - annotation
-> - [aop003](#) : Before - POJO class & XML
-> - [aop004](#) : Before, After - POJO class & XML
-> - [aop005](#) : Before, After - annotation
-> - [aop006](#) : @Pointcut - annotation
-> - [aop007](#) : @Pointcut - POJO class & XML
->   ![image](https://user-images.githubusercontent.com/79209568/122001850-e650dd80-cdeb-11eb-9130-d3a8a12babda.png)
+> - [aop001](#전체) : 전체 작업
+> - [aop002](#Advice Annotation) : Before - annotation
+> - [aop003](#POJO클래스와-XML을-이용) : Before - POJO class & XML
+> - [aop004](#POJO클래스와-XML을-이용) : Before, After - POJO class & XML
+> - aop005 : Before, After - annotation
+> - [aop006](#PointCut-반복-줄이기) : @Pointcut - annotation
+> - [aop007](#annotation) : @Pointcut - POJO class & XML
+
 
 
 ## 전체
