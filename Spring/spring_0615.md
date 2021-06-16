@@ -1,6 +1,6 @@
 # AOP 예제 2
 
-> - 프로젝트명 : examspring06 ([👉project file](https://github.com/Clary0122/TIL/tree/main/Spring/project/examspring06))
+> - 프로젝트명 : examspring06 ([👉project file](https://github.com/Clary0122/TIL/blob/main/Spring/project/examspring06.zip))
 > - [aop001](#전체) : 전체 작업
 > - aop002
 >     - [1 : Before - annotation](#Advice-Annotation)
