@@ -38,12 +38,13 @@ create sequence MEMBER_SEQ start with 1 increment by 1 maxvalue 99999;
 ![image](https://user-images.githubusercontent.com/79209568/122334683-0fe94080-cf75-11eb-8533-38cfdb47c6a8.png)
 
 ## Spring 프로젝트 준비
-> 프로젝트 : examspring07
-> 패키지 : examspring03의 spring 패키지
-> 리소스 : examspring03의 applicationContext.xml
+> - 프로젝트 : examspring07 ([👉project file](https://github.com/Clary0122/TIL/blob/main/Spring/project/examspring07))
+> - 패키지 : examspring03의 spring 패키지
+> - 리소스 : examspring03의 applicationContext.xml
 
-### DB 연동을 위한 dependency 추가
+### DB 연동을 위한 설정 추가
 #### pom.xml
+- **Dependency 추가**
 - [spirng-jdbc 4.1.0버전](https://mvnrepository.com/artifact/org.springframework/spring-jdbc/4.1.0.RELEASE)
 - [c3p0 0.9.5.2 버전](https://mvnrepository.com/artifact/com.mchange/c3p0/0.9.5.2)
 - [commons-dbcp 1.4 버전](https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp/1.4)
@@ -58,5 +59,25 @@ create sequence MEMBER_SEQ start with 1 increment by 1 maxvalue 99999;
     ```
   - 저장하면 오류가 난다.
     - 사용자의 `.m2 > repository > oracle > ojdbc6 > 11.2.0.3` 폴더에 ojdbc6 jar 파일이 없기 때문이다.
-    - ojdbc6 jar 파일을 해당 폴더에 넣어주고 pom.xml을 다시 저장해주면 오류는 사라진다.
+    - [ojdbc6 jar](https://github.com/Clary0122/TIL/blob/main/Spring/project/ojdbc6-11.2.0.3.jar) 파일을 해당 폴더에 넣어주고 pom.xml을 다시 저장해주면 오류는 사라진다.
+    
     ![image](https://user-images.githubusercontent.com/79209568/122336863-6b68fd80-cf78-11eb-938c-2dd10e48fff6.png)
+- 추가 완료
+  
+  ![image](https://user-images.githubusercontent.com/79209568/122337078-c864b380-cf78-11eb-9738-1be9e8eb7cf5.png)
+
+#### applicationContext.xml
+![image](https://user-images.githubusercontent.com/79209568/122340392-2abfb300-cf7d-11eb-9de7-b7182bf82003.png)
+
+#### MemberDao.java
+- JdbcTemplate 클래스를 의존하는 MemberDao
+![image](https://user-images.githubusercontent.com/79209568/122342349-7e330080-cf7f-11eb-8da0-c6e8248d8293.png)
+
+#### applicationContext.xml
+- MemberDao 빈 설정
+![image](https://user-images.githubusercontent.com/79209568/122342572-c2be9c00-cf7f-11eb-9a06-ddb6709c68f9.png)
+
+> ORM 기법
+
+### select 
+![image](https://user-images.githubusercontent.com/79209568/122342792-f7325800-cf7f-11eb-9b22-2c2285a4eb03.png)
