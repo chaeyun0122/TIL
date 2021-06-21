@@ -26,4 +26,6 @@ https://tomcat.apache.org/download-80.cgi
 - 결과  
   ![image](https://user-images.githubusercontent.com/79209568/122710418-28ba6480-d29b-11eb-8f52-6fc3f136154a.png)
 
-
+----------
+- WEB-INF아래에 jsp 파일을 넣는 이유
+웹에서 직접 요청이 불가능하게 만들기 위해 WEB-INF아래에 둔다. 서블릿을 통해서만 응답하도록한다.
