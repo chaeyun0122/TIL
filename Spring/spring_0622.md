@@ -53,6 +53,12 @@
 #### `/simple?type=greeting`로 요청 된 경우
 ![image](https://user-images.githubusercontent.com/79209568/123115717-43e3ca80-d47b-11eb-9e68-5865d9806439.png)
 
+#### `/simple?type=date`로 요청 된 경우
+![image](https://user-images.githubusercontent.com/79209568/123124933-0daa4900-d483-11eb-801b-441395a74540.png)
+
+#### `/simple?type=test`로 요청 된 경우
+![image](https://user-images.githubusercontent.com/79209568/123125305-5a8e1f80-d483-11eb-9d21-bac58857237c.png)
+
 #### CommandHandler.java
 - 인터페이스 생성
 ![image](https://user-images.githubusercontent.com/79209568/123106758-e009d380-d473-11eb-8243-1345ff3a71b3.png)
