@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>examspring08</display-name>
+  
+  <!-- 프론트 컨트롤러 선언 - 모든 요청을 다 받아주는 한 지점 -->
+  <servlet>
+  	<servlet-name>dispatcher</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<init-param>  <!-- 설정 파일들을 읽어들이도록하는 태그 -->
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>
+  			classpath:spring-mvc.xml
+  			classpath:spring-controller.xml
+  		</param-value>
+  	</init-param>
+  </servlet>
+  
+  <!-- 모든 요청을 프론트 컨트롤러로 매핑 -->
+  <servlet-mapping>
+  	<servlet-name>dispatcher</servlet-name>
+  	<url-pattern>/</url-pattern> <!-- 최상위 루트이므로 모든 요청을 다 받는다 -->
+  </servlet-mapping>
+  
+  <!-- 요청과 응답에 적용될 필터 등록 - utf8로 바꿔서 처리하고 응답 -->
+  <!-- 
+  	서블릿과 동일한 개념이지만 동작하는 시점이 다르다
+  	필터는 요청이 들어올 때 동작한다, 그리고 처리가 끝나서 응답을 할 때 동작한다.
+   -->
+  <filter>
+  	<filter-name>encoding</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>utf-8</param-value>
+  	</init-param>
+  </filter>
+  
+  <!-- 필터를 적용할 요청 URL 매핑 -->
+  <filter-mapping>
+  	<filter-name>encoding</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+</web-app>
