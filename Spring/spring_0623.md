@@ -50,11 +50,12 @@
   > - filter
   >   - 서블릿과 동일한 개념이지만 동작하는 시점이 다르다.
   >   - 필터는 요청이 들어올 때 동작한다, 그리고 처리가 끝나서 응답을 할 때 동작한다.
-- 필터를 적용할 요청 URL 매핑 
+- 필터를 적용할 요청 URL 매핑  
 ![image](https://user-images.githubusercontent.com/79209568/123036633-55e84d80-d428-11eb-8f70-0bc1ae956140.png)
 
 ### Spring-controller.xml
-- spring 빈 생성할 xml 파일 준비
+- spring 빈 생성할 xml 파일 준비  
+  
   ![image](https://user-images.githubusercontent.com/79209568/123038534-8978a700-d42b-11eb-8e0a-b5deed918a51.png)
 
 ## 기본 동작 실행 확인
