@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>examJsp02</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!-- 웹 컨테이너에 서브릿 생성 선언(서블릿 등록) -->
+  <servlet>
+  	<servlet-name>simpleController</servlet-name>
+  	<servlet-class>controller.SimpleController</servlet-class>
+  </servlet>
+  
+  <!-- 요청 URL과 처리할 서블릿을 매핑 -->
+  <servlet-mapping>
+  	<servlet-name>simpleController</servlet-name>
+  	<url-pattern>/simple</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 웹 컨테이너에 서블릿 생성 선언(서블릿 등록) -->
+  <servlet>
+  	<servlet-name>controllerUsingInstance</servlet-name>
+  	<servlet-class>controller.ControllerUsingInstance</servlet-class>
+  </servlet>
+  
+  <!-- 요청 URL과 처리할 서블릿을 매핑 -->
+  <servlet-mapping>
+  	<servlet-name>controllerUsingInstance</servlet-name>
+  	<url-pattern>/conui</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 웹 컨테이너에 서블릿 생성 선언(서블릿 등록) -->
+  <servlet>
+  	<servlet-name>controllerUsingURI</servlet-name>
+  	<servlet-class>controller.ControllerUsingURI</servlet-class>
+  </servlet>
+  
+  <!-- 요청 URL과 처리할 서블릿을 매핑 -->
+  <servlet-mapping>
+  	<servlet-name>controllerUsingURI</servlet-name>
+  	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+</web-app>
