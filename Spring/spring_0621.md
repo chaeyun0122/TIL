@@ -15,7 +15,7 @@ https://tomcat.apache.org/download-80.cgi
 
 # Servlet
 - 서블릿 클래스 생성 (HttpServlet을 extend)  
-  ![image](https://user-images.githubusercontent.com/79209568/122710220-d24d2600-d29a-11eb-991b-4f1a321ea8a2.png)
+  ![image](https://user-images.githubusercontent.com/79209568/123097109-c0ba7880-d46a-11eb-8702-551130cbce03.png)
 - web.xml 만들기  
   ![image](https://user-images.githubusercontent.com/79209568/122710257-e1cc6f00-d29a-11eb-997a-8973b3ddac38.png)\
   ![image](https://user-images.githubusercontent.com/79209568/122710262-e729b980-d29a-11eb-9ea7-5cf1f8d18cb2.png)
