@@ -1,4 +1,6 @@
 # Spring MVC
+> 프로젝트 : examspring08 ([👉project file](https://github.com/Clary0122/TIL/tree/main/Spring/project/examspring08))
+
 ## 프로젝트 구조 설정
 ### 폴더 생성
 - main폴더에 webapp \> WEB-INF \> views 폴더를 생성  
@@ -130,3 +132,13 @@
 - 같은 `/ex/exam3` url로 넘어가지만 method가 POST인 요청이 들어왔기 때문에 exam4 메서드가 실행된다.  
   
   ![image](https://user-images.githubusercontent.com/79209568/123151238-3986f800-d49e-11eb-8279-3b40012d0521.png)
+
+> ## 연습
+> - 두 수를 입력받고 합을 구하는 \/add
+> - 하나의 수를 입력받고 팩토리얼을 구하는 \/factorial
+> ### add()
+> ![image](https://user-images.githubusercontent.com/79209568/123154456-d1d2ac00-d4a1-11eb-9cf2-a79970a682ed.png)
+> ### factorial()
+> ![image](https://user-images.githubusercontent.com/79209568/123154593-0b0b1c00-d4a2-11eb-80c9-0cd8daabc5a6.png)
+> ## 모든 결과 정리한 index
+> ![image](https://user-images.githubusercontent.com/79209568/123154692-2ece6200-d4a2-11eb-896a-4732dd3efccd.png)
