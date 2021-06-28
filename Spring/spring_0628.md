@@ -42,3 +42,20 @@
 ![image](https://user-images.githubusercontent.com/79209568/123587651-8c0b4000-d821-11eb-8186-6266852a049c.png)
 ![image](https://user-images.githubusercontent.com/79209568/123587666-9299b780-d821-11eb-83e6-fa600da3e31c.png)
 
+<hr>
+
+# 세션 유지
+#### LoginController.java
+![image](https://user-images.githubusercontent.com/79209568/123588494-cd501f80-d822-11eb-80e5-dc2e128bb6c9.png)
+
+# 로그아웃
+## 컨트롤러
+#### logoutController.java
+![image](https://user-images.githubusercontent.com/79209568/123588619-fec8eb00-d822-11eb-845d-6fbd9c0fcd2b.png)
+
+## 빈 등록
+#### spring-controller.xml
+![image](https://user-images.githubusercontent.com/79209568/123588652-0be5da00-d823-11eb-9e08-4a04024522c6.png)
+
+## 메인 수정
+#### main.jsp
