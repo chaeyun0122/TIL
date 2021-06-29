@@ -15,7 +15,7 @@
   
 #### LoginCommand.java
 - 로그인 요청에 사용 될 커맨드 객체  
-![image](https://user-images.githubusercontent.com/79209568/123583295-544cca00-d81a-11eb-9b08-dcedc40cfc7b.png)
+![image](https://user-images.githubusercontent.com/79209568/123864609-ead9d200-d965-11eb-81cf-78f051a923bc.png)
 
 ## 검증처리
 #### LoginCommandValidatitor.java
@@ -38,6 +38,10 @@
 - 로그인 성공 폼  
 ![image](https://user-images.githubusercontent.com/79209568/123587601-77c74300-d821-11eb-9ad1-bdd855aef9b6.png)
 
+#### label.properties
+![image](https://user-images.githubusercontent.com/79209568/123864760-165cbc80-d966-11eb-8fd5-cac80bbe2309.png)
+
+
 ## 서버 실행 결과
 ![image](https://user-images.githubusercontent.com/79209568/123587651-8c0b4000-d821-11eb-8186-6266852a049c.png)
 ![image](https://user-images.githubusercontent.com/79209568/123587666-9299b780-d821-11eb-83e6-fa600da3e31c.png)
@@ -59,3 +63,7 @@
 
 ## 메인 수정
 #### main.jsp
+- authInfo에 값이 없다면 = 로그인하지 않은 상태인 경우 **회원가입과 로그인 메뉴**
+- authInfo에 값이 있다면 = 로그인 한 상태인 경우 **로그아웃 메뉴**  
+  
+  ![image](https://user-images.githubusercontent.com/79209568/123864474-c41b9b80-d965-11eb-9b67-50a2b3279ac1.png)
