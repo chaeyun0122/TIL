@@ -3,6 +3,14 @@
 > - 특정 시점에서 요청을 가로채서 확인 후 처리를 하는 인터셉터를 이용해서 /edit이후의 요청은 모두 세션 확인을 하도록 한다.
 
 # Interceptor
+- **preHandle**
+  - controller로 보내기 전에 처리하는 인터셉터
+  - 반환이 false라면 controller로 요청을 안함
+  -  매개변수 Object는 핸들러 정보를 의미한다.
+- **postHandle**
+  - controller의 handler가 끝나면 처리됨
+- **afterCompletion**
+  - view까지 처리가 끝난 후에 처리됨
 ## Interceptor 정의
 - interceptor패키지 AuthCheckInterceptor 클래스 생성
 
