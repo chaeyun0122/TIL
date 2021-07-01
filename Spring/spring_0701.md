@@ -65,3 +65,7 @@ O/R Mapper : object relation mapper
 - 콘솔에도 insert 반환 값이 1로 나타는 것을 확인할 수 있다.
   
   ![image](https://user-images.githubusercontent.com/79209568/124073580-1b605f80-da7d-11eb-84d9-fe77afebd168.png)
+
+## 나머지도 연동학
+## 리턴 parameterType이 두 개이상일 경우
+- Map 사용
