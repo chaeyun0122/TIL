@@ -94,7 +94,7 @@
   ![image](https://user-images.githubusercontent.com/79209568/125157066-c078e780-e1a3-11eb-8ebf-9d5b766a288d.png)
 
 ### slave
-- hadoop으로 로그인
+- slave1에서 hadoop으로 로그인
   
   ![image](https://user-images.githubusercontent.com/79209568/125157084-d5557b00-e1a3-11eb-95f2-e7750e4e1c37.png)
 - `su -`로 관리자로 로그인 가능
@@ -106,4 +106,36 @@
 - `vi /etc/sysconfig/network-scripts/ifcfg-ens33` vi 에디터로 해당 파일 열기
 - BOOTPROTO를 `static`으로 변경, IPADDR, NETMASK, GATEWAY를 각각 입력 후 저장 (:wq)
   
-  ![image](https://user-images.githubusercontent.com/79209568/125157150-2feed700-e1a4-11eb-9642-72a4bcac0c94.png)
+  ![image](https://user-images.githubusercontent.com/79209568/125157459-0f278100-e1a6-11eb-8517-9b7baf3bfbd6.png)
+- `systemctl restart network`로 적용
+- slave2도 동일하게 설정
+
+### 확인방법
+- `ping IP주소`했을 때 핑이 잘 나가면 설정이 잘 된 것이다.
+
+## 호스트네임 변경
+### master
+- `su -`로 루트 로그인
+- `vi /etc/hostname` : 내용 지우고 master라고 쓴 후 저장
+- `vi /etc/hosts` : 아이피 등록과 백업 등록
+  
+  ![image](https://user-images.githubusercontent.com/79209568/125157832-15b6f800-e1a8-11eb-8e51-d314270b8fe2.png)
+### slave
+- slave1, slave2도 hostname을 각각 변경해주고, hosts의 내용은 master에서 썼던 것과 동일하게 작성 후 저장해준다.
+
+### 확인방법
+- `ping master`, `ping slave1`, `ping backup`을 했을 때 핑이 잘 나가면 설정이 잘 된 것이다.
+- slave2에서 해 본 결과
+  
+  ![image](https://user-images.githubusercontent.com/79209568/125158127-dd181e00-e1a9-11eb-9047-6d9c6c096f10.png)
+
+## 크롬 다운로드(필요한 파일 다운로드를 위한)
+```
+su –
+cd /usr/local/
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+sudo yum localinstall google-chrome-stable_current_x86_64.rpm
+```
+![image](https://user-images.githubusercontent.com/79209568/125158297-18671c80-e1ab-11eb-95bf-6a1311d7ca40.png)
+
+##
