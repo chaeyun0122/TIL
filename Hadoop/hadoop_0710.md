@@ -138,4 +138,21 @@ sudo yum localinstall google-chrome-stable_current_x86_64.rpm
 ```
 ![image](https://user-images.githubusercontent.com/79209568/125158297-18671c80-e1ab-11eb-95bf-6a1311d7ca40.png)
 
-##
+## 필요파일 다운로드
+### 자바 다운로드
+- 크롬에서 `java.oracle.com`
+- Java SE 8 버전의 `Linux x64 Compressed Archive`를 다운로드한다.
+  ![image](https://user-images.githubusercontent.com/79209568/125159106-40a54a00-e1b0-11eb-8d55-1c42a0e4f93e.png)
+
+### 이클립스 다운로드
+- 크롬에서 `www.eclipse.org`
+- 2020년 06월의 Linux버전을 다운로드한다.
+
+### 하둡 다운로드
+- 크롬에서 `hadoop.apache.org`
+- 2.10.1버전을 다운로드한다.
+  
+  ![image](https://user-images.githubusercontent.com/79209568/125159229-2029bf80-e1b1-11eb-80e6-a07e007900c6.png)
+  
+  ![image](https://user-images.githubusercontent.com/79209568/125159230-2324b000-e1b1-11eb-9163-d47d72c6078f.png)
+
