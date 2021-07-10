@@ -24,6 +24,7 @@
 - 다운로드 후 workspace에 옮기기
 
 ## 리눅스 설치
+### Master
 - 새로운 Virtual Machine 생성
 - next 누르다가 Linux, CentOS 7 64-bit를 선택 후 next
   
@@ -36,3 +37,27 @@
 - CD/DVD에서 Use ISO image file을 아까 다운로드 한 CentOS 7 ISO 파일로 설정 후 OK
   
   ![image](https://user-images.githubusercontent.com/79209568/125154786-d338ef80-e196-11eb-8be6-79c83be7d28a.png)
+
+- 한국어 설정 후 다음
+- 소프트웨어 선택 - 서버 GUI 선택 후 확인
+- 설치 대상 - 바로 확인
+- 네트워크 및 호스트명 - 이더넷 연결 토글을 킨 후 확인  
+  
+![image](https://user-images.githubusercontent.com/79209568/125154986-edbf9880-e197-11eb-87c3-1a74cb0a5fbf.png)
+
+- 설치 시작 클릭
+- Root 암호 : master 
+  
+  ![image](https://user-images.githubusercontent.com/79209568/125155254-77239a80-e199-11eb-9030-cab370f52bdf.png)
+- 사용자 생성 : hadoop / hadoop
+  
+  ![image](https://user-images.githubusercontent.com/79209568/125155262-8571b680-e199-11eb-8101-da3298c5e5d8.png)
+- 재부팅까지 완료
+
+### Slave1
+- master 가상머신과 앞 부분은 같음
+- **소프트웨어 선택** - 인프라 서버
+- 나머지 다 같음
+
+### Slave2
+- slave1과 같음
