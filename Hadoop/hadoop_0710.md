@@ -173,4 +173,5 @@ sudo yum localinstall google-chrome-stable_current_x86_64.rpm
   chown -R hadoop:hadoop hadoop-2.10.1
   ```
 - 확인 : `ls -l`
+  
   ![image](https://user-images.githubusercontent.com/79209568/125184491-499e2600-e259-11eb-81f9-97303eb44522.png)
