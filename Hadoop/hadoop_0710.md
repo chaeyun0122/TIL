@@ -156,3 +156,21 @@ sudo yum localinstall google-chrome-stable_current_x86_64.rpm
   
   ![image](https://user-images.githubusercontent.com/79209568/125159230-2324b000-e1b1-11eb-9163-d47d72c6078f.png)
 
+### master에 설치
+- master에서 관리자 계정 로그인 후 /usr/local로 이동
+  
+  ![image](https://user-images.githubusercontent.com/79209568/125184383-26bf4200-e258-11eb-82d2-e36ee42df0a3.png)
+- 압축 풀기 (순서대로 자바, 이클립스, 하둡)
+  ```
+  tar xvf /home/hadoop/다운로드/jdk-8u292-linux-x64.tar.gz
+  tar xvf /home/hadoop/다운로드/eclipse-java-2018-09-linux-gtk-x86_64.tar.gz
+  tar xvf /home/hadoop/다운로드/hadoop-2.10.1.tar.gz
+  ```
+- 권한을 hadoop 사용자로 변경
+  ```
+  chown -R hadoop:hadoop jdk1.8.0_292/
+  chown -R hadoop:hadoop eclipse/
+  chown -R hadoop:hadoop hadoop-2.10.1
+  ```
+- 확인 : `ls -l`
+  ![image](https://user-images.githubusercontent.com/79209568/125184491-499e2600-e259-11eb-81f9-97303eb44522.png)
